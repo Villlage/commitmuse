@@ -1,0 +1,44 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-mock = "*"
+faker = "*"
+freezegun = "*"
+factory-boy = "*"
+
+[packages]
+gunicorn = "*"
+passlib = "*"
+psycopg2-binary = "*"
+Flask = "*"
+Flask-SSLify = "*"
+plaid-python = "==3.1.1"
+requests = "*"
+datadog = "==0.22.0"
+bleach = "*"
+analytics-python = "*"
+celery = "==4.2.0"
+honcho = "==1.0.1"
+
+Flask-Login = "==0.3.2"
+APScheduler = "*"
+email_validator = "*"
+
+flask-migrate = "*"
+flask-marshmallow = "*"
+marshmallow-sqlalchemy = "*"
+googlemaps = "*"
+coverage = "*"
+pytest-cov = "*"
+kombu = "==4.3.0"
+arrow = "==0.14.4"
+marshmallow = "*"
+
+
+
+[requires]
+python_version = "3.7.0"
