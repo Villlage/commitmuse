@@ -1,0 +1,16 @@
+__pycache__/
+pillar/
+venv/
+.pytest_cache/
+.DS_Store
+node_modules/
+data/pillar-data
+data/*/*/*.png
+.ipynb_checkpoints
+.python-version
+.idea/
+.pre-commit-config.yaml
+*.pyc
+*.local
+.vscode
+.mypy_cache/

@@ -182,3 +182,13 @@ or
 FLASK_ENV=testing pipenv run pytest controller services models third_party tests recommendation_engine
 ```
 which is faster
+
+
+
+### Pre-commit
+
+```
+pip install pre-commit
+pre-commit install
+```
+enjoy
