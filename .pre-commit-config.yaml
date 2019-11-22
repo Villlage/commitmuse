@@ -1,0 +1,42 @@
+exclude: '^$|settings'
+fail_fast: false
+repos:
+
+- repo: git@github.com:humitos/mirrors-autoflake.git
+  rev: v1.1
+  hooks:
+    - id: autoflake
+      exclude: >
+            (?x)^(
+                app.py|
+            )$
+      args: ['--in-place', '--remove-all-unused-imports', '--remove-unused-variable']
+
+
+-   repo: https://github.com/pre-commit/mirrors-autopep8
+    rev: 'v1.4.2'  # Use the sha / tag you want to point at
+    hooks:
+    - id: autopep8
+      exclude: >
+            (?x)^(
+                app.py|
+            )$
+      args: ['--in-place', '--max-line-length=100']
+
+
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: 'v0.650'  # Use the sha / tag you want to point at
+    hooks:
+    - id: mypy
+      exclude: >
+            (?x)^(
+                ^.|
+                app.py|
+            )$
+      args: ['--ignore-missing-imports', '--strict']
+
+-   repo: https://github.com/ambv/black
+    rev: stable
+    hooks:
+    - id: black
+      language_version: python3.6
