@@ -49,11 +49,11 @@ def get_env() -> Optional[str]:
     return app.env
 
 
-metadata = MetaData(naming_convention=convention)
+metadata = MetaData(naming_convention=convention)  # # type: MetaData
 db = SQLAlchemy(app, metadata=metadata)  # type: SQLAlchemy
-migrate = Migrate(app, db)
-ma = Marshmallow(app)
-logger = _get_logger(config.LOG_LEVEL)
+migrate = Migrate(app, db)  # type: Migrate
+ma = Marshmallow(app)  # type: Marshmallow
+logger = _get_logger(config.LOG_LEVEL)  # type: logging.Logger
 
 
 # Models

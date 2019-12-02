@@ -3,7 +3,7 @@
 ### Prerequisites
 
 ```
-python3 (3.6.8)
+python3 (3.7.0)
 pyenv
 pipenv
 PostgreSQL 11.5
