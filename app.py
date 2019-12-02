@@ -1,10 +1,11 @@
+from typing import Type, Optional
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from sqlalchemy import MetaData
 import logging
-from config import LocalConfig, TestingConfig, StagingConfig, ProductionConfig
+from config import Config, LocalConfig, TestingConfig, StagingConfig, ProductionConfig
 
 
 DEVELOPMENT = "development"
@@ -13,7 +14,9 @@ STAGING = "staging"
 PRODUCTION = "production"
 
 
-app = Flask(__name__, static_folder="./client/dist", template_folder="./client/build")
+app = Flask(
+    __name__, static_folder="./client/dist", template_folder="./client/build"
+)  # type: Flask
 
 config_map = {
     DEVELOPMENT: LocalConfig,
@@ -21,7 +24,8 @@ config_map = {
     STAGING: StagingConfig,
     PRODUCTION: ProductionConfig,
 }
-config = config_map[app.env]
+
+config = config_map[app.env]  # type: ignore
 app.config.from_object(config)
 
 convention = {
@@ -38,15 +42,23 @@ def _get_logger(log_level: str) -> logging.Logger:
         level=log_level, format="%(asctime)s - %(levelname)s - %(message)s"
     )
     logger = logging.getLogger(__name__)
-    print(logger)
     return logger
 
 
+def get_env() -> Optional[str]:
+    return app.env
+
+
 metadata = MetaData(naming_convention=convention)
-db = SQLAlchemy(app, metadata=metadata)
+db = SQLAlchemy(app, metadata=metadata)  # type: SQLAlchemy
 migrate = Migrate(app, db)
 ma = Marshmallow(app)
 logger = _get_logger(config.LOG_LEVEL)
 
 
+# Models
+from models.user import User
+
+
+# Routes
 import controller.user_routes

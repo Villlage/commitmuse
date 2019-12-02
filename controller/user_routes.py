@@ -4,7 +4,7 @@ from werkzeug import Response
 from app import app, logger
 
 
-@app.route("/login", methods=["POST"])  # type: ignore
+@app.route("/login", methods=["POST"])
 def login() -> Tuple[Response, int]:
     """
     login a user with email and password
