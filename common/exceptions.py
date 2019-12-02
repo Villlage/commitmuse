@@ -16,3 +16,11 @@ class ValidationError(Error):
 
 class ResourceConflictError(Error):
     pass
+
+
+class ResourceNotFound(Error):
+    pass
+
+
+class AuthenticationError(Error):
+    pass

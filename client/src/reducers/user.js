@@ -1,4 +1,4 @@
-import { REGISTER } from '../actions/types';
+import { REGISTER, LOGIN } from '../actions/types';
 
 export default function userReducer (state = {}, action) {
   const { type } = action
@@ -6,8 +6,14 @@ export default function userReducer (state = {}, action) {
     case REGISTER:
       return {
         ...state,
-        apiErrors: action.error
+        error: action.error
       }
+    case LOGIN:
+      return {
+        ...state,
+        error: action.error
+      }
+
     default:
       return state
   }
