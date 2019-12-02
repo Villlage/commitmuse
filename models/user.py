@@ -16,7 +16,7 @@ class User(db.Model):  # type: ignore
     email = db.Column(db.String(255), nullable=False, unique=True)
     confirmed_at = db.Column(db.DateTime())
 
-    is_active = db.Column(db.Boolean(), nullable=False, server_default="0")
+    is_active = db.Column(db.Boolean(), nullable=False, default=True)
     first_name = db.Column(db.String(255), nullable=False, server_default="")
     last_name = db.Column(db.String(255), nullable=False, server_default="")
 
@@ -45,6 +45,14 @@ class User(db.Model):  # type: ignore
                 session.query(cls).filter(cls.id.in_(user_ids)).all()
             )  # type: List[User]
             return users
+
+    @classmethod
+    def get_user_by_email(cls, email: str) -> Optional["User"]:
+        with db_session() as session:
+            user = (
+                session.query(cls).filter(cls.email == email).one_or_none()
+            )  # type: Optional[User]
+            return user
 
     def deactivate(self) -> "User":
         with db_session() as session:
