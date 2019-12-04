@@ -1,23 +1,20 @@
-import React from 'react';
+import React from "react";
 import { Route, Switch } from "react-router";
 
-
-import RegisterForm from './components/Register';
-import LoginForm from './components/Login';
-import User from './components/User';
-
+import RegisterForm from "./components/Register";
+import LoginForm from "./components/Login";
+import User from "./components/User";
 
 function App() {
-  return (
-    <Switch>
+    return (
+        <Switch>
+            <Route exact path={"/register"} component={RegisterForm} />
+            <Route exact path={"/login"} component={LoginForm} />
+            <Route exact path={"/user"} component={User} />
 
-    <Route exact path={"/register"} component={RegisterForm} />
-    <Route exact path={"/login"} component={LoginForm} />
-    <Route exact path={"/user"} component={User} />
-
-    < RegisterForm />
-    </Switch>
-  );
+            <RegisterForm />
+        </Switch>
+    );
 }
 
 export default App;
