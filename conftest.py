@@ -1,3 +1,4 @@
+# type: ignore
 import os
 from contextlib import contextmanager
 

@@ -11,8 +11,6 @@ function App() {
             <Route exact path={"/register"} component={RegisterForm} />
             <Route exact path={"/login"} component={LoginForm} />
             <Route exact path={"/user"} component={User} />
-
-            <RegisterForm />
         </Switch>
     );
 }

@@ -7,6 +7,7 @@ class Config(object):
     TESTING = False
     LOG_LEVEL = "INFO"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = os.getenv("SECRET_KEY", "thisisasecretkey")
 
 
 class LocalConfig(Config):

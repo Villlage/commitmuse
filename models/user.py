@@ -2,9 +2,10 @@ from typing import List, Optional
 from datetime import datetime
 from app import db
 from common.database import db_session
+from flask_login import UserMixin
 
 
-class User(db.Model):  # type: ignore
+class User(db.Model, UserMixin):  # type: ignore
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     created_at = db.Column(db.DateTime(), default=datetime.utcnow)

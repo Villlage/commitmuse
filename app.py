@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_marshmallow import Marshmallow
 from sqlalchemy import MetaData
+from flask_login import LoginManager
 import logging
 from config import Config, LocalConfig, TestingConfig, StagingConfig, ProductionConfig
 
@@ -51,6 +52,8 @@ def get_env() -> Optional[str]:
 
 metadata = MetaData(naming_convention=convention)  # # type: MetaData
 db = SQLAlchemy(app, metadata=metadata)  # type: SQLAlchemy
+login_manager = LoginManager()  # type: LoginManager
+login_manager.init_app(app)
 migrate = Migrate(app, db)  # type: Migrate
 ma = Marshmallow(app)  # type: Marshmallow
 logger = _get_logger(config.LOG_LEVEL)  # type: logging.Logger
@@ -62,3 +65,4 @@ from models.user import User
 
 # Routes
 import controller.user_routes
+import controller.react_routes
