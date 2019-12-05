@@ -24,7 +24,6 @@ def serviceworkerForReact() -> Response:
     return send_from_directory("client/build", "service-worker.js")
 
 
-# GILAD: TBD: There has to be a better way for this
 @app.route("/favicon.ico")
 def favicon() -> Response:
     return send_from_directory("client/build", "favicon.ico")

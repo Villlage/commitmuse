@@ -1,0 +1,2 @@
+release: flask db upgrade
+web: honcho -f procfile_web start
