@@ -1,9 +1,8 @@
 from flask import request, jsonify
-from functools import wraps
-from typing import Tuple, Callable
+from typing import Tuple
 import marshmallow
 from werkzeug import Response
-from app import app, login_manager
+from app import app
 from common.exceptions import (
     ResourceConflictError,
     ResourceNotFound,
@@ -11,34 +10,8 @@ from common.exceptions import (
 )
 from services.user_service import create_user, get_user
 from serializers.user_serializers import login_schema
-from flask_login import login_user, logout_user, current_user
-
-
-@login_manager.user_loader
-def load_user(user_id):  # type: ignore
-    from models.user import User
-
-    return User.get_user(user_id)
-
-
-def login_required(function: Callable):  # type: ignore
-    @wraps(function)
-    def wrapped(*args, **kwargs):  # type: ignore
-        if not current_user.is_authenticated:
-            return login_manager.unauthorized(), 401
-        return function(*args, **kwargs)
-
-    return wrapped
-
-
-def admin_login_required(function: Callable) -> Callable:  # type: ignore
-    @wraps(function)
-    def wrapped(*args, **kwargs):  # type: ignore
-        if current_user.is_anonymous or not current_user.is_admin():
-            return jsonify(error="Admin login required"), 403
-        return function(*args, **kwargs)
-
-    return wrapped
+from flask_login import login_user, logout_user
+from controller.common import login_required
 
 
 @app.route("/login", methods=["POST"])

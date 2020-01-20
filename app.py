@@ -61,8 +61,10 @@ logger = _get_logger(config.LOG_LEVEL)  # type: logging.Logger
 
 # Models
 from models.user import User
-
+from models.plaid_item import PlaidItem
+from models.plaid_account import PlaidAccount
 
 # Routes
 import controller.user_routes
 import controller.react_routes
+import controller.plaid_routes

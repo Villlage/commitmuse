@@ -7,7 +7,7 @@
         "DATABASE_URL": "postgres://localhost/postgres"
       },
       "scripts": {
-        "test": "pytest --cov-config=.coveragerc --cov-report xml --cov=controller --cov=models --cov=services controller services models;"
+        "test": "pytest --cov-config=.coveragerc --cov-report xml --cov=controller --cov=models --cov=services --cov=third_party controller services models third_party;"
       },
       "addons": ["heroku-postgresql:in-dyno"]
     }
