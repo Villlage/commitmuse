@@ -1,0 +1,87 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.PageHeader-module {
+  height: 60px;
+  padding: 0 24px;
+  background: #ffffff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.07);
+  @include gothic-normal($size: 16);
+  color: $Title;
+
+  nav {
+    height: 100%;
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 330px 1fr;
+
+    .logo {
+      display: flex;
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        color: #954BDE;
+        margin-left: 12px;
+      }
+    }
+
+    .profile {
+      @include flex-centered;
+      justify-self: flex-end;
+
+      button {
+        color: $MainPrimary;
+        background: transparent;
+        padding: 0;
+        height: initial;
+        margin-top: 5px;
+        text-transform: initial;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    & {
+      height: 90px;
+      padding-bottom: 8px;
+    }
+    nav {
+      display: grid;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-template-columns: 1fr;
+      justify-items: center;
+
+      .navigation a {
+        border: 0 !important;
+        font-size: 14px;
+        min-width: initial;
+        padding: 5px 10px;
+      }
+
+      .profile {
+        justify-self: center;
+        border: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: initial;
+        width: 100%;
+        justify-content: center;
+
+        button {
+          background: $ActivePrimary;
+          color: white;
+          padding: 3px 10px;
+          margin: 0 0 0 10px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+
+  .settings-logout-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

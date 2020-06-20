@@ -1,0 +1,66 @@
+@import '../../../styles/colors';
+
+.Message-component {
+  text-align: center;
+  font-family: Gothic A1, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+
+  &.alert {
+    height: 64px;
+    background: $MainError;
+    padding-left: 16px;
+    padding-right: 16px;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 40%;
+    bottom: 10%;
+    right: 40%;
+    display: flex;
+    color: white;
+  }
+
+  &.info {
+    width: 270px;
+    padding-top: 20px;
+    background: #ffffff;
+    border-radius: 13px;
+    position: fixed;
+    left: 40%;
+    bottom: 10%;
+    color: $Title;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+    p {
+      font-weight: normal;
+      font-size: 14px;
+      margin-bottom: 19px;
+    }
+
+    div {
+      border-top: 1px solid #c8c7cc;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      button {
+        margin: 0;
+        color: $MainPrimary;
+        width: 100%;
+        background: transparent;
+        border: 0;
+
+        &:hover {
+          background: transparent;
+        }
+      }
+    }
+  }
+
+  &.static {
+    position: static;
+  }
+}

@@ -1,0 +1,42 @@
+.PopUp-component {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0000005c;
+    z-index: 1;
+  }
+
+  .popup-content {
+    background: white;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px 2px #00000026;
+    position: relative;
+    z-index: 2;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 24px;
+    cursor: pointer;
+    opacity: 0.8;
+    z-index: 5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

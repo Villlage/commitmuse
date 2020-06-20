@@ -1,0 +1,39 @@
+@import '../styles/colors';
+
+@mixin flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin gothic-normal($size: 14) {
+  font-family: Gothic A1, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: $size + px;
+}
+
+@mixin custom-scroll() {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width: 0.3em;
+    height: 0.3em;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(74, 93, 195, 0.71);
+    &:hover {
+      background: rgba(74, 93, 195, 1);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $Background;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $Background;
+    scrollbar-track-color: $MainPrimary;
+  }
+}

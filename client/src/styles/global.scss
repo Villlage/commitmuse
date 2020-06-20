@@ -1,0 +1,252 @@
+@import 'mixins';
+@import 'colors';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'Gothic A1';
+  src: url('/web/assets/fonts/GothicA1-Regular.ttf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Heebo';
+  src: url('/web/assets/fonts/Heebo-Regular.ttf') format('opentype');
+}
+
+html,
+body {
+  width: 100%;
+  font-family: 'Inter', 'Open Sans', arial, sans-serif;
+  @include custom-scroll;
+}
+
+input {
+  border: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+  font-weight: 400;
+  box-sizing: border-box;
+  color: #000;
+}
+
+button,
+input[type='button'] {
+  cursor: pointer;
+}
+
+hr {
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background: $Border;
+}
+
+a {
+  color: $MainPrimary;
+}
+
+a:focus,
+button:focus {
+  outline: none;
+}
+
+li {
+  list-style: none;
+}
+
+.react-datepicker-wrapper {
+  width: 100%;
+
+  input {
+    font-family: Gothic A1, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    @include gothic-normal($size: 16);
+    background: $MainLight url(/web/assets/icons/calendar.svg) no-repeat 16px 16px;
+    min-height: 50px;
+    padding: 8px 42px;
+    border: 1px solid $Border;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.react-datepicker-popper {
+  .react-datepicker {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+    background: #ffffff;
+    @include gothic-normal();
+    color: #323740;
+
+    .react-datepicker__navigation {
+      top: 13px;
+    }
+
+    .react-datepicker__header {
+      background: #ffffff;
+      border: 0;
+      padding: 0;
+
+      .react-datepicker__current-month {
+        @include flex-centered;
+        @include gothic-normal($size: 13);
+        color: #323740;
+        font-weight: bold;
+        height: 40px;
+        border-bottom: 1px solid $Border;
+      }
+    }
+
+    .react-datepicker__navigation--previous {
+      border-right-color: transparent;
+      background: url(/web/assets/icons/date_arrow_left.svg) no-repeat;
+      transition: all 300ms;
+      background-size: contain;
+      height: 12px;
+      width: 7px;
+      border: 0;
+      transform: scale(1);
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .react-datepicker__day--keyboard-selected {
+      background: $MainPrimary;
+      font-weight: normal;
+    }
+  }
+
+  .react-datepicker__navigation--next {
+    border-right-color: transparent;
+    background: url(/web/assets/icons/date_arrow_right.svg) no-repeat;
+    transition: all 300ms;
+    background-size: contain;
+    height: 12px;
+    width: 7px;
+    border: 0;
+    transform: scale(1);
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .react-datepicker__day-names {
+    margin-top: 5px;
+  }
+
+  .react-datepicker__month {
+    margin-top: 0;
+  }
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}

@@ -1,0 +1,16 @@
+@import '../../../styles/colors';
+@import '../../../styles/mixins';
+
+.Table-component {
+  @include gothic-normal();
+  color: #000000;
+
+  .table-row {
+    padding: 10px;
+    border-bottom: 1px solid $Border;
+    transition: 0.2s;
+
+    .table-column {
+    }
+  }
+}

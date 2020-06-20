@@ -1,0 +1,28 @@
+@import '../../../../styles/colors';
+
+.NotFound-page {
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Gothic A1, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+
+  h1 {
+    font-size: 32px;
+    line-height: 120%;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background: $MainPrimary;
+    border-radius: 3px;
+    color: white;
+    border: 0;
+    margin-top: 20px;
+    padding: 10px;
+  }
+}

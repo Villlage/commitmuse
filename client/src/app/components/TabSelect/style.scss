@@ -1,0 +1,41 @@
+@import '../../../styles/colors';
+
+.TabSelect-component {
+  margin-bottom: 30px;
+
+  p {
+    margin-bottom: 8px;
+    font-family: Gothic A1, sans-serif;
+    font-size: 16px;
+    color: $BodyDarker;
+  }
+
+  .options {
+    display: flex;
+    border-radius: 4.8px;
+  }
+
+  .option {
+    cursor: pointer;
+    padding: 16px 0;
+    text-align: center;
+    flex: 1;
+    font-family: Gothic A1, sans-serif;
+    font-size: 16px;
+    color: $Title;
+    border: 1px solid $Border;
+
+    &:first-child {
+      border-right-color: transparent;
+    }
+
+    &:last-child {
+      border-left-color: transparent;
+    }
+
+    &:hover,
+    &.selected {
+      border: 1px solid $MainPrimary;
+    }
+  }
+}

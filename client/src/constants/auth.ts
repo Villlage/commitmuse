@@ -1,0 +1,5 @@
+export const requiredFieldError = 'Field is required'
+export const phoneNumberMustBeValid = 'Please enter a valid phone number'
+export const emailErrorMessage = 'Please enter a valid email'
+export const passwordLength = 'Must be at least 6 characters'
+export const passwordMustMatch = 'Password must match'

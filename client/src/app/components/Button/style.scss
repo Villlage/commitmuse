@@ -1,0 +1,67 @@
+.Button-component {
+  font-size: 16px;
+  font-family: Gothic A1, sans-serif;
+  border: 0;
+  border-radius: 3px;
+  padding: 8px 10px;
+  transition: all 200ms;
+  border: none;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: initial;
+  }
+
+  &:hover {
+    //background: #4558B8;
+  }
+
+  .lds-ring {
+    position: relative;
+    width: 20px;
+    height: 20px;
+  }
+
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #5c8de8 transparent transparent transparent;
+  }
+
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 30px;
+  }
+}

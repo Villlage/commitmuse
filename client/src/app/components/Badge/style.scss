@@ -1,0 +1,22 @@
+@import '../../../styles/colors';
+
+.Badge-component {
+  background: $MainLight;
+  border: 1px solid $Border;
+  color: $MainPrimary;
+  display: inline-flex;
+  height: 24px;
+  width: 24px;
+  border-radius: 3px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 12px;
+  font-size: 16px;
+
+  @media only screen and (max-width: 600px) {
+    height: 20px;
+    width: 20px;
+    font-size: 12px;
+    margin-right: 6px;
+  }
+}
