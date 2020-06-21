@@ -1,14 +1,96 @@
 @import '../../../../styles/mixins';
 @import '../../../../styles/colors';
 
-.MyIsa-page{
+.MyIsa-page {
+  .content {
+    background: $Background;
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
 
-  .content{
+    .my_isa {
+      margin-top: 32px;
+      width: 512px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
+      border-radius: 10px;
 
-    .myIsa{
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        flex-direction: column;
+        background: $MainPrimary;
+        padding: 24px 24px 15px;
 
+        .actions {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+
+          .new_isa {
+            background: #4c63b6;
+            box-shadow: 0 4px 25px rgba(74, 35, 0, 0.08);
+            border-radius: 7px;
+            padding: 8px 12px;
+            border: 0;
+            color: #e0e8f9;
+            @include heebo-normal($size: 12);
+            font-weight: bold;
+
+            img {
+              margin-right: 8px;
+            }
+          }
+
+          .filter_btn {
+            border: 0;
+            color: white;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            @include heebo-normal();
+
+            img {
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+
+      footer {
+        .single_isa {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin: 0 20px;
+          padding: 30px 0;
+          @include heebo-normal($size: 16);
+          border-bottom: 1px solid $Border;
+
+          h2 {
+            color: $MainSecondary;
+          }
+
+          div {
+            @include heebo-normal($size: 12);
+            padding: 2px 6px;
+            border-radius: 25px;
+            text-transform: uppercase;
+            font-weight: bold;
+          }
+        }
+      }
     }
   }
 
-
+  @media only screen and (max-width: 600px) {
+    .content {
+      .my_isa {
+        width: 100%;
+        margin: 20px;
+      }
+    }
+  }
 }

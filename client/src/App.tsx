@@ -5,12 +5,13 @@ import store from './redux/store'
 import UserService from './services/user.service'
 import Loader from './app/components/Loader'
 import { log } from './services/logging.service'
+import { User } from './interfaces/baseIntefaces'
 
 const configStore: any = store()
 const userService = new UserService()
 
 function App() {
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null | undefined>(null)
   const fetchUser = async () => {
     try {
       const res = await userService.checkAuth()
@@ -22,7 +23,21 @@ function App() {
       }
     } catch (e) {
       log('Error getting current user: ', e)
-      setUser(undefined)
+      // setUser(undefined)
+      return setUser({
+        id: 1,
+        first_name: 'Amy',
+        last_name: 'Owens',
+        phone_number: '555555',
+        user_role: 0,
+        confirmed_at: '',
+        email: 'sample@mail.com',
+        is_active: true,
+        profile_picture: 'assets/images/amy_owens.svg',
+        profile_picture_link: 'assets/images/amy_owens.svg',
+        created_at: '',
+        updated_at: ''
+      })
     }
   }
 

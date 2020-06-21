@@ -1,28 +1,11 @@
 import * as React from 'react'
 import { CSSProperties } from 'react'
 
-const iconsFolder = 'web/assets/icons/'
+const iconsFolder = 'assets/icons/'
 
 const generateIconLink = (icon: SystemIcons | string) => iconsFolder + icon + '.svg'
 
 export const icons: any = {
-  GeneralLabor: generateIconLink('GeneralLabor'),
-  Carpentry: generateIconLink('Carpentry'),
-  Concrete: generateIconLink('Concrete'),
-  Demo: generateIconLink('Mallet'),
-  Drywall: generateIconLink('Drywall'),
-  Electrical: generateIconLink('Electrical'),
-  Flooring: generateIconLink('Flooring'),
-  Glass: generateIconLink('Glass'),
-  HVAC: generateIconLink('HVAC'),
-  Ironwork: generateIconLink('Ironwork'),
-  Landscaping: generateIconLink('Landscaping'),
-  Masonry: generateIconLink('Masonry'),
-  Painting: generateIconLink('Painting'),
-  Plumbing: generateIconLink('Plumbing'),
-  Roofing: generateIconLink('Roofing'),
-  'Tile&Stone': generateIconLink('Tile&Stone'),
-  Welding: generateIconLink('Welding'),
   active_star: generateIconLink('active_star'),
   arrow_right: generateIconLink('arrow_right'),
   save_profile: generateIconLink('save_profile'),
@@ -55,26 +38,11 @@ export const icons: any = {
   edit: generateIconLink('Edit'),
   account: generateIconLink('account'),
   company: generateIconLink('company'),
+  new_isa_plus: generateIconLink('new_isa_plus'),
 }
 
 export type SystemIcons =
-  | 'general labor'
-  | 'carpentry'
-  | 'concrete'
-  | 'demo'
-  | 'drywall'
-  | 'electrical'
-  | 'flooring'
-  | 'glass'
-  | 'hvac'
-  | 'ironwork'
-  | 'landscaping'
-  | 'masonry'
-  | 'painting'
-  | 'plumbing'
-  | 'roofing'
-  | 'tile&stone'
-  | 'welding'
+  | 'new_isa_plus'
   | 'active_star'
   | 'arrow_right'
   | 'close'

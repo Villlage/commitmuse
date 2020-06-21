@@ -15,9 +15,9 @@ const Wrapper = styled.div`
   right: 0;
   left: 0;
   img {
-    width: 70px;
+    width: 40px;
     position: relative;
-    top: -55px;
+    top: -77px;
   }
   svg {
     -webkit-transform-origin: 50% 65%;
@@ -59,7 +59,7 @@ export default function Loader(props: LoaderProps) {
   return (
     <Wrapper>
       <svg id="triangle" width="150px" height="150px" viewBox="-3 -4 39 39">
-        <polygon fill="#FFFFFF" stroke="#333333" strokeWidth="1" points="16,0 32,32 0,32" />
+        <polygon fill="#FFFFFF" stroke="#954bde" strokeWidth="1" points="16,0 32,32 0,32" />
       </svg>
       <Icon icon="logo" />
     </Wrapper>

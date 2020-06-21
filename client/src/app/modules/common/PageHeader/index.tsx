@@ -3,6 +3,7 @@ import './style.scss'
 import { NavLink, useHistory } from 'react-router-dom'
 import { User } from '../../../../interfaces/baseIntefaces'
 import Button from '../../../components/Button'
+import Icon from '../../../components/Icon'
 
 interface PageHeaderProps {
   user?: User
@@ -14,12 +15,17 @@ export default function PageHeader(props: PageHeaderProps) {
     <header className="PageHeader-module">
       <nav>
         <div className="logo">
-        <img src="/assets/icons/logo.svg" alt="logo" />
-        <p>LOGO</p>
+          <img src="/assets/icons/logo.svg" alt="logo" />
+          <p>LOGO</p>
         </div>
         <div className="profile">
           {props.user ? (
             <>
+              {props.user.profile_picture_link ? (
+                <img src={props.user.profile_picture_link} alt="profile_pic" />
+              ) : (
+                <Icon icon="person" />
+              )}
               {props.user.first_name + ' ' + props.user.last_name}
             </>
           ) : (
