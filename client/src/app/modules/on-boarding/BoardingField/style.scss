@@ -1,0 +1,47 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.BoardingField-module {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+
+    label {
+      @include heebo-normal();
+      color: $Title;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    img {
+      margin-left: 4px;
+      margin-top: -2px;
+    }
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 32px;
+
+    input {
+      background: #FFFFFF;
+      border: 1px solid $Border;
+      border-radius: 3px;
+      padding: 6px 12px;
+      height: 100%;
+      width: 100%;
+    }
+
+    span {
+      position: absolute;
+      right: 10px;
+      color: #9E9E9E;
+    }
+  }
+}

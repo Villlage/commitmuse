@@ -36,7 +36,8 @@ function App() {
         profile_picture: 'assets/images/amy_owens.svg',
         profile_picture_link: 'assets/images/amy_owens.svg',
         created_at: '',
-        updated_at: ''
+        updated_at: '',
+        hourly_rate: 40
       })
     }
   }

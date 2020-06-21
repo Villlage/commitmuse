@@ -20,6 +20,13 @@
   font-size: $size + px;
 }
 
+@mixin heebo-bold($size: 14) {
+  font-family: Heebo-Bold, sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: $size + px;
+}
+
 @mixin custom-scroll() {
   // For Google Chrome
   &::-webkit-scrollbar {

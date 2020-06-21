@@ -18,6 +18,7 @@ export interface User {
   user_role: number
   confirmed_at: null | string
   email: string
+  hourly_rate: number
   is_active: boolean
   profile_picture: string
   profile_picture_link: string

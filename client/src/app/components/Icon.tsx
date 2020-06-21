@@ -39,6 +39,10 @@ export const icons: any = {
   account: generateIconLink('account'),
   company: generateIconLink('company'),
   new_isa_plus: generateIconLink('new_isa_plus'),
+  pencil: generateIconLink('pencil'),
+  question_circle: generateIconLink('question-circle'),
+  question_circle_active: generateIconLink('question-circle-active'),
+  code: generateIconLink('code'),
 }
 
 export type SystemIcons =
@@ -75,6 +79,10 @@ export type SystemIcons =
   | 'edit'
   | 'account'
   | 'company'
+  | 'pencil'
+  | 'question_circle'
+  | 'question_circle_active'
+  | 'code'
 
 interface IconProps {
   icon: SystemIcons

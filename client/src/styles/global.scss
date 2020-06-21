@@ -104,6 +104,11 @@ video {
   src: url('/assets/fonts/Heebo-Regular.ttf') format('opentype');
 }
 
+@font-face {
+  font-family: 'Heebo-Bold';
+  src: url('/assets/fonts/Heebo-Bold.ttf') format('opentype');
+}
+
 html,
 body {
   width: 100%;

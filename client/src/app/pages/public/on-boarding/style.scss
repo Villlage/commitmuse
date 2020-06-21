@@ -1,0 +1,144 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.OnBoarding-page {
+  .content {
+    background: $Background;
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+
+    .form_wrapper {
+      margin-top: 32px;
+      width: 512px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 24px;
+
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        background: $MainPrimary;
+        padding: 24px;
+        position: relative;
+        flex-direction: column;
+
+        h1 {
+          margin-bottom: 4px;
+          @include heebo-normal($size: 18);
+        }
+
+        h2 {
+          @include heebo-normal();
+          text-transform: uppercase;
+        }
+
+        img {
+          position: absolute;
+          right: 30px;
+        }
+      }
+
+      footer {
+        padding: 32px 24px;
+        @include heebo-normal();
+
+        .pricing {
+          margin-bottom: 26px;
+
+          label {
+            text-transform: uppercase;
+            color: $Title;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 6px;
+            font-weight: bold;
+
+            img {
+              margin-left: 4px;
+              margin-top: -3px;
+            }
+          }
+
+          .selects {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-column-gap: 16px;
+            justify-content: space-between;
+
+            button {
+              height: 40px;
+              background: white;
+              border: 1px solid $Border;
+              border-radius: 5px;
+              text-transform: uppercase;
+              color: #757575;
+
+              &.active {
+                background: $Title;
+                color: white;
+              }
+            }
+          }
+        }
+
+        .fields {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          margin-bottom: 28px;
+
+          &.percents {
+            .BoardingField-module .input {
+              width: 96px;
+            }
+          }
+
+          &.amount {
+            .BoardingField-module .input {
+              width: 128px;
+
+              &:last-child {
+                width: 160px;
+              }
+            }
+          }
+        }
+
+        .message {
+          background: #EFFCF6;
+          border: 2px solid #3EBD93;
+          box-sizing: border-box;
+          border-radius: 5px;
+          padding: 12px 20px;
+
+          .title {
+            display: flex;
+
+            h2 {
+              @include heebo-normal();
+              color: $Title;
+              text-transform: uppercase;
+              font-weight: bold;
+            }
+
+            img {
+             margin-left: 4px;
+              margin-top: -2px;
+            }
+          }
+
+          h2 {
+            @include heebo-normal($size: 16);
+            font-weight: bold;
+            color: #147D64;
+          }
+        }
+      }
+    }
+  }
+}

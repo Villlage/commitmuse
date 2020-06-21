@@ -1,0 +1,89 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.ISACalculator-module {
+  width: 384px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  header {
+    background: $MainSecondary;
+    color: white;
+    @include heebo-normal($size: 16);
+    @include flex-centered;
+    padding: 12px 0;
+
+    h2 {
+      font-weight: normal;
+    }
+  }
+
+  .body {
+    .slider-wrapper {
+      background: $Title;
+      padding: 20px 16px;
+
+      .titles {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        h2 {
+          @include heebo-bold();
+          text-transform: uppercase;
+          color: #BED0F7;
+        }
+
+        p {
+          color: white;
+          @include heebo-bold($size: 16);
+        }
+      }
+
+      .future-bill {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #ffffff33;
+
+        label {
+          @include heebo-normal();
+          text-transform: uppercase;
+          color: #BED0F7;
+        }
+
+        p {
+          color: white;
+          @include heebo-bold($size: 16);
+        }
+      }
+    }
+  }
+
+  footer {
+    background: #35469C;
+    padding: 16px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #FFFFFF;
+    @include heebo-normal($size: 12);
+
+    button {
+      background: #4C63B6;
+      box-shadow: 0 4px 25px rgba(74, 35, 0, 0.08);
+      border-radius: 7px;
+      padding: 8px 12px;
+      border: 0;
+      color: $Border;
+      text-transform: uppercase;
+      @include flex-centered;
+      @include heebo-bold($size: 12);
+      font-weight: bold;
+
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+}

@@ -3,8 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Switch, Redirect } from 'react-router'
 import { User } from './interfaces/baseIntefaces'
 import NotFound from './app/pages/public/404'
-import MyIsa from './app/pages/public/MyISA'
-import OnBoarding from './app/pages/public/OnBoarding'
+import MyIsa from './app/pages/public/my-isa'
+import OnBoarding from './app/pages/public/on-boarding'
 
 export default function Routes({ currentUser, fetchUser }: any) {
   return (
