@@ -16,7 +16,11 @@ export default function BoardingField(props: BoardingFieldProps) {
     <div className="BoardingField-module">
       <TooltipBadge label={props.label} tooltip={props.tooltip} />
       <div className="input">
-        <input type="text" value={props.value} onChange={e => isNumber(e.target.value) && props.onChange(Number(e.target.value))} />
+        <input
+          type="text"
+          value={props.value}
+          onChange={e => isNumber(e.target.value) && props.onChange(Number(e.target.value))}
+        />
         <span>{props.suffix}</span>
       </div>
     </div>

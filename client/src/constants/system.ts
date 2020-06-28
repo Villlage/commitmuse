@@ -60,7 +60,7 @@ export const status_colors = [
     label: 'paying',
     bg: '#FFF3C4',
     text: '#CB6E17',
-    active: true
+    active: true,
   },
   {
     label: 'completed',

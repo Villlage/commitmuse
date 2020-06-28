@@ -12,7 +12,12 @@ export default function Status(props: StatusProps) {
   return (
     <section className="Status-module">
       {status_colors.map((status, i) => (
-        <div className={`status${fixClass(className && className.label === status.label && 'selected')}${fixClass(className && className.label)}`} key={i}>
+        <div
+          className={`status${fixClass(className && className.label === status.label && 'selected')}${fixClass(
+            className && className.label,
+          )}`}
+          key={i}
+        >
           {status.label}
         </div>
       ))}

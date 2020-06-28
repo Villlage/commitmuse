@@ -36,31 +36,31 @@
     }
 
     &.created {
-      color: #147D64;
-      background: #C6F7E2;
+      color: #147d64;
+      background: #c6f7e2;
     }
     &.active {
-      color: #C6F7E2;
-      background: #147D64;
+      color: #c6f7e2;
+      background: #147d64;
     }
     &.paying {
-      color: #F0B429;
-      background: #FFF3C4;
+      color: #f0b429;
+      background: #fff3c4;
       &.selected {
         background: #f0b429;
         color: white;
       }
-      &.selected:before  {
-        border-color: transparent transparent transparent #FFF3C4;
+      &.selected:before {
+        border-color: transparent transparent transparent #fff3c4;
       }
       &.selected:after {
-        background: #FFF3C4;
+        background: #fff3c4;
         border-color: transparent transparent transparent #f0b429;
       }
     }
     &.completed {
-      color: #BAE3FF;
-      background: #0967D2;
+      color: #bae3ff;
+      background: #0967d2;
     }
   }
 }

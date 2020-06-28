@@ -23,22 +23,22 @@ export default function ISACalculator(props: ISACalculatorProps) {
               <h2>current income</h2>
               <p>${props.current_income}K / YEAR</p>
             </div>
-            <div style={{textAlign: 'right'}}>
+            <div style={{ textAlign: 'right' }}>
               <h2>future income</h2>
               <p>${props.future_income}K / YEAR</p>
             </div>
           </div>
 
           <Slider
-              min={props.current_income}
-              max={props.future_income}
-              onMinChange={e => props.incomeChange(e)}
-              onMaxChange={e => props.futureChange(e)}
-            />
-            <div className="future-bill">
-              <label>Future Bill</label>
-              <p>$41.25K / YEAR (17%)</p>
-            </div>
+            min={props.current_income}
+            max={props.future_income}
+            onMinChange={e => props.incomeChange(e)}
+            onMaxChange={e => props.futureChange(e)}
+          />
+          <div className="future-bill">
+            <label>Future Bill</label>
+            <p>$41.25K / YEAR (17%)</p>
+          </div>
         </div>
       </div>
       <footer>

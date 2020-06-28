@@ -14,8 +14,12 @@ export default function TooltipBadge(props: TooltipBadgeProps) {
     <div className="TooltipBadge-component">
       <label onClick={() => set_show(!show)}>{props.label}</label>
       <div onClick={() => set_show(!show)} className="question_circle">
-        <img alt="circle" src={icon}/>
-        {show && <div className="tooltip">{props.tooltip} <Icon icon="tooltip_arrow"/></div>}
+        <img alt="circle" src={icon} />
+        {show && (
+          <div className="tooltip">
+            {props.tooltip} <Icon icon="tooltip_arrow" />
+          </div>
+        )}
       </div>
     </div>
   )

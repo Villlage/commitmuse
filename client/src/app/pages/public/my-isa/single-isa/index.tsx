@@ -16,7 +16,7 @@ export default function SingleIsa(props: SingleIsaProps) {
           <header>
             <h2>ISA Offer</h2>
           </header>
-          <Status selected="paying"/>
+          <Status selected="paying" />
           <div className="offer-body">
             <p>
               <span>Coach</span> Amy Owens
