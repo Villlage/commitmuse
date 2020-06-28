@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import ISACalculator from '../../../../modules/on-boarding/ISACalculator'
@@ -8,6 +8,8 @@ import Status from '../../../../modules/common/Status'
 interface SingleIsaProps extends ScreenProps {}
 
 export default function SingleIsa(props: SingleIsaProps) {
+  const [current_income, set_current_income] = useState(95)
+  const [future_income, set_future_income] = useState(125)
   return (
     <article className="SingleIsa-page">
       <PageHeader user={props.currentUser} />
@@ -39,7 +41,12 @@ export default function SingleIsa(props: SingleIsaProps) {
             <button className="accept">accept Offer</button>
           </footer>
         </section>
-        <ISACalculator current_income={95} future_income={125} incomeChange={() => null} futureChange={() => null} />
+        <ISACalculator
+          current_income={current_income}
+          future_income={future_income}
+          incomeChange={e => set_current_income(e)}
+          futureChange={e => set_future_income(e)}
+        />
       </section>
     </article>
   )

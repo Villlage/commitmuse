@@ -1,5 +1,101 @@
 
 const style = `
+input[type=range] {
+  width: 100%;
+  background-color: white;
+  -webkit-appearance: none;
+  border: 0;
+  margin: 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #ffffff;
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  margin-top: -9px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #ffffff;
+}
+input[type=range]::-moz-range-track {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #ffffff;
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 8px 0;
+  color: transparent;
+  width: 100%;
+  height: 4px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #ffffff;
+  border: 1px solid #ffffff;
+}
+input[type=range]::-ms-fill-upper {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid #ffffff;
+}
+input[type=range]::-ms-thumb {
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-top: 0px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: rgba(255, 255, 255, 0.6);
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #ffffff;
+}
+@supports (-ms-ime-align:auto) {
+  input[type=range] {
+    margin: 0;
+  }
+}
+
+#future_amount::-ms-thumb {
+  background: #65D6AD !important;
+}
+
+#future_amount::-moz-range-thumb {
+  background: #65D6AD !important;
+}
+
+#future_amount::-webkit-slider-thumb {
+  background: #65D6AD !important;
+}
+
+
   .ISACalculator-module {
      width: 100%;
      max-width: 512px;
@@ -81,6 +177,57 @@ const style = `
     display: flex;
     justify-content: center;
   }
+  
+  .line {
+    width: 100%
+  }
+`
+
+let width = 30
+const pe = document.getElementById('commit-muse-calc').parentElement
+
+const calc = `
+<section class="ISACalculator-module">
+  <style>
+    ${style}
+  </style>
+  <header>
+    <h2>ISA Calculator</h2>
+  </header>
+  <div class="body">
+    <div class="slider-wrapper">
+      <div class="titles">
+        <div>
+          <h2>current income</h2>
+          <p>10K / YEAR</p>
+        </div>
+        <div>
+          <h2>future income</h2>
+          <p>20K / YEAR</p>
+        </div>
+      </div>
+
+      <section class="Slider-component">
+        <div class="empty-line">
+          <input class="line" value="10" min="0" max="100" step="1" id="current_amount" type="range" />
+          <input class="line" value="10" min="0" max="100" step="1" id="future_amount" type="range" />
+        </div>
+      </section>
+
+      <div class="future-bill">
+        <label>Future Bill</label>
+        <p>$41.25K / YEAR (17%)</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+`
+pe.insertAdjacentHTML('beforeend', calc)
+
+
+/*
+
   .filled-line {
     width: 20%;
     border-radius: 3px;
@@ -113,61 +260,7 @@ const style = `
   .filled-line span.dot:active {
     cursor: grabbing;
   }
-  .filled-line span.right_dot {
+  .filled-line #future_dot {
     background: #65D6AD;
   }
-`
-let width = 20
-const pe = document.getElementById('commit-muse-calc').parentElement
-const dragLeft = (e) => {
-  console.log('E LEft: ', e)
-  const line = document.getElementById('amount')
-  width += 10
-  line.style.width = width + '%'
-  console.log('width', width)
-}
-const dragRight = (e) => {
-  console.log('E right: ', e)
-}
-const drag = (e) => {
-  console.log('E right: ', e)
-}
-const calc = `
-        <section class="ISACalculator-module">
-          <style>${style}</style>
-          <header>
-            <h2>ISA Calculator</h2>
-          </header>
-          <div class="body">
-            <div class="slider-wrapper">
-              <div class="titles">
-                <div>
-                  <h2>current income</h2>
-                  <p>10K / YEAR</p>
-                </div>
-                <div style={{textAlign: 'right'}}>
-                  <h2>future income</h2>
-                  <p>20K / YEAR</p>
-                </div>
-              </div>
-              
-              <section class="Slider-component">
-               <div class="empty-line">
-                 <div class="filled-line" id="amount">
-                   <span draggable="true" class="area left_area" ondragenter="dragLeft(event)"></span>
-                   <span draggable="true" class="dot left_dot"></span>
-                   <span draggable="true" class="dot right_dot"></span> 
-                   <span draggable="true" class="area right_area" ondragenter="dragRight(event)"></span>                  
-                 </div>
-               </div>
-              </section>
-              
-              <div class="future-bill">
-                <label>Future Bill</label>
-                <p>$41.25K / YEAR (17%)</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        `
-  pe.insertAdjacentHTML('beforeend', calc)
+ */

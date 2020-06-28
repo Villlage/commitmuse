@@ -29,12 +29,11 @@ export default function ISACalculator(props: ISACalculatorProps) {
             </div>
           </div>
 
-          <Slider
-            min={props.current_income}
-            max={props.future_income}
-            onMinChange={e => props.incomeChange(e)}
-            onMaxChange={e => props.futureChange(e)}
-          />
+          <section className="slider">
+            <input onChange={e => props.incomeChange(Number(e.target.value))} className="line" value={props.current_income} min={0} max={100} step={1} type="range" />
+            <input onChange={e => props.futureChange(Number(e.target.value))} className="line" id="future_amount" value={props.future_income} min={100} max={200} step={1} type="range" />
+          </section>
+
           <div className="future-bill">
             <label>Future Bill</label>
             <p>$41.25K / YEAR (17%)</p>
@@ -48,25 +47,6 @@ export default function ISACalculator(props: ISACalculatorProps) {
           copy code
         </button>
       </footer>
-    </section>
-  )
-}
-
-interface SliderProps {
-  min: number
-  max: number
-  onMinChange(e: number): void
-  onMaxChange(e: number): void
-}
-
-function Slider(props: SliderProps) {
-  return (
-    <section className="Slider-component">
-      <div className="wrapper">
-        <span className="left_dot" />
-        <span className="line" />
-        <span className="right_dot" />
-      </div>
     </section>
   )
 }
