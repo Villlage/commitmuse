@@ -14,7 +14,7 @@ export default function PageHeader(props: PageHeaderProps) {
   return (
     <header className="PageHeader-module">
       <nav>
-        <div className="logo">
+        <div onClick={() => history.push('/my-isa')} className="logo">
           <img src="/assets/icons/logo.svg" alt="logo" />
           <p>LOGO</p>
         </div>
