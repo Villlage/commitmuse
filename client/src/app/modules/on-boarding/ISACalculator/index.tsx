@@ -13,13 +13,13 @@ export default function ISACalculator(props: ISACalculatorProps) {
   const [future_income, set_future_income] = useState(125)
 
   const feature_bill = () => {
-    let bill = (props.percentage / 100) * future_income * (props.months / 12)
+    let bill = ((props.percentage / 100) * future_income) * (props.months / 12)
 
     if (future_income > props.max) {
       bill = props.max
     }
 
-    if (bill < current_income) {
+    if (bill > current_income) {
       bill = 0
     }
 
