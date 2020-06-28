@@ -44,3 +44,27 @@ export const SYSTEM_COLORS = {
   HoverBorder: '#d4dbe0',
   HoverWhite: '#f9f9f9',
 }
+
+export const status_colors = [
+  {
+    label: 'created',
+    bg: '#C6F7E2',
+    text: '#147D64',
+  },
+  {
+    label: 'active',
+    bg: '#C6F7E2',
+    text: '#147D64',
+  },
+  {
+    label: 'paying',
+    bg: '#FFF3C4',
+    text: '#CB6E17',
+    active: true
+  },
+  {
+    label: 'completed',
+    bg: '#BAE3FF',
+    text: '#0967D2',
+  },
+]

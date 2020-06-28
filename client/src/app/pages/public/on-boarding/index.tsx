@@ -31,9 +31,7 @@ export default function OnBoarding(props: OnBoardingProps) {
           </header>
           <footer>
             <div className="pricing">
-              <label>
-                Pricing <TooltipBadge tooltip={tooltip} />
-              </label>
+              <TooltipBadge label="Pricing" tooltip={tooltip} />
               <div className="selects">
                 <button onClick={() => set_pricing('total')} className={pricing === 'total' ? 'active' : ''}>
                   From total income
@@ -77,15 +75,17 @@ export default function OnBoarding(props: OnBoardingProps) {
             </div>
 
             <section className="message">
-              <div className="title">
-                <h2>Isa assessment</h2>
-                <TooltipBadge tooltip={tooltip} />
-              </div>
+              <TooltipBadge label="Isa assessment" tooltip={tooltip} />
               <h2>This ISA looks good!</h2>
             </section>
           </footer>
         </section>
-        <ISACalculator futureChange={() => null} incomeChange={() => null} current_income={95} future_income={125} />
+        <ISACalculator
+          futureChange={() => null}
+          incomeChange={() => null}
+          current_income={95}
+          future_income={125}
+        />
       </section>
     </article>
   )

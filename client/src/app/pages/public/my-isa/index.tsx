@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import { ScreenProps } from '../../../../interfaces/baseIntefaces'
 import PageHeader from '../../../modules/common/PageHeader'
 import Icon from '../../../components/Icon'
+import Select from '../../../components/Select/Select'
 
 interface MyIsa extends ScreenProps {}
 
 const ISAs = [
-  { name: 'Jonah Serna', status: 'active' },
-  { name: 'Dina Castro', status: 'paying' },
-  { name: 'Glenn Stone', status: 'completed' },
+  { id: 1, name: 'Jonah Serna', status: 'active' },
+  { id: 2, name: 'Dina Castro', status: 'paying' },
+  { id: 3, name: 'Glenn Stone', status: 'completed' },
 ]
 
 const status_colors: any = {
@@ -28,7 +29,7 @@ const status_colors: any = {
 }
 
 export default function MyIsa(props: MyIsa) {
-  console.log('props.currentUser', props.currentUser)
+  const [filter, set_filter] = useState('')
   return (
     <article className="MyIsa-page">
       <PageHeader user={props.currentUser} />
@@ -36,20 +37,27 @@ export default function MyIsa(props: MyIsa) {
         <section className="my_isa">
           <header>
             <h1>My ISA's</h1>
-            <div className="actions">
-              <button className="new_isa">
-                <Icon icon="new_isa_plus" />
-                NEW ISA
-              </button>
-              <button className="filter_btn">
-                View All <Icon icon="select_down" />
-              </button>
-            </div>
+            <Select
+              value={filter}
+              options={['View all', 'active', 'paying', 'completed']}
+              onChange={e => set_filter(e)}
+              placeholder={'View all'}
+            />
           </header>
           <footer>
-            {ISAs.map((isa, index) => (
-              <Isa key={index} name={isa.name} status={isa.status} />
+            {ISAs.filter(i => i.status.includes(filter === 'View all' ? '' : filter)).map((isa, index) => (
+              <Isa
+                onClick={id => props.history.push('/isa/' + id)}
+                id={isa.id}
+                key={index}
+                name={isa.name}
+                status={isa.status}
+              />
             ))}
+            <button className="new_isa">
+              <Icon icon="new_isa_plus" />
+              NEW ISA
+            </button>
           </footer>
         </section>
       </section>
@@ -58,13 +66,15 @@ export default function MyIsa(props: MyIsa) {
 }
 
 type IsaProps = {
+  id: number
   status: string
   name: string
+  onClick(id: number): void
 }
 
 function Isa(props: IsaProps) {
   return (
-    <div className="single_isa">
+    <div className="single_isa" onClick={() => props.onClick(props.id)}>
       <h2>{props.name}</h2>
       <div
         style={{

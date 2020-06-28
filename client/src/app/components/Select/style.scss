@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 20px;
 
   .overlay {
     position: fixed;
@@ -18,37 +17,29 @@
 
   label {
     color: $BodyDarker;
-    font-size: 16px;
+    font-size: 14px;
     font-family: Gothic A1, sans-serif;
     margin-bottom: 8px;
   }
 
   .placeholder {
-    background: $MainLight;
     height: 50px;
     padding: 16px;
-    font-size: 16px;
-    border: 1px solid $Border;
+    font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     text-transform: capitalize;
-    color: $BodyLight;
+    color: #FFFFFF;
     position: relative;
 
     &.value {
-      color: $Title;
+      color: #FFFFFF;
     }
 
-    .icons {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      img {
-        margin: 2px 0;
-      }
+    img {
+      margin-left: 8px;
     }
   }
 

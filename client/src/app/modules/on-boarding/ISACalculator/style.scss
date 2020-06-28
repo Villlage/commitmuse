@@ -2,15 +2,20 @@
 @import '../../../../styles/colors';
 
 .ISACalculator-module {
-  width: 384px;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
 
   header {
-    background: $MainSecondary;
+    background: #19216C;
     color: white;
-    @include heebo-normal($size: 16);
-    @include flex-centered;
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 12px 0;
 
     h2 {
@@ -20,7 +25,7 @@
 
   .body {
     .slider-wrapper {
-      background: $Title;
+      background: #4C63B6;
       padding: 20px 16px;
 
       .titles {
@@ -28,14 +33,20 @@
         grid-template-columns: 1fr 1fr;
 
         h2 {
-          @include heebo-bold();
+          font-family: Heebo-Bold, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
           text-transform: uppercase;
           color: #BED0F7;
         }
 
         p {
           color: white;
-          @include heebo-bold($size: 16);
+          font-family: Heebo-Bold, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
         }
       }
 
@@ -47,14 +58,20 @@
         border-top: 1px solid #ffffff33;
 
         label {
-          @include heebo-normal();
+          font-family: Heebo, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
           text-transform: uppercase;
           color: #BED0F7;
         }
 
         p {
           color: white;
-          @include heebo-bold($size: 16);
+          font-family: Heebo-Bold, sans-serif;
+          font-style: normal;
+          font-weight: 500;
+          font-size: 16px;
         }
       }
     }
@@ -67,7 +84,10 @@
     justify-content: space-between;
     align-items: center;
     color: #FFFFFF;
-    @include heebo-normal($size: 12);
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
 
     button {
       background: #4C63B6;
@@ -75,10 +95,14 @@
       border-radius: 7px;
       padding: 8px 12px;
       border: 0;
-      color: $Border;
+      color: #E0E8F9;
       text-transform: uppercase;
-      @include flex-centered;
-      @include heebo-bold($size: 12);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Heebo-Bold, sans-serif;
+      font-style: normal;
+      font-size: 12px;
       font-weight: bold;
 
       img {

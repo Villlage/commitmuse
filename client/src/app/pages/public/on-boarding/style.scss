@@ -2,31 +2,35 @@
 @import '../../../../styles/colors';
 
 .OnBoarding-page {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
   .content {
+    padding-top: 32px;
     background: $Background;
     height: calc(100vh - 60px);
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 512px;
     justify-content: center;
-    align-items: baseline;
+    align-items: self-start;
+    grid-row-gap: 16px;
 
     .form_wrapper {
-      margin-top: 32px;
-      width: 512px;
-      background: #ffffff;
-      box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-right: 24px;
+      width: 100%;
 
       header {
         display: flex;
         justify-content: center;
         align-items: center;
         color: white;
-        background: $MainPrimary;
+        background: $MainSecondary;
         padding: 24px;
         position: relative;
         flex-direction: column;
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
 
         h1 {
           margin-bottom: 4px;
@@ -47,23 +51,17 @@
       footer {
         padding: 32px 24px;
         @include heebo-normal();
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
+
+        .TooltipBadge-component {
+          margin-bottom: 6px;
+        }
 
         .pricing {
           margin-bottom: 26px;
-
-          label {
-            text-transform: uppercase;
-            color: $Title;
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 6px;
-            font-weight: bold;
-
-            img {
-              margin-left: 4px;
-              margin-top: -3px;
-            }
-          }
 
           .selects {
             display: grid;
@@ -73,15 +71,17 @@
 
             button {
               height: 40px;
-              background: white;
-              border: 1px solid $Border;
               border-radius: 5px;
               text-transform: uppercase;
               color: #757575;
+              background: #F5F5F5;
+              border: 1px solid #BDBDBD;
 
               &.active {
-                background: $Title;
-                color: white;
+                background: #BED0F7;
+                border: 2px solid #647ACB;
+                color: #35469C;
+                font-weight: 600;
               }
             }
           }
@@ -90,23 +90,8 @@
         .fields {
           display: grid;
           grid-template-columns: 1fr 1fr;
+          grid-column-gap: 16px;
           margin-bottom: 28px;
-
-          &.percents {
-            .BoardingField-module .input {
-              width: 96px;
-            }
-          }
-
-          &.amount {
-            .BoardingField-module .input {
-              width: 128px;
-
-              &:last-child {
-                width: 160px;
-              }
-            }
-          }
         }
 
         .message {
@@ -115,22 +100,6 @@
           box-sizing: border-box;
           border-radius: 5px;
           padding: 12px 20px;
-
-          .title {
-            display: flex;
-
-            h2 {
-              @include heebo-normal();
-              color: $Title;
-              text-transform: uppercase;
-              font-weight: bold;
-            }
-
-            img {
-             margin-left: 4px;
-              margin-top: -2px;
-            }
-          }
 
           h2 {
             @include heebo-normal($size: 16);

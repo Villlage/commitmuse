@@ -1,0 +1,75 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.SingleIsa-page {
+  .content {
+    height: calc(100vh - 60px);
+    background: #E5E5E5;
+    padding-top: 32px;
+    display: grid;
+    grid-template-columns: 512px;
+    grid-row-gap: 16px;
+    justify-content: center;
+    align-content: baseline;
+
+    .isa-offer {
+      border-radius: 10px;
+      overflow: hidden;
+
+      header {
+        background: #19216C;
+        color: white;
+        @include heebo-normal($size: 20);
+        @include flex-centered;
+        padding: 18px 0;
+
+        h2 {
+          font-weight: normal;
+        }
+      }
+
+      .offer-body {
+        padding: 30px 18px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-row-gap: 30px;
+        background: white;
+
+        p {
+          @include heebo-normal();
+          color: #4C63B6;
+          text-transform: capitalize;
+
+          span {
+            color: #19216C;
+            text-transform: uppercase;
+            margin-right: 6px;
+          }
+        }
+      }
+
+      footer {
+        background: #F5F5F5;
+        padding: 16px 24px;
+        display: flex;
+        justify-content: flex-end;
+
+        button {
+          border: 0;
+          @include heebo-bold($size: 14);
+          background: #4C63B6;
+          border-radius: 7px;
+          padding: 10px 24px;
+          text-transform: uppercase;
+          color: #E0E8F9;
+          font-weight: 600;
+        }
+
+        .pdf {
+          background: transparent;
+          color: #19216C;
+        }
+      }
+    }
+  }
+}

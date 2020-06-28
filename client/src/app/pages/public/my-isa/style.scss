@@ -23,28 +23,13 @@
         align-items: center;
         color: white;
         flex-direction: column;
-        background: $MainPrimary;
+        background: $MainSecondary;
         padding: 24px 24px 15px;
 
         .actions {
           display: flex;
           width: 100%;
           justify-content: space-between;
-
-          .new_isa {
-            background: #4c63b6;
-            box-shadow: 0 4px 25px rgba(74, 35, 0, 0.08);
-            border-radius: 7px;
-            padding: 8px 12px;
-            border: 0;
-            color: #e0e8f9;
-            @include heebo-normal($size: 12);
-            font-weight: bold;
-
-            img {
-              margin-right: 8px;
-            }
-          }
 
           .filter_btn {
             border: 0;
@@ -62,7 +47,16 @@
       }
 
       footer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 24px;
+
         .single_isa {
+          transition: all 200ms;
+          width: 100%;
+          cursor: pointer;
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -70,6 +64,11 @@
           padding: 30px 0;
           @include heebo-normal($size: 16);
           border-bottom: 1px solid $Border;
+          transform: scale(1);
+
+          &:hover {
+            transform: scale(1.05);
+          }
 
           &:last-child {
             border-bottom: none;
@@ -85,6 +84,24 @@
             border-radius: 25px;
             text-transform: uppercase;
             font-weight: bold;
+          }
+        }
+
+        .new_isa {
+          background: #4c63b6;
+          box-shadow: 0 4px 25px rgba(74, 35, 0, 0.08);
+          border-radius: 7px;
+          padding: 8px 12px;
+          border: 0;
+          color: #e0e8f9;
+          @include heebo-normal($size: 12);
+          font-weight: bold;
+          width: 100%;
+          margin: 24px;
+          height: 40px;
+
+          img {
+            margin-right: 8px;
           }
         }
       }

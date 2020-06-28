@@ -1,3 +1,45 @@
+@import '../../../styles/mixins';
+@import '../../../styles/colors';
+
 .TooltipBadge-component {
   display: inline-flex;
+  position: relative;
+  cursor: pointer;
+
+  label {
+    @include heebo-normal();
+    color: $Title;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  img {
+    margin-left: 4px;
+    margin-top: -2px;
+  }
+
+  .question_circle {
+    position: relative;
+    @include flex-centered;
+
+    .tooltip {
+      position: absolute;
+      background: #212121;
+      border-radius: 7px;
+      color: white;
+      width: 256px;
+      padding: 6px 10px;
+      z-index: 10;
+      bottom: 120%;
+      margin-left: 8px;
+
+
+      img {
+        position: absolute;
+        bottom: -6px;
+        right: 50%;
+      }
+    }
+  }
 }

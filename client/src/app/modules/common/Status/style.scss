@@ -1,0 +1,66 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.Status-module {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25%, 25%));
+  justify-content: stretch;
+  height: 32px;
+  align-items: center;
+  justify-items: center;
+  text-transform: uppercase;
+
+  .status {
+    width: 100%;
+    height: 100%;
+    @include flex-centered;
+    justify-content: space-between;
+    @include heebo-bold($size: 13);
+
+    &:after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 16px 0 16px 8px;
+      border-color: transparent transparent transparent transparent;
+    }
+
+    &:before {
+      content: '';
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 16px 0 16px 8px;
+      border-color: transparent transparent transparent transparent;
+    }
+
+    &.created {
+      color: #147D64;
+      background: #C6F7E2;
+    }
+    &.active {
+      color: #C6F7E2;
+      background: #147D64;
+    }
+    &.paying {
+      color: #F0B429;
+      background: #FFF3C4;
+      &.selected {
+        background: #f0b429;
+        color: white;
+      }
+      &.selected:before  {
+        border-color: transparent transparent transparent #FFF3C4;
+      }
+      &.selected:after {
+        background: #FFF3C4;
+        border-color: transparent transparent transparent #f0b429;
+      }
+    }
+    &.completed {
+      color: #BAE3FF;
+      background: #0967D2;
+    }
+  }
+}

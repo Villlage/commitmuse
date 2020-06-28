@@ -15,6 +15,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
       <header>
         <h2>ISA Calculator</h2>
       </header>
+
       <div className="body">
         <div className="slider-wrapper">
           <div className="titles">
