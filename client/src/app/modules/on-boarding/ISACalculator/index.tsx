@@ -1,15 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import Icon from '../../../components/Icon'
 
 interface ISACalculatorProps {
-  current_income: number
-  future_income: number
-  incomeChange(e: number): void
-  futureChange(e: number): void
+  percentage: number
+  months: number
+  max: number
 }
 
 export default function ISACalculator(props: ISACalculatorProps) {
+  const [current_income, set_current_income] = useState(95)
+  const [future_income, set_future_income] = useState(125)
+
+  const feature_bill = () => {
+    let bill = (props.percentage / 100) * future_income * (props.months / 12)
+
+    if (future_income > props.max) {
+      bill = props.max
+    }
+
+    if (bill < current_income) {
+      bill = 0
+    }
+
+    return Math.round(bill)
+  }
+
   return (
     <section className="ISACalculator-module">
       <header>
@@ -21,22 +37,22 @@ export default function ISACalculator(props: ISACalculatorProps) {
           <div className="titles">
             <div>
               <h2>current income</h2>
-              <p>${props.current_income}K / YEAR</p>
+              <p>${current_income}K / YEAR</p>
             </div>
             <div style={{ textAlign: 'right' }}>
               <h2>future income</h2>
-              <p>${props.future_income}K / YEAR</p>
+              <p>${future_income}K / YEAR</p>
             </div>
           </div>
 
           <section className="slider">
-            <input onChange={e => props.incomeChange(Number(e.target.value))} className="line" value={props.current_income} min={0} max={100} step={1} type="range" />
-            <input onChange={e => props.futureChange(Number(e.target.value))} className="line" id="future_amount" value={props.future_income} min={100} max={200} step={1} type="range" />
+            <input onChange={e => set_current_income(Number(e.target.value))} className="line" value={current_income} min={0} max={200} step={1} type="range" />
+            <input onChange={e => set_future_income(Number(e.target.value))} className="line" id="future_amount" value={future_income} min={0} max={200} step={1} type="range" />
           </section>
 
           <div className="future-bill">
             <label>Future Bill</label>
-            <p>$41.25K / YEAR (17%)</p>
+            <p>${feature_bill()}K / YEAR ({props.percentage}%)</p>
           </div>
         </div>
       </div>

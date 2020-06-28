@@ -8,8 +8,6 @@ import Status from '../../../../modules/common/Status'
 interface SingleIsaProps extends ScreenProps {}
 
 export default function SingleIsa(props: SingleIsaProps) {
-  const [current_income, set_current_income] = useState(95)
-  const [future_income, set_future_income] = useState(125)
   return (
     <article className="SingleIsa-page">
       <PageHeader user={props.currentUser} />
@@ -41,12 +39,7 @@ export default function SingleIsa(props: SingleIsaProps) {
             <button className="accept">accept Offer</button>
           </footer>
         </section>
-        <ISACalculator
-          current_income={current_income}
-          future_income={future_income}
-          incomeChange={e => set_current_income(e)}
-          futureChange={e => set_future_income(e)}
-        />
+        <ISACalculator max={10000} months={7} percentage={17}/>
       </section>
     </article>
   )
