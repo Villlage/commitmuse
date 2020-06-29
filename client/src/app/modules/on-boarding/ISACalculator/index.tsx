@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import './style.scss'
 import Icon from '../../../components/Icon'
+import { embedCalculator } from '../../../../helpers/base'
+import Message from '../../../components/Message'
+import { SYSTEM_COLORS } from '../../../../constants/system'
 
 interface ISACalculatorProps {
   percentage: number
@@ -9,10 +12,11 @@ interface ISACalculatorProps {
 }
 
 export default function ISACalculator(props: ISACalculatorProps) {
+  const [copied_to_clipboard, set_copied_to_clipboard] = useState(false)
   const [current_income, set_current_income] = useState(95)
   const [future_income, set_future_income] = useState(125)
 
-  const feature_bill = () => {
+  const future_bill = () => {
     let bill = ((props.percentage / 100) * future_income) * (props.months / 12)
 
     if (future_income > props.max) {
@@ -24,6 +28,12 @@ export default function ISACalculator(props: ISACalculatorProps) {
     }
 
     return Math.round(bill)
+  }
+
+  const handleCopy = () => {
+    embedCalculator(props.percentage, props.months, props.max, current_income, future_income)
+    set_copied_to_clipboard(true)
+    return setTimeout(() => set_copied_to_clipboard(false), 2000)
   }
 
   return (
@@ -52,17 +62,18 @@ export default function ISACalculator(props: ISACalculatorProps) {
 
           <div className="future-bill">
             <label>Future Bill</label>
-            <p>${feature_bill()}K / YEAR ({props.percentage}%)</p>
+            <p>${future_bill()}K / YEAR ({props.percentage}%)</p>
           </div>
         </div>
       </div>
       <footer>
         <p>Embed this calculator in your website:</p>
-        <button>
+        <button onClick={handleCopy}>
           <Icon icon="code" />
           copy code
         </button>
       </footer>
+      {copied_to_clipboard && <Message message="Copied to clipboard!" background={SYSTEM_COLORS.MainSuccess} />}
     </section>
   )
 }
