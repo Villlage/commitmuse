@@ -2,7 +2,8 @@ import factory
 from faker import Faker
 
 from app import db
-from models.user import User
+from models.user import User, Coach, Student
+from models.isa import ISA
 from models.plaid_item import PlaidItem
 from models.plaid_account import PlaidAccount
 from common.constants import PlaidAccountType, PlaidDepositoryAccountSubtype
@@ -52,3 +53,37 @@ class PlaidAccountFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: igno
     )
     account_id = factory.Faker("pystr", max_chars=50)
     user = factory.SubFactory(UserFactory)
+
+
+class StudentFactory(UserFactory):
+    class Meta:
+        model = Student
+        sqlalchemy_session = db.session
+        sqlalchemy_session_persistence = "commit"
+
+
+class CoachFactory(UserFactory):
+    class Meta:
+        model = Coach
+        sqlalchemy_session = db.session
+        sqlalchemy_session_persistence = "commit"
+
+
+class ISAFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
+    class Meta:
+        model = ISA
+        sqlalchemy_session = db.session
+        sqlalchemy_session_persistence = "commit"
+
+    current_income = factory.Faker(
+        "pydecimal", left_digits=5, right_digits=2, positive=True
+    )
+    percentage = factory.Faker("random_int", min=1, max=20, step=1)
+    cap = factory.Faker("pydecimal", left_digits=5, right_digits=2, positive=True)
+    time_to_be_paid = factory.Faker("random_int", min=1, max=1000, step=1)
+
+    description = factory.Faker("word")
+    status = factory.Faker("word")
+
+    student = factory.SubFactory(StudentFactory)
+    coach = factory.SubFactory(CoachFactory)
