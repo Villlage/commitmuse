@@ -21,6 +21,10 @@ class User(db.Model, UserMixin):  # type: ignore
     first_name = db.Column(db.String(255), nullable=False, server_default="")
     last_name = db.Column(db.String(255), nullable=False, server_default="")
 
+    type = db.Column(db.String(20))
+
+    __mapper_args__ = {"polymorphic_identity": "users", "polymorphic_on": type}
+
     @classmethod
     def get_user(cls, user_id: int) -> Optional["User"]:
         with db_session() as session:
@@ -65,3 +69,27 @@ class User(db.Model, UserMixin):  # type: ignore
     def is_admin(self) -> bool:
         is_admin = self.user_role == 1  # type: bool
         return is_admin
+
+
+class Coach(User):
+    __tablename__ = "coaches"
+    id = db.Column(db.Integer, primary_key=True)
+
+    __mapper_args__ = {
+        "polymorphic_identity": "coaches",
+    }
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user = db.relationship("User", backref="coaches")
+
+
+class Student(User):
+    __tablename__ = "students"
+    id = db.Column(db.Integer, primary_key=True)
+
+    __mapper_args__ = {
+        "polymorphic_identity": "students",
+    }
+
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    user = db.relationship("User", backref="students")

@@ -24,3 +24,7 @@ class ResourceNotFound(Error):
 
 class AuthenticationError(Error):
     pass
+
+
+class AuthorizationError(Error):
+    pass
