@@ -44,8 +44,10 @@ def admin_login_required(function: Callable) -> Callable:  # type: ignore
 def _get_user_id_from_request() -> Any:
     if request.method == "GET":
         return request.args.get("user_id", None)
+    elif request.json:
+        return request.json.get("user_id", None)
 
-    return request.json.get("user_id", None)
+    return None
 
 
 def get_current_user(user_id: Optional[int] = None) -> Any:
