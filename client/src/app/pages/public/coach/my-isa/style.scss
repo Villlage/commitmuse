@@ -1,5 +1,5 @@
-@import '../../../../styles/mixins';
-@import '../../../../styles/colors';
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
 
 .MyIsa-page {
   .content {
@@ -8,6 +8,31 @@
     display: flex;
     justify-content: center;
     align-items: baseline;
+
+    .empty-isa {
+      @include flex-centered;
+      flex-direction: column;
+
+      h2 {
+        color: #19216C;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      p {
+        color: #19216C;
+        line-height: 20px;
+        font-size: 16px;
+      }
+
+      .icon {
+        border-radius: 100%;
+        padding: 15px 10px 5px;
+        background: #E0E8F9;
+        margin-top: 20px;
+        margin-bottom: 10px;
+      }
+    }
 
     .my_isa {
       margin-top: 32px;

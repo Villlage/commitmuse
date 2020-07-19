@@ -5,11 +5,7 @@ const baseService = new BaseService()
 
 interface User {
   email: string
-  first_name: string
-  last_name: string
   password: string
-  phone_number: string
-  is_demand?: boolean
 }
 
 export default class AuthService {

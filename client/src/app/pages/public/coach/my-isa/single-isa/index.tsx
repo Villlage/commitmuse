@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import './style.scss'
-import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
-import ISACalculator from '../../../../modules/on-boarding/ISACalculator'
-import PageHeader from '../../../../modules/common/PageHeader'
-import Status from '../../../../modules/common/Status'
+import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
+import ISACalculator from '../../../../../modules/on-boarding/ISACalculator'
+import PageHeader from '../../../../../modules/common/PageHeader'
+import Status from '../../../../../modules/common/Status'
 
 interface SingleIsaProps extends ScreenProps {}
 
 export default function SingleIsa(props: SingleIsaProps) {
   return (
     <article className="SingleIsa-page">
-      <PageHeader user={props.currentUser} />
+      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
       <section className="content">
         <section className="isa-offer">
           <header>

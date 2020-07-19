@@ -1,4 +1,6 @@
 from typing import Type, Optional
+
+import flask_cors
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -28,6 +30,7 @@ config_map = {
 
 config = config_map[app.env]  # type: ignore
 app.config.from_object(config)
+flask_cors.CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 convention = {
     "ix": "ix_%(column_0_label)s",

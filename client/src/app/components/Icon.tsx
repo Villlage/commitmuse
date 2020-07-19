@@ -43,6 +43,7 @@ export const icons: any = {
   question_circle: generateIconLink('question-circle'),
   question_circle_active: generateIconLink('question-circle-active'),
   code: generateIconLink('code'),
+  empty_isa: generateIconLink('empty_isa'),
 }
 
 export type SystemIcons =
@@ -83,6 +84,7 @@ export type SystemIcons =
   | 'question_circle'
   | 'question_circle_active'
   | 'code'
+  | 'empty_isa'
 
 interface IconProps {
   icon: SystemIcons

@@ -6,7 +6,7 @@ type PostAPIs = 'register' | 'login' | 'user'
 
 type PatchAPIs = 'register' | 'login' | 'user'
 
-type GetAPIs = 'logout' | 'user' | 'check-auth'
+type GetAPIs = 'logout' | 'user' | 'check-auth' | string
 
 export default class BaseService {
   public MAIN_API = currentEnv().MAIN_API

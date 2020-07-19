@@ -1,4 +1,6 @@
-from marshmallow import Schema, fields
+from typing import Dict, Any
+
+from marshmallow import Schema, fields, validate, pre_load
 from app import ma
 from models.isa import ISA
 
@@ -37,8 +39,21 @@ class ISASchema(ma.ModelSchema):  # type: ignore
         model = ISA
 
 
+class UserSchema(Schema):  # type: ignore
+    email = fields.Email(allow_none=False, required=True)
+
+    @pre_load  # type: ignore
+    def process_email(self, data: Dict[str, Any], **kwargs) -> Dict[str, Any]:  # type: ignore
+        if data["email"] is None:
+            return data
+
+        data["email"] = data["email"].lower().replace(" ", "")
+        return data
+
+
 login_schema = LoginSchema()
 
 update_isa_schema = UpdateISASchema()
 create_isa_schema = CreateISASchema()
 isa_schema = ISASchema()
+user_schema = UserSchema()

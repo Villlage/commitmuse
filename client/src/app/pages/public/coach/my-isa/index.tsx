@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import './style.scss'
-import { ScreenProps } from '../../../../interfaces/baseIntefaces'
-import PageHeader from '../../../modules/common/PageHeader'
-import Icon from '../../../components/Icon'
-import Select from '../../../components/Select/Select'
+import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
+import PageHeader from '../../../../modules/common/PageHeader'
+import Icon from '../../../../components/Icon'
+import Select from '../../../../components/Select/Select'
+import { notEmptyArray } from '../../../../../helpers/base'
+import IsaService from '../../../../../services/isa.service'
+
+const isaService = new IsaService()
 
 interface MyIsa extends ScreenProps {}
 
@@ -32,7 +36,7 @@ export default function MyIsa(props: MyIsa) {
   const [filter, set_filter] = useState('')
   return (
     <article className="MyIsa-page">
-      <PageHeader user={props.currentUser} />
+      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
       <section className="content">
         <section className="my_isa">
           <header>
@@ -45,15 +49,25 @@ export default function MyIsa(props: MyIsa) {
             />
           </header>
           <footer>
-            {ISAs.filter(i => i.status.includes(filter === 'View all' ? '' : filter)).map((isa, index) => (
-              <Isa
-                onClick={id => props.history.push('/isa/' + id)}
-                id={isa.id}
-                key={index}
-                name={isa.name}
-                status={isa.status}
-              />
-            ))}
+            {notEmptyArray(ISAs) ? (
+              ISAs.filter(i => i.status.includes(filter === 'View all' ? '' : filter)).map((isa, index) => (
+                <Isa
+                  onClick={id => props.history.push('/isa/' + id)}
+                  id={isa.id}
+                  key={index}
+                  name={isa.name}
+                  status={isa.status}
+                />
+              ))
+            ) : (
+              <section className="empty-isa">
+                <div className="icon">
+                  <Icon icon="empty_isa" />
+                </div>
+                <h2>You have no ISA offers.</h2>
+                <p>Start by creating a new one.</p>
+              </section>
+            )}
             <button className="new_isa">
               <Icon icon="new_isa_plus" />
               NEW ISA

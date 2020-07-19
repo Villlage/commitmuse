@@ -1,5 +1,11 @@
 import os
 
+client_build_dir = (
+    os.getenv("REACT_FILES")
+    if os.getenv("REACT_FILES") is not None
+    else "client/build-dev"
+)
+
 
 class Config(object):
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")

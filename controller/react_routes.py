@@ -1,12 +1,14 @@
 # type: ignore
-from flask import send_from_directory, render_template
+from flask import send_from_directory, render_template, url_for
 from werkzeug import Response
 from app import app
+from config import client_build_dir
 
 
-@app.route("/<path:path>")
-def any_root_path(path) -> Response:
-    return render_template("index.html")
+@app.route('/')
+def index():
+    url = url_for('static', filename='bundle.js')
+    return render_template('index.html', bundle=url)
 
 
 @app.route("/static/<path:path>")
@@ -27,6 +29,11 @@ def serviceworkerForReact() -> Response:
 @app.route("/favicon.ico")
 def favicon() -> Response:
     return send_from_directory("client/build", "favicon.ico")
+
+
+@app.route("/assets/<path:path>")
+def serve_assets(path) -> Response:
+    return send_from_directory(client_build_dir + "/assets", path)
 
 
 @app.route("/og-image.png")
