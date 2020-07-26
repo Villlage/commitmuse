@@ -20,18 +20,21 @@ export default function PageHeader(props: PageHeaderProps) {
       <header className="PageHeader-module">
         <nav>
           <div onClick={() => history.push('/my-isa')} className="logo">
-            <img src="/assets/icons/logo.svg" alt="logo" />
+            <img src="/assets/icons/rocket.svg" alt="logo" />
             <p>LOGO</p>
           </div>
           <div className="profile">
             {props.user ? (
               <>
                 {props.user.profile_picture_link ? (
-                  <img src={props.user.profile_picture_link} alt="profile_pic" />
+                  <>
+                    <Icon icon="bell" className="notification" />
+                    <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
+                    <Icon icon="caret-down" />
+                  </>
                 ) : (
                   <Icon icon="person" />
                 )}
-                {props.user.first_name  ? props.user.first_name + ' ' + props.user.last_name : props.user.email}
               </>
             ) : (
               <Button onClick={() => set_show_auth(true)}>Sign in</Button>

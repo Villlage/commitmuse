@@ -1,0 +1,107 @@
+.ClientInfo-module {
+  background: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(16, 42, 67, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+
+  header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 9px;
+    grid-column-gap: 16px;
+    margin-bottom: 32px;
+    padding: 20px 20px 0;
+
+    h2 {
+      color: #19216c;
+    }
+
+    h2, .email {
+      grid-column-start: 1;
+      grid-column-end: span 2;
+    }
+
+    .email {
+      margin-top: 7px;
+    }
+  }
+
+  footer {
+    padding: 0 20px 0;
+
+    h2 {
+      color: #19216c;
+      margin-bottom: 4px;
+    }
+
+    .selects {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 4px;
+      margin-bottom: 16px;
+
+      button {
+        padding: 14px 0;
+        background: #F5F5F5;
+        border: 1px solid #BDBDBD;
+
+        color: #888499;
+
+        &:first-child {
+          border-left: 1px solid #BDBDBD;
+          border-top-left-radius: 5px;
+          border-bottom-left-radius: 5px;
+        }
+
+        &:last-child {
+          border-top-right-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+        &.selected {
+          background: #BED0F7;
+          font-weight: bold;
+          color: #35469C;
+          border-color: #647ACB;
+        }
+      }
+    }
+
+    .form {
+      input {
+        margin-bottom: 16px;
+      }
+
+      .isa-assessment {
+        background: #EFFCF6;
+        border: 2px solid #3EBD93;
+        box-sizing: border-box;
+        border-radius: 5px;
+        padding: 12px 20px;
+
+        p {
+          font-weight: bold;
+          font-size: 16px;
+          color: #147D64;
+        }
+      }
+    }
+  }
+
+  .actions {
+    padding: 16px 24px;
+    display: flex;
+    justify-content: flex-end;
+    background: #F5F5F5;
+
+    button {
+      background: #F0B429;
+      border-radius: 5px;
+      padding: 8px 16px;
+      border: 0;
+      text-transform: uppercase;
+      font-size: 12px;
+      color: #FFFFFF;
+    }
+  }
+}

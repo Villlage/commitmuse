@@ -6,6 +6,7 @@ interface InputProps {
   onChange(e: string): void
   value: string
   placeholder?: string
+  error?: string
   className?: string
   style?: CSSProperties
   type?: string
@@ -14,14 +15,16 @@ interface InputProps {
 
 export default function Input(props: InputProps) {
   return (
-    <input
-      disabled={props.disabled}
-      className={`Input-component${fixClass(props.className)}`}
-      type={props.type || 'text'}
-      onChange={e => props.onChange(e.target.value)}
-      style={props.style}
-      placeholder={props.placeholder}
-      value={props.value}
-    />
+    <div  className={`Input-component${fixClass(props.className)}`}>
+      <input
+        disabled={props.disabled}
+        type={props.type || 'text'}
+        onChange={e => props.onChange(e.target.value)}
+        style={props.style}
+        placeholder={props.placeholder}
+        value={props.value}
+      />
+      {props.error && props.error.length > 0 && <p className="error">{props.error}</p>}
+    </div>
   )
 }

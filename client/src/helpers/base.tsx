@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 
 import * as _ from 'lodash'
-import React from 'react'
+import React, { ClassAttributes, DOMAttributes } from 'react'
 
 //eslint-disable-next-line
 const emailREGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -126,3 +126,6 @@ export const embedCalculator = (
 </script>
 `
 )
+
+export const createEl = <P extends DOMAttributes<T>, T extends Element>(el: string, child: any, props?: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> | null) => child && React.createElement(`${el}`, props, child)
+
