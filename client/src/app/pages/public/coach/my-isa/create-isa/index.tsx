@@ -6,9 +6,7 @@ import PageContent from '../../../../../modules/common/PageContent'
 import FAQ from '../../../../../modules/coach/CreateIsa/FAQ'
 import ClientInfo from '../../../../../modules/coach/CreateIsa/ClientInfo'
 
-interface CreateIsaProps extends ScreenProps {
-
-}
+interface CreateIsaProps extends ScreenProps {}
 
 export default function CreateIsa(props: CreateIsaProps) {
   return (

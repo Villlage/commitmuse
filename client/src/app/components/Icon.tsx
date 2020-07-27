@@ -45,8 +45,8 @@ export const icons: any = {
   code: generateIconLink('code'),
   empty_isa: generateIconLink('empty_isa'),
   'caret-down': generateIconLink('caret-down'),
-  'bell': generateIconLink('bell'),
-  'arrow_to_button': generateIconLink('arrow_to_button'),
+  bell: generateIconLink('bell'),
+  arrow_to_button: generateIconLink('arrow_to_button'),
   'chevron-right': generateIconLink('chevron-right'),
 }
 

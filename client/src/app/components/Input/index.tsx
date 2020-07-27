@@ -15,7 +15,7 @@ interface InputProps {
 
 export default function Input(props: InputProps) {
   return (
-    <div  className={`Input-component${fixClass(props.className)}`}>
+    <div className={`Input-component${fixClass(props.className)}`}>
       <input
         disabled={props.disabled}
         type={props.type || 'text'}

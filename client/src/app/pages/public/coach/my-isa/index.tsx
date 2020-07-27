@@ -4,10 +4,12 @@ import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageHeader from '../../../../modules/common/PageHeader'
 import Icon from '../../../../components/Icon'
 import Select from '../../../../components/Select/Select'
-import { notEmptyArray } from '../../../../../helpers/base'
+import { fixClass, notEmptyArray } from '../../../../../helpers/base'
 import IsaService from '../../../../../services/isa.service'
 import PageContent from '../../../../modules/common/PageContent'
 import { Link } from 'react-router-dom'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 
 const isaService = new IsaService()
 
@@ -96,14 +98,23 @@ type IsaProps = {
 function Isa(props: IsaProps) {
   return (
     <div className="single_isa" onClick={() => props.onClick(props.id)}>
-      <h2>{props.name}</h2>
+      <div>
+        <h2>{props.name}</h2>
+        {props.status === 'paying' && <p className={props.status}>PAYING - 5K of 20K</p>}
+        {props.status === 'completed' && <p className={props.status}>COMPLETED - 20K</p>}
+      </div>
+      <CircularProgressbar background={status_colors[props.status].bg} value={25} text={`${25}%`} />
       <div
+        className={props.status + fixClass(props.status !== 'active' && 'round')}
         style={{
           color: status_colors[props.status].text,
           background: status_colors[props.status].bg,
+          borderColor: status_colors[props.status].text,
         }}
       >
-        {props.status}
+        {props.status === 'paying' && <p className={props.status}>25%</p>}
+        {props.status === 'completed' && <p className={props.status}>100%</p>}
+        {props.status === 'active' && props.status}
       </div>
     </div>
   )
