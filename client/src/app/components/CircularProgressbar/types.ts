@@ -9,7 +9,6 @@ export type CircularProgressbarStyles = {
 }
 
 export type CircularProgressbarDefaultProps = {
-  background: boolean
   backgroundPadding: number
   circleRatio: number
   classes: {
@@ -26,6 +25,8 @@ export type CircularProgressbarDefaultProps = {
   strokeWidth: number
   styles: CircularProgressbarStyles
   text: string
+  lineColor: string
+  textColor: string
 }
 
 // These are used for any CircularProgressbar wrapper components that can safely

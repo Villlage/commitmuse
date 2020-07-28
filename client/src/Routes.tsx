@@ -7,6 +7,7 @@ import MyIsa from './app/pages/public/coach/my-isa'
 import OnBoarding from './app/pages/public/coach/on-boarding'
 import SingleIsa from './app/pages/public/coach/my-isa/single-isa'
 import CreateIsa from './app/pages/public/coach/my-isa/create-isa'
+import SignUp from './app/pages/public/auth/sign-up'
 
 export default function Routes(routerProps: any) {
   return (
@@ -15,6 +16,10 @@ export default function Routes(routerProps: any) {
         <Route
           path="/my-isa"
           render={(props: any) => <MyIsa {...props} {...routerProps} />}
+        />
+        <Route
+          path="/login"
+          render={(props: any) => <SignUp {...props} {...routerProps} />}
         />
         <Route
           path="/isa/create"

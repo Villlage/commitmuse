@@ -1,12 +1,14 @@
 import * as React from 'react'
-
+import './style.scss'
 import { VIEWBOX_WIDTH, VIEWBOX_HEIGHT, VIEWBOX_HEIGHT_HALF, VIEWBOX_CENTER_X, VIEWBOX_CENTER_Y } from './constants'
 import Path from './Path'
 import { CircularProgressbarDefaultProps, CircularProgressbarProps } from './types'
+import styled from 'styled-components'
 
 export default class CircularProgressbar extends React.Component<CircularProgressbarProps> {
   static defaultProps: CircularProgressbarDefaultProps = {
-    background: false,
+    textColor: '#3e98c7',
+    lineColor: '#3e98c7',
     backgroundPadding: 0,
     circleRatio: 1,
     classes: {
@@ -20,7 +22,7 @@ export default class CircularProgressbar extends React.Component<CircularProgres
     className: '',
     maxValue: 100,
     minValue: 0,
-    strokeWidth: 8,
+    strokeWidth: 4,
     styles: {
       root: {},
       trail: {},
@@ -31,18 +33,10 @@ export default class CircularProgressbar extends React.Component<CircularProgres
     text: '',
   }
 
-  getBackgroundPadding() {
-    if (!this.props.background) {
-      // Don't add padding if not displaying background
-      return 0
-    }
-    return this.props.backgroundPadding
-  }
-
   getPathRadius() {
     // The radius of the path is defined to be in the middle, so in order for the path to
     // fit perfectly inside the 100x100 viewBox, need to subtract half the strokeWidth
-    return VIEWBOX_HEIGHT_HALF - this.props.strokeWidth / 2 - this.getBackgroundPadding()
+    return VIEWBOX_HEIGHT_HALF - this.props.strokeWidth / 2
   }
 
   // Ratio of path length to trail length, as a value between 0 and 1
@@ -58,23 +52,22 @@ export default class CircularProgressbar extends React.Component<CircularProgres
     const pathRadius = this.getPathRadius()
     const pathRatio = this.getPathRatio()
 
+    const Svg = styled.svg`
+      .CircularProgressbar-path {
+        stroke: ${this.props.lineColor};
+      }
+      .CircularProgressbar-text {
+        fill: ${this.props.textColor};
+      }
+    `
+
     return (
-      <svg
+      <Svg
         className={`${classes.root} ${className}`}
         style={styles.root}
         viewBox={`0 0 ${VIEWBOX_WIDTH} ${VIEWBOX_HEIGHT}`}
         data-test-id="CircularProgressbar"
       >
-        {this.props.background ? (
-          <circle
-            className={classes.background}
-            style={styles.background}
-            cx={VIEWBOX_CENTER_X}
-            cy={VIEWBOX_CENTER_Y}
-            r={VIEWBOX_HEIGHT_HALF}
-          />
-        ) : null}
-
         <Path
           className={classes.trail}
           counterClockwise={counterClockwise}
@@ -98,7 +91,7 @@ export default class CircularProgressbar extends React.Component<CircularProgres
             {text}
           </text>
         ) : null}
-      </svg>
+      </Svg>
     )
   }
 }
