@@ -1,4 +1,4 @@
-## Village
+## Commitmuse
 
 ### Prerequisites
 

@@ -1,0 +1,129 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.MyIsa-page {
+
+  .page-header {
+    width: 512px;
+    @include flex-centered;
+    position: relative;
+
+    .Select-component {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .content {
+    .empty-isa {
+      @include flex-centered;
+      flex-direction: column;
+      @include heebo-normal();
+      width: 512px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      padding: 24px;
+
+      h2 {
+        color: #19216C;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      p {
+        color: #19216C;
+        line-height: 20px;
+        font-size: 16px;
+      }
+
+      .icon {
+        border-radius: 100%;
+        padding: 15px 10px 5px;
+        background: #e0e8f9;
+        margin: 20px 0;
+      }
+
+      .text_with_icon {
+        display: flex;
+
+        img {
+          margin-top: 4px;
+        }
+      }
+    }
+
+    .my_isa {
+      width: 512px;
+      background: #ffffff;
+      box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        flex-direction: column;
+        background: $MainSecondary;
+        padding: 24px 24px 15px;
+
+        .actions {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+
+          .filter_btn {
+            border: 0;
+            color: white;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            @include heebo-normal();
+
+            img {
+              margin-left: 8px;
+            }
+          }
+        }
+      }
+    }
+
+    .new_isa {
+      background: #F0B429;
+      box-shadow: 0 4px 25px rgba(74, 35, 0, 0.08);
+      border-radius: 7px;
+      padding: 8px 12px;
+      border: 0;
+      color: white;
+      letter-spacing: 0.02em;
+      @include heebo-normal($size: 12);
+      font-weight: bold;
+      width: 100%;
+      margin-top: 15px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      .my_isa {
+        width: 100%;
+        margin: 20px;
+      }
+    }
+  }
+}

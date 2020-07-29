@@ -27,6 +27,10 @@ export default function ISACalculator(props: ISACalculatorProps) {
       bill = 0
     }
 
+    if (future_income < current_income) {
+      bill = 0
+    }
+
     return Math.round(bill)
   }
 

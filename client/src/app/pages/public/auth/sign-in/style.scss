@@ -1,0 +1,75 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.SignIn-page {
+
+  .top-wrapper {
+    height: 160px;
+  }
+
+  .content {
+    padding-top: 25px;
+    color: white;
+
+    .logo {
+      display: flex;
+      cursor: pointer;
+      justify-content: center;
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        margin-left: 12px;
+      }
+    }
+
+    h2 {
+      margin: 16px 0;
+    }
+
+    .form {
+      max-width: 512px;
+      background: #FFFFFF;
+      box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.2);
+      border-radius: 10px;
+
+      .fields {
+        padding: 24px 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-column-gap: 16px;
+        grid-row-gap: 16px;
+      }
+
+      footer {
+        display: flex;
+        padding: 18px 24px;
+        background: #F5F5F5;
+        justify-content: space-between;
+        align-items: center;
+        color: #656565;
+        border-radius: 0px 0px 10px 10px;
+
+        a {
+          margin-right: 60px;
+        }
+
+        button {
+          display: flex;
+          padding: 8px 26px;
+          background: #F0B429;
+          border-radius: 5px;
+          border: 0;
+          color: #FFFFFF;
+          font-weight: bold;
+          align-items: center;
+
+          img {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+}

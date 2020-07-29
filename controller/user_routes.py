@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from typing import Tuple
+from typing import Tuple, Optional
 import marshmallow
 from werkzeug import Response
 from app import app
@@ -8,10 +8,11 @@ from common.exceptions import (
     ResourceNotFound,
     AuthenticationError,
 )
+from models.user import User
 from services.user_service import create_user, get_user
-from serializers.user_serializers import login_schema
-from flask_login import login_user, logout_user
-from controller.common import login_required
+from serializers.user_serializers import login_schema, user_schema
+from flask_login import login_user, logout_user, current_user
+from controller.common import login_required, get_current_user
 
 
 @app.route("/login", methods=["POST"])
@@ -31,6 +32,20 @@ def login() -> Tuple[Response, int]:
         return jsonify(error=error.message), 403
 
     return jsonify("successfully logged in user"), 200
+
+
+@app.route("/check-auth", methods=["GET"])
+def check_auth() -> str:
+    return jsonify(current_user.is_authenticated)
+
+
+@app.route("/user", methods=["GET"])
+@login_required
+def user() -> Tuple[Response, int]:
+    user = get_current_user()
+    result = user_schema.dump(user)
+
+    return jsonify(result), 200
 
 
 @app.route("/register", methods=["POST"])
@@ -58,3 +73,37 @@ def logout() -> Tuple[Response, int]:
     """
     logout_user()
     return jsonify("logged out user successfully"), 200
+
+
+def _get_user(user_id: Optional[int] = None) -> "User":
+
+    user = get_user_or_none(user_id=user_id)
+
+    if not user:
+        raise ResourceNotFound("User Not Found")
+
+    return user
+
+
+def get_user_or_none(user_id: Optional[int] = None) -> Optional["User"]:
+    user_id = _get_user_id(user_id)
+
+    user = None
+    if user_id and current_user.is_authenticated and current_user.is_admin():
+        user = User.get_user(user_id)
+    elif current_user.is_authenticated:
+        user = User.query.filter(User.id == current_user.id).one_or_none()
+
+    return user
+
+
+def _get_user_id(user_id: Optional[int] = None) -> Optional[int]:
+    if user_id:
+        return user_id
+
+    if request.method == "GET":
+        user_id = request.args.get("user_id", None)
+    elif request.json:
+        user_id = request.json.get("user_id", None)
+
+    return user_id

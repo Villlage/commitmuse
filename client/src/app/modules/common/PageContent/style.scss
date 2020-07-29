@@ -1,0 +1,27 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.PageContent-module {
+  position: relative;
+  .top-wrapper {
+    position: absolute;
+    top: 0;
+    background: #19216C;
+    height: 100px;
+    width: 100%;
+  }
+
+
+  > .content {
+    position: relative;
+    height: calc(100vh - 60px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .page-title {
+      color: white;
+      margin-bottom: 18px;
+    }
+  }
+}

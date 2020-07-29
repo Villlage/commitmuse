@@ -56,3 +56,14 @@ export type SystemColors =
   | 'ActiveLight'
   | 'HoverBorder'
   | 'ActiveBorder'
+
+export interface ISA {
+  current_income: number
+  percentage: number
+  cap: number
+  time_to_be_paid: number
+  status: string
+  description: string
+  coach_id: number
+  student_id: number
+}

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './style.scss'
-import Icon from '../../../components/Icon'
-import { ScreenProps } from '../../../../interfaces/baseIntefaces'
-import BoardingField from '../../../modules/on-boarding/BoardingField'
-import TooltipBadge from '../../../components/TooltipBadge'
-import PageHeader from '../../../modules/common/PageHeader'
-import ISACalculator from '../../../modules/on-boarding/ISACalculator'
+import Icon from '../../../../components/Icon'
+import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
+import BoardingField from '../../../../modules/on-boarding/BoardingField'
+import TooltipBadge from '../../../../components/TooltipBadge'
+import PageHeader from '../../../../modules/common/PageHeader'
+import ISACalculator from '../../../../modules/on-boarding/ISACalculator'
 
 interface OnBoardingProps extends ScreenProps {}
 
@@ -17,9 +17,10 @@ export default function OnBoarding(props: OnBoardingProps) {
   const [risk_assessment, set_risk_assessment] = useState(20)
   const [pay_time, set_pay_time] = useState(7)
   const [pay_maximum, set_pay_maximum] = useState(10000)
+
   return (
     <article className="OnBoarding-page">
-      <PageHeader user={props.currentUser} />
+      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
       <section className="content">
         <section className="form_wrapper">
           <header>
