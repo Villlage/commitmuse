@@ -12,7 +12,7 @@ from models.user import User
 from services.user_service import create_user, get_user
 from serializers.user_serializers import login_schema, user_schema
 from flask_login import login_user, logout_user, current_user
-from controller.common import login_required
+from controller.common import login_required, get_current_user
 
 
 @app.route("/login", methods=["POST"])
@@ -42,7 +42,7 @@ def check_auth() -> str:
 @app.route("/user", methods=["GET"])
 @login_required
 def user() -> Tuple[Response, int]:
-    user = _get_user()
+    user = get_current_user()
     result = user_schema.dump(user)
 
     return jsonify(result), 200
