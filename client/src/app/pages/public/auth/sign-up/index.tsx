@@ -44,6 +44,7 @@ export default function SignUp(props: ScreenProps) {
 
       if (res) {
         if (res.error) {
+          set_loading(false)
           set_request_error(res.error)
           return setTimeout(() => set_request_error(''), 3000)
         }

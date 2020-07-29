@@ -1,11 +1,9 @@
 import * as React from 'react'
 import './style.scss'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { User } from '../../../../interfaces/baseIntefaces'
-import Button from '../../../components/Button'
 import Icon from '../../../components/Icon'
-import { useState } from 'react'
-import Auth from '../../auth'
+import Button from '../../../components/Button'
 
 interface PageHeaderProps {
   user?: User
@@ -13,7 +11,6 @@ interface PageHeaderProps {
 }
 
 export default function PageHeader(props: PageHeaderProps) {
-  const [show_auth, set_show_auth] = useState(false)
   const history = useHistory()
   return (
     <>
@@ -35,12 +32,13 @@ export default function PageHeader(props: PageHeaderProps) {
                 <Icon icon="caret-down" />
               </>
             ) : (
-              <Button onClick={() => set_show_auth(true)}>Sign in</Button>
+              <Link to="/login">
+                <Button>Sign in</Button>
+              </Link>
             )}
           </div>
         </nav>
       </header>
-      <Auth fetchUser={props.fetchUser} isOpen={show_auth} onClose={() => set_show_auth(false)} />
     </>
   )
 }
