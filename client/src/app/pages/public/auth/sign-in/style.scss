@@ -1,7 +1,7 @@
 @import '../../../../../styles/mixins';
 @import '../../../../../styles/colors';
 
-.SignUp-page {
+.SignIn-page {
 
   .top-wrapper {
     height: 160px;
@@ -37,14 +37,9 @@
       .fields {
         padding: 24px 20px;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-column-gap: 16px;
         grid-row-gap: 16px;
-      }
-
-      .full {
-        grid-column-start: 1;
-        grid-column-end: span 2;
       }
 
       footer {
@@ -55,6 +50,10 @@
         align-items: center;
         color: #656565;
         border-radius: 0px 0px 10px 10px;
+
+        a {
+          margin-right: 60px;
+        }
 
         button {
           display: flex;

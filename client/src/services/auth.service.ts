@@ -10,17 +10,7 @@ interface User {
 
 export default class AuthService {
   public async register(user: User) {
-    try {
-      const res = await baseService.postJSON('register', user)
-
-      if (res && !res.error) {
-        await this.login({ email: formatEmail(user.email), password: user.password })
-      }
-
-      return res
-    } catch (e) {
-      throw e
-    }
+      return await baseService.postJSON('register', user)
   }
 
   public async login(user: { password: string; email: string }) {

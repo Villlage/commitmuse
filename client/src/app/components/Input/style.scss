@@ -3,18 +3,64 @@
 
 .Input-component {
   position: relative;
+  background: $MainLight;
+  border-radius: 5px;
+  height: 48px;
+  display: flex;
+  padding: 0 0 0 12px;
+
+  &.rippled {
+    input {
+      padding: 16px 0 4px;
+
+    }
+  }
+
+  .ripple {
+    position: absolute;
+    color: #647ACB;
+    font-weight: bold;
+    font-size: 10px;
+    top: 6px;
+  }
+
+  &.with-icon {
+    img {
+      margin-right: 18px;
+    }
+
+    .eye-icon {
+      margin-right: 0;
+      cursor: pointer;
+    }
+  }
+
+  .post-fix {
+    width: 96px;
+    background: #E0E0E0;
+    border-radius: 0px 5px 5px 0px;
+    @include flex-centered;
+    font-size: 14px;
+    color: #616161;
+  }
 
   input {
-    background: $MainLight;
-    border-radius: 5px;
-    height: 48px;
-    padding: 20px 16px;
+    padding: 16px 0;
     color: $Title;
     width: 100%;
     @include gothic-normal();
+    background: $MainLight;
+    font-size: 16px;
 
     &::placeholder {
-      color: $BodyLight;
+      color: #888499;
+    }
+  }
+
+
+  &.has-error {
+    input {
+      color: $MainError;
     }
   }
 
@@ -22,6 +68,6 @@
     color: $MainError;
     font-size: 11px;
     position: absolute;
-    top: calc(100% + 2px);
+    top: 100%;
   }
 }

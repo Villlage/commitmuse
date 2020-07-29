@@ -1,5 +1,5 @@
 .ClientInfo-module {
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0 4px 16px rgba(16, 42, 67, 0.2);
   border-radius: 10px;
   overflow: hidden;
@@ -16,7 +16,8 @@
       color: #19216c;
     }
 
-    h2, .email {
+    h2,
+    .email {
       grid-column-start: 1;
       grid-column-end: span 2;
     }
@@ -42,13 +43,13 @@
 
       button {
         padding: 14px 0;
-        background: #F5F5F5;
-        border: 1px solid #BDBDBD;
+        background: #f5f5f5;
+        border: 1px solid #bdbdbd;
 
         color: #888499;
 
         &:first-child {
-          border-left: 1px solid #BDBDBD;
+          border-left: 1px solid #bdbdbd;
           border-top-left-radius: 5px;
           border-bottom-left-radius: 5px;
         }
@@ -59,22 +60,22 @@
         }
 
         &.selected {
-          background: #BED0F7;
+          background: #bed0f7;
           font-weight: bold;
-          color: #35469C;
-          border-color: #647ACB;
+          color: #35469c;
+          border-color: #647acb;
         }
       }
     }
 
     .form {
-      input {
+      .Input-component {
         margin-bottom: 16px;
       }
 
       .isa-assessment {
-        background: #EFFCF6;
-        border: 2px solid #3EBD93;
+        background: #effcf6;
+        border: 2px solid #3ebd93;
         box-sizing: border-box;
         border-radius: 5px;
         padding: 12px 20px;
@@ -82,7 +83,7 @@
         p {
           font-weight: bold;
           font-size: 16px;
-          color: #147D64;
+          color: #147d64;
         }
       }
     }
@@ -92,16 +93,16 @@
     padding: 16px 24px;
     display: flex;
     justify-content: flex-end;
-    background: #F5F5F5;
+    background: #f5f5f5;
 
     button {
-      background: #F0B429;
+      background: #f0b429;
       border-radius: 5px;
       padding: 8px 16px;
       border: 0;
       text-transform: uppercase;
       font-size: 12px;
-      color: #FFFFFF;
+      color: #ffffff;
     }
   }
 }

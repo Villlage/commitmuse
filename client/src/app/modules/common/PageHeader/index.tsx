@@ -26,15 +26,13 @@ export default function PageHeader(props: PageHeaderProps) {
           <div className="profile">
             {props.user ? (
               <>
+                <Icon icon="bell" className="notification" />
                 {props.user.profile_picture_link ? (
-                  <>
-                    <Icon icon="bell" className="notification" />
-                    <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
-                    <Icon icon="caret-down" />
-                  </>
+                  <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
                 ) : (
-                  <Icon icon="person" />
+                  <Icon className="profile_pic" icon="person" />
                 )}
+                <Icon icon="caret-down" />
               </>
             ) : (
               <Button onClick={() => set_show_auth(true)}>Sign in</Button>

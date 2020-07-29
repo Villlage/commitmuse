@@ -48,6 +48,10 @@ export const icons: any = {
   bell: generateIconLink('bell'),
   arrow_to_button: generateIconLink('arrow_to_button'),
   'chevron-right': generateIconLink('chevron-right'),
+  'arrow-right': generateIconLink('arrow-right'),
+  'eye': generateIconLink('eye'),
+  'mail': generateIconLink('mail'),
+  'key': generateIconLink('key'),
 }
 
 export type SystemIcons =
@@ -93,6 +97,10 @@ export type SystemIcons =
   | 'bell'
   | 'arrow_to_button'
   | 'chevron-right'
+  | 'arrow-right'
+  | 'eye'
+  | 'mail'
+  | 'key'
 
 interface IconProps {
   icon: SystemIcons
