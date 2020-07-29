@@ -70,3 +70,4 @@ import controller.user_routes
 import controller.react_routes
 import controller.plaid_routes
 import controller.isa_routes
+import controller.pdf_routes
