@@ -1,36 +1,32 @@
 import base64
 import os
-import time
-
-import pdfkit
 from docusign_esign import (ApiClient, Document, EnvelopeDefinition,
                             EnvelopesApi, Recipients, RecipientViewRequest,
                             Signer, SignHere, Tabs)
 from flask import render_template, url_for
 
-from app import app
-from config import access_token, account_id, authentication_method, base_path
+from app import app, config
 from services.pdf_service import (create_component_envelop,
                                   create_envelop_definition, create_sign_tab,
                                   create_signer_model, signer_email,
-                                  signer_name)
+                                  signer_name,create_pdf_file)
 
 # Recipient Information:
 
 @app.route("/pdf/generate", methods=["GET"])
 def create_pdf():
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-    # TODO: pdf path to replace with CDN and store in db wrt user
-    pdf = pdfkit.from_file('demo.html' ,'resources/output.pdf')
-    return render_template('index.html')
-
+    import pdb; pdb.set_trace()
+    created = create_pdf_file()
+    if created:
+        return "pdf successfullu created"
+    else:
+        return "pdf not created"
 
 @app.route("/pdf/send", methods=["POST"])
 def send_document_for_signing():
     """
     Sends the document <file_name> to be signed by <signer_name> via <signer_email>
     """
-
 
     envelope_args = {
             "signer_email": signer_email,
@@ -50,16 +46,16 @@ def send_document_for_signing():
     signer.tabs = Tabs(sign_here_tabs = [sign_here]) # The Tabs object wants arrays of the different field/tab types
 
     api_client = ApiClient()
-    api_client.host = base_path
-    api_client.set_default_header("Authorization", "Bearer " + access_token)
+    api_client.host = config.base_path
+    api_client.set_default_header("Authorization", "Bearer " + config.access_token)
     # TODO: move to services -verify_token
     envelope_api = EnvelopesApi(api_client)
-    results = envelope_api.create_envelope(account_id, envelope_definition=create_envelop_definition())
+    results = envelope_api.create_envelope(config.account_id, envelope_definition=create_envelop_definition())
     envelope_id = results.envelope_id
 
     # 3. Create the Recipient View request object
     recipient_view_request = RecipientViewRequest(
-        authentication_method=authentication_method,
+        authentication_method=config.authentication_method,
         client_user_id=envelope_args["signer_client_id"],
         recipient_id="1",
         return_url=envelope_args["ds_return_url"],

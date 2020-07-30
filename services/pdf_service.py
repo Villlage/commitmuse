@@ -1,6 +1,8 @@
 import base64
 import os
-
+import time
+import pdfkit
+from flask import render_template
 from docusign_esign import (ApiClient, Document, EnvelopeDefinition,
                             EnvelopesApi, Recipients, RecipientViewRequest,
                             Signer, SignHere)
@@ -13,6 +15,14 @@ signer_name = "sumit chawla"
 signer_email = "sumitcstpl@gmail.com"
 APP_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 file_name_path = 'resources/output.pdf'
+
+
+def create_pdf_file():
+    timestr = time.strftime("%Y%m%d-%H%M%S")
+    # TODO: pdf path to replace with CDN and store in db wrt user
+    pdf = pdfkit.from_file('demo.html' ,'resources/output.pdf')
+    return pdf
+
 
 
 # Create the component objects for the envelope definition...
