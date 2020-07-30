@@ -5,7 +5,7 @@ import Icon, { SystemIcons } from '../Icon'
 
 interface InputProps {
   onChange(e: string): void
-  value: string
+  value: string | number
   placeholder?: string
   error?: string
   className?: string
@@ -19,7 +19,7 @@ interface InputProps {
 
 export default function Input(props: InputProps) {
   const [visible, set_visible] = useState(props.type !== 'password')
-  const rippled = props.value && props.withRipple
+  const rippled = !!props.value && props.withRipple
   return (
     <div
       className={`Input-component${fixClass(props.error && 'has-error')}${fixClass(props.className)}${fixClass(props.icon && 'with-icon')}${fixClass(rippled && 'rippled')}`}
