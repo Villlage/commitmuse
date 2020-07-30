@@ -1,0 +1,19 @@
+.Tabs-module {
+  display: flex;
+
+  > div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 0;
+    color: #9E9E9E;
+    text-transform: uppercase;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+
+    &:hover {
+      color: #19216C;
+      border-color: #19216C;
+    }
+  }
+}

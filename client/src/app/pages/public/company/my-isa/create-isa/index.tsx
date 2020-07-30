@@ -83,7 +83,7 @@ export default function CreateIsa(props: CreateIsaProps) {
 
   return (
     <article className="CreateIsa-page">
-      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
+      <PageHeader user={props.currentUser} />
       <PageContent title="New ISA Offer">
         <section className="container">
           <section className="client-info">

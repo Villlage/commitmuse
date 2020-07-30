@@ -7,7 +7,6 @@ import Button from '../../../components/Button'
 
 interface PageHeaderProps {
   user?: User
-  fetchUser(): void
 }
 
 export default function PageHeader(props: PageHeaderProps) {

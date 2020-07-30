@@ -24,7 +24,7 @@ export default function MyIsa(props: MyIsa) {
   const [filter, set_filter] = useState('')
   return (
     <article className="MyIsa-page">
-      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
+      <PageHeader user={props.currentUser} />
       <PageContent>
         <header className="page-header">
           <h1 className="page-title">My ISA’s</h1>
