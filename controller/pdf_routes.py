@@ -15,7 +15,6 @@ from services.pdf_service import (create_component_envelop,
 
 @app.route("/pdf/generate", methods=["GET"])
 def create_pdf():
-    import pdb; pdb.set_trace()
     created = create_pdf_file()
     if created:
         return "pdf successfullu created"

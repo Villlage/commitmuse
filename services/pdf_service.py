@@ -1,14 +1,12 @@
 import base64
 import os
 import time
+
 import pdfkit
-from flask import render_template
 from docusign_esign import (ApiClient, Document, EnvelopeDefinition,
                             EnvelopesApi, Recipients, RecipientViewRequest,
                             Signer, SignHere)
-from flask import url_for
-
-from config import access_token, account_id, authentication_method, base_path
+from flask import render_template, url_for
 
 # To be replaced with dynamic data
 signer_name = "sumit chawla"
