@@ -3,12 +3,13 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Switch, Redirect } from 'react-router'
 import { User } from './interfaces/baseIntefaces'
 import NotFound from './app/pages/public/404'
-import MyIsa from './app/pages/public/coach/my-isa'
-import OnBoarding from './app/pages/public/coach/on-boarding'
-import SingleIsa from './app/pages/public/coach/my-isa/single-isa'
-import CreateIsa from './app/pages/public/coach/my-isa/create-isa'
+import MyIsa from './app/pages/public/company/my-isa'
+import OnBoarding from './app/pages/public/company/on-boarding'
+import SingleIsa from './app/pages/public/company/my-isa/single-isa'
+import CreateIsa from './app/pages/public/company/my-isa/create-isa'
 import SignUp from './app/pages/public/auth/sign-up'
 import SignIn from './app/pages/public/auth/sign-in'
+import IsaOverview from './app/pages/public/company/my-isa/isa-overview'
 
 export default function Routes(routerProps: any) {
   return (
@@ -32,7 +33,7 @@ export default function Routes(routerProps: any) {
         />
         <Route
           path="/isa/:id"
-          render={(props: any) => <SingleIsa {...props} {...routerProps} />}
+          render={(props: any) => <IsaOverview {...props} {...routerProps} />}
         />
         <Route
           path="/on-boarding"

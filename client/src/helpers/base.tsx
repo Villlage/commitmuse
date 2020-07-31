@@ -12,7 +12,7 @@ export const validatePhoneNumber = (phoneNumber: string) =>
 
 export const notEmptyArray = (arr: any[] | null | undefined) => Array.isArray(arr) && arr.length > 0
 
-export const fixClass = (className: string | undefined | boolean) => (className ? ' ' + className : '')
+export const fixClass = (className: any) => (className ? ' ' + className : '')
 
 export const noScroll = <style>{`html { overflow: hidden; }`}</style>
 

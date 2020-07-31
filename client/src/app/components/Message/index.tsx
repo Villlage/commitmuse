@@ -15,6 +15,7 @@ interface MessageProps {
 }
 
 const Message = (props: MessageProps) => {
+  if (!props.message) return null
   return typeof props.message === 'string' ? (
     <div
       className={`Message-component alert${fixClass(props.static && 'static')}`}

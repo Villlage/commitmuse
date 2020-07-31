@@ -20,7 +20,7 @@ export default function OnBoarding(props: OnBoardingProps) {
 
   return (
     <article className="OnBoarding-page">
-      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
+      <PageHeader user={props.currentUser} />
       <section className="content">
         <section className="form_wrapper">
           <header>

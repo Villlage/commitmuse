@@ -10,7 +10,7 @@ interface SingleIsaProps extends ScreenProps {}
 export default function SingleIsa(props: SingleIsaProps) {
   return (
     <article className="SingleIsa-page">
-      <PageHeader user={props.currentUser} fetchUser={props.fetchUser} />
+      <PageHeader user={props.currentUser} />
       <section className="content">
         <section className="isa-offer">
           <header>

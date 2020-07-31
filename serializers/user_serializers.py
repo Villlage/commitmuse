@@ -5,6 +5,7 @@ from app import ma
 from models.isa import ISA
 
 # from marshmallow.validate import OneOf, Range
+from models.user import User
 
 
 class LoginSchema(Schema):  # type: ignore
@@ -40,6 +41,9 @@ class ISASchema(ma.ModelSchema):  # type: ignore
 
 
 class UserSchema(Schema):  # type: ignore
+    id = fields.Int(allow_none=False, required=True)
+    first_name = fields.Str(allow_none=False, required=True)
+    last_name = fields.Str(allow_none=False, required=True)
     email = fields.Email(allow_none=False, required=True)
 
     @pre_load  # type: ignore

@@ -4,7 +4,7 @@
 .PageHeader-module {
   height: 60px;
   padding: 0 24px;
-  background: #19216C;
+  background: #010162;
   box-shadow: 0 4px 16px rgba(16, 42, 67, 0.06);
   position: relative;
   @include gothic-normal($size: 16);
@@ -20,6 +20,10 @@
     .logo {
       display: flex;
       cursor: pointer;
+
+      img {
+        height: 80px;
+      }
 
       p {
         font-size: 16px;

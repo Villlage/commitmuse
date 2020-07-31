@@ -7,7 +7,6 @@ import Button from '../../../components/Button'
 
 interface PageHeaderProps {
   user?: User
-  fetchUser(): void
 }
 
 export default function PageHeader(props: PageHeaderProps) {
@@ -16,9 +15,8 @@ export default function PageHeader(props: PageHeaderProps) {
     <>
       <header className="PageHeader-module">
         <nav>
-          <div onClick={() => history.push('/my-isa')} className="logo">
-            <img src="/assets/icons/rocket.svg" alt="logo" />
-            <p>LOGO</p>
+          <div className="logo" onClick={() => history.push('/my-isa')}>
+            <img src="/assets/images/logo.png" alt="logo" />
           </div>
           <div className="profile">
             {props.user ? (
