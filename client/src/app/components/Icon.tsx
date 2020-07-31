@@ -52,9 +52,11 @@ export const icons: any = {
   'eye': generateIconLink('eye'),
   'mail': generateIconLink('mail'),
   'key': generateIconLink('key'),
+  'file-download': generateIconLink('file-download'),
 }
 
 export type SystemIcons =
+  | 'file-download'
   | 'new_isa_plus'
   | 'active_star'
   | 'arrow_right'

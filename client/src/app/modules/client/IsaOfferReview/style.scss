@@ -1,0 +1,33 @@
+.client-isa_offer_review {
+  .fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 16px;
+    grid-gap: 16px;
+    padding: 16px;
+
+    .full {
+      grid-column-start: 1;
+      grid-column-end: span 2;
+    }
+  }
+
+  footer {
+    padding: 18px 24px;
+    background: #F5F5F5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      display: flex;
+      font-size: 12px;
+      color: #19216C;
+      font-weight: bold;
+    }
+
+    img {
+      margin-right: 8px;
+    }
+  }
+}
