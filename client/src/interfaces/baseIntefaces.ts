@@ -67,3 +67,23 @@ export interface ISA {
   coach_id: number
   student_id: number
 }
+
+export interface PlaidAccount {
+  id: string
+  name: string
+  type: string
+  subtype: string
+  mask: string
+}
+
+export interface PlaidMetadata {
+  account: PlaidAccount
+  account_id: null | number
+  accounts: PlaidAccount[]
+  institution: {
+    name: string
+    institution_id: string
+  }
+  link_session_id: string
+  public_token: string
+}

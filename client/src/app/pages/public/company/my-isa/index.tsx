@@ -7,7 +7,7 @@ import { notEmptyArray } from '../../../../../helpers/base'
 import IsaService from '../../../../../services/isa.service'
 import PageContent from '../../../../modules/common/PageContent'
 import { Link } from 'react-router-dom'
-import IsaStatus from '../../../../modules/coach/MyIsa/IsaStatus'
+import IsaStatus from '../../../../modules/company/MyIsa/IsaStatus'
 import Select from '../../../../components/Select/Select'
 
 const isaService = new IsaService()

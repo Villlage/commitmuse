@@ -1,0 +1,34 @@
+.ClientIsaOffer-page {
+  .PageContent-module > .content {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
+    .offer-steps {
+      width: 512px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-right: 32px;
+      box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.2);
+
+      .link_bank {
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        button {
+          padding: 0 40px;
+        }
+      }
+
+      footer {
+        button {
+          font-size: 12px;
+          line-height: 12px;
+          font-weight: bold;
+          height: 36px;
+        }
+      }
+    }
+  }
+}

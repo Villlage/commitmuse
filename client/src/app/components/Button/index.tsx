@@ -52,7 +52,7 @@ export default function Button(props: ButtonProps) {
         <Loader />
       ) : (
         <>
-          {props.icon && <Icon icon={props.icon} style={{ marginRight: 6 }} />} {props.children}
+          {props.children} {props.icon && <Icon icon={props.icon} style={{ marginLeft: 6 }} />}
         </>
       )}
     </Btn>

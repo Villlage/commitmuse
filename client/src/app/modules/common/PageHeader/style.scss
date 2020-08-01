@@ -50,6 +50,18 @@
         height: 32px;
         border-radius: 32px;
       }
+
+      a {
+        display: flex;
+        margin-left: 22px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #FFFFFF;
+
+        img {
+          margin-right: 6px;
+        }
+      }
     }
   }
 

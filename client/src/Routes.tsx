@@ -10,6 +10,8 @@ import CreateIsa from './app/pages/public/company/my-isa/create-isa'
 import SignUp from './app/pages/public/auth/sign-up'
 import SignIn from './app/pages/public/auth/sign-in'
 import IsaOverview from './app/pages/public/company/my-isa/isa-overview'
+import ClientIsaOffer from './app/pages/public/client/isa-offer-steps/review'
+import Settings from './app/pages/public/client/settings'
 
 export default function Routes(routerProps: any) {
   return (
@@ -38,6 +40,14 @@ export default function Routes(routerProps: any) {
         <Route
           path="/on-boarding"
           render={(props: any) => <OnBoarding {...props} {...routerProps} />}
+        />
+        <Route
+          path="/client/isa-offer"
+          render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />}
+        />
+        <Route
+          path="/settings"
+          render={(props: any) => <Settings {...props} {...routerProps} />}
         />
         {/*404*/}
         <Redirect path="/" to={'/my-isa'} exact />

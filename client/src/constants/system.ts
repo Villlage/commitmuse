@@ -16,7 +16,7 @@ export const SYSTEM_COLORS = {
   MainSecondary: '#3c3d4d',
   MainSuccess: '#21b881',
   MainError: '#dc3545',
-  MainWarning: '#ffc107',
+  MainWarning: '#F0B429',
   MainInfo: '#17a2b8',
   MainLight: '#f2f5f9',
   MainWhite: '#ffffff',

@@ -2,7 +2,7 @@ import './style.scss'
 import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
 import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
-import FAQ from '../../../../../modules/coach/CreateIsa/FAQ'
+import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
 import React, { useState } from 'react'
 import { fixClass, isNumber, validateEmail } from '../../../../../../helpers/base'
 import Input from '../../../../../components/Input'
@@ -11,6 +11,7 @@ import { emailErrorMessage } from '../../../../../../constants/auth'
 import Button from '../../../../../components/Button'
 import IsaService from '../../../../../../services/isa.service'
 import Message from '../../../../../components/Message'
+import IsaAssessment from '../../../../../modules/common/IsaAssessment'
 
 const isaService = new IsaService()
 
@@ -179,12 +180,7 @@ export default function CreateIsa(props: CreateIsaProps) {
                       placeholder="Risk Assessment"
                       value={total_income.risk}
                     />
-                    {!notValid() && (
-                      <div className="isa-assessment">
-                        <TooltipBadge label="Isa assessment" tooltip="help text" />
-                        <p>This ISA looks good!</p>
-                      </div>
-                    )}
+                    {!notValid() && <IsaAssessment/>}
                   </>
                 )}
               </div>
