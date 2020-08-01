@@ -18,7 +18,7 @@ const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
 interface ClientIsaOfferProps extends ScreenProps {}
 
 export default function ClientIsaOffer(props: ClientIsaOfferProps) {
-  const [offer_step, set_offer_step] = useState(2)
+  const [offer_step, set_offer_step] = useState(0)
   const [request_error, set_request_error] = useState('')
 
   const onSuccess = async (token: string, metadata: PlaidMetadata) => {

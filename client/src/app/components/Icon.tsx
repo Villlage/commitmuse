@@ -51,8 +51,9 @@ export const icons: any = {
   'arrow-right': generateIconLink('arrow-right'),
   'eye': generateIconLink('eye'),
   'mail': generateIconLink('mail'),
-  'key': generateIconLink('key'),
   'file-download': generateIconLink('file-download'),
+  'key': generateIconLink('key'),
+  'gear': generateIconLink('gear'),
 }
 
 export type SystemIcons =
@@ -103,6 +104,7 @@ export type SystemIcons =
   | 'eye'
   | 'mail'
   | 'key'
+  | 'gear'
 
 interface IconProps {
   icon: SystemIcons
