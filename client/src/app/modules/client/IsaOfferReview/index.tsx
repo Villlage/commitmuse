@@ -5,7 +5,9 @@ import IsaAssessment from '../../common/IsaAssessment'
 import Icon from '../../../components/Icon'
 import Button from '../../../components/Button'
 
-interface IsaOfferReviewProps {}
+interface IsaOfferReviewProps {
+  onNext(): void
+}
 
 export default function IsaOfferReview(props: IsaOfferReviewProps) {
   return (
@@ -35,7 +37,7 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
           <Icon icon="file-download"/>
           DOWNLOAD CONTRACT
         </a>
-        <Button background="MainWarning">ACCEPT OFFER</Button>
+        <Button background="MainWarning" onClick={props.onNext}>ACCEPT OFFER</Button>
       </footer>
     </section>
   )

@@ -11,6 +11,15 @@
       overflow: hidden;
       margin-right: 32px;
       box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.2);
+
+      footer {
+        button {
+          font-size: 12px;
+          line-height: 12px;
+          font-weight: bold;
+          height: 36px;
+        }
+      }
     }
   }
 }

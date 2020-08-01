@@ -4,7 +4,7 @@ import { fixClass } from '../../../../helpers/base'
 
 interface OfferStatusProps {
   statuses: Array<string>
-  selected: string
+  activeIndex: number
 }
 
 export default function OfferStatus(props: OfferStatusProps) {
@@ -12,7 +12,7 @@ export default function OfferStatus(props: OfferStatusProps) {
     <section className="OfferStatus-module">
       {props.statuses.map((status, i) => (
         <div
-          className={`status${fixClass(status === props.selected && 'selected')}`}
+          className={`status${fixClass(i === props.activeIndex && 'selected')}`}
           key={i}
         >
           {status}
