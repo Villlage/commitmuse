@@ -10,6 +10,7 @@ import ClientIsaSignUp from '../sign-up'
 import { usePlaidLink } from 'react-plaid-link'
 import PlaidService from '../../../../../../services/plaid.service'
 import Message from '../../../../../components/Message'
+import Button from '../../../../../components/Button'
 
 const plaidService = new PlaidService()
 const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
@@ -17,25 +18,33 @@ const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
 interface ClientIsaOfferProps extends ScreenProps {}
 
 export default function ClientIsaOffer(props: ClientIsaOfferProps) {
-  const [offer_step, set_offer_step] = useState(0)
+  const [offer_step, set_offer_step] = useState(2)
   const [request_error, set_request_error] = useState('')
 
   const onSuccess = async (token: string, metadata: PlaidMetadata) => {
     try {
-      const res = true ? {} : await plaidService.createItem(token, metadata)
+      const res = await plaidService.createItem(token, metadata)
 
       if (res) {
         if (res.error) {
+          set_offer_step(offer_step - 1)
           set_request_error(res.error)
           setTimeout(() => set_request_error(''), 3000)
         } else {
-          set_offer_step(offer_step + 1)
+          props.history.push(`/isa/${res.id || 1}`)
         }
       }
     } catch (e) {
+      set_offer_step(offer_step - 1)
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
     }
+  }
+
+  const handleSignUp = async () => {
+    set_offer_step(offer_step + 1)
+    await props.fetchUser()
+    open()
   }
 
   const config = {
@@ -56,28 +65,13 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
         }}
       />
     ),
-    'sign up': (
-      <ClientIsaSignUp
-        onNext={() => {
-          set_offer_step(offer_step + 1)
-          open()
-        }}
-      />
-    ),
+    'sign up': <ClientIsaSignUp onNext={handleSignUp} />,
     'link bank': (
-      <ClientIsaSignUp
-        onNext={() => {
-          set_offer_step(offer_step + 1)
-        }}
-      />
-    ),
-    'sign contract': (
-      <ClientIsaSignUp
-        onNext={() => {
-          set_offer_step(offer_step + 1)
-          open()
-        }}
-      />
+      <section className="link_bank">
+        <Button background="MainWarning" onClick={() => open()}>
+          Link Bank
+        </Button>
+      </section>
     ),
   }
 
