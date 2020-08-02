@@ -56,7 +56,7 @@ export default function IsaOverview(props: IsaOverviewProps) {
       ) : (
         isa && (
           <PageContent>
-            <h1 className="page-title">Dina Castro</h1>
+            <h1 className="page-title">{makeName(isa.student)}</h1>
             <section className="form">
               <Tabs tabs={['overview', 'isa offer']} onChange={tab => set_active_tab(tab)} activeTab={active_tab} />
               {active_tab === 'overview' ? (
@@ -79,12 +79,17 @@ export default function IsaOverview(props: IsaOverviewProps) {
                   <div>
                     <label>Current Income</label>
                     {/*<p>95K / YEAR</p>*/}
-                    <p>N/A</p>
+                    <p>${isa.current_income}K / YEAR</p>
+                  </div>
+                  <div>
+                    <label>Previous Income</label>
+                    {/*<p>95K / YEAR</p>*/}
+                    <p>${isa.current_income}K / YEAR</p>
                   </div>
                 </div>
               ) : (
                 <>
-                  <Status selected="paying" />
+                  <Status selected={isa.status} />
                   <div className="fields">
                     <Field title="company">{makeName(props.currentUser)}</Field>
                     <Field title="Client">{makeName(isa.student)}</Field>

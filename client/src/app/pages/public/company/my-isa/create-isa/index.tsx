@@ -25,6 +25,7 @@ type IncomeKeys =
   | 'cancellation_period'
   | 'risk'
   | 'current_income'
+
 interface CreateIsaProps extends ScreenProps {}
 
 export default function CreateIsa(props: CreateIsaProps) {

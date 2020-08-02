@@ -4,6 +4,10 @@ import React from 'react'
 import './style.scss'
 
 const status_colors: any = {
+  created: {
+    bg: '#C6F7E2',
+    text: '#147D64',
+  },
   active: {
     bg: '#C6F7E2',
     text: '#147D64',
@@ -52,30 +56,33 @@ export default function IsaStatus(props: IsaStatusProps) {
       </div>
 
       <div
-        className={props.status + fixClass(props.status !== 'active' && 'round')}
+        // className={props.status + fixClass(props.status !== 'active' && 'round')}
+        className={props.status}
         style={{
-          color: status_colors[props.status].text,
-          background: status_colors[props.status].bg,
-          borderColor: status_colors[props.status].text,
+          color: status_colors[props.status] ? status_colors[props.status].text : status_colors.status_colors.text,
+          background: status_colors[props.status] ? status_colors[props.status].bg : status_colors.status_colors.text,
+          borderColor: status_colors[props.status]
+            ? status_colors[props.status].text
+            : status_colors.status_colors.text,
         }}
       >
-        {props.status === 'paying' && (
-          <CircularProgressbar
-            lineColor={status_colors[props.status].text}
-            textColor={status_colors[props.status].text}
-            value={25}
-            text={`${25}%`}
-          />
-        )}
-        {props.status === 'completed' && (
-          <CircularProgressbar
-            lineColor={status_colors[props.status].text}
-            textColor={status_colors[props.status].text}
-            value={100}
-            text={`${100}%`}
-          />
-        )}
-        {props.status === 'active' && props.status}
+        {/*{props.status === 'paying' && (*/}
+        {/*  <CircularProgressbar*/}
+        {/*    lineColor={status_colors[props.status].text}*/}
+        {/*    textColor={status_colors[props.status].text}*/}
+        {/*    value={25}*/}
+        {/*    text={`${25}%`}*/}
+        {/*  />*/}
+        {/*)}*/}
+        {/*{props.status === 'completed' && (*/}
+        {/*  <CircularProgressbar*/}
+        {/*    lineColor={status_colors[props.status].text}*/}
+        {/*    textColor={status_colors[props.status].text}*/}
+        {/*    value={100}*/}
+        {/*    text={`${100}%`}*/}
+        {/*  />*/}
+        {/*)}*/}
+        {props.status}
       </div>
     </div>
   )
