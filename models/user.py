@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Dict, Optional, Any
 from datetime import datetime
 from app import db
 from common.database import db_session
@@ -58,6 +58,18 @@ class User(db.Model, UserMixin):  # type: ignore
                 session.query(cls).filter(cls.email == email).one_or_none()
             )  # type: Optional[User]
             return user
+
+    def update_user(self, attributes: Dict[str, Any]) -> "User":
+        with db_session() as session:
+            for key, value in attributes.items():
+                if key == "user_trades":  # nested objects must be handled differently
+                    self._set_user_trades(value)
+                else:
+                    setattr(self, key, value)
+
+            session.add(self)
+            session.commit()
+            return self
 
     def deactivate(self) -> "User":
         with db_session() as session:

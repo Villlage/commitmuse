@@ -28,3 +28,7 @@ class AuthenticationError(Error):
 
 class AuthorizationError(Error):
     pass
+
+
+class TokenValidationError(Error):
+    pass
