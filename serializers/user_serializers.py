@@ -36,7 +36,7 @@ class CreateISASchema(Schema):  # type: ignore
     percentage = fields.Float(required=True)
     cap = fields.Int(required=True)
     time_to_be_paid = fields.Int(required=True)
-    status = fields.Str(required=False, default="Start")
+    status = fields.Str(required=False, default="Created")
     description = fields.Str(required=True)
     coach_id = fields.Int(required=True)
     client = fields.Nested(ClientSchema, required=True)
