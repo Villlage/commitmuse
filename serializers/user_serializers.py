@@ -1,8 +1,7 @@
-from typing import Dict, Any
-
-from marshmallow import Schema, fields, pre_load
+from marshmallow import Schema, fields
 from app import ma
 from models.isa import ISA
+from models.user import User
 
 
 class LoginSchema(Schema):  # type: ignore
@@ -46,16 +45,9 @@ class ISASchema(ma.ModelSchema):  # type: ignore
         model = ISA
 
 
-class UserSchema(Schema):  # type: ignore
-    email = fields.Email(allow_none=False, required=True)
-
-    @pre_load  # type: ignore
-    def process_email(self, data: Dict[str, Any], **kwargs) -> Dict[str, Any]:  # type: ignore
-        if data["email"] is None:
-            return data
-
-        data["email"] = data["email"].lower().replace(" ", "")
-        return data
+class UserSchema(ma.ModelSchema):  # type: ignore
+    class Meta:
+        model = User
 
 
 login_schema = LoginSchema()

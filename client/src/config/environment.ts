@@ -7,10 +7,10 @@ const ENV = {
     MAIN_API: 'http://localhost:5000/',
   },
   staging: {
-    MAIN_API: 'http://staging.com/',
+    MAIN_API: 'https://commitmuse-staging.herokuapp.com/',
   },
   production: {
-    MAIN_API: 'http://production.com/',
+    MAIN_API: 'https://commitmuse.herokuapp.com/',
   },
 }
 

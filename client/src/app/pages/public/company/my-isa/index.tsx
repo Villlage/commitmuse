@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageHeader from '../../../../modules/common/PageHeader'
@@ -9,26 +9,55 @@ import PageContent from '../../../../modules/common/PageContent'
 import { Link } from 'react-router-dom'
 import IsaStatus from '../../../../modules/company/MyIsa/IsaStatus'
 import Select from '../../../../components/Select/Select'
+import Message from '../../../../components/Message'
 
 const isaService = new IsaService()
 
-const ISAs: any = [
-  { id: 1, name: 'Jonah Serna', status: 'active' },
-  { id: 2, name: 'Dina Castro', status: 'paying' },
-  { id: 3, name: 'Glenn Stone', status: 'completed' },
-]
+// const ISAs: any = [
+//   { id: 1, name: 'Jonah Serna', status: 'active' },
+//   { id: 2, name: 'Dina Castro', status: 'paying' },
+//   { id: 3, name: 'Glenn Stone', status: 'completed' },
+// ]
 
 interface MyIsa extends ScreenProps {}
 
 export default function MyIsa(props: MyIsa) {
   const [filter, set_filter] = useState('')
+  const [isas, set_isas] = useState<any[]>([])
+  const [request_error, set_request_error] = useState('')
+  const [loading, set_loading] = useState(true)
+
+  const getIsas = async () => {
+    set_loading(true)
+
+    try {
+      const res = await isaService.getIsas()
+
+      if (res.error) {
+        set_loading(false)
+        set_request_error(res.error)
+        return setTimeout(() => set_request_error(''), 3000)
+      }
+
+      set_isas(res)
+    } catch (e) {
+      set_loading(false)
+      set_request_error(e.error || e.toString())
+      return setTimeout(() => set_request_error(''), 3000)
+    }
+  }
+
+  useLayoutEffect(() => {
+    getIsas()
+  }, [])
+
   return (
     <article className="MyIsa-page">
       <PageHeader user={props.currentUser} />
       <PageContent>
         <header className="page-header">
           <h1 className="page-title">My ISA’s</h1>
-          {notEmptyArray(ISAs) && (
+          {notEmptyArray(isas) && (
             <Select
               value={filter}
               options={['View all', 'active', 'paying', 'completed']}
@@ -37,9 +66,9 @@ export default function MyIsa(props: MyIsa) {
             />
           )}
         </header>
-        {notEmptyArray(ISAs) ? (
+        {notEmptyArray(isas) ? (
           <section className="my_isa">
-            {ISAs.filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter)).map(
+            {isas.filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter)).map(
               (isa: any, index: number) => (
                 <IsaStatus
                   onClick={(id: number) => props.history.push('/isa/' + id)}
@@ -72,6 +101,7 @@ export default function MyIsa(props: MyIsa) {
           </section>
         )}
       </PageContent>
+      <Message message={request_error} />
     </article>
   )
 }
