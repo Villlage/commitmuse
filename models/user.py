@@ -4,8 +4,6 @@ from app import db
 from common.database import db_session
 from flask_login import UserMixin
 
-from models.isa import ISA
-
 
 class User(db.Model, UserMixin):  # type: ignore
     __tablename__ = "users"
@@ -33,8 +31,6 @@ class User(db.Model, UserMixin):  # type: ignore
             user = (
                 session.query(cls).filter(cls.id == user_id).one_or_none()
             )  # type: Optional[User]
-            user.last_name = user.last_name
-            user.isas = ISA.get_isa_by_coach_id(user.id)
             return user
 
     @classmethod

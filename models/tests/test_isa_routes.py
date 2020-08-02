@@ -54,6 +54,7 @@ class TestISA:
     def test_update(self) -> None:
         coach = CoachFactory.create()
         isa = ISAFactory.create(coach=coach)
+        student = isa.student
         isa_id = isa.id
 
         description = "something else"
@@ -64,6 +65,8 @@ class TestISA:
             assert resp.status_code == 200
             assert resp.json["cap"] == isa.cap
             assert resp.json["description"] == description
+            assert resp.json["student"]
+            assert resp.json["student"]["email"] == student.email
 
     def test_bad_update_autherization(self) -> None:
         coach1 = CoachFactory.create()

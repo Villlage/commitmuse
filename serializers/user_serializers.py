@@ -45,19 +45,21 @@ class CreateISASchema(Schema):  # type: ignore
 class UserSchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = User
-        exclude = ("updated_at", "created_at", "password", "confirmed_at")
-
-
-class StudentSchema(Schema):  # type: ignore
-    first_name = fields.Str(required=False)
-    last_name = fields.Str(required=False)
+        exclude = (
+            "updated_at",
+            "created_at",
+            "password",
+            "confirmed_at",
+            "coaches",
+            "students",
+        )
 
 
 class ISASchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = ISA
 
-    student = fields.Nested(StudentSchema, required=True)
+    student = fields.Nested(UserSchema, required=True)
 
 
 login_schema = LoginSchema()
