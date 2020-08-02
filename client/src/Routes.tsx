@@ -15,7 +15,7 @@ import Settings from './app/pages/public/client/settings'
 
 export default function Routes(routerProps: any) {
   return (
-    <Router>
+    <Router basename={'/web'}>
       <Switch>
         <Route
           path="/login"
