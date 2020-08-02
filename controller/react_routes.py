@@ -41,21 +41,6 @@ def service_worker_for_react() -> Response:
     return send_from_directory(client_build_dir, "service-worker.js")
 
 
-@app.route("/web/assets/images/logo.png")
-def logo() -> Response:
-    return send_from_directory(client_build_dir, "logo.png")
-
-
-@app.route("/web/assets/images/favicon.png")
-def favicon() -> Response:
-    return send_from_directory(client_build_dir, "favicon.png")
-
-
-@app.route("/web/og-image.png")
-def og_image() -> Response:
-    return send_from_directory(client_build_dir, "og-image.png")
-
-
 @app.route("/web")
 def home() -> Response:
     return render_template("index.html")
