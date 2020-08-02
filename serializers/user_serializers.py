@@ -9,6 +9,7 @@ class LoginSchema(Schema):  # type: ignore
     password = fields.Str(allow_none=False, required=True)
     first_name = fields.Str(required=False)
     last_name = fields.Str(required=False)
+    type = fields.Str(required=False, missing="coaches")
 
 
 class ClientSchema(Schema):  # type: ignore
@@ -16,6 +17,7 @@ class ClientSchema(Schema):  # type: ignore
     password = fields.Str(required=False, missing="")
     first_name = fields.Str(required=False)
     last_name = fields.Str(required=False)
+    type = "students"
 
 
 class UpdateISASchema(Schema):  # type: ignore
