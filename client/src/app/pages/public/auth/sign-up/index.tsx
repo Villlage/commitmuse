@@ -66,7 +66,7 @@ export default function SignUp(props: ScreenProps) {
     <article className="SignUp-page">
       <PageContent>
         <div className="logo">
-          <img src="/assets/icons/rocket.svg" alt="logo" />
+          <img src="/web/assets/icons/rocket.svg" alt="logo" />
           <p>Logo</p>
         </div>
         <h2>Register</h2>

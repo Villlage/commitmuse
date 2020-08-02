@@ -60,7 +60,7 @@ export default function SignIn(props: ScreenProps) {
     <article className="SignIn-page">
       <PageContent>
         <div className="logo">
-          <img src="/assets/icons/rocket.svg" alt="logo" />
+          <img src="/web/assets/icons/rocket.svg" alt="logo" />
           <p>Logo</p>
         </div>
         <h2>Login</h2>

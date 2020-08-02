@@ -9,7 +9,7 @@ interface TooltipBadgeProps {
 
 export default function TooltipBadge(props: TooltipBadgeProps) {
   const [show, set_show] = useState(false)
-  const icon = show ? `/assets/icons/question-circle-active.svg` : `/assets/icons/question-circle.svg`
+  const icon = show ? `/web/assets/icons/question-circle-active.svg` : `/web/assets/icons/question-circle.svg`
   return (
     <div className="TooltipBadge-component">
       <label onClick={() => set_show(!show)}>{props.label}</label>

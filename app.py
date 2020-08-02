@@ -8,7 +8,15 @@ from flask_marshmallow import Marshmallow
 from sqlalchemy import MetaData
 from flask_login import LoginManager
 import logging
-from config import Config, LocalConfig, TestingConfig, StagingConfig, ProductionConfig
+
+from common.flask_help import SecureCookieSession
+from config import (
+    LocalConfig,
+    TestingConfig,
+    StagingConfig,
+    ProductionConfig,
+    client_build_dir,
+)
 
 
 DEVELOPMENT = "development"
@@ -18,8 +26,11 @@ PRODUCTION = "production"
 
 
 app = Flask(
-    __name__, static_folder="./client/dist", template_folder="./client/build"
+    __name__,
+    static_folder="./client/dist",
+    template_folder="./" + client_build_dir,  #  type: ignore
 )  # type: Flask
+app.session_interface = SecureCookieSession()
 
 config_map = {
     DEVELOPMENT: LocalConfig,
@@ -30,6 +41,7 @@ config_map = {
 
 config = config_map[app.env]  # type: ignore
 app.config.from_object(config)
+
 flask_cors.CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 convention = {

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { CSSProperties } from 'react'
 
-const iconsFolder = 'web/assets/icons'
+const iconsFolder = '/web/assets/icons/'
 
 const generateIconLink = (icon: SystemIcons | string) => iconsFolder + icon + '.svg'
 
@@ -120,7 +120,7 @@ export default function Icon(props: IconProps) {
   return !!icons[icon] ? (
     <img
       onClick={props.onClick}
-      src={'/' + icons[icon]}
+      src={icons[icon]}
       alt={props.icon + 'icon'}
       style={props.style}
       className={props.className}

@@ -26,6 +26,7 @@ class LocalConfig(Config):
     LOG_LEVEL = "DEBUG"
     SQLALCHEMY_DATABASE_URI = "postgres://localhost/village"
 
+    WEB_APP_DOMAIN = "http://localhost:5000/web"
 
 class TestingConfig(Config):
     ENV = "testing"
@@ -34,11 +35,14 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL", "postgresql://localhost/village_test"
     )
+    WEB_APP_DOMAIN = "http://localhost:5000/web"
 
 
 class StagingConfig(Config):
     LOG_LEVEL = "INFO"
+    WEB_APP_DOMAIN = "https://commitmuse-staging.herokuapp.com/web"
 
 
 class ProductionConfig(Config):
     LOG_LEVEL = "INFO"
+    WEB_APP_DOMAIN = "https://commitmuse.herokuapp.com/web"
