@@ -79,12 +79,12 @@ export default function IsaOverview(props: IsaOverviewProps) {
                   <div>
                     <label>Current Income</label>
                     {/*<p>95K / YEAR</p>*/}
-                    <p>${isa.current_income}K / YEAR</p>
+                    <p>${isa.current_income} / YEAR</p>
                   </div>
                   <div>
                     <label>Previous Income</label>
                     {/*<p>95K / YEAR</p>*/}
-                    <p>${isa.current_income}K / YEAR</p>
+                    <p>${isa.current_income} / YEAR</p>
                   </div>
                 </div>
               ) : (
@@ -94,7 +94,7 @@ export default function IsaOverview(props: IsaOverviewProps) {
                     <Field title="company">{makeName(props.currentUser)}</Field>
                     <Field title="Client">{makeName(isa.student)}</Field>
                     <Field className="full" title="Current Income">
-                      ${isa.current_income}K / YEAR
+                      ${isa.current_income} / YEAR
                     </Field>
                     <Field className="full" title="time to be paid">
                       {isa.time_to_be_paid || '-'} weeks

@@ -56,11 +56,11 @@ export default function ISACalculator(props: ISACalculatorProps) {
           <div className="titles">
             <div>
               <h2>current income</h2>
-              <p>${current_income}K / YEAR</p>
+              <p>${current_income} / YEAR</p>
             </div>
             <div style={{ textAlign: 'right' }}>
               <h2>future income</h2>
-              <p>${future_income}K / YEAR</p>
+              <p>${future_income} / YEAR</p>
             </div>
           </div>
 
@@ -71,7 +71,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
 
           <div className="future-bill">
             <label>Future Bill</label>
-            <p>${future_bill()}K / YEAR ({props.percentage}%)</p>
+            <p>${future_bill()} / YEAR ({props.percentage}%)</p>
           </div>
         </div>
       </div>
