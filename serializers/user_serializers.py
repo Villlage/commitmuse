@@ -45,6 +45,8 @@ class ISASchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = ISA
 
+    client = fields.Nested(ClientSchema)
+
 
 class UserSchema(Schema):  # type: ignore
     email = fields.Email(allow_none=False, required=True)

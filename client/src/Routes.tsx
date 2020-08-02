@@ -50,7 +50,7 @@ export default function Routes(routerProps: any) {
           render={(props: any) => <Settings {...props} {...routerProps} />}
         />
         {/*404*/}
-        <Redirect path="/" to={'/my-isa'} exact />
+        <Redirect path="/" to={'/login'} exact />
         <Route path="*" render={(props: any) => <NotFound {...props} />} />
       </Switch>
     </Router>
