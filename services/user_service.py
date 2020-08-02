@@ -1,4 +1,5 @@
-from typing import Optional
+from typing import Any, Dict, Optional
+
 from common.exceptions import (
     ResourceConflictError,
     ResourceNotFound,
@@ -8,13 +9,13 @@ from models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-def create_user(email: str, password: str) -> User:
-    hashed_password = generate_password_hash(password)
+def create_user(schema: Dict[Any, Any]) -> User:
+    schema["password"] = generate_password_hash(schema["password"])
 
-    if User.get_user_by_email(email):
+    if User.get_user_by_email(schema["email"]):
         raise ResourceConflictError("Please sign in. This email address is in use")
 
-    return User.create_user(email=email, password=hashed_password)
+    return User.create_user(**schema)
 
 
 def get_user(email: str, password: str) -> Optional[User]:

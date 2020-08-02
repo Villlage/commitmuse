@@ -14,16 +14,18 @@ class TestCreateUser:
     def test_create_user(self) -> None:
         email = "something@something.com"
         password = "something"
-        user = create_user(email=email, password=password)
+        payload = dict(email=email, password=password)
+        user = create_user(schema=payload)
         assert user.email == email
         assert check_password_hash(user.password, password)
 
     def test_create_user_same_email(self) -> None:
         email = "something@something.com"
         password = "something"
+        payload = dict(email=email, password=password)
         UserFactory.create(email=email)
         with pytest.raises(ResourceConflictError):
-            create_user(email=email, password=password)
+            create_user(schema=payload)
 
 
 class TestGetUser:
