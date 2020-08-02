@@ -35,8 +35,8 @@ def login() -> Tuple[Response, int]:
 
 
 @app.route("/check-auth", methods=["GET"])
-def check_auth() -> str:
-    return jsonify(current_user.is_authenticated)
+def check_auth() -> Tuple[Response, int]:
+    return jsonify(current_user.is_authenticated), 200
 
 
 @app.route("/user", methods=["GET"])
@@ -55,7 +55,7 @@ def register() -> Tuple[Response, int]:
     """
     try:
         schema = login_schema.load(request.json)
-        user = create_user(email=schema["email"], password=schema["password"])
+        user = create_user(**schema)
         login_user(user)
     except marshmallow.exceptions.ValidationError as error:
         return jsonify(error=error.messages), 400

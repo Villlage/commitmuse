@@ -15,7 +15,7 @@ from serializers.user_serializers import (
     isa_schema,
 )
 
-from services.isa_service import get_isa_by_id
+from services.isa_service import get_isa_by_id, create_student_and_isa
 from controller.common import login_required, get_current_user
 from models.user import User
 from models.isa import ISA
@@ -52,7 +52,7 @@ def create_isa_route() -> Tuple[Response, int]:
     get_current_user()
     try:
         schema = create_isa_schema.load(request.json)
-        isa = ISA.create_isa(**schema)
+        isa = create_student_and_isa(schema)
 
     except marshmallow.exceptions.ValidationError as error:
         return jsonify(error=error.messages), 400
