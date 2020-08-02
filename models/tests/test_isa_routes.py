@@ -27,6 +27,9 @@ class TestISA:
             time_to_be_paid=24,
             description="becoming a product manager",
             coach_id=coach.id,
+            client=dict(
+                email="client@gmail.com", first_name="client", last_name="student"
+            ),
         )
 
         with logged_in_client(coach) as client:
