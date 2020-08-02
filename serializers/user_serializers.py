@@ -27,6 +27,7 @@ class UpdateISASchema(Schema):  # type: ignore
     time_to_be_paid = fields.Int(required=False)
     description = fields.Str(required=False)
     status = fields.Str(required=False)
+    cancellation_period_weeks = fields.Int(required=False)
     coach_id = fields.Int(required=False)
     client = fields.Nested(ClientSchema, required=False)
 
@@ -38,6 +39,7 @@ class CreateISASchema(Schema):  # type: ignore
     time_to_be_paid = fields.Int(required=True)
     status = fields.Str(required=False, default="Created")
     description = fields.Str(required=True)
+    cancellation_period_weeks = fields.Int(required=True)
     coach_id = fields.Int(required=True)
     client = fields.Nested(ClientSchema, required=True)
 
