@@ -50,6 +50,7 @@ class ISASchema(ma.ModelSchema):  # type: ignore
 class UserSchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = User
+        exclude = ("updated_at", "created_at", "password", "confirmed_at")
 
 
 login_schema = LoginSchema()
