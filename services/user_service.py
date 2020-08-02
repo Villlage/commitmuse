@@ -5,7 +5,7 @@ from common.exceptions import (
     ResourceNotFound,
     AuthenticationError,
 )
-from models.user import User
+from models.user import User, Coach, Student
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -15,7 +15,14 @@ def create_user(schema: Dict[Any, Any]) -> User:
     if User.get_user_by_email(schema["email"]):
         raise ResourceConflictError("Please sign in. This email address is in use")
 
-    return User.create_user(**schema)
+    type = schema.get("type", "coaches")
+    user = None
+    if type == "coaches":
+        user = Coach.create_user(**schema)
+    else:
+        user = Student.create_user(**schema)
+
+    return user
 
 
 def get_user(email: str, password: str) -> Optional[User]:
