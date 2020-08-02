@@ -4,7 +4,7 @@ import { log } from './logging.service'
 
 type PostAPIs = 'register' | 'login' | 'user' | 'isas' | 'plaid/items'
 
-type PatchAPIs = 'register' | 'login' | 'user'
+type PatchAPIs = 'register' | 'login' | 'user' | string
 
 type GetAPIs = 'logout' | 'user' | 'check-auth' | string
 

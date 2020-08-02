@@ -7,25 +7,24 @@ import AuthService from '../../../../../../services/auth.service'
 import { log } from '../../../../../../services/logging.service'
 import { emailErrorMessage, passwordLength, passwordMustMatch } from '../../../../../../constants/auth'
 import Message from '../../../../../components/Message'
+import ClientService from '../../../../../../services/client.service'
 
-const authService = new AuthService()
+const clientService = new ClientService()
 
 interface ClientIsaSignUpProps {
+  user_id: number
+  email: string
   onNext(): void
 }
 
 export default function ClientIsaSignUp(props: ClientIsaSignUpProps) {
-  const [user, set_user] = useState({
-    email: '',
-    password: '',
-  })
+  const [password, set_password] = useState('')
 
   const [password_confirm, set_password_confirm] = useState('')
   const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
 
   const [error, set_error] = useState({
-    email: '',
     password: '',
     password_confirm: '',
   })
@@ -33,7 +32,7 @@ export default function ClientIsaSignUp(props: ClientIsaSignUpProps) {
   const onSubmit = async () => {
     set_loading(true)
     try {
-      const res = await authService.register(user)
+      const res = await clientService.resetPassword(props.user_id, password)
 
       if (res) {
         if (res.error) {
@@ -53,23 +52,18 @@ export default function ClientIsaSignUp(props: ClientIsaSignUpProps) {
     }
   }
 
-  const notValid = () =>
-    Object.values(user).some(i => i === '') || !validateEmail(user.email) || user.password.length < 6 || password_confirm !== user.password
+  const notValid = () => password.length < 6 || password_confirm !== password
 
   return (
     <section className="ClientIsaSignUp-module">
       <div className="fields">
         <Input
+          disabled={true}
           className="full"
           icon="mail"
           placeholder="Email Address *"
-          error={error.email}
-          value={user.email}
-          onChange={e => {
-            set_error({ ...error, email: '' })
-            set_user({ ...user, email: e })
-            !validateEmail(e) && set_error({ ...error, email: emailErrorMessage })
-          }}
+          value={props.email}
+          onChange={e => null}
         />
         <Input
           className="full"
@@ -77,10 +71,10 @@ export default function ClientIsaSignUp(props: ClientIsaSignUpProps) {
           placeholder="Password *"
           type="password"
           error={error.password}
-          value={user.password}
+          value={password}
           onChange={e => {
             set_error({ ...error, password: '' })
-            set_user({ ...user, password: e })
+            set_password(e)
             e.length < 6 && set_error({ ...error, password: passwordLength })
           }}
         />
@@ -94,7 +88,7 @@ export default function ClientIsaSignUp(props: ClientIsaSignUpProps) {
           onChange={e => {
             set_error({ ...error, password_confirm: '' })
             set_password_confirm(e)
-            e !== user.password && set_error({ ...error, password_confirm: passwordMustMatch })
+            e !== password && set_error({ ...error, password_confirm: passwordMustMatch })
           }}
         />
       </div>

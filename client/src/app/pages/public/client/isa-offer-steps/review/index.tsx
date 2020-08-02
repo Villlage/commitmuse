@@ -22,7 +22,7 @@ interface ClientIsaOfferProps extends ScreenProps {
 }
 
 export default function ClientIsaOffer(props: ClientIsaOfferProps) {
-  const [isa, set_isa] = useState<any>([])
+  const [isa, set_isa] = useState<any>(null)
   const [offer_step, set_offer_step] = useState(0)
   const [request_error, set_request_error] = useState('')
 
@@ -86,7 +86,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
   }
 
   const { open, ready, error } = usePlaidLink(config)
-  const offer_strategy: any = {
+  const offer_strategy: any = isa && {
     'review offer': (
       <IsaOfferReview
         isa={isa}
@@ -95,7 +95,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
         }}
       />
     ),
-    'sign up': <ClientIsaSignUp onNext={handleSignUp} />,
+    'sign up': isa && <ClientIsaSignUp email={isa.student.email} user_id={isa.student.id.toString()} onNext={handleSignUp} />,
     'link bank': (
       <section className="link_bank">
         <Button background="MainWarning" onClick={() => open()}>
@@ -111,7 +111,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
       <PageContent>
         <section className="offer-steps">
           <OfferStatus statuses={offerStatuses} activeIndex={offer_step} />
-          {offer_strategy[offerStatuses[offer_step]]}
+          {isa && offer_strategy[offerStatuses[offer_step]]}
         </section>
         <FAQ maximum={10000} months={7} percentage={1} current_income={80000} />
       </PageContent>
