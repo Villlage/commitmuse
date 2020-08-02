@@ -61,7 +61,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
           set_request_error(res.error || res.err_msg)
           setTimeout(() => set_request_error(''), 3000)
         } else {
-          props.history.push(`/isa/${res.id || 1}`)
+          props.history.push(`/isa/${isa_id || 1}`)
         }
       }
     } catch (e) {
