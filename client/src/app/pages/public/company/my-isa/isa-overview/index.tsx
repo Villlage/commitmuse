@@ -64,27 +64,22 @@ export default function IsaOverview(props: IsaOverviewProps) {
                   <div>
                     <label>Total Paid</label>
                     <p>
-                      5,000 USD
-                      <span>of 25,000 USD</span>
+                      0 USD
+                      <span>of 0 USD</span>
                     </p>
                   </div>
                   <div>
-                    <label>Total Paid</label>
+                    <label>Last Payment</label>
                     <p>
-                      1,250 USD
-                      <span>August 8th 2020</span>
+                      {/*1,250 USD*/}
+                      {/*<span>August 8th 2020</span>*/}
+                      N/A
                     </p>
                   </div>
                   <div>
-                    <label>Total Paid</label>
-                    <p>95K / YEAR</p>
-                  </div>
-                  <div>
-                    <label>Total Paid</label>
-                    <p>
-                      125K / YEAR
-                      <span>Last verified: August 8th 2020</span>
-                    </p>
+                    <label>Current Income</label>
+                    {/*<p>95K / YEAR</p>*/}
+                    <p>N/A</p>
                   </div>
                 </div>
               ) : (
