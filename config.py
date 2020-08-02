@@ -1,7 +1,9 @@
 import os
 
 client_build_dir = (
-    "client/build-dev"
+    os.getenv("REACT_FILES")
+    if os.getenv("REACT_FILES") is not None
+    else "client/build-dev"
 )
 
 
@@ -38,7 +40,7 @@ class TestingConfig(Config):
 
 class StagingConfig(Config):
     LOG_LEVEL = "INFO"
-    WEB_APP_DOMAIN = "https://commitmuse.herokuapp.com/web"
+    WEB_APP_DOMAIN = "https://commitmuse-staging.herokuapp.com/web"
 
 
 class ProductionConfig(Config):
