@@ -57,6 +57,11 @@ class UserSchema(ma.ModelSchema):  # type: ignore
         )
 
 
+class ResetPasswordSchema(Schema):  # type: ignore
+    token = fields.Str(allow_none=False, required=True)
+    password = fields.Str(allow_none=False, required=True)
+
+
 class ISASchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = ISA
@@ -71,3 +76,4 @@ update_isa_schema = UpdateISASchema()
 create_isa_schema = CreateISASchema()
 isa_schema = ISASchema()
 user_schema = UserSchema()
+reset_password_schema = ResetPasswordSchema()

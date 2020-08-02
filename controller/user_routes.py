@@ -8,8 +8,12 @@ from common.exceptions import (
     AuthenticationError,
 )
 from models.user import User
-from services.user_service import create_user, get_user
-from serializers.user_serializers import login_schema, user_schema
+from services.user_service import create_user, get_user, reset_password
+from serializers.user_serializers import (
+    login_schema,
+    user_schema,
+    reset_password_schema,
+)
 from flask_login import login_user, logout_user, current_user
 from controller.common import login_required, get_current_user
 
@@ -93,3 +97,12 @@ def _get_user_id(user_id: Optional[int] = None) -> Optional[int]:
         user_id = request.json.get("user_id", None)
 
     return user_id
+
+
+@app.route("/users/reset-password", methods=["PATCH", "GET"])
+def reset_user_password() -> Tuple[Response, int]:
+    schema = reset_password_schema.load(request.json)
+    user = reset_password(token=schema["token"], password=schema["password"])
+    result = user_schema.dump(user)
+
+    return jsonify(result), 200

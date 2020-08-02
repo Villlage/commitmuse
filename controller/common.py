@@ -8,6 +8,7 @@ from common.exceptions import (
     ResourceNotFound,
     AuthenticationError,
     AuthorizationError,
+    TokenValidationError,
 )
 from werkzeug.exceptions import HTTPException
 from flask import request, jsonify
@@ -89,7 +90,11 @@ def handle_exception(exc):  # type:ignore
         logger.error(f"Payload: {request.args}")
         return jsonify(error=exc.messages), 400
 
-    if isinstance(exc, AuthenticationError) or isinstance(exc, AuthorizationError):
+    if (
+        isinstance(exc, AuthenticationError)
+        or isinstance(exc, AuthorizationError)
+        or isinstance(exc, TokenValidationError)
+    ):
         return jsonify(error=exc.message), 403
 
     if isinstance(exc, ResourceNotFound):
