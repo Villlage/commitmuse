@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
 import { PlaidMetadata, ScreenProps } from '../../../../../../interfaces/baseIntefaces'
 import PageHeader from '../../../../../modules/common/PageHeader'
@@ -11,24 +11,54 @@ import { usePlaidLink } from 'react-plaid-link'
 import PlaidService from '../../../../../../services/plaid.service'
 import Message from '../../../../../components/Message'
 import Button from '../../../../../components/Button'
+import ClientService from '../../../../../../services/client.service'
 
 const plaidService = new PlaidService()
+const clientService = new ClientService()
 const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
 
-interface ClientIsaOfferProps extends ScreenProps {}
+interface ClientIsaOfferProps extends ScreenProps {
+  match: any
+}
 
 export default function ClientIsaOffer(props: ClientIsaOfferProps) {
+  const [isa, set_isa] = useState<any>([])
   const [offer_step, set_offer_step] = useState(0)
   const [request_error, set_request_error] = useState('')
+
+  const isa_id = props.match.params.id
+
+  const getIsa = async () => {
+    try {
+      const res = await clientService.getOffer(isa_id)
+
+      if (res) {
+        if (res.error) {
+          set_offer_step(offer_step - 1)
+          set_request_error(res.error)
+          setTimeout(() => set_request_error(''), 3000)
+        } else {
+          set_isa(res)
+        }
+      }
+    } catch (e) {
+      set_request_error(e.error || e.toString())
+      setTimeout(() => set_request_error(''), 3000)
+    }
+  }
+
+  useLayoutEffect(() => {
+    getIsa()
+  }, [])
 
   const onSuccess = async (token: string, metadata: PlaidMetadata) => {
     try {
       const res = await plaidService.createItem(token, metadata)
 
       if (res) {
-        if (res.error) {
+        if (res.error || res.err_msg) {
           set_offer_step(offer_step - 1)
-          set_request_error(res.error)
+          set_request_error(res.error || res.err_msg)
           setTimeout(() => set_request_error(''), 3000)
         } else {
           props.history.push(`/isa/${res.id || 1}`)
@@ -56,10 +86,10 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
   }
 
   const { open, ready, error } = usePlaidLink(config)
-
   const offer_strategy: any = {
     'review offer': (
       <IsaOfferReview
+        isa={isa}
         onNext={() => {
           set_offer_step(offer_step + 1)
         }}

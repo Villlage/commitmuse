@@ -6,6 +6,7 @@ import Icon from '../../../components/Icon'
 import Button from '../../../components/Button'
 
 interface IsaOfferReviewProps {
+  isa: any
   onNext(): void
 }
 
@@ -16,19 +17,19 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
         <Field title="company">Amy Owens</Field>
         <Field title="Client">Dina Castro</Field>
         <Field className="full" title="Current Income">
-          $95K / YEAR
+          ${props.isa.current_income} / YEAR
         </Field>
-        <Field className="full" title="target Income">
-          $125K / YEAR
+        <Field className="full" title="Previous Income">
+          ${props.isa.current_income} / YEAR
         </Field>
         <Field className="full" title="Percentage to be paid">
-          17%
+          {props.isa.percentage}%
         </Field>
         <Field className="full" title="Description">
           Get a senior PM role
         </Field>
         <Field className="full" title="Cancellation PEriod">
-          2 weeks
+          {props.isa.cancellation_period_weeks} weeks
         </Field>
         <IsaAssessment className="full"/>
       </div>
