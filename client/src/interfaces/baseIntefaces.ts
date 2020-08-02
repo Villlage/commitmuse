@@ -65,7 +65,7 @@ export interface ISA {
   status: string
   description: string
   coach_id: number
-  student_id: number
+  client: any
 }
 
 export interface PlaidAccount {

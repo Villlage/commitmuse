@@ -64,8 +64,8 @@ export default function CreateIsa(props: CreateIsaProps) {
         time_to_be_paid: Number(total_income.months),
         status: 'created',
         description: total_income.description,
+        client,
         coach_id: props.currentUser.id,
-        student_id: 1,
       })
 
       if (res && res.error) {

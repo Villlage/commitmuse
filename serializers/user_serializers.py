@@ -45,11 +45,12 @@ class ISASchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = ISA
 
-    client = fields.Nested(ClientSchema)
-
 
 class UserSchema(Schema):  # type: ignore
+    id = fields.Int(allow_none=False, required=True)
     email = fields.Email(allow_none=False, required=True)
+    first_name = fields.Str(required=True)
+    last_name = fields.Str(required=True)
 
     @pre_load  # type: ignore
     def process_email(self, data: Dict[str, Any], **kwargs) -> Dict[str, Any]:  # type: ignore
