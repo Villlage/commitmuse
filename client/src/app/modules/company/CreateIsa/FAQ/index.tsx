@@ -16,7 +16,7 @@ const FAQs = [
           income is paid to the educator via the app for a fixed duration. It is not a traditional loan or grant, and
           there is no principal balance or interest rate.
         </p>
-        <img src="/assets/icons/calc.svg" alt="calc" />
+        <img src="/web/assets/icons/calc.svg" alt="calc" />
       </>
     ),
   },

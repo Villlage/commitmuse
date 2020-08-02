@@ -1,9 +1,7 @@
 import os
 
 client_build_dir = (
-    os.getenv("REACT_FILES")
-    if os.getenv("REACT_FILES") is not None
-    else "client/build-dev"
+    "client/build-dev"
 )
 
 
@@ -26,6 +24,7 @@ class LocalConfig(Config):
     LOG_LEVEL = "DEBUG"
     SQLALCHEMY_DATABASE_URI = "postgres://localhost/village"
 
+    WEB_APP_DOMAIN = "http://localhost:5000/web"
 
 class TestingConfig(Config):
     ENV = "testing"
@@ -34,11 +33,14 @@ class TestingConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL", "postgresql://localhost/village_test"
     )
+    WEB_APP_DOMAIN = "http://localhost:5000/web"
 
 
 class StagingConfig(Config):
     LOG_LEVEL = "INFO"
+    WEB_APP_DOMAIN = "https://commitmuse.herokuapp.com/web"
 
 
 class ProductionConfig(Config):
     LOG_LEVEL = "INFO"
+    WEB_APP_DOMAIN = "https://commitmuse.herokuapp.com/web"

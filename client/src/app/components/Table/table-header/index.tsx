@@ -32,7 +32,7 @@ export default function TableHeader(props: TableHeaderProps) {
             {header.title}
             {header.sortable && (
               <img
-                src="/assets/icons/polygon.svg"
+                src="/web/assets/icons/polygon.svg"
                 alt="arrow"
                 className={props.asc && props.sortBy === header.key ? 'active' : ''}
               />
