@@ -93,11 +93,11 @@ export default function CreateIsa(props: CreateIsaProps) {
   }
 
   const addComma = (str: string) => {
-    return Number( str.replace(/,/g, '')).toLocaleString()
+    return Number(str.replace(/,/g, '')).toLocaleString()
   }
 
   const removeComma = (str: string) => {
-    return Number( str.replace(/,/g, ''))
+    return Number(str.replace(/,/g, ''))
   }
 
   return (
@@ -166,7 +166,7 @@ export default function CreateIsa(props: CreateIsaProps) {
                     <Input
                       withRipple
                       postFix="%"
-                      onChange={e => isNumber(e) && setIncome(e, 'percentage')}
+                      onChange={e => isNumber(e) && Number(e) > 0 && Number(e) < 100 && setIncome(e, 'percentage')}
                       placeholder="Percentage to be Paid"
                       value={total_income.percentage}
                     />
@@ -212,7 +212,12 @@ export default function CreateIsa(props: CreateIsaProps) {
             )}
           </section>
 
-          <FAQ />
+          <FAQ
+            current_income={removeComma(total_income.current_income)}
+            percentage={Number(total_income.percentage)}
+            months={Number(total_income.time_to_be_paid)}
+            maximum={removeComma(total_income.cap)}
+          />
         </section>
       </PageContent>
       <Message message={request_error} />

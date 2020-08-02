@@ -24,9 +24,9 @@ export default function Routes(routerProps: any) {
         {privateRoute(CreateIsa, '/isa/create', routerProps)}
         {privateRoute(IsaOverview, '/isa/:id', routerProps)}
         {privateRoute(Settings, '/settings', routerProps)}
+        {privateRoute(OnBoarding, '/on-boarding', routerProps)}
 
-        <Route path="/on-boarding" render={(props: any) => <OnBoarding {...props} {...routerProps} />} />
-        <Route path="/client/isa-offer" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
+        <Route path="/client/isa-offer/:id" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
 
         {/*404*/}
         <Redirect path="/" to={routerProps.currentUser ? '/my-isa' : '/login'} exact />

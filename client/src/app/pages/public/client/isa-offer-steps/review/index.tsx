@@ -83,7 +83,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
           <OfferStatus statuses={offerStatuses} activeIndex={offer_step} />
           {offer_strategy[offerStatuses[offer_step]]}
         </section>
-        <FAQ />
+        <FAQ maximum={10000} months={7} percentage={1} current_income={80000} />
       </PageContent>
       <Message message={request_error} />
     </article>
