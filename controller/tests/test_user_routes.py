@@ -103,3 +103,12 @@ class TestLogOut:
         with app.test_client() as client:
             resp = client.get("/logout")
             assert resp.status_code == 401
+
+
+class TestUser:
+    def test_user_route(self) -> None:
+        user = UserFactory.create()
+        with logged_in_client(user) as client:
+            resp = client.get("/user")
+            assert resp.status_code == 200
+            assert resp.json["first_name"] == user.first_name
