@@ -2,7 +2,6 @@
 @import '../../../../../styles/colors';
 
 .MyIsa-page {
-
   .page-header {
     width: 512px;
     @include flex-centered;
@@ -28,13 +27,13 @@
       padding: 24px;
 
       h2 {
-        color: #19216C;
+        color: #19216c;
         font-size: 16px;
         line-height: 20px;
       }
 
       p {
-        color: #19216C;
+        color: #19216c;
         line-height: 20px;
         font-size: 16px;
       }
@@ -96,7 +95,7 @@
     }
 
     .new_isa {
-      background: #F0B429;
+      background: #f0b429;
       box-shadow: 0 4px 25px rgba(74, 35, 0, 0.08);
       border-radius: 7px;
       padding: 8px 12px;
