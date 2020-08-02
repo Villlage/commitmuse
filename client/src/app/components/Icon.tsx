@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { CSSProperties } from 'react'
 
-const iconsFolder = 'assets/icons/'
+const iconsFolder = 'web/assets/icons'
 
 const generateIconLink = (icon: SystemIcons | string) => iconsFolder + icon + '.svg'
 
