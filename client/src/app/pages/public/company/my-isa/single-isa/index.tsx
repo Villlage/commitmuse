@@ -39,7 +39,7 @@ export default function SingleIsa(props: SingleIsaProps) {
             <button className="accept">accept Offer</button>
           </footer>
         </section>
-        <ISACalculator max={10000} months={7} percentage={17} />
+        <ISACalculator current_income={80000} max={10000} months={7} percentage={17} />
       </section>
     </article>
   )

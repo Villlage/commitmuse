@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 import Icon from '../../../components/Icon'
 import { embedCalculator } from '../../../../helpers/base'
@@ -6,6 +6,7 @@ import Message from '../../../components/Message'
 import { SYSTEM_COLORS } from '../../../../constants/system'
 
 interface ISACalculatorProps {
+  current_income: number
   percentage: number
   months: number
   max: number
@@ -13,8 +14,12 @@ interface ISACalculatorProps {
 
 export default function ISACalculator(props: ISACalculatorProps) {
   const [copied_to_clipboard, set_copied_to_clipboard] = useState(false)
-  const [current_income, set_current_income] = useState(95)
+  const [current_income, set_current_income] = useState(props.current_income)
   const [future_income, set_future_income] = useState(125)
+
+  useEffect(() => {
+    set_current_income(props.current_income / 1000)
+  }, [props.current_income])
 
   const future_bill = () => {
     let bill = ((props.percentage / 100) * future_income) * (props.months / 12)
@@ -43,7 +48,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
   return (
     <section className="ISACalculator-module">
       <header>
-        <h2>ISA Calculator</h2>
+        <h2>ISA CALCULATOR</h2>
       </header>
 
       <div className="body">
