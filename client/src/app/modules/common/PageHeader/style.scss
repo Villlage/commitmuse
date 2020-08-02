@@ -9,6 +9,7 @@
   position: relative;
   @include gothic-normal($size: 16);
   color: white;
+  width: 100%;
 
   nav {
     height: 100%;
