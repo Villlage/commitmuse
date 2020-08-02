@@ -1,11 +1,19 @@
+import traceback
 from flask import request
 from flask_login import current_user
 from typing import Optional, Any
-
+import marshmallow
+from common.exceptions import (
+    ResourceConflictError,
+    ResourceNotFound,
+    AuthenticationError,
+    AuthorizationError,
+)
+from werkzeug.exceptions import HTTPException
 from flask import request, jsonify
 from functools import wraps
 from typing import Callable
-from app import login_manager
+from app import app, login_manager, logger
 from common.exceptions import (
     ResourceConflictError,
     ResourceNotFound,
@@ -69,3 +77,28 @@ def get_current_user(user_id: Optional[int] = None) -> Any:
         return User.get_user(current_user.id)
 
     return None
+
+
+@app.errorhandler(Exception)
+def handle_exception(exc):  # type:ignore
+    # pass through HTTP errors
+    if isinstance(exc, HTTPException):
+        return exc
+
+    if isinstance(exc, marshmallow.exceptions.ValidationError):
+        logger.error(f"Payload: {request.args}")
+        return jsonify(error=exc.messages), 400
+
+    if isinstance(exc, AuthenticationError) or isinstance(exc, AuthorizationError):
+        return jsonify(error=exc.message), 403
+
+    if isinstance(exc, ResourceNotFound):
+        return jsonify(error=exc.message), 404
+
+    if isinstance(exc, ResourceConflictError):
+        return jsonify(error=exc.message), 409
+
+    # now you're handling non-HTTP exceptions only
+    exc_msg = traceback.format_exc()
+    logger.error(exc_msg)
+    return jsonify({"err_msg": exc_msg}), 500

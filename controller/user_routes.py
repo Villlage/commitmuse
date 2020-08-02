@@ -1,6 +1,5 @@
 from flask import request, jsonify
 from typing import Tuple, Optional
-import marshmallow
 from werkzeug import Response
 from app import app
 from common.exceptions import (
@@ -20,17 +19,9 @@ def login() -> Tuple[Response, int]:
     """
     login a user with email and password
     """
-    try:
-        schema = login_schema.load(request.json)
-        user = get_user(email=schema["email"], password=schema["password"])
-        login_user(user)
-    except marshmallow.exceptions.ValidationError as error:
-        return jsonify(error=error.messages), 400
-    except ResourceNotFound as error:
-        return jsonify(error=error.message), 404
-    except AuthenticationError as error:
-        return jsonify(error=error.message), 403
-
+    schema = login_schema.load(request.json)
+    user = get_user(email=schema["email"], password=schema["password"])
+    login_user(user)
     return jsonify("successfully logged in user"), 200
 
 
@@ -53,14 +44,9 @@ def register() -> Tuple[Response, int]:
     """
     register a user with an email and a password
     """
-    try:
-        schema = login_schema.load(request.json)
-        user = create_user(schema)
-        login_user(user)
-    except marshmallow.exceptions.ValidationError as error:
-        return jsonify(error=error.messages), 400
-    except ResourceConflictError as error:
-        return jsonify(error=error.message), 409
+    schema = login_schema.load(request.json)
+    user = create_user(schema)
+    login_user(user)
 
     return jsonify("user registered successfully"), 200
 
