@@ -11,6 +11,7 @@ import { emailErrorMessage, passwordLength } from '../../../../../constants/auth
 import Button from '../../../../components/Button'
 import Message from '../../../../components/Message'
 import { Link } from 'react-router-dom'
+import PageHeader from '../../../../modules/common/PageHeader'
 
 const authService = new AuthService()
 
@@ -59,10 +60,7 @@ export default function SignIn(props: ScreenProps) {
   return (
     <article className="SignIn-page">
       <PageContent>
-        <div className="logo">
-          <img src="/web/assets/icons/rocket.svg" alt="logo" />
-          <p>Logo</p>
-        </div>
+        <PageHeader user={props.currentUser}/>
         <h2>Login</h2>
         <section className="form">
           <div className="fields">
