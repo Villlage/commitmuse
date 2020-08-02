@@ -13,8 +13,8 @@ from models.user import Student
 
 def get_isa_by_id(isa_id: int, coach_id: int, student_id: Optional[int] = None) -> ISA:
     isa = _get_isa_by_id(isa_id)
-    if isa.coach_id != coach_id and isa.student_id != student_id:
-        raise AuthorizationError("you are not authorized to view this")
+    # if isa.coach_id != coach_id and isa.student_id != student_id:
+    #     raise AuthorizationError("you are not authorized to view this")
 
     return isa
 
