@@ -81,11 +81,7 @@ export default function OnBoarding(props: OnBoardingProps) {
             </section>
           </footer>
         </section>
-        <ISACalculator
-          percentage={percentage}
-          months={pay_time}
-          max={pay_maximum}
-        />
+        <ISACalculator percentage={percentage} months={pay_time} max={pay_maximum} />
       </section>
     </article>
   )

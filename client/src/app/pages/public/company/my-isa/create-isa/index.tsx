@@ -17,7 +17,14 @@ const isaService = new IsaService()
 
 const pricing = ['From total income', 'From new raise', 'Placement']
 
-type IncomeKeys = 'description' | 'percentage' | 'months' | 'maximum' | 'cancellation_period' | 'risk' | 'current_income'
+type IncomeKeys =
+  | 'description'
+  | 'percentage'
+  | 'months'
+  | 'maximum'
+  | 'cancellation_period'
+  | 'risk'
+  | 'current_income'
 interface CreateIsaProps extends ScreenProps {}
 
 export default function CreateIsa(props: CreateIsaProps) {
@@ -74,7 +81,6 @@ export default function CreateIsa(props: CreateIsaProps) {
         return setTimeout(() => set_request_error(''), 3000)
       }
       set_loading(false)
-
     } catch (e) {
       set_loading(false)
       set_request_error(e.error || e.toString())
@@ -180,7 +186,7 @@ export default function CreateIsa(props: CreateIsaProps) {
                       placeholder="Risk Assessment"
                       value={total_income.risk}
                     />
-                    {!notValid() && <IsaAssessment/>}
+                    {!notValid() && <IsaAssessment />}
                   </>
                 )}
               </div>
@@ -197,7 +203,7 @@ export default function CreateIsa(props: CreateIsaProps) {
           <FAQ />
         </section>
       </PageContent>
-      <Message message={request_error}/>
+      <Message message={request_error} />
     </article>
   )
 }
