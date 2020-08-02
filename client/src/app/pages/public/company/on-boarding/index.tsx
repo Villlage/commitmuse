@@ -6,6 +6,7 @@ import BoardingField from '../../../../modules/on-boarding/BoardingField'
 import TooltipBadge from '../../../../components/TooltipBadge'
 import PageHeader from '../../../../modules/common/PageHeader'
 import ISACalculator from '../../../../modules/on-boarding/ISACalculator'
+import PageContent from '../../../../modules/common/PageContent'
 
 interface OnBoardingProps extends ScreenProps {}
 
@@ -21,7 +22,7 @@ export default function OnBoarding(props: OnBoardingProps) {
   return (
     <article className="OnBoarding-page">
       <PageHeader user={props.currentUser} />
-      <section className="content">
+        <PageContent>
         <section className="form_wrapper">
           <header>
             <h1>
@@ -82,7 +83,7 @@ export default function OnBoarding(props: OnBoardingProps) {
           </footer>
         </section>
         <ISACalculator percentage={percentage} months={pay_time} max={pay_maximum} />
-      </section>
+        </PageContent>
     </article>
   )
 }

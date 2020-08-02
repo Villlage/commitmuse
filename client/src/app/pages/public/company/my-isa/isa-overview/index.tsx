@@ -65,7 +65,7 @@ export default function IsaOverview(props: IsaOverviewProps) {
                     <label>Total Paid</label>
                     <p>
                       0 USD
-                      <span>of 0 USD</span>
+                      <span>of {isa.cap} USD</span>
                     </p>
                   </div>
                   <div>
@@ -105,7 +105,7 @@ export default function IsaOverview(props: IsaOverviewProps) {
                     <Field className="full" title="Description">
                       {isa.description || '-'}
                     </Field>
-                    <Field className="full" title="Cancellation PEriod">
+                    <Field className="full" title="Cancellation Period">
                       {isa.cap || '-'} weeks
                     </Field>
                   </div>

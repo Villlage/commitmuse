@@ -15,14 +15,14 @@ export default function Settings(props: SettingsProps) {
         <div className="wrapper">
           <h2>Account Information</h2>
           <section className="account_info">
-            <Field title="FIRST NAME">Johan</Field>
-            <Field title="LAST NAME">Serna</Field>
-            <Field className="full" title="Email address">jonah.serna@emailaddress.com</Field>
+            <Field title="FIRST NAME">{props.currentUser.first_name}</Field>
+            <Field title="LAST NAME">{props.currentUser.last_name}</Field>
+            <Field className="full" title="Email address">{props.currentUser.email}</Field>
             <Field className="full" title="">Change Password</Field>
           </section>
           <h2>Contract Information</h2>
           <section className="contract_info">
-            <Field className="full" title="Current income">$95K / YEAR</Field>
+            <Field className="full" title="Current income">$ - / YEAR</Field>
             <Field className="full" title="">Cancel ISA Contract</Field>
           </section>
         </div>
