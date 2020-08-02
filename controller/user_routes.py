@@ -103,6 +103,7 @@ def _get_user_id(user_id: Optional[int] = None) -> Optional[int]:
 def reset_user_password() -> Tuple[Response, int]:
     schema = reset_password_schema.load(request.json)
     user = reset_password(token=schema["token"], password=schema["password"])
+    login_user(user)
     result = user_schema.dump(user)
 
     return jsonify(result), 200
