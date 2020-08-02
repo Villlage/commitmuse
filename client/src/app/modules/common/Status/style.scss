@@ -38,10 +38,34 @@
     &.created {
       color: #147d64;
       background: #c6f7e2;
+
+      &.selected {
+        background: #147d64;
+        color: white;
+      }
+      &.selected:before {
+        border-color: transparent transparent transparent #c6f7e2;
+      }
+      &.selected:after {
+        background: #c6f7e2;
+        border-color: transparent transparent transparent #147d64;
+      }
     }
     &.active {
       color: #c6f7e2;
       background: #147d64;
+
+      &.selected {
+        background: #147d64;
+        color: white;
+      }
+      &.selected:before {
+        border-color: transparent transparent transparent #c6f7e2;
+      }
+      &.selected:after {
+        background: #c6f7e2;
+        border-color: transparent transparent transparent #147d64;
+      }
     }
     &.paying {
       color: #f0b429;
@@ -61,6 +85,18 @@
     &.completed {
       color: #bae3ff;
       background: #0967d2;
+
+      &.selected {
+        background: #0967d2;
+        color: white;
+      }
+      &.selected:before {
+        border-color: transparent transparent transparent #bae3ff;
+      }
+      &.selected:after {
+        background: #bae3ff;
+        border-color: transparent transparent transparent #0967d2;
+      }
     }
   }
 }
