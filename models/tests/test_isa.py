@@ -20,6 +20,7 @@ class TestISA:
             description="becoming a product manager",
             student_id=student.id,
             coach_id=coach.id,
+            cancellation_period_weeks=2,
         )
 
         isa = ISA.create_isa(**arguments)

@@ -81,6 +81,7 @@ class ISAFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
     percentage = factory.Faker("random_int", min=1, max=20, step=1)
     cap = factory.Faker("pydecimal", left_digits=5, right_digits=2, positive=True)
     time_to_be_paid = factory.Faker("random_int", min=1, max=1000, step=1)
+    cancellation_period_weeks = factory.Faker("random_int", min=0, max=10, step=1)
 
     description = factory.Faker("word")
     status = factory.Faker("word")

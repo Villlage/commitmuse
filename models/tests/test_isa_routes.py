@@ -27,6 +27,7 @@ class TestISA:
             time_to_be_paid=24,
             description="becoming a product manager",
             coach_id=coach.id,
+            cancellation_period_weeks=2,
             client=dict(
                 email="client@gmail.com", first_name="client", last_name="student"
             ),

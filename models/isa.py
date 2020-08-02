@@ -13,6 +13,7 @@ class ISA(db.Model):  # type: ignore
     current_income = db.Column(db.Integer, nullable=False, default=0)
     percentage = db.Column(db.Float, nullable=False, default=0)
     cap = db.Column(db.Integer, nullable=False, default=0)
+    cancellation_period_weeks = db.Column(db.Integer, nullable=False, default=0)
     time_to_be_paid = db.Column(db.Integer, nullable=False, default=0)
 
     description = db.Column(db.String(255), nullable=False, server_default="")
