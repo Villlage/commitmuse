@@ -29,3 +29,8 @@ class TestISAService:
         bad_coach_id = created_isa.coach_id + 1
         with pytest.raises(AuthorizationError):
             get_isa_by_id(coach_id=bad_coach_id, isa_id=created_isa.id)
+
+    def get_isa_by_id_with_access_token(self):
+        created_isa = ISAFactory.create()
+        isa = get_isa_by_id(isa_id=created_isa.id, access_token="123")
+        assert created_isa == isa

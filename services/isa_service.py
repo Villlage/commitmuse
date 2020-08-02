@@ -36,3 +36,11 @@ def create_student_and_isa(schema: Dict[Any, Any]) -> ISA:
 
     isa = ISA.create_isa(**schema)
     return isa
+
+
+def get_isa_by_id_with_access_token(isa_id: int, access_token: str) -> ISA:
+    """
+    TODO: use the access token to see if you can use the isa here
+    """
+    isa = _get_isa_by_id(isa_id)
+    return isa

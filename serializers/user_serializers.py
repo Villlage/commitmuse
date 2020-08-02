@@ -62,6 +62,7 @@ class ISASchema(ma.ModelSchema):  # type: ignore
         model = ISA
 
     student = fields.Nested(UserSchema, required=True)
+    coach = fields.Nested(UserSchema, required=True)
 
 
 login_schema = LoginSchema()

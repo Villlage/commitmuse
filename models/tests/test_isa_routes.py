@@ -1,5 +1,6 @@
 # type: ignore
 import pytest
+from app import app
 from tests.factories import CoachFactory, ISAFactory
 from conftest import logged_in_client
 from common.exceptions import ResourceNotFound
@@ -115,3 +116,12 @@ class TestISA:
 
         with pytest.raises(ResourceNotFound):
             assert get_isa_by_id(coach_id=coach.id, isa_id=isa_id)
+
+    def test_get_isa_by_access_token(self) -> None:
+        isa = ISAFactory.create()
+        isa_id = isa.id
+
+        with app.test_client() as client:
+            resp = client.get(f"/client/isas/{isa_id}")
+            assert resp.status_code == 200
+            assert resp.json["id"] == isa_id

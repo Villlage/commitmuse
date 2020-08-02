@@ -14,7 +14,11 @@ from serializers.user_serializers import (
     isa_schema,
 )
 
-from services.isa_service import get_isa_by_id, create_student_and_isa
+from services.isa_service import (
+    get_isa_by_id,
+    create_student_and_isa,
+    get_isa_by_id_with_access_token,
+)
 from controller.common import login_required, get_current_user
 from models.user import User
 from models.isa import ISA
@@ -33,6 +37,21 @@ def get_or_update_isa(isa_id: int) -> Tuple[Response, int]:
     elif request.method == "DELETE":
         isa.delete()
         return jsonify(), 204
+
+    result = isa_schema.dump(isa)
+    return jsonify(result), 200
+
+
+@app.route("/client/isas/<int:isa_id>", methods=["GET"])
+def get_isa_by_access_token(isa_id: int) -> Tuple[Response, int]:
+    """
+    TODO: add access token functionality
+    """
+    access_token = request.args.get("access_token", "abc123")
+
+    isa = get_isa_by_id_with_access_token(
+        isa_id=isa_id, access_token=access_token
+    )  # type: ISA
 
     result = isa_schema.dump(isa)
     return jsonify(result), 200
