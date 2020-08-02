@@ -1,6 +1,5 @@
 from flask import request, jsonify
 from typing import Any, Dict, List, Tuple
-import marshmallow
 from werkzeug import Response
 from app import app
 from common.exceptions import (
@@ -26,21 +25,14 @@ from models.isa import ISA
 def get_or_update_isa(isa_id: int) -> Tuple[Response, int]:
     user = get_current_user()  # type: User
 
-    try:
-        isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
-        if request.method == "PATCH":
-            schema = update_isa_schema.load(request.json)
-            isa = isa.update_isa(**schema)
-        elif request.method == "DELETE":
-            isa.delete()
-            return jsonify(), 204
+    isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
 
-    except marshmallow.exceptions.ValidationError as error:
-        return jsonify(error=error.messages), 400
-    except AuthorizationError:
-        return jsonify(error="you are not authorized to view this"), 403
-    except ResourceNotFound:
-        return jsonify(error="Resource Not Found"), 404
+    if request.method == "PATCH":
+        schema = update_isa_schema.load(request.json)
+        isa = isa.update_isa(**schema)
+    elif request.method == "DELETE":
+        isa.delete()
+        return jsonify(), 204
 
     result = isa_schema.dump(isa)
     return jsonify(result), 200
@@ -50,12 +42,8 @@ def get_or_update_isa(isa_id: int) -> Tuple[Response, int]:
 @login_required
 def create_isa_route() -> Tuple[Response, int]:
     get_current_user()
-    try:
-        schema = create_isa_schema.load(request.json)
-        isa = create_student_and_isa(schema)
-
-    except marshmallow.exceptions.ValidationError as error:
-        return jsonify(error=error.messages), 400
+    schema = create_isa_schema.load(request.json)
+    isa = create_student_and_isa(schema)
 
     result = isa_schema.dump(isa)
     return jsonify(result), 200
