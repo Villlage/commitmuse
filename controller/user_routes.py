@@ -55,7 +55,7 @@ def register() -> Tuple[Response, int]:
     """
     try:
         schema = login_schema.load(request.json)
-        user = create_user(**schema)
+        user = create_user(schema)
         login_user(user)
     except marshmallow.exceptions.ValidationError as error:
         return jsonify(error=error.messages), 400

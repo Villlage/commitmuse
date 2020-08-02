@@ -1,6 +1,5 @@
 from functools import wraps
 from typing import Callable, Any
-
 import marshmallow
 from flask import jsonify, request
 from flask.helpers import total_seconds, get_env
@@ -42,8 +41,12 @@ class SecureCookieSession(SecureCookieSessionInterface):
 
 
 def capture_error_if_needed(error: Exception) -> None:
+    """
+    TODO: fix logger here
+    """
     if get_env() != "testing":  # type: ignore
-        sentry_sdk.capture_exception(error)
+        print("test error")
+        # sentry_sdk.capture_exception(error)
 
 
 def error_handled(function: Callable) -> Callable:  # type: ignore

@@ -9,8 +9,18 @@ class TestRegister:
         with app.test_client() as client:
             email = faker.safe_email()
             password = faker.password()
+            first_name = faker.word()
+            last_name = faker.word()
             # register a user
-            resp = client.post("/register", json=dict(email=email, password=password))
+            resp = client.post(
+                "/register",
+                json=dict(
+                    email=email,
+                    password=password,
+                    last_name=last_name,
+                    first_name=first_name,
+                ),
+            )
             assert resp.status_code == 200
 
     def test_register_bad_email(self) -> None:
