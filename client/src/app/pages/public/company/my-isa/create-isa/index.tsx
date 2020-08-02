@@ -81,6 +81,8 @@ export default function CreateIsa(props: CreateIsaProps) {
         return setTimeout(() => set_request_error(''), 3000)
       }
       set_loading(false)
+
+      return props.history.push(`/isa/${res.id}`)
     } catch (e) {
       set_loading(false)
       set_request_error(e.error || e.toString())
