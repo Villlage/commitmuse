@@ -158,7 +158,7 @@ export default function CreateIsa(props: CreateIsaProps) {
                   <>
                     <Input
                       withRipple
-                      postFix="%"
+                      postFix="$"
                       onChange={e => setIncome(e, 'current_income')}
                       placeholder="Current income"
                       value={addComma(total_income.current_income)}
