@@ -71,7 +71,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
 
           <div className="future-bill">
             <label>Future Bill</label>
-            <p>${future_bill()} / YEAR ({props.percentage}%)</p>
+            <p>${future_bill()} ({props.percentage}%)</p>
           </div>
         </div>
       </div>

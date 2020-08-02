@@ -61,7 +61,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
           set_request_error(res.error || res.err_msg)
           setTimeout(() => set_request_error(''), 3000)
         } else {
-          props.history.push(`/isa/${res.id || 1}`)
+          props.history.push(`/isa/${isa_id || 1}`)
         }
       }
     } catch (e) {
@@ -113,7 +113,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
           <OfferStatus statuses={offerStatuses} activeIndex={offer_step} />
           {isa && offer_strategy[offerStatuses[offer_step]]}
         </section>
-        <FAQ maximum={10000} months={7} percentage={1} current_income={80000} />
+        {isa && <FAQ maximum={isa.cap} months={isa.time_to_be_paid} percentage={isa.percentage} current_income={isa.current_income} />}
       </PageContent>
       <Message message={request_error} />
     </article>
