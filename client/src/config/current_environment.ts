@@ -1,3 +1,3 @@
 import { ENVs } from './environment'
-const ENVIRONMENT: ENVs = 'production'
+const ENVIRONMENT: ENVs = 'dev'
 export default ENVIRONMENT

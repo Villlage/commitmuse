@@ -4,10 +4,10 @@ export type ENVs = 'staging' | 'production' | 'dev'
 
 const ENV = {
   dev: {
-    MAIN_API: 'http://localhost:5000/',
+    MAIN_API: 'https://commitmuse.herokuapp.com/',
   },
   staging: {
-    MAIN_API: 'https://commitmuse-staging.herokuapp.com/',
+    MAIN_API: 'https://commitmuse.herokuapp.com/',
   },
   production: {
     MAIN_API: 'https://commitmuse.herokuapp.com/',

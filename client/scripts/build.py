@@ -60,8 +60,8 @@ def create_env_build(env_type):
 
 os.path.isdir(build_dir) and delete_build_dir(build_dir)
 
-create_env_build(ENV_STAGING)
 create_env_build(ENV_PROD)
-create_env_build(ENV_DEV)
+create_env_build(ENV_PROD)
+create_env_build(ENV_PROD)
 
 write_cur_env_file(ENV_DEV)
