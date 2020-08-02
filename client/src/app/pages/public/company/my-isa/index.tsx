@@ -10,14 +10,9 @@ import { Link } from 'react-router-dom'
 import IsaStatus from '../../../../modules/company/MyIsa/IsaStatus'
 import Select from '../../../../components/Select/Select'
 import Message from '../../../../components/Message'
+import Loader from '../../../../components/Loader'
 
 const isaService = new IsaService()
-
-// const ISAs: any = [
-//   { id: 1, name: 'Jonah Serna', status: 'active' },
-//   { id: 2, name: 'Dina Castro', status: 'paying' },
-//   { id: 3, name: 'Glenn Stone', status: 'completed' },
-// ]
 
 interface MyIsa extends ScreenProps {}
 
@@ -38,7 +33,7 @@ export default function MyIsa(props: MyIsa) {
         set_request_error(res.error)
         return setTimeout(() => set_request_error(''), 3000)
       }
-
+      set_loading(false)
       set_isas(res)
     } catch (e) {
       set_loading(false)
@@ -54,53 +49,56 @@ export default function MyIsa(props: MyIsa) {
   return (
     <article className="MyIsa-page">
       <PageHeader user={props.currentUser} />
-      <PageContent>
-        <header className="page-header">
-          <h1 className="page-title">My ISA’s</h1>
-          {notEmptyArray(isas) && (
-            <Select
-              value={filter}
-              options={['View all', 'active', 'paying', 'completed']}
-              onChange={e => set_filter(e)}
-              placeholder={'View all'}
-            />
-          )}
-        </header>
-        {notEmptyArray(isas) ? (
-          <section className="my_isa">
-            {isas.filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter)).map(
-              (isa: any, index: number) => (
-                <IsaStatus
-                  onClick={(id: number) => props.history.push('/isa/' + id)}
-                  id={isa.id}
-                  key={index}
-                  name={isa.name}
-                  status={isa.status}
-                />
-              ),
+      {loading ? (
+        <Loader />
+      ) : (
+        <PageContent>
+          <header className="page-header">
+            <h1 className="page-title">My ISA’s</h1>
+            {notEmptyArray(isas) && (
+              <Select
+                value={filter}
+                options={['View all', 'active', 'paying', 'completed']}
+                onChange={e => set_filter(e)}
+                placeholder={'View all'}
+              />
             )}
-            <Link to="isa/create" className="new_isa">
-              <Icon icon="new_isa_plus" />
-              NEW ISA
-            </Link>
-          </section>
-        ) : (
-          <section className="empty-isa">
-            <div className="icon">
-              <Icon icon="empty_isa" />
-            </div>
-            <h2>You have no ISA offers.</h2>
-            <div className="text_with_icon">
-              <p>Start by creating a new one.</p>
-              <Icon icon="arrow_to_button" />
-            </div>
-            <Link to="isa/create" className="new_isa">
-              <Icon icon="new_isa_plus" />
-              NEW ISA
-            </Link>
-          </section>
-        )}
-      </PageContent>
+          </header>
+          {notEmptyArray(isas) ? (
+            <section className="my_isa">
+              {isas
+                .filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter))
+                .map((isa: any, index: number) => (
+                  <IsaStatus
+                    onClick={() => props.history.push('/isa/' + isa.id)}
+                    key={index}
+                    name={isa.student.first_name + ' ' + isa.student.last_name}
+                    status={isa.status}
+                  />
+                ))}
+              <Link to="isa/create" className="new_isa">
+                <Icon icon="new_isa_plus" />
+                NEW ISA
+              </Link>
+            </section>
+          ) : (
+            <section className="empty-isa">
+              <div className="icon">
+                <Icon icon="empty_isa" />
+              </div>
+              <h2>You have no ISA offers.</h2>
+              <div className="text_with_icon">
+                <p>Start by creating a new one.</p>
+                <Icon icon="arrow_to_button" />
+              </div>
+              <Link to="isa/create" className="new_isa">
+                <Icon icon="new_isa_plus" />
+                NEW ISA
+              </Link>
+            </section>
+          )}
+        </PageContent>
+      )}
       <Message message={request_error} />
     </article>
   )

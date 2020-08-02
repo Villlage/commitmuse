@@ -40,14 +40,21 @@ class CreateISASchema(Schema):  # type: ignore
     client = fields.Nested(ClientSchema, required=True)
 
 
+class UserSchema(ma.ModelSchema):  # type: ignore
+    class Meta:
+        model = User
+
+
+class StudentSchema(Schema):  # type: ignore
+    first_name = fields.Str(required=False)
+    last_name = fields.Str(required=False)
+
+
 class ISASchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = ISA
 
-
-class UserSchema(ma.ModelSchema):  # type: ignore
-    class Meta:
-        model = User
+    student = fields.Nested(StudentSchema, required=True)
 
 
 login_schema = LoginSchema()

@@ -11,7 +11,11 @@ export default class IsaService {
     return await baseService.getJSON('isas')
   }
 
-  public async create(isa: ISA) {
+  public async create(isa: any) {
     return await baseService.postJSON('isas', isa)
+  }
+
+  public async getIsaById(isa_id: number) {
+    return await baseService.getJSON(`isas/${isa_id}`)
   }
 }

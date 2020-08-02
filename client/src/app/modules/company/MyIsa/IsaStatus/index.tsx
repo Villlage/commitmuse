@@ -19,15 +19,14 @@ const status_colors: any = {
 }
 
 type IsaStatusProps = {
-  id: number
   status: any
   name: string
-  onClick(id: number): void
+  onClick(): void
 }
 
 export default function IsaStatus(props: IsaStatusProps) {
   return (
-    <div className="IsaStatus-module" onClick={() => props.onClick(props.id)}>
+    <div className="IsaStatus-module" onClick={props.onClick}>
       <div>
         <h2>{props.name}</h2>
         {props.status === 'paying' && (

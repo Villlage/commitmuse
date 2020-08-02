@@ -36,6 +36,12 @@ class ISA(db.Model):  # type: ignore
             return isa
 
     @classmethod
+    def get_isa_by_coach_id(cls, coach_id: int) -> "ISA":
+        with db_session() as session:
+            isa = session.query(cls).filter(cls.coach_id == coach_id).all()  # type: ISA
+            return isa
+
+    @classmethod
     def create_isa(cls, **args: str) -> "ISA":
         with db_session() as session:
             isa = cls(**args)
