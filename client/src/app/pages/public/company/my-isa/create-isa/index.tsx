@@ -4,7 +4,7 @@ import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
 import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
 import React, { useState } from 'react'
-import { fixClass, isNumber, validateEmail } from '../../../../../../helpers/base'
+import { fixClass, intOrFloat, isNumber, validateEmail } from '../../../../../../helpers/base'
 import Input from '../../../../../components/Input'
 import TooltipBadge from '../../../../../components/TooltipBadge'
 import { emailErrorMessage } from '../../../../../../constants/auth'
@@ -20,8 +20,8 @@ const pricing = ['From total income', 'From new raise', 'Placement']
 type IncomeKeys =
   | 'description'
   | 'percentage'
-  | 'months'
-  | 'maximum'
+  | 'time_to_be_paid'
+  | 'cap'
   | 'cancellation_period'
   | 'risk'
   | 'current_income'
@@ -47,12 +47,12 @@ export default function CreateIsa(props: CreateIsaProps) {
 
   const [total_income, set_total_income] = useState({
     description: '',
-    percentage: '',
-    months: '',
-    maximum: '',
-    cancellation_period: '',
-    risk: '',
-    current_income: '',
+    percentage: '17',
+    time_to_be_paid: '2',
+    cap: '10000',
+    cancellation_period: '2',
+    risk: '20',
+    current_income: '80000',
   })
 
   const setIncome = (e: string, key: IncomeKeys) => set_total_income({ ...total_income, [key]: e })
@@ -66,10 +66,11 @@ export default function CreateIsa(props: CreateIsaProps) {
     set_loading(true)
     try {
       const res = await isaService.create({
-        current_income: Number(total_income.current_income),
+        current_income: removeComma(total_income.current_income),
         percentage: Number(total_income.percentage),
-        cap: Number(total_income.cancellation_period),
-        time_to_be_paid: Number(total_income.months),
+        cap: removeComma(total_income.cap),
+        cancellation_period_weeks: Number(total_income.cancellation_period),
+        time_to_be_paid: Number(total_income.time_to_be_paid),
         status: 'created',
         description: total_income.description,
         client,
@@ -89,6 +90,14 @@ export default function CreateIsa(props: CreateIsaProps) {
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
     }
+  }
+
+  const addComma = (str: string) => {
+    return Number( str.replace(/,/g, '')).toLocaleString()
+  }
+
+  const removeComma = (str: string) => {
+    return Number( str.replace(/,/g, ''))
   }
 
   return (
@@ -150,9 +159,9 @@ export default function CreateIsa(props: CreateIsaProps) {
                     <Input
                       withRipple
                       postFix="%"
-                      onChange={e => isNumber(e) && setIncome(e, 'current_income')}
+                      onChange={e => setIncome(e, 'current_income')}
                       placeholder="Current income"
-                      value={total_income.current_income}
+                      value={addComma(total_income.current_income)}
                     />
                     <Input
                       withRipple
@@ -164,16 +173,16 @@ export default function CreateIsa(props: CreateIsaProps) {
                     <Input
                       withRipple
                       postFix="Months"
-                      onChange={e => isNumber(e) && setIncome(e, 'months')}
+                      onChange={e => isNumber(e) && setIncome(e, 'time_to_be_paid')}
                       placeholder="Time to be Paid"
-                      value={total_income.months}
+                      value={total_income.time_to_be_paid}
                     />
                     <Input
                       withRipple
                       postFix="USD"
-                      onChange={e => isNumber(e) && setIncome(e, 'maximum')}
+                      onChange={e => setIncome(e, 'cap')}
                       placeholder="Maximum to be paid"
-                      value={total_income.maximum}
+                      value={addComma(total_income.cap)}
                     />
                     <Input
                       withRipple
