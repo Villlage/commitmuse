@@ -135,3 +135,5 @@ export const makeName = (u: User) => u ? u.first_name + ' ' + u.last_name : ''
 // helper to check if value is number
 export const intOrFloat = (value: string) =>
   /^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$/.test(value) || value === '' || value[value.length - 1] === '.'
+
+export const roundK = (val: number) => Math.round((val + Number.EPSILON) * 100) / 100
