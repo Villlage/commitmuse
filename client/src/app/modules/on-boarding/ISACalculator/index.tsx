@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './style.scss'
 import Icon from '../../../components/Icon'
-import { embedCalculator } from '../../../../helpers/base'
+import { embedCalculator, roundK } from '../../../../helpers/base'
 import Message from '../../../components/Message'
 import { SYSTEM_COLORS } from '../../../../constants/system'
 
@@ -56,11 +56,11 @@ export default function ISACalculator(props: ISACalculatorProps) {
           <div className="titles">
             <div>
               <h2>current income</h2>
-              <p>${current_income} / YEAR</p>
+              <p>${roundK(current_income)}K / YEAR</p>
             </div>
             <div style={{ textAlign: 'right' }}>
               <h2>future income</h2>
-              <p>${future_income} / YEAR</p>
+              <p>${roundK(future_income)}K / YEAR</p>
             </div>
           </div>
 
@@ -71,7 +71,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
 
           <div className="future-bill">
             <label>Future Bill</label>
-            <p>${future_bill()} ({props.percentage}%)</p>
+            <p>${roundK(future_bill())}K ({props.percentage}%)</p>
           </div>
         </div>
       </div>
