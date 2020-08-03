@@ -67,3 +67,9 @@ def reset_password(token: str, password: str) -> User:
 #     user = get_user_by_email(email)
 #     reset_password_link = _reset_password_link(user, url_root)
 #     send_forgot_password_email(user=user, reset_password_link=reset_password_link)
+
+
+def get_user_name(user: User) -> str:
+    if not user:
+        raise ResourceNotFound("Could not find user. Please Register.")
+    return f"{user.first_name} {user.last_name}"

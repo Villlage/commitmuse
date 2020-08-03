@@ -31,6 +31,7 @@ marshmallow = "==3.2.2"
 plaid-python = "==3.4.0"
 flask-cors = "*"
 pyjwt = "*"
+docusign-esign = "*"
 
 [requires]
 python_version = "3.7.5"

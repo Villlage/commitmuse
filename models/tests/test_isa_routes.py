@@ -8,6 +8,10 @@ from services.isa_service import get_isa_by_id
 
 
 class TestISA:
+    @pytest.fixture()
+    def mock_send_document(self, mocker):
+        return mocker.patch("services.documents_service.docusign_client.send_envelope",)
+
     def test_get_all(self) -> None:
         coach = CoachFactory.create()
         isa1 = ISAFactory.create(coach=coach)
@@ -18,7 +22,7 @@ class TestISA:
             assert resp.status_code == 200
             assert len(resp.json) == 2
 
-    def test_create(self) -> None:
+    def test_create(self, mock_send_document) -> None:
         coach = CoachFactory.create()
 
         payload = dict(
@@ -42,6 +46,8 @@ class TestISA:
             assert resp.json["cap"] == payload["cap"]
             assert resp.json["time_to_be_paid"] == payload["time_to_be_paid"]
             assert resp.json["id"]
+
+            mock_send_document.assert_called_once()
 
     def test_bad_create(self) -> None:
         coach = CoachFactory.create()
