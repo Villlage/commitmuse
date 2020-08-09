@@ -157,3 +157,12 @@ class TestResetPassword:
         with app.test_client() as client:
             resp = client.patch("/users/reset-password", json=dict(token=f"{token}"))
             assert resp.status_code == 400
+
+
+class TestUserUpdate:
+    user = UserFactory.create(first_name="something")
+    first_name = "something else"
+    with logged_in_client(user) as client:
+        resp = client.patch("/user", json=dict(first_name=first_name))
+        assert resp.status_code == 200
+        assert resp.json["first_name"] == first_name
