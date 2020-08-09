@@ -9,6 +9,7 @@
   justify-items: center;
   text-transform: uppercase;
   background: #E0E8F9;
+  overflow: hidden;
 
   .status {
     width: 100%;
@@ -62,6 +63,5 @@
         border-color: transparent transparent transparent transparent;
       }
     }
-
   }
 }
