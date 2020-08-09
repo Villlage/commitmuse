@@ -94,3 +94,32 @@ class TestCompany:
 
         with pytest.raises(ResourceNotFound):
             assert get_company_by_id(user=coach, company_id=company_id)
+
+
+class TestCompanyDashboard:
+    def test_copmany_isas(self) -> None:
+        company = CompanyFactory.create()
+        coach = CoachFactory.create(company=company)
+        company_id = company.id
+
+        with logged_in_client(coach) as client:
+            resp = client.get(f"companies/{company_id}/isas")
+            assert resp.status_code == 200
+
+    def test_copmany_coaches(self) -> None:
+        company = CompanyFactory.create()
+        coach = CoachFactory.create(company=company)
+        company_id = company.id
+
+        with logged_in_client(coach) as client:
+            resp = client.get(f"companies/{company_id}/coaches")
+            assert resp.status_code == 200
+
+    def test_copmany_overview(self) -> None:
+        company = CompanyFactory.create()
+        coach = CoachFactory.create(company=company)
+        company_id = company.id
+
+        with logged_in_client(coach) as client:
+            resp = client.get(f"companies/{company_id}/overview")
+            assert resp.status_code == 200
