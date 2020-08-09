@@ -23,22 +23,7 @@ function App() {
       }
     } catch (e) {
       log('Error getting current user: ', e)
-      // setUser(undefined)
-      return setUser({
-        id: 1,
-        first_name: 'Amy',
-        last_name: 'Owens',
-        phone_number: '555555',
-        user_role: 0,
-        confirmed_at: '',
-        email: 'sample@mail.com',
-        is_active: true,
-        profile_picture: '/assets/images/amy_owens.svg',
-        profile_picture_link: '/assets/images/amy_owens.svg',
-        created_at: '',
-        updated_at: '',
-        hourly_rate: 40
-      })
+      return setUser(undefined)
     }
   }
 

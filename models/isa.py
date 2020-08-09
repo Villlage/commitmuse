@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 from datetime import datetime
 from app import db
 from common.database import db_session
@@ -62,3 +62,9 @@ class ISA(db.Model):  # type: ignore
         with db_session() as session:
             session.delete(self)
             session.commit()
+
+    @classmethod
+    def get_all_isas(cls) -> List["ISA"]:
+        with db_session() as session:
+            isas = session.query(cls).all()  # type: List[ISA]
+            return isas

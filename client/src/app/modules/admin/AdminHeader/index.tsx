@@ -1,6 +1,6 @@
 import * as React from 'react'
 import './style.scss'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import { User } from '../../../../interfaces/baseIntefaces'
 import Icon from '../../../components/Icon'
 import Button from '../../../components/Button'
@@ -10,11 +10,11 @@ import { log } from '../../../../services/logging.service'
 
 const authService = new AuthService()
 
-interface PageHeaderProps {
-  user?: User
+interface AdminHeaderProps {
+  user: User
 }
 
-export default function PageHeader(props: PageHeaderProps) {
+export default function AdminHeader(props: AdminHeaderProps) {
   const [show_menu, set_show_menu] = useState(false)
   const history = useHistory()
 
@@ -29,12 +29,25 @@ export default function PageHeader(props: PageHeaderProps) {
 
   return (
     <>
-      <header className="PageHeader-module">
+      <header className="AdminHeader-module">
         <nav>
           <div className="logo" onClick={() => history.push('/my-isa')}>
             <img src="/web/assets/images/logo.png" alt="logo" />
           </div>
-          {props.user && props.user.user_role === 1 && <Link className="switch" to={'/admin/users'}>Admin portal</Link>}
+          <div className="menu-list">
+            <NavLink activeClassName="is-active" to="/admin/users">
+              Users
+            </NavLink>
+            <NavLink activeClassName="is-active" to="/admin/isas">
+              ISAS
+            </NavLink>
+            <NavLink activeClassName="is-active" to="/admin/plaid">
+              Plaid
+            </NavLink>
+            <NavLink activeClassName="is-active" className="switch" to="/my-isa">
+              Web App
+            </NavLink>
+          </div>
           <div className="profile">
             {props.user ? (
               <>

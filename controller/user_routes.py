@@ -1,11 +1,11 @@
+from functools import wraps
+
 from flask import request, jsonify
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Callable
 from werkzeug import Response
 from app import app
 from common.exceptions import (
-    ResourceConflictError,
     ResourceNotFound,
-    AuthenticationError,
 )
 from models.user import User
 from services.user_service import create_user, get_user, reset_password
@@ -26,7 +26,8 @@ def login() -> Tuple[Response, int]:
     schema = login_schema.load(request.json)
     user = get_user(email=schema["email"], password=schema["password"])
     login_user(user)
-    return jsonify("successfully logged in user"), 200
+    result = user_schema.dump(user)
+    return jsonify(result), 200
 
 
 @app.route("/check-auth", methods=["GET"])
@@ -107,3 +108,14 @@ def reset_user_password() -> Tuple[Response, int]:
     result = user_schema.dump(user)
 
     return jsonify(result), 200
+
+
+def admin_login_required(function: Callable) -> Callable:  # type: ignore
+    @wraps(function)
+    def wrapped(*args, **kwargs):  # type: ignore
+        if current_user.is_anonymous or not current_user.is_admin():
+            return jsonify(error="Admin login required"), 403
+
+        return function(*args, **kwargs)
+
+    return wrapped

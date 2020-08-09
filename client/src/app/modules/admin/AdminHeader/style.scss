@@ -1,8 +1,8 @@
 @import '../../../../styles/mixins';
 @import '../../../../styles/colors';
 
-.PageHeader-module {
-  height: 60px;
+.AdminHeader-module {
+  height: 80px;
   padding: 0 24px;
   background: #010162;
   box-shadow: 0 4px 16px rgba(16, 42, 67, 0.06);
@@ -11,21 +11,37 @@
   color: white;
   width: 100%;
 
+  .menu-list {
+    height: 100%;
+    display: flex;
+
+    a {
+      color: #d8d8d8;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      border-bottom: 3px solid transparent;
+
+      &.is-active,
+      &:hover {
+        border-color: white;
+        color: white;
+      }
+
+      &.switch {
+        color: $MainSuccess;
+        font-weight: bold;
+      }
+    }
+  }
+
   nav {
     height: 100%;
     align-items: center;
     display: flex;
     justify-content: space-between;
     padding: 0 80px 0 110px;
-
-    .switch {
-      color: $MainSuccess;
-      font-weight: bold;
-
-      &:hover {
-        color: white;
-      }
-    }
 
     .logo {
       display: flex;
@@ -58,7 +74,7 @@
         margin-left: 22px;
         font-weight: 600;
         font-size: 14px;
-        color: #FFFFFF;
+        color: #ffffff;
 
         img {
           margin-right: 6px;

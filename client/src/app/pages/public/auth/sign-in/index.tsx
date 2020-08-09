@@ -46,8 +46,12 @@ export default function SignIn(props: ScreenProps) {
 
         await props.fetchUser()
         set_loading(false)
-
-        return props.history.push('/my-isa')
+console.log('res', res)
+        if (res.user_role === 1) {
+          return props.history.push('admin/users')
+        } else {
+          return props.history.push('/my-isa')
+        }
       }
     } catch (e) {
       set_loading(false)

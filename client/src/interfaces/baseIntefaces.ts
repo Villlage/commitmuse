@@ -10,6 +10,8 @@ export interface ScreenProps {
   fetchUser(): void
 }
 
+export type UserTypes = 'coaches' | 'students'
+
 export interface User {
   id: number
   first_name: string
@@ -24,6 +26,11 @@ export interface User {
   profile_picture_link: string
   created_at: string
   updated_at: string
+  coaches: number[]
+  plaid_account: []
+  plaid_items: []
+  students: []
+  type: UserTypes
 }
 
 export type SystemColors =
@@ -58,6 +65,7 @@ export type SystemColors =
   | 'ActiveBorder'
 
 export interface ISA {
+  id: number
   current_income: number
   percentage: number
   cap: number
@@ -66,7 +74,11 @@ export interface ISA {
   description: string
   coach_id: number
   client: any
-  student: any
+  coach: number
+  student: number
+  cancellation_period_weeks: number
+  created_at: string
+  updated_at: null | string
 }
 
 export interface PlaidAccount {

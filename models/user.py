@@ -82,6 +82,12 @@ class User(db.Model, UserMixin):  # type: ignore
         is_admin = self.user_role == 1  # type: bool
         return is_admin
 
+    @classmethod
+    def get_all_users(cls) -> List["User"]:
+        with db_session() as session:
+            users = session.query(cls).all()  # type: List[User]
+            return users
+
 
 class Coach(User):
     __tablename__ = "coaches"

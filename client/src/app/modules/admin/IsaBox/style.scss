@@ -1,0 +1,23 @@
+.IsaBox-module {
+  box-shadow: 0 0 2px 1px #0000002b;
+
+  header {
+    display: flex;
+    padding: 10px;
+    justify-content: flex-end;
+
+    button {
+      height: 32px;
+      margin-right: 12px;
+    }
+  }
+
+  .body {
+    display: grid;
+    grid: 1fr / 1fr 1fr;
+    background-color: #F5F5F5;
+  }
+
+  footer {
+  }
+}
