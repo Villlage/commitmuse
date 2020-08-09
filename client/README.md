@@ -1,44 +1,73 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🔥🔥🔥 Commit-muse client 🔥🔥🔥
+<h2>Set up Instructions:</h2>
 
-## Available Scripts
+- `Starting project`<br/>
+after cloning repository run `yarn` or `npm i`, next you can run `yarn start` to start the app
 
-In the project directory, you can run:
+- `Building project`<br/>
+for building client's React app must be used `pyhton scripts/build.py` command, it will create 3 separate folders with built files for `dev` `staging` and `production` environments
 
-### `yarn start`
+<h2>Folders and file structure</h2>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- `app` - contains folders: `components`, `modules`, `screens`
+  - desc: we need this folder to store all the components, modules and screens(aka pages) of our app 
+  - component - is a one single brick of our ui, `very small ui` parts like Button or Select
+  - module - is `big ui` part of a project, made with small components, ex: LoginStep or some PopUp
+  - screen - is a whole `single page` of our app made with `modules` and `components`
+  
+- `assets` - contains folders: `fonts`, `icons`
+  - rules: svg is preferable format for icons and Icon component can be used to store all the icons of the system 
+  - desc: we need this folder to store all the needed assets of our app, like icons, fonts etc
+  
+- `config` -
+  - desc: we need this folder to store configuration files and environment file with environment  vars 
+  
+- `constants` - 
+  - desc: we need this folder to store all the constant variables of the project like `system_colors` or `mockData`
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- `helpers` - 
+  - desc: we need this folder to store any help functions
+   
+- `jest` - contains folders: `app-tests`
+  - desc: we need this folder to store all the tests of our app, for now we have `units` soon we need to add other types and make sure coverage to be 100%
 
-### `yarn test`
+- `redux` - contains folders: `containers`, `reducers`
+  - desc: we need this folder to store all `redux` related files: `containers`, `reducers`, `actions`
+  - rules: No need to create file containing `ACTION name` no need to create mess
+  
+- `routes` - 
+  - desc: we need this folder to store all the routes of our app
+  
+- `services` - 
+  - desc: we need this folder to store all the services of our app, <br/>
+  basically services are classes with mostly async methods to work with our back-end endpoints
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h2>Tests</h2>
+- desc: 
+- command to run tests: yarn jest -- -u<br/>
+When we run tests, jest generates a nice coverage report for us. To have a look at it, navigate to rootDir/coverage/lcov-report/index.html.
 
-### `yarn build`
+- also you can use command: yarn test
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<h2>Code styles and preferable way of coding: </h2>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- no semicolons: **Bad** - `let a = 1;` | **Good** - `let a = 1`<br/>
+- use single quote in vars: **Bad** - `let name = "John";` | **Good** - `let name = 'John'`<br/>
+- use double quote in html attr: **Bad** - `id='main'` | **Good** - `id="main"`<br/>
+- `tab width` must be equal to 2<br/>
+- `trailing comma` in files<br/>
+- `max line width` is `120` <br/>
+- check for `null` and `undefined` at the start of the function so it will stop at the start of running<br/>
+- use `prettier` for code formatting <br/>
+- must use `const` if variable will not change<br/>
+- must use `let` if variable will change<br/>
+- `var` is restricted <br/>
+- must use `===` instead of `==`<br/>
+    - why: The `===` operator ensures that not only the values are equal, but the two items being compared are of the same type too; Whereas the `==` operator only checks that the values of the two items are equal<br/>
+- use `strategy patern` instead of creating mess with `if/else if` or `switch/case` just make one object with all possible conditions as properties and use it where needed<br/>
+- must use `KISS` and `DRY` principles:<br/>
+    - `KISS` - `keep it stupid simple`: code must be as simple as possible, no need to over complicate simple things. Keep it clean, readable, reusable and understandable for other devs. Don't write `war and peace`, just a Haiku is enough. <br/>
+    - `DRY` - `don't repeat yourself`: don't copy paste your code from one place to another, export and reuse it instead. If you see that one thing is used multiple times just export it and reuse.<br/>
+- in the end just code like it is your best project ever which you will be very proud of to show anyone<br/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<a href="https://docs.google.com/document/d/1tho6hya2gqbPaRyYlC_fTm6ukke-fdh8S82QFx6pNHc">Toolbox's - Engineering Workflow</a>

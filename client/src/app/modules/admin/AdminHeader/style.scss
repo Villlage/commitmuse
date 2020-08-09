@@ -1,0 +1,136 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.AdminHeader-module {
+  height: 80px;
+  padding: 0 24px;
+  background: #010162;
+  box-shadow: 0 4px 16px rgba(16, 42, 67, 0.06);
+  position: relative;
+  @include gothic-normal($size: 16);
+  color: white;
+  width: 100%;
+
+  .menu-list {
+    height: 100%;
+    display: flex;
+
+    a {
+      color: #d8d8d8;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      border-bottom: 3px solid transparent;
+
+      &.is-active,
+      &:hover {
+        border-color: white;
+        color: white;
+      }
+
+      &.switch {
+        color: $MainSuccess;
+        font-weight: bold;
+      }
+    }
+  }
+
+  nav {
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 80px 0 110px;
+
+    .logo {
+      display: flex;
+      cursor: pointer;
+
+      img {
+        height: 80px;
+      }
+
+      p {
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+        margin-left: 12px;
+      }
+    }
+
+    .profile {
+      @include flex-centered;
+      justify-self: flex-end;
+      @include heebo-normal($size: 16);
+      color: #19216c;
+
+      img {
+        cursor: pointer;
+      }
+
+      a {
+        display: flex;
+        margin-left: 22px;
+        font-weight: 600;
+        font-size: 14px;
+        color: #ffffff;
+
+        img {
+          margin-right: 6px;
+        }
+      }
+
+      .auth-menu {
+        display: flex;
+        position: relative;
+        margin-left: 25px;
+        cursor: pointer;
+
+        .profile_pic {
+          margin-right: 6px;
+          width: 32px;
+          height: 32px;
+          border-radius: 32px;
+        }
+
+        .hidden-menu {
+          position: absolute;
+          top: calc(100% + 10px);
+          z-index: 99;
+
+          button {
+            height: 32px;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    height: 60px;
+    padding: 0;
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+
+      .navigation a {
+        border: 0 !important;
+        font-size: 14px;
+        min-width: initial;
+        padding: 5px 10px;
+      }
+
+      .profile {
+        justify-self: center;
+        border: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: initial;
+        justify-content: center;
+      }
+    }
+  }
+}

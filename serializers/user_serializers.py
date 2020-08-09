@@ -70,6 +70,14 @@ class ISASchema(ma.ModelSchema):  # type: ignore
     coach = fields.Nested(UserSchema, required=True)
 
 
+class AdminUserSchema(ma.ModelSchema):  # type: ignore
+    class Meta:
+        model = User
+        exclude = (
+            "password",
+        )
+
+
 login_schema = LoginSchema()
 
 update_isa_schema = UpdateISASchema()

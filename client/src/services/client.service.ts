@@ -4,7 +4,6 @@ import { ISA } from '../interfaces/baseIntefaces'
 
 const baseService = new BaseService()
 
-
 export default class ClientService {
 
   public async getOffer(isa_id: number) {
