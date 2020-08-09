@@ -1,6 +1,4 @@
 import BaseService from './base.service'
-import { formatEmail } from '../helpers/formattings'
-import { ISA } from '../interfaces/baseIntefaces'
 
 const baseService = new BaseService()
 

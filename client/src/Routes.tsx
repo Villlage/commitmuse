@@ -1,11 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Switch, Redirect } from 'react-router'
-import { ScreenProps, User } from './interfaces/baseIntefaces'
+import { ScreenProps } from './interfaces/baseIntefaces'
 import NotFound from './app/pages/public/404'
 import MyIsa from './app/pages/public/company/my-isa'
-import OnBoarding from './app/pages/public/company/on-boarding'
-import SingleIsa from './app/pages/public/company/my-isa/single-isa'
+import OnBoarding from './app/pages/public/coach/on-boarding'
 import CreateIsa from './app/pages/public/company/my-isa/create-isa'
 import SignUp from './app/pages/public/auth/sign-up'
 import SignIn from './app/pages/public/auth/sign-in'
@@ -15,6 +14,7 @@ import Settings from './app/pages/public/client/settings'
 import AdminIsas from './app/pages/admin/Isas'
 import AdminPlaid from './app/pages/admin/Plaid'
 import AdminUsers from './app/pages/admin/Users'
+import CompanyOnBoarding from './app/pages/public/company/onboarding'
 
 export default function Routes(routerProps: any) {
   const adminRoute = (Component: any, path: string) => (
@@ -30,6 +30,8 @@ export default function Routes(routerProps: any) {
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
+
+        <Route path="/company/on-boarding" render={(props: any) => <CompanyOnBoarding {...props} {...routerProps} />} />
 
         {/* Private Routes */}
         {privateRoute(MyIsa, '/my-isa', routerProps)}

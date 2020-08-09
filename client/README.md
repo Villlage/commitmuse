@@ -69,5 +69,3 @@ When we run tests, jest generates a nice coverage report for us. To have a look 
     - `KISS` - `keep it stupid simple`: code must be as simple as possible, no need to over complicate simple things. Keep it clean, readable, reusable and understandable for other devs. Don't write `war and peace`, just a Haiku is enough. <br/>
     - `DRY` - `don't repeat yourself`: don't copy paste your code from one place to another, export and reuse it instead. If you see that one thing is used multiple times just export it and reuse.<br/>
 - in the end just code like it is your best project ever which you will be very proud of to show anyone<br/>
-
-<a href="https://docs.google.com/document/d/1tho6hya2gqbPaRyYlC_fTm6ukke-fdh8S82QFx6pNHc">Toolbox's - Engineering Workflow</a>

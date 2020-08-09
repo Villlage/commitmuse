@@ -47,6 +47,16 @@
         grid-column-end: span 2;
       }
 
+      .select-type {
+        display: grid;
+        grid-template-columns: 60px auto;
+        align-items: center;
+
+        label {
+          color: #888499;
+        }
+      }
+
       footer {
         display: flex;
         padding: 18px 24px;

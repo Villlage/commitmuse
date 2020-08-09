@@ -1,9 +1,8 @@
 @import '../../../../styles/mixins';
 @import '../../../../styles/colors';
 
-.OfferStatus-module {
+.Stepper-module {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(25%, 25%));
   justify-content: stretch;
   height: 40px;
   align-items: center;
