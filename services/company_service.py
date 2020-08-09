@@ -8,7 +8,7 @@ from models.company import Company
 from typing import Any, Dict, List
 
 from models.user import User, UserRole
-from models.isas import ISA
+from models.isa import ISA
 
 
 def get_company_by_id(company_id: int, user: User) -> Company:

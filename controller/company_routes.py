@@ -12,6 +12,8 @@ from serializers.user_serializers import (
     company_schema,
     update_company_schema,
     create_company_schema,
+    user_schema,
+    isa_schema,
 )
 
 from services.company_service import (
@@ -58,8 +60,8 @@ def companies_route() -> Tuple[Response, int]:
 @login_required
 def companies_isas(company_id: int) -> Tuple[Response, int]:
     user = get_current_user()
-    company = get_company_isas(company_id=company_id, user=user)
-    result = company_schema.dump(company)
+    isas = get_company_isas(company_id=company_id, user=user)
+    result = isa_schema.dump(isas, many=True)
 
     return jsonify(result), 200
 
@@ -68,8 +70,8 @@ def companies_isas(company_id: int) -> Tuple[Response, int]:
 @login_required
 def companies_coaches(company_id: int) -> Tuple[Response, int]:
     user = get_current_user()
-    company = get_company_coaches(company_id=company_id, user=user)
-    result = company_schema.dump(company)
+    coaches = get_company_coaches(company_id=company_id, user=user)
+    result = user_schema.dump(coaches, many=True)
 
     return jsonify(result), 200
 

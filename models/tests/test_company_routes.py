@@ -1,6 +1,6 @@
 # type: ignore
 import pytest
-from tests.factories import CoachFactory, CompanyFactory
+from tests.factories import CoachFactory, CompanyFactory, ISAFactory
 from conftest import logged_in_client
 from common.exceptions import ResourceNotFound
 from services.company_service import get_company_by_id
@@ -99,21 +99,34 @@ class TestCompany:
 class TestCompanyDashboard:
     def test_copmany_isas(self) -> None:
         company = CompanyFactory.create()
-        coach = CoachFactory.create(company=company)
+        coach1 = CoachFactory.create(company=company)
+        coach2 = CoachFactory.create(company=company)
+
+        isa1 = ISAFactory.create(coach=coach1)
+        isa1 = ISAFactory.create(coach=coach1)
+        isa3 = ISAFactory.create(coach=coach2)
+        isa4 = ISAFactory.create(coach=coach2)
+
         company_id = company.id
 
-        with logged_in_client(coach) as client:
+        with logged_in_client(coach1) as client:
             resp = client.get(f"companies/{company_id}/isas")
             assert resp.status_code == 200
+            assert len(resp.json) == 4
 
     def test_copmany_coaches(self) -> None:
         company = CompanyFactory.create()
         coach = CoachFactory.create(company=company)
+        CoachFactory.create(company=company)
+        CoachFactory.create(company=company)
+        CoachFactory.create(company=company)
+
         company_id = company.id
 
         with logged_in_client(coach) as client:
             resp = client.get(f"companies/{company_id}/coaches")
             assert resp.status_code == 200
+            assert len(resp.json) == 4
 
     def test_copmany_overview(self) -> None:
         company = CompanyFactory.create()
