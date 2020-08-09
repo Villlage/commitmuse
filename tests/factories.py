@@ -4,12 +4,26 @@ from faker import Faker
 from app import db
 from models.user import User, Coach, Student
 from models.isa import ISA
+from models.company import Company, CompanyStatus
 from models.plaid_item import PlaidItem
 from models.plaid_account import PlaidAccount
 from common.constants import PlaidAccountType, PlaidDepositoryAccountSubtype
 
 faker = Faker()
 faker.seed_instance(4321)
+
+
+class CompanyFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
+    class Meta:
+        model = Company
+        sqlalchemy_session = db.session
+        sqlalchemy_session_persistence = "commit"
+
+    number_of_employees_estimate = factory.Faker("word")
+    name = factory.Faker("word")
+    address = factory.Faker("address")
+    is_active = True
+    status = CompanyStatus.ACTIVE.value
 
 
 class UserFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
@@ -25,6 +39,8 @@ class UserFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
     last_name = factory.Faker("last_name")
     user_role = 0
     # date_of_birth = factory.Faker('date_between', start_date="-100", end_date="-10y")
+
+    # company = factory.SubFactory(CompanyFactory)
 
 
 class PlaidItemFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore

@@ -4,15 +4,14 @@ from flask import request, jsonify
 from typing import Tuple, Optional, Callable
 from werkzeug import Response
 from app import app
-from common.exceptions import (
-    ResourceNotFound,
-)
+from common.exceptions import ResourceNotFound
 from models.user import User
 from services.user_service import create_user, get_user, reset_password
 from serializers.user_serializers import (
     login_schema,
     user_schema,
     reset_password_schema,
+    update_user_schema,
 )
 from flask_login import login_user, logout_user, current_user
 from controller.common import login_required, get_current_user
@@ -35,10 +34,15 @@ def check_auth() -> Tuple[Response, int]:
     return jsonify(current_user.is_authenticated), 200
 
 
-@app.route("/user", methods=["GET"])
+@app.route("/user", methods=["GET", "PATCH"])
 @login_required
 def user() -> Tuple[Response, int]:
     user = get_current_user()
+
+    if request.method == "PATCH":
+        schema = update_user_schema.load(request.json)
+        user = user.update_user(attributes=schema)
+
     result = user_schema.dump(user)
 
     return jsonify(result), 200
