@@ -30,7 +30,9 @@ export default function Input(props: InputProps) {
         <div className={`ripple${fixClass((rippled || !!props.value) && 'focused')}`}>{props.placeholder}</div>
         <input
           onFocus={() => set_rippled(true)}
-          onBlur={() => set_rippled(false)}
+          onBlur={() => {
+            !props.value && set_rippled(false)
+          }}
           disabled={props.disabled}
           type={visible ? 'text' : props.type || 'text'}
           onChange={e => props.onChange(e.target.value)}

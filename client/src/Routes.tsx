@@ -31,7 +31,7 @@ export default function Routes(routerProps: any) {
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
 
-        <Route path="/company/on-boarding" render={(props: any) => <CompanyOnBoarding {...props} {...routerProps} />} />
+        <Route path="/company/register" render={(props: any) => <CompanyOnBoarding {...props} {...routerProps} />} />
 
         {/* Private Routes */}
         {privateRoute(MyIsa, '/my-isa', routerProps)}

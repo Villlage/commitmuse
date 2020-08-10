@@ -36,8 +36,10 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
   })
 
   const onChange = (e: any, key: CompanyOnBoardingKeys) => {
-    set_data({ [key]: e })
+    set_data({ ...data, [key]: e })
   }
+
+  const notValid = () => Object.values(data).some((v: any) => v.length === 0)
 
   return (
     <article className="CompanyOnBoarding-page">
@@ -75,7 +77,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
             </div>
           </div>
           <footer>
-            <Button background="MainWarning" icon="arrow-right">
+            <Button disabled={notValid()} background="MainWarning" icon="arrow-right">
               NEXT
             </Button>
           </footer>
