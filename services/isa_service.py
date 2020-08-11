@@ -1,5 +1,4 @@
 from common.exceptions import (
-    ResourceConflictError,
     ResourceNotFound,
     AuthenticationError,
     AuthorizationError,
