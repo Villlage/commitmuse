@@ -29,6 +29,7 @@ class Config(object):
     DOCUSIGN_BASE_PATH = os.getenv(
         "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
     )
+    SENDGRID_API_KEY = "SOMETHING"
 
 
 class LocalConfig(Config):

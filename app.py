@@ -65,6 +65,10 @@ def get_env() -> Optional[str]:
     return app.env
 
 
+def is_development() -> bool:
+    return app.env in [DEVELOPMENT, TESTING]
+
+
 metadata = MetaData(naming_convention=convention)  # # type: MetaData
 db = SQLAlchemy(app, metadata=metadata)  # type: SQLAlchemy
 login_manager = LoginManager()  # type: LoginManager
