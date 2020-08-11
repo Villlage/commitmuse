@@ -3,6 +3,13 @@ from datetime import datetime
 from app import db
 from common.database import db_session
 from flask_login import UserMixin
+from enum import Enum
+
+
+class UserRole(Enum):
+    REGULAR = 0
+    ADMIN = 1
+    COMPANY_ADMIN = 2
 
 
 class User(db.Model, UserMixin):  # type: ignore
@@ -22,6 +29,10 @@ class User(db.Model, UserMixin):  # type: ignore
     last_name = db.Column(db.String(255), nullable=False, server_default="")
 
     type = db.Column(db.String(20))
+
+    company_id = db.Column(db.Integer, db.ForeignKey("companies.id"), nullable=True)
+
+    company = db.relationship("Company", backref="users")
 
     __mapper_args__ = {"polymorphic_identity": "users", "polymorphic_on": type}
 
@@ -62,10 +73,7 @@ class User(db.Model, UserMixin):  # type: ignore
     def update_user(self, attributes: Dict[str, Any]) -> "User":
         with db_session() as session:
             for key, value in attributes.items():
-                if key == "user_trades":  # nested objects must be handled differently
-                    self._set_user_trades(value)
-                else:
-                    setattr(self, key, value)
+                setattr(self, key, value)
 
             session.add(self)
             session.commit()

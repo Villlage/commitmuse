@@ -1,6 +1,7 @@
 from marshmallow import Schema, fields
 from app import ma
 from models.isa import ISA
+from models.company import Company
 from models.user import User
 
 
@@ -10,6 +11,12 @@ class LoginSchema(Schema):  # type: ignore
     first_name = fields.Str(required=False)
     last_name = fields.Str(required=False)
     type = fields.Str(required=False, missing="coaches")
+
+
+class UpdateUserSchema(Schema):  # type: ignore
+    email = fields.Email(required=False)
+    first_name = fields.Str(required=False)
+    last_name = fields.Str(required=False)
 
 
 class ClientSchema(Schema):  # type: ignore
@@ -70,18 +77,43 @@ class ISASchema(ma.ModelSchema):  # type: ignore
     coach = fields.Nested(UserSchema, required=True)
 
 
+class CompanySchema(ma.ModelSchema):  # type: ignore
+    class Meta:
+        model = Company
+
+
+class UpdateCompanySchema(Schema):  # type: ignore
+    number_of_employees_estimate = fields.Str(required=False)
+    name = fields.Str(required=False)
+    address = fields.Str(required=False)
+
+
+class CreateCompanySchema(Schema):  # type: ignore
+    number_of_employees_estimate = fields.Str(allow_none=False, required=True)
+    name = fields.Str(allow_none=False, required=True)
+    address = fields.Str(allow_none=False, required=True)
+
+
 class AdminUserSchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = User
-        exclude = (
-            "password",
-        )
+        exclude = ("password",)
 
 
 login_schema = LoginSchema()
+user_schema = UserSchema()
+reset_password_schema = ResetPasswordSchema()
+update_user_schema = UpdateUserSchema()
+
+
+isa_schema = ISASchema()
+create_isa_schema = CreateISASchema()
+update_isa_schema = UpdateISASchema()
+
 
 update_isa_schema = UpdateISASchema()
 create_isa_schema = CreateISASchema()
-isa_schema = ISASchema()
-user_schema = UserSchema()
-reset_password_schema = ResetPasswordSchema()
+
+company_schema = CompanySchema()
+create_company_schema = CreateCompanySchema()
+update_company_schema = UpdateCompanySchema()
