@@ -24,3 +24,8 @@ class PlaidDepositoryAccountSubtype(Enum):
 class PlaidLoanAccountSubtype(Enum):
     LOAN = "loan"
     STUDENT = "student"
+
+
+USER_FORGOT_PASSWORD_ROUTE = "web/reset-password"
+
+FORGOT_PASSWORD_TEMPLATE = "123"
