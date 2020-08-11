@@ -32,6 +32,9 @@ plaid-python = "==3.4.0"
 flask-cors = "*"
 pyjwt = "*"
 docusign-esign = "*"
+sendgrid = "*"
+arrow = "*"
+datadog = "*"
 
 [requires]
 python_version = "3.7.5"
