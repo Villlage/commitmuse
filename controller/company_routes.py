@@ -12,9 +12,16 @@ from serializers.user_serializers import (
     company_schema,
     update_company_schema,
     create_company_schema,
+    user_schema,
+    isa_schema,
 )
 
-from services.company_service import get_company_by_id, create_company
+from services.company_service import (
+    get_company_by_id,
+    create_company,
+    get_company_coaches,
+    get_company_isas,
+)
 from controller.common import login_required, get_current_user
 from models.user import User
 from models.company import Company
@@ -47,3 +54,30 @@ def companies_route() -> Tuple[Response, int]:
     result = company_schema.dump(company)
 
     return jsonify(result), 200
+
+
+@app.route("/companies/<int:company_id>/isas", methods=["GET"])
+@login_required
+def companies_isas(company_id: int) -> Tuple[Response, int]:
+    user = get_current_user()
+    isas = get_company_isas(company_id=company_id, user=user)
+    result = isa_schema.dump(isas, many=True)
+
+    return jsonify(result), 200
+
+
+@app.route("/companies/<int:company_id>/coaches", methods=["GET"])
+@login_required
+def companies_coaches(company_id: int) -> Tuple[Response, int]:
+    user = get_current_user()
+    coaches = get_company_coaches(company_id=company_id, user=user)
+    result = user_schema.dump(coaches, many=True)
+
+    return jsonify(result), 200
+
+
+@app.route("/companies/<int:company_id>/overview", methods=["GET"])
+@login_required
+def companies_overview(company_id: int) -> Tuple[Response, int]:
+    get_current_user()
+    return jsonify(dict(total_revenue=0, last_payment=dict(value=0, date=None))), 200
