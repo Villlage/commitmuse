@@ -21,6 +21,7 @@ from common.exceptions import (
     AuthenticationError,
 )
 from flask_login import current_user
+import plaid
 
 
 @login_manager.user_loader
@@ -102,6 +103,10 @@ def handle_exception(exc):  # type:ignore
 
     if isinstance(exc, ResourceConflictError):
         return jsonify(error=exc.message), 409
+
+    if isinstance(exc, plaid.errors.PlaidError):
+        logger.error("Plaid error - request id: {}".format(exc.request_id))
+        return jsonify(error=exc.display_message or exc.code), 500
 
     # now you're handling non-HTTP exceptions only
     exc_msg = traceback.format_exc()

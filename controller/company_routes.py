@@ -3,7 +3,6 @@ from typing import Tuple
 from werkzeug import Response
 from app import app
 from common.exceptions import (
-    ResourceConflictError,
     ResourceNotFound,
     AuthenticationError,
     AuthorizationError,

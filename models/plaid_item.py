@@ -9,6 +9,7 @@ class PlaidItem(db.Model):  # type: ignore
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    company_id = db.Column(db.Integer, db.ForeignKey("companies.id"))
     item_id = db.Column(db.String(255), nullable=False, index=True)
     access_token = db.Column(db.String(255), nullable=True)
 
@@ -19,6 +20,7 @@ class PlaidItem(db.Model):  # type: ignore
     updated_at = db.Column(db.DateTime(), onupdate=datetime.utcnow)
 
     user = db.relationship("User", backref="plaid_items")
+    company = db.relationship("Company", backref="plaid_items")
     plaid_accounts = db.relationship(
         "PlaidAccount",
         back_populates="plaid_item",
@@ -27,7 +29,7 @@ class PlaidItem(db.Model):  # type: ignore
         lazy="joined",
     )
 
-    __table_args__ = (db.UniqueConstraint("user_id", "institution_id"),)
+    __table_args__ = (db.UniqueConstraint("user_id", "institution_id", "company_id"),)
 
     @classmethod
     def create_plaid_item(
@@ -36,6 +38,7 @@ class PlaidItem(db.Model):  # type: ignore
         item_response: Dict[str, Any],
         institution_name: str,
         user_id: int,
+        company_id: Optional[int] = None,
     ) -> "PlaidItem":
         """
         Creates PlaidItem object
@@ -54,6 +57,7 @@ class PlaidItem(db.Model):  # type: ignore
                 institution_name=institution_name,
                 item_id=plaid_item_id,
                 access_token=access_token,
+                company_id=company_id,
             )
             session.add(plaid_item)
             session.commit()
