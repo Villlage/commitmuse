@@ -21,6 +21,8 @@ class TestISA:
             student_id=student.id,
             coach_id=coach.id,
             cancellation_period_weeks=2,
+            industry_field="Information Technology",
+            program_duration_weeks=10,
         )
 
         isa = ISA.create_isa(**arguments)

@@ -87,6 +87,7 @@ from models.company import Company
 
 
 # Routes
+import controller.common
 import controller.user_routes
 import controller.react_routes
 import controller.plaid_routes

@@ -4,6 +4,7 @@ from conftest import logged_in_client  # type: ignore
 from werkzeug.security import generate_password_hash
 
 from services.token_service import generate_user_token
+from common.constants import INDUSTRY_FIELDS
 
 
 class TestRegister:
@@ -163,3 +164,11 @@ class TestUserUpdate:
             resp = client.patch("/user", json=dict(first_name=first_name))
             assert resp.status_code == 200
             assert resp.json["first_name"] == first_name
+
+
+class TestConstantRoutes:
+    def test_industry_fields(self) -> None:
+        with app.test_client() as client:
+            resp = client.get("/industry-fields")
+            assert resp.status_code == 200
+            assert resp.json == INDUSTRY_FIELDS
