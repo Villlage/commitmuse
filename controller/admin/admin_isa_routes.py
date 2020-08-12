@@ -2,7 +2,7 @@
 from typing import Tuple
 from flask import Response, jsonify
 from app import app
-from controller.user_routes import admin_login_required
+from controller.common import admin_login_required
 from models.isa import ISA
 from serializers.isa_serializers import AdminIsaSchema
 

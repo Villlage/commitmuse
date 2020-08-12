@@ -1,11 +1,7 @@
-from functools import wraps
-
 from flask import request, jsonify
-from typing import Tuple, Optional, Callable
+from typing import Tuple
 from werkzeug import Response
 from app import app
-from common.exceptions import ResourceNotFound
-from models.user import User
 from services.user_service import create_user, get_user, reset_password
 from serializers.user_serializers import (
     login_schema,
@@ -15,6 +11,7 @@ from serializers.user_serializers import (
 )
 from flask_login import login_user, logout_user, current_user
 from controller.common import login_required, get_current_user
+from common.constants import INDUSTRY_FIELDS
 
 
 @app.route("/login", methods=["POST"])
@@ -70,40 +67,6 @@ def logout() -> Tuple[Response, int]:
     return jsonify("logged out user successfully"), 200
 
 
-def _get_user(user_id: Optional[int] = None) -> "User":
-
-    user = get_user_or_none(user_id=user_id)
-
-    if not user:
-        raise ResourceNotFound("User Not Found")
-
-    return user
-
-
-def get_user_or_none(user_id: Optional[int] = None) -> Optional["User"]:
-    user_id = _get_user_id(user_id)
-
-    user = None
-    if user_id and current_user.is_authenticated and current_user.is_admin():
-        user = User.get_user(user_id)
-    elif current_user.is_authenticated:
-        user = User.query.filter(User.id == current_user.id).one_or_none()
-
-    return user
-
-
-def _get_user_id(user_id: Optional[int] = None) -> Optional[int]:
-    if user_id:
-        return user_id
-
-    if request.method == "GET":
-        user_id = request.args.get("user_id", None)
-    elif request.json:
-        user_id = request.json.get("user_id", None)
-
-    return user_id
-
-
 @app.route("/users/reset-password", methods=["PATCH", "GET"])
 def reset_user_password() -> Tuple[Response, int]:
     schema = reset_password_schema.load(request.json)
@@ -114,12 +77,6 @@ def reset_user_password() -> Tuple[Response, int]:
     return jsonify(result), 200
 
 
-def admin_login_required(function: Callable) -> Callable:  # type: ignore
-    @wraps(function)
-    def wrapped(*args, **kwargs):  # type: ignore
-        if current_user.is_anonymous or not current_user.is_admin():
-            return jsonify(error="Admin login required"), 403
-
-        return function(*args, **kwargs)
-
-    return wrapped
+@app.route("/industry-fields", methods=["GET"])
+def industry_fields() -> Tuple[Response, int]:
+    return jsonify(INDUSTRY_FIELDS), 200

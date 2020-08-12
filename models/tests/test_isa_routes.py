@@ -33,6 +33,8 @@ class TestISA:
             description="becoming a product manager",
             coach_id=coach.id,
             cancellation_period_weeks=2,
+            industry_field="Information technology",
+            program_duration_weeks=4,
             client=dict(
                 email="client@gmail.com", first_name="client", last_name="student"
             ),
@@ -45,6 +47,10 @@ class TestISA:
             assert resp.json["percentage"] == payload["percentage"]
             assert resp.json["cap"] == payload["cap"]
             assert resp.json["time_to_be_paid"] == payload["time_to_be_paid"]
+            assert resp.json["industry_field"] == payload["industry_field"]
+            assert (
+                resp.json["program_duration_weeks"] == payload["program_duration_weeks"]
+            )
             assert resp.json["id"]
 
             mock_send_document.assert_called_once()
