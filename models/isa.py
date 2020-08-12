@@ -17,7 +17,7 @@ class ISA(db.Model):  # type: ignore
     time_to_be_paid = db.Column(db.Integer, nullable=False, default=0)
 
     industry_field = db.Column(db.String(255), nullable=True, default="")
-    program_duration_weeks = db.Column(db.Integer, nullable=False, default=0)
+    program_duration_weeks = db.Column(db.Integer, nullable=True, default=0)
     description = db.Column(db.String(2047), nullable=False, server_default="")
 
     status = db.Column(db.String(255), nullable=False, server_default="")
