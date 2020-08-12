@@ -23,7 +23,7 @@ def upgrade():
         "isas", sa.Column("industry_field", sa.String(length=255), nullable=True)
     )
     op.add_column(
-        "isas", sa.Column("program_duration_weeks", sa.Integer(), nullable=False)
+        "isas", sa.Column("program_duration_weeks", sa.Integer(), nullable=True)
     )
     # ### end Alembic commands ###
 
