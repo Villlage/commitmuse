@@ -7,6 +7,7 @@ from models.isa import ISA
 from models.company import Company, CompanyStatus
 from models.plaid_item import PlaidItem
 from models.plaid_account import PlaidAccount
+from models.subscription import Subscription
 from common.constants import PlaidAccountType, PlaidDepositoryAccountSubtype
 
 faker = Faker()
@@ -104,3 +105,13 @@ class ISAFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
 
     student = factory.SubFactory(StudentFactory)
     coach = factory.SubFactory(CoachFactory)
+
+
+class SubscriptionFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
+    class Meta:
+        model = Subscription
+        sqlalchemy_session = db.session
+        sqlalchemy_session_persistence = "commit"
+
+    is_active = True
+    company = factory.SubFactory(CompanyFactory)
