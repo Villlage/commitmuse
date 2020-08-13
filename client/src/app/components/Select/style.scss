@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  background: #f5f5f5;
 
   .overlay {
     position: fixed;
@@ -24,22 +25,51 @@
 
   .placeholder {
     height: 50px;
-    padding: 16px;
+    padding: 18px 16px 16px;
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
     display: flex;
-    justify-content: space-between;
     text-transform: capitalize;
-    color: #ffffff;
+    color: #d4d4d4;
     position: relative;
 
     &.value {
-      color: #ffffff;
+      color: #888499;
     }
 
-    img {
-      margin-left: 8px;
+    .selected-icon {
+      margin-right: 12px;
+    }
+
+    .caret_down {
+      margin-left: auto;
+    }
+  }
+
+  .select-container {
+    overflow: hidden;
+    width: 100%;
+
+    &.rippled {
+      input {
+        padding: 16px 0 4px;
+      }
+    }
+
+    .ripple {
+      position: absolute;
+      color: #647ACB;
+      font-weight: bold;
+      font-size: 10px;
+      top: 10px;
+      opacity: 0;
+      transition: all 200ms;
+
+      &.focused {
+        opacity: 1;
+        top: 4px;
+      }
     }
   }
 

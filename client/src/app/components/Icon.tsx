@@ -54,6 +54,12 @@ export const icons: any = {
   'file-download': generateIconLink('file-download'),
   'key': generateIconLink('key'),
   'gear': generateIconLink('gear'),
+  'globe': generateIconLink('globe'),
+  'building': generateIconLink('building'),
+  'location': generateIconLink('location'),
+  'globus': generateIconLink('globus'),
+  'check-circle': generateIconLink('check-circle'),
+  'blue-plus': generateIconLink('blue-plus'),
 }
 
 export type SystemIcons =
@@ -105,6 +111,12 @@ export type SystemIcons =
   | 'mail'
   | 'key'
   | 'gear'
+  | 'globe'
+  | 'building'
+  | 'location'
+  | 'globus'
+  | 'check-circle'
+  | 'blue-plus'
 
 interface IconProps {
   icon: SystemIcons

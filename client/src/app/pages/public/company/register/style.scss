@@ -1,0 +1,45 @@
+.CompanyOnBoarding-page {
+
+  .content {
+    color: white;
+
+    h2 {
+      margin-bottom: 16px;
+    }
+
+    .on_boarding-form {
+      width: 512px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.15);
+
+      .fields {
+        display: grid;
+        grid: 1fr / 1fr;
+        grid-gap: 16px;
+        padding: 16px 20px;
+        background: white;
+
+        .zip-code {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-column-gap: 16px;
+        }
+      }
+
+      footer {
+        display: flex;
+        justify-content: flex-end;
+        padding: 18px 24px;
+        background: #F5F5F5;
+      }
+    }
+
+    .link_bank {
+      background: white;
+      display: flex;
+      justify-content: center;
+      padding: 20px 0;
+    }
+  }
+}

@@ -2,7 +2,7 @@ import * as React from 'react'
 import './style.scss'
 import { useState } from 'react'
 import { notEmptyArray, fixClass } from '../../../helpers/base'
-import Icon from '../Icon'
+import Icon, { SystemIcons } from '../Icon'
 
 interface SelectProps {
   value: string
@@ -12,6 +12,7 @@ interface SelectProps {
   label?: string
   error?: string
   disabled?: boolean
+  icon?: SystemIcons
 }
 
 export default function Select(props: SelectProps) {
@@ -24,8 +25,13 @@ export default function Select(props: SelectProps) {
         onClick={() => !props.disabled && setShowOptions(!showOptions)}
         className={`placeholder ${!!props.value ? 'value' : ''}`}
       >
-        {props.value || props.placeholder}
-        <Icon icon="select_down" />
+        {props.icon && <Icon className="selected-icon" icon={props.icon} />}
+
+        <div className="select-container">
+          <div className={`ripple${fixClass(!!props.value && 'focused')}`}>{props.placeholder}</div>
+          {props.value || props.placeholder}
+        </div>
+        <Icon className="caret_down" icon="select_down" />
         {showOptions && notEmptyArray(props.options) && (
           <div className="options">
             {props.options!.map((option, index) => (

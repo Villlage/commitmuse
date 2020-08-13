@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
-import { ISA, ScreenProps } from '../../../../../../interfaces/baseIntefaces'
+import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
 import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
 import Field from '../../../../../components/Field'
@@ -9,6 +9,7 @@ import Status from '../../../../../modules/common/Status'
 import IsaService from '../../../../../../services/isa.service'
 import Loader from '../../../../../components/Loader'
 import { makeName } from '../../../../../../helpers/base'
+import Message from '../../../../../components/Message'
 
 interface IsaOverviewProps extends ScreenProps {
   match: any
@@ -112,6 +113,7 @@ export default function IsaOverview(props: IsaOverviewProps) {
                 </>
               )}
             </section>
+            <Message message={request_error} />
           </PageContent>
         )
       )}

@@ -1,3 +1,5 @@
+export const USER_TYPES = ['company', 'coach', 'client']
+
 export const COLORS = {
   body_darker: '#5E6672',
   title: '#354151',
