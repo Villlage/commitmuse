@@ -58,7 +58,9 @@ export default function Subscription(props: SubscriptionProps) {
           </div>
           <footer>
             <Button className="skip">Skip for now</Button>
-            <Button className="start" background="MainWarning">START MY Subscription</Button>
+            <Button className="start" background="MainWarning">
+              START MY Subscription
+            </Button>
           </footer>
         </section>
       </PageContent>
