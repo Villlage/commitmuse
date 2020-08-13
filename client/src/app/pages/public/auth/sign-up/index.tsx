@@ -72,7 +72,6 @@ export default function SignUp(props: ScreenProps) {
   return (
     <article className="SignUp-page">
       <PageContent>
-        <PageHeader user={props.currentUser} />
         <h2>Register</h2>
         <section className="form">
           <div className="fields">

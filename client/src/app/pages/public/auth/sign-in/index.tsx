@@ -46,7 +46,7 @@ export default function SignIn(props: ScreenProps) {
 
         await props.fetchUser()
         set_loading(false)
-console.log('res', res)
+
         if (res.user_role === 1) {
           return props.history.push('admin/users')
         } else {
@@ -64,7 +64,6 @@ console.log('res', res)
   return (
     <article className="SignIn-page">
       <PageContent>
-        <PageHeader user={props.currentUser}/>
         <h2>Login</h2>
         <section className="form">
           <div className="fields">

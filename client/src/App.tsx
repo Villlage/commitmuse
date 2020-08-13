@@ -11,19 +11,19 @@ const configStore: any = store()
 const userService = new UserService()
 
 function App() {
-  const [user, setUser] = useState<User | null | undefined>(null)
+  const [currentUser, setCurrentUser] = useState<User | null | undefined>(null)
   const fetchUser = async () => {
     try {
       const res = await userService.checkAuth()
       if (res) {
         const user = await userService.getCurrentUser()
-        return setUser(user)
+        return setCurrentUser(user)
       } else {
-        return setUser(undefined)
+        return setCurrentUser(undefined)
       }
     } catch (e) {
       log('Error getting current user: ', e)
-      return setUser(undefined)
+      return setCurrentUser(undefined)
     }
   }
 
@@ -31,9 +31,9 @@ function App() {
     fetchUser()
   }, [])
 
-  return user !== null ? (
+  return currentUser !== null ? (
     <Provider store={configStore}>
-      <Routes currentUser={user} fetchUser={fetchUser} />
+      <Routes currentUser={currentUser} fetchUser={fetchUser} />
     </Provider>
   ) : (
     <Loader />

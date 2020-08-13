@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
-import PageHeader from '../../../../modules/common/PageHeader'
 import Icon from '../../../../components/Icon'
 import { notEmptyArray } from '../../../../../helpers/base'
 import IsaService from '../../../../../services/isa.service'
@@ -48,7 +47,6 @@ export default function MyIsa(props: MyIsa) {
 
   return (
     <article className="MyIsa-page">
-      <PageHeader user={props.currentUser} />
       {loading ? (
         <Loader />
       ) : (

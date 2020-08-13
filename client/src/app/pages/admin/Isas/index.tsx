@@ -3,7 +3,6 @@ import './style.scss'
 import AdminService from '../../../../services/admin.service'
 import { ISA, ScreenProps } from '../../../../interfaces/baseIntefaces'
 import { log } from '../../../../services/logging.service'
-import AdminHeader from '../../../modules/admin/AdminHeader'
 import { notEmptyArray } from '../../../../helpers/base'
 import IsaBox from '../../../modules/admin/IsaBox'
 
@@ -29,7 +28,6 @@ export default function AdminIsas(props: AdminIsasProps) {
 
   return (
     <article className="AdminIsas-page">
-      <AdminHeader user={props.currentUser} />
       <div className="content">
         {notEmptyArray(isas) && isas.map((isa, i) => <IsaBox key={i} isa={isa}/>)}
       </div>

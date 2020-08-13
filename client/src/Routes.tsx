@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Switch, Redirect } from 'react-router'
-import { ScreenProps } from './interfaces/baseIntefaces'
 import NotFound from './app/pages/public/404'
 import MyIsa from './app/pages/public/company/my-isa'
 import OnBoarding from './app/pages/public/coach/on-boarding'
@@ -17,37 +16,59 @@ import AdminUsers from './app/pages/admin/Users'
 import CompanyOnBoarding from './app/pages/public/company/register'
 import Subscription from './app/pages/public/company/subscription'
 import CompanyDashboard from './app/pages/public/company/dashboard'
+import PageHeader from './app/modules/common/PageHeader'
+import AdminHeader from './app/modules/admin/AdminHeader'
 
 export default function Routes(routerProps: any) {
   const adminRoute = (Component: any, path: string) => (
     <Route path={path}>
       {(props: any) =>
-        routerProps.currentUser && routerProps.currentUser.user_role === 1 && <Component {...props} {...routerProps} />
+        routerProps.currentUser && routerProps.currentUser.user_role === 1 ? <Component {...props} {...routerProps} /> : <Redirect to={'/my-isa'} />
       }
     </Route>
   )
 
+  const privateRoute = (Component: any, route: string) => {
+    return (
+      <Route
+        path={route}
+        render={(props: any) =>
+          routerProps.currentUser ? <Component {...props} {...routerProps} /> : <Redirect to={'/login'} />
+        }
+      />
+    )
+  }
+
   return (
     <Router basename={'/web'}>
+      {routerProps.currentUser ? (
+        routerProps.currentUser.user_role === 1 ? (
+          <AdminHeader user={routerProps.currentUser} />
+        ) : (
+          <PageHeader user={routerProps.currentUser} />
+        )
+      ) : (
+        <PageHeader />
+      )}
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
 
         {/* Private Routes */}
-        {privateRoute(MyIsa, '/my-isa', routerProps)}
-        {privateRoute(CreateIsa, '/isa/create', routerProps)}
-        {privateRoute(IsaOverview, '/isa/:id', routerProps)}
-        {privateRoute(Settings, '/settings', routerProps)}
-        {privateRoute(OnBoarding, '/on-boarding', routerProps)}
-        {privateRoute(Subscription, '/subscription', routerProps)}
-        {privateRoute(CompanyOnBoarding, '/company/register', routerProps)}
+        {privateRoute(MyIsa, '/my-isa')}
+        {privateRoute(CreateIsa, '/isa/create')}
+        {privateRoute(IsaOverview, '/isa/:id')}
+        {privateRoute(Settings, '/settings')}
+        {privateRoute(OnBoarding, '/on-boarding')}
+        {privateRoute(Subscription, '/subscription')}
+        {privateRoute(CompanyOnBoarding, '/company/register')}
 
         {/* Company Routes */}
-        {privateRoute(CompanyDashboard, '/company/dashboard', routerProps)}
+        {privateRoute(CompanyDashboard, '/company/dashboard')}
 
         {/* Admin Routes */}
         {adminRoute(AdminUsers, '/admin/users')}
-        {adminRoute(AdminIsas,  '/admin/isas')}
+        {adminRoute(AdminIsas, '/admin/isas')}
         {adminRoute(AdminPlaid, '/admin/plaid')}
 
         <Route path="/client/isa-offer/:id" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
@@ -57,20 +78,5 @@ export default function Routes(routerProps: any) {
         <Route path="*" render={(props: any) => <NotFound {...props} />} />
       </Switch>
     </Router>
-  )
-}
-
-const privateRoute = (Component: any, route: string, routerProps: ScreenProps) => {
-  return (
-    <Route
-      path={route}
-      render={(props: any) =>
-        routerProps.currentUser ? (
-          <Component {...props} {...routerProps} />
-        ) : (
-          <Redirect to={'/login'} />
-        )
-      }
-    />
   )
 }

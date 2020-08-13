@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
 import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
-import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
 import Field from '../../../../../components/Field'
 import Tabs from '../../../../../components/Tabs'
@@ -51,7 +50,6 @@ export default function IsaOverview(props: IsaOverviewProps) {
 
   return (
     <article className="IsaOverview-page">
-      <PageHeader user={props.currentUser} />
       {loading ? (
         <Loader />
       ) : (
@@ -107,7 +105,7 @@ export default function IsaOverview(props: IsaOverviewProps) {
                       {isa.description || '-'}
                     </Field>
                     <Field className="full" title="Cancellation Period">
-                      {isa.cap || '-'} weeks
+                      {isa.cancellation_period_weeks || '-'} weeks
                     </Field>
                   </div>
                 </>

@@ -2,7 +2,6 @@ import React from 'react'
 import './syle.scss'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../modules/common/PageContent'
-import PageHeader from '../../../../modules/common/PageHeader'
 import Icon from '../../../../components/Icon'
 import Button from '../../../../components/Button'
 
@@ -33,8 +32,6 @@ interface SubscriptionProps extends ScreenProps {}
 export default function Subscription(props: SubscriptionProps) {
   return (
     <article className="Subscription-page">
-      <PageHeader user={props.currentUser} />
-
       <PageContent title="Subscription">
         <section className="subscription-offer">
           <h2>Early adopter Discount offer:</h2>

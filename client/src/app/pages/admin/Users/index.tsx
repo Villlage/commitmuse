@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
-import AdminHeader from '../../../modules/admin/AdminHeader'
 import { ScreenProps, User } from '../../../../interfaces/baseIntefaces'
 import AdminService from '../../../../services/admin.service'
 import { log } from '../../../../services/logging.service'
@@ -29,7 +28,6 @@ export default function AdminUsers(props: AdminUsersProps) {
 
   return (
     <article className="AdminUsers-page">
-      <AdminHeader user={props.currentUser} />
       <div className="content">
         {notEmptyArray(users) && users.map(u => <AdminUserBox key={u.id} user={u}/>)}
       </div>

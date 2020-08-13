@@ -107,7 +107,6 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
 
   return (
     <article className="ClientIsaOffer-page">
-      <PageHeader />
       <PageContent>
         <section className="offer-steps">
           <Stepper steps={offerStatuses} activeIndex={offer_step} />
