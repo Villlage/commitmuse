@@ -1,5 +1,3 @@
-import { fixClass } from '../../../../../helpers/base'
-import { CircularProgressbar } from '../../../../components/CircularProgressbar'
 import React from 'react'
 import './style.scss'
 

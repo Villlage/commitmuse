@@ -9,19 +9,30 @@
   display: flex;
   padding: 0 0 0 12px;
 
-  &.rippled {
-    input {
-      padding: 16px 0 4px;
+  .input-container {
+    overflow: hidden;
+    width: 100%;
 
+    &.rippled {
+      input {
+        padding: 16px 0 4px;
+      }
     }
-  }
 
-  .ripple {
-    position: absolute;
-    color: #647ACB;
-    font-weight: bold;
-    font-size: 10px;
-    top: 6px;
+    .ripple {
+      position: absolute;
+      color: #647ACB;
+      font-weight: bold;
+      font-size: 10px;
+      top: 10px;
+      opacity: 0;
+      transition: all 200ms;
+
+      &.focused {
+        opacity: 1;
+        top: 4px;
+      }
+    }
   }
 
   &.with-icon {

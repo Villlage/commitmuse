@@ -5,7 +5,7 @@ import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
 import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
 import IsaOfferReview from '../../../../../modules/client/IsaOfferReview'
-import OfferStatus from '../../../../../modules/client/OfferStatus'
+import Stepper from '../../../../../modules/common/Stepper'
 import ClientIsaSignUp from '../sign-up'
 import { usePlaidLink } from 'react-plaid-link'
 import PlaidService from '../../../../../../services/plaid.service'
@@ -110,7 +110,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
       <PageHeader />
       <PageContent>
         <section className="offer-steps">
-          <OfferStatus statuses={offerStatuses} activeIndex={offer_step} />
+          <Stepper steps={offerStatuses} activeIndex={offer_step} />
           {isa && offer_strategy[offerStatuses[offer_step]]}
         </section>
         {isa && <FAQ maximum={isa.cap} months={isa.time_to_be_paid} percentage={isa.percentage} current_income={isa.current_income} />}

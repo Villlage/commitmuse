@@ -4,10 +4,26 @@ import PageHeader from '../../../../modules/common/PageHeader'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../modules/common/PageContent'
 import Field from '../../../../components/Field'
+import Button from '../../../../components/Button'
+import { log } from '../../../../../services/logging.service'
+import AuthService from '../../../../../services/auth.service'
+
+const authService = new AuthService()
 
 interface SettingsProps extends ScreenProps {}
 
 export default function Settings(props: SettingsProps) {
+
+  const onLogout = async () => {
+    try {
+      await authService.signOut()
+      await props.fetchUser()
+      props.history.push('/login')
+    } catch (e) {
+      log(e)
+    }
+  }
+
   return (
     <article className="Settings-page">
       <PageHeader user={props.currentUser} />
@@ -25,6 +41,7 @@ export default function Settings(props: SettingsProps) {
             <Field className="full" title="Current income">$ - / YEAR</Field>
             <Field className="full" title="">Cancel ISA Contract</Field>
           </section>
+          <Button style={{marginTop: 16}} onClick={onLogout}>Logout</Button>
         </div>
       </PageContent>
     </article>

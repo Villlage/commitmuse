@@ -109,19 +109,16 @@ export default function CreateIsa(props: CreateIsaProps) {
             <header>
               <h2>Client Information</h2>
               <Input
-                withRipple
                 onChange={e => set_client({ ...client, first_name: e })}
                 value={client.first_name}
                 placeholder="First Name"
               />
               <Input
-                withRipple
                 onChange={e => set_client({ ...client, last_name: e })}
                 value={client.last_name}
                 placeholder="Last Name"
               />
               <Input
-                withRipple
                 className="email"
                 error={error.email}
                 onChange={e => {
@@ -149,7 +146,6 @@ export default function CreateIsa(props: CreateIsaProps) {
               </div>
               <div className="form">
                 <Input
-                  withRipple
                   onChange={e => setIncome(e, 'description')}
                   placeholder="Description"
                   value={total_income.description}
@@ -157,42 +153,36 @@ export default function CreateIsa(props: CreateIsaProps) {
                 {selected_pricing === 'From total income' && (
                   <>
                     <Input
-                      withRipple
                       postFix="$"
                       onChange={e => setIncome(e, 'current_income')}
                       placeholder="Current income"
                       value={addComma(total_income.current_income)}
                     />
                     <Input
-                      withRipple
                       postFix="%"
                       onChange={e => isNumber(e) && Number(e) > 0 && Number(e) < 100 && setIncome(e, 'percentage')}
                       placeholder="Percentage to be Paid"
                       value={total_income.percentage}
                     />
                     <Input
-                      withRipple
                       postFix="Months"
                       onChange={e => isNumber(e) && setIncome(e, 'time_to_be_paid')}
                       placeholder="Time to be Paid"
                       value={total_income.time_to_be_paid}
                     />
                     <Input
-                      withRipple
                       postFix="USD"
                       onChange={e => setIncome(e, 'cap')}
                       placeholder="Maximum to be paid"
                       value={addComma(total_income.cap)}
                     />
                     <Input
-                      withRipple
                       postFix="Weeks"
                       onChange={e => isNumber(e) && setIncome(e, 'cancellation_period')}
                       placeholder="Cancellation Period"
                       value={total_income.cancellation_period}
                     />
                     <Input
-                      withRipple
                       postFix="%"
                       onChange={e => isNumber(e) && setIncome(e, 'risk')}
                       placeholder="Risk Assessment"

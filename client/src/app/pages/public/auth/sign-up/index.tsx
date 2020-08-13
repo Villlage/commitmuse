@@ -12,6 +12,8 @@ import Button from '../../../../components/Button'
 import Message from '../../../../components/Message'
 import { Link } from 'react-router-dom'
 import PageHeader from '../../../../modules/common/PageHeader'
+import ButtonSelect from '../../../../components/ButtonSelect'
+import { USER_TYPES } from '../../../../../constants/system'
 
 const authService = new AuthService()
 
@@ -21,6 +23,7 @@ export default function SignUp(props: ScreenProps) {
     last_name: '',
     email: '',
     password: '',
+    // type: 'company',
   })
 
   const [password_confirm, set_password_confirm] = useState('')
@@ -36,7 +39,10 @@ export default function SignUp(props: ScreenProps) {
   })
 
   const notValid = () =>
-    Object.values(user).some(i => i === '') || !validateEmail(user.email) || user.password.length < 6
+    Object.values(user).some(i => i === '') ||
+    !validateEmail(user.email) ||
+    user.password.length < 6 ||
+    user.password !== password_confirm
 
   const onSubmit = async () => {
     set_loading(true)
@@ -66,7 +72,7 @@ export default function SignUp(props: ScreenProps) {
   return (
     <article className="SignUp-page">
       <PageContent>
-        <PageHeader user={props.currentUser}/>
+        <PageHeader user={props.currentUser} />
         <h2>Register</h2>
         <section className="form">
           <div className="fields">
@@ -131,11 +137,20 @@ export default function SignUp(props: ScreenProps) {
                 e !== user.password && set_error({ ...error, password_confirm: passwordMustMatch })
               }}
             />
+            <div className="select-type full">
+              <label>I am a:</label>
+              <ButtonSelect
+                options={USER_TYPES}
+                selected={'company'}
+                onSelect={e => {
+                  // set_user({ ...user, type: e })
+                }}
+              />
+            </div>
           </div>
           <footer className="full">
             <p>
-              Already have an account?{' '}
-              <Link to="/login">Sign In</Link>
+              Already have an account? <Link to="/login">Sign In</Link>
             </p>
 
             <Button disabled={notValid()} onClick={onSubmit} loading={loading}>
