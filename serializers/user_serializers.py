@@ -33,6 +33,8 @@ class UpdateISASchema(Schema):  # type: ignore
     cap = fields.Int(required=False)
     time_to_be_paid = fields.Int(required=False)
     description = fields.Str(required=False)
+    industry_field = fields.Str(required=False)
+    program_duration_weeks = fields.Int(required=False)
     status = fields.Str(required=False)
     cancellation_period_weeks = fields.Int(required=False)
     coach_id = fields.Int(required=False)
@@ -46,6 +48,8 @@ class CreateISASchema(Schema):  # type: ignore
     time_to_be_paid = fields.Int(required=True)
     status = fields.Str(required=False, default="Created")
     description = fields.Str(required=True)
+    industry_field = fields.Str(required=False)
+    program_duration_weeks = fields.Int(required=False)
     cancellation_period_weeks = fields.Int(required=True)
     coach_id = fields.Int(required=True)
     client = fields.Nested(ClientSchema, required=True)
@@ -109,10 +113,6 @@ update_user_schema = UpdateUserSchema()
 isa_schema = ISASchema()
 create_isa_schema = CreateISASchema()
 update_isa_schema = UpdateISASchema()
-
-
-update_isa_schema = UpdateISASchema()
-create_isa_schema = CreateISASchema()
 
 company_schema = CompanySchema()
 create_company_schema = CreateCompanySchema()

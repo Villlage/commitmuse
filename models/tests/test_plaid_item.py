@@ -1,6 +1,6 @@
 from models.plaid_item import PlaidItem
 from tests.mocks.plaid_response import item_response
-from tests.factories import UserFactory, PlaidItemFactory
+from tests.factories import UserFactory, PlaidItemFactory, CompanyFactory
 
 
 class TestPlaidItem:
@@ -42,3 +42,22 @@ class TestPlaidItem:
         plaid_items = user1.plaid_items
         assert len(plaid_items) == 2
         assert set([p.id for p in plaid_items]) == set([plaid_item1.id, plaid_item2.id])
+
+    def test_save_plaid_item_with_company(self) -> None:
+        company = CompanyFactory.create()
+        user = UserFactory.create()
+        access_token = "abc123"
+
+        plaid_item = PlaidItem.create_plaid_item(
+            access_token=access_token,
+            item_response=item_response,
+            user_id=user.id,
+            institution_name="Citi",
+            company_id=company.id,
+        )
+        assert plaid_item.user_id == user.id
+        assert plaid_item.institution_id == item_response["institution_id"]
+        assert plaid_item.item_id == item_response["item_id"]
+        assert plaid_item.access_token == access_token
+        assert len(company.plaid_items) == 1
+        assert len(user.plaid_items) == 1

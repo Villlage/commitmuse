@@ -65,6 +65,10 @@ def get_env() -> Optional[str]:
     return app.env
 
 
+def is_development() -> bool:
+    return app.env in [DEVELOPMENT, TESTING]
+
+
 metadata = MetaData(naming_convention=convention)  # # type: MetaData
 db = SQLAlchemy(app, metadata=metadata)  # type: SQLAlchemy
 login_manager = LoginManager()  # type: LoginManager
@@ -83,6 +87,7 @@ from models.company import Company
 
 
 # Routes
+import controller.common
 import controller.user_routes
 import controller.react_routes
 import controller.plaid_routes

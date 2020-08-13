@@ -3,7 +3,8 @@ from tests.factories import faker, UserFactory
 from conftest import logged_in_client  # type: ignore
 from werkzeug.security import generate_password_hash
 
-# from services.token_service import generate_user_token, verify_user_token
+from services.token_service import generate_user_token
+from common.constants import INDUSTRY_FIELDS
 
 
 class TestRegister:
@@ -119,8 +120,7 @@ class TestUser:
 class TestResetPassword:
     def test_reset_password_success(self) -> None:
         user = UserFactory.create()
-        # token = generate_user_token(user.id)
-        token = user.id
+        token = generate_user_token(user.id)
         with app.test_client() as client:
             resp = client.patch(
                 "/users/reset-password",
@@ -128,21 +128,19 @@ class TestResetPassword:
             )
             assert resp.status_code == 200
 
-    # def test_reset_password_failure_invalid_token(self) -> None:
-    #     #token = "clearlyBadToken"
-    #     token = "10000"
-    #     with app.test_client() as client:
-    #         resp = client.patch(
-    #             "/users/reset-password",
-    #             json=dict(token=f"{token}", password="someNewPassword"),
-    #         )
-    #         assert resp.status_code == 403
+    def test_reset_password_failure_invalid_token(self) -> None:
+        token = "clearlyBadToken"
+        with app.test_client() as client:
+            resp = client.patch(
+                "/users/reset-password",
+                json=dict(token=f"{token}", password="someNewPassword"),
+            )
+            assert resp.status_code == 403
 
     def test_reset_password_failure_no_user(self) -> None:
         user = UserFactory.create()
-        user.id + 1
-        # token = generate_user_token(bad_user_id)
-        token = "10000"
+        bad_user_id = user.id + 1
+        token = generate_user_token(bad_user_id)
         with app.test_client() as client:
             resp = client.patch(
                 "/users/reset-password",
@@ -151,9 +149,8 @@ class TestResetPassword:
             assert resp.status_code == 404
 
     def test_reset_password_failure(self) -> None:
-        UserFactory.create()
-        # token = generate_user_token(user.id)
-        token = "10000"
+        user = UserFactory.create()
+        token = generate_user_token(user.id)
         with app.test_client() as client:
             resp = client.patch("/users/reset-password", json=dict(token=f"{token}"))
             assert resp.status_code == 400
@@ -167,3 +164,11 @@ class TestUserUpdate:
             resp = client.patch("/user", json=dict(first_name=first_name))
             assert resp.status_code == 200
             assert resp.json["first_name"] == first_name
+
+
+class TestConstantRoutes:
+    def test_industry_fields(self) -> None:
+        with app.test_client() as client:
+            resp = client.get("/industry-fields")
+            assert resp.status_code == 200
+            assert resp.json == INDUSTRY_FIELDS

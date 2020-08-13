@@ -2,7 +2,7 @@
 import pytest
 from copy import copy
 import json
-from tests.factories import PlaidItemFactory, UserFactory
+from tests.factories import PlaidItemFactory, UserFactory, CompanyFactory
 from conftest import logged_in_client
 
 
@@ -52,3 +52,23 @@ class TestPlaidItem:
             resp = client.get("/plaid/items")
             assert resp.status_code == 200
             assert set(p["id"] for p in resp.json) == plaid_items_ids_set
+
+    def test_get_company_plaid_items(self) -> None:
+        company = CompanyFactory.create()
+        company_id = company.id
+
+        user1 = UserFactory.create(company=company)
+        user2 = UserFactory.create(company=company)
+
+        plaid_item1 = PlaidItemFactory.create(user=user1)
+        plaid_item2 = PlaidItemFactory.create(user=user1)
+        # plaid_items_ids_set = set([plaid_item1.id, plaid_item2.id])
+
+        plaid_item3 = PlaidItemFactory.create(user=user2, company=company)
+        plaid_item3_id = plaid_item3.id
+
+        with logged_in_client(user1) as client:
+            resp = client.get(f"/plaid/items?company_id={company_id}")
+            assert resp.status_code == 200
+            assert len(resp.json) == 1
+            assert resp.json[0]["id"] == plaid_item3_id
