@@ -14,7 +14,8 @@ import Settings from './app/pages/public/client/settings'
 import AdminIsas from './app/pages/admin/Isas'
 import AdminPlaid from './app/pages/admin/Plaid'
 import AdminUsers from './app/pages/admin/Users'
-import CompanyOnBoarding from './app/pages/public/company/onboarding'
+import CompanyOnBoarding from './app/pages/public/company/register'
+import Subscription from './app/pages/public/company/subscription'
 
 export default function Routes(routerProps: any) {
   const adminRoute = (Component: any, path: string) => (
@@ -31,14 +32,14 @@ export default function Routes(routerProps: any) {
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
 
-        <Route path="/company/register" render={(props: any) => <CompanyOnBoarding {...props} {...routerProps} />} />
-
         {/* Private Routes */}
         {privateRoute(MyIsa, '/my-isa', routerProps)}
         {privateRoute(CreateIsa, '/isa/create', routerProps)}
         {privateRoute(IsaOverview, '/isa/:id', routerProps)}
         {privateRoute(Settings, '/settings', routerProps)}
         {privateRoute(OnBoarding, '/on-boarding', routerProps)}
+        {privateRoute(Subscription, '/subscription', routerProps)}
+        {privateRoute(CompanyOnBoarding, '/company/register', routerProps)}
 
         {/* Admin Routes */}
         {adminRoute(AdminUsers, '/admin/users')}

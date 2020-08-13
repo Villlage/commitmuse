@@ -1,10 +1,11 @@
 import BaseService from './base.service'
+import { Company } from '../interfaces/baseIntefaces'
 
 const baseService = new BaseService()
 
 export default class CompanyService {
 
-  public async create(isa_id: number) {
-    return await baseService.getJSON(`/company`)
+  public async create(company: Company) {
+    return await baseService.postJSON('companies', company)
   }
 }

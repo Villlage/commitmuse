@@ -58,6 +58,8 @@ export const icons: any = {
   'building': generateIconLink('building'),
   'location': generateIconLink('location'),
   'globus': generateIconLink('globus'),
+  'check-circle': generateIconLink('check-circle'),
+  'blue-plus': generateIconLink('blue-plus'),
 }
 
 export type SystemIcons =
@@ -113,6 +115,8 @@ export type SystemIcons =
   | 'building'
   | 'location'
   | 'globus'
+  | 'check-circle'
+  | 'blue-plus'
 
 interface IconProps {
   icon: SystemIcons

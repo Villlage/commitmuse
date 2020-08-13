@@ -100,3 +100,10 @@ export interface PlaidMetadata {
   link_session_id: string
   public_token: string
 }
+
+
+export interface Company {
+  number_of_employees_estimate: string
+  name: string
+  address: string
+}

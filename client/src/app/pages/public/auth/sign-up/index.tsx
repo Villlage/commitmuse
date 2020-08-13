@@ -23,7 +23,7 @@ export default function SignUp(props: ScreenProps) {
     last_name: '',
     email: '',
     password: '',
-    type: 'company',
+    // type: 'company',
   })
 
   const [password_confirm, set_password_confirm] = useState('')
@@ -39,7 +39,10 @@ export default function SignUp(props: ScreenProps) {
   })
 
   const notValid = () =>
-    Object.values(user).some(i => i === '') || !validateEmail(user.email) || user.password.length < 6 || user.password !== password_confirm
+    Object.values(user).some(i => i === '') ||
+    !validateEmail(user.email) ||
+    user.password.length < 6 ||
+    user.password !== password_confirm
 
   const onSubmit = async () => {
     set_loading(true)
@@ -136,7 +139,13 @@ export default function SignUp(props: ScreenProps) {
             />
             <div className="select-type full">
               <label>I am a:</label>
-              <ButtonSelect options={USER_TYPES} selected={user.type} onSelect={e => set_user({ ...user, type: e })} />
+              <ButtonSelect
+                options={USER_TYPES}
+                selected={'company'}
+                onSelect={e => {
+                  // set_user({ ...user, type: e })
+                }}
+              />
             </div>
           </div>
           <footer className="full">

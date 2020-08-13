@@ -2,7 +2,7 @@ import currentEnv from '../config/environment'
 import { objectToUrlParams } from '../helpers/base'
 import { log } from './logging.service'
 
-type PostAPIs = 'register' | 'login' | 'user' | 'isas' | 'plaid/items'
+type PostAPIs = 'register' | 'login' | 'user' | 'isas' | 'plaid/items' | 'companies'
 
 type PatchAPIs = 'register' | 'login' | 'user' | string
 
