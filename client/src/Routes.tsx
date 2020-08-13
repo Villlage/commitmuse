@@ -15,6 +15,7 @@ import Settings from './app/pages/public/client/settings'
 import AdminIsas from './app/pages/admin/Isas'
 import AdminPlaid from './app/pages/admin/Plaid'
 import AdminUsers from './app/pages/admin/Users'
+import CompanyDashboard from './app/pages/public/company/dashboard'
 
 export default function Routes(routerProps: any) {
   const adminRoute = (Component: any, path: string) => (
@@ -38,10 +39,14 @@ export default function Routes(routerProps: any) {
         {privateRoute(Settings, '/settings', routerProps)}
         {privateRoute(OnBoarding, '/on-boarding', routerProps)}
 
+        {/* Company Routes */}
+        {privateRoute(CompanyDashboard, '/company/dashboard', routerProps)}
+
         {/* Admin Routes */}
         {adminRoute(AdminUsers, '/admin/users')}
         {adminRoute(AdminIsas,  '/admin/isas')}
         {adminRoute(AdminPlaid, '/admin/plaid')}
+
 
         <Route path="/client/isa-offer/:id" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
 
