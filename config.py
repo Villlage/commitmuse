@@ -31,6 +31,8 @@ class Config(object):
     )
     SENDGRID_API_KEY = "SOMETHING"
 
+    WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")
+
 
 class LocalConfig(Config):
     DEBUG = True
