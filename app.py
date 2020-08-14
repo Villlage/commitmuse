@@ -83,6 +83,7 @@ from models.user import User
 from models.plaid_item import PlaidItem
 from models.plaid_account import PlaidAccount
 from models.isa import ISA
+from models.subscription import Subscription
 from models.company import Company
 
 
@@ -93,5 +94,6 @@ import controller.react_routes
 import controller.plaid_routes
 import controller.isa_routes
 import controller.company_routes
+import controller.subscription_routes
 import controller.admin.admin_user_routes
 import controller.admin.admin_isa_routes

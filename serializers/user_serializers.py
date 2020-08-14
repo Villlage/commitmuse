@@ -3,6 +3,7 @@ from app import ma
 from models.isa import ISA
 from models.company import Company
 from models.user import User
+from models.subscription import Subscription
 
 
 class LoginSchema(Schema):  # type: ignore
@@ -25,6 +26,21 @@ class ClientSchema(Schema):  # type: ignore
     first_name = fields.Str(required=False)
     last_name = fields.Str(required=False)
     type = "students"
+
+
+class CreateSubscriptionSchema(Schema):  # type: ignore
+    company_id = fields.Int(required=True)
+    is_active = True
+
+
+class UpdateSubscriptionSchema(Schema):  # type: ignore
+    is_active = fields.Boolean(required=True)
+    company_id = fields.Int(required=False)
+
+
+class SubscriptionSchema(ma.ModelSchema):  # type: ignore
+    class Meta:
+        model = Subscription
 
 
 class UpdateISASchema(Schema):  # type: ignore
@@ -117,3 +133,11 @@ update_isa_schema = UpdateISASchema()
 company_schema = CompanySchema()
 create_company_schema = CreateCompanySchema()
 update_company_schema = UpdateCompanySchema()
+
+create_subscription_schema = CreateSubscriptionSchema()
+create_subscription_schema = CreateSubscriptionSchema()
+create_subscription_schema = CreateSubscriptionSchema()
+
+subscription_schema = SubscriptionSchema()
+create_subscription_schema = CreateSubscriptionSchema()
+update_subscription_schema = UpdateSubscriptionSchema()

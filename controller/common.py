@@ -22,6 +22,7 @@ from common.exceptions import (
 )
 from flask_login import current_user
 import plaid
+from services.company_service import _get_company_by_id
 
 
 @login_manager.user_loader
@@ -41,6 +42,23 @@ def login_required(function: Callable):  # type: ignore
     return wrapped
 
 
+def company_admin_login_required(function: Callable) -> Callable:  # type: ignore
+    @wraps(function)
+    def wrapped(*args, **kwargs):  # type: ignore
+        if not current_user.is_authenticated:
+            return login_manager.unauthorized(), 401
+
+        company_id = _get_company_id_from_request()
+        company = _get_company_by_id(company_id)
+
+        if current_user not in company.users and not current_user.is_admin():
+            return jsonify(error="Company Login Required"), 403
+
+        return function(*args, **kwargs)
+
+    return wrapped
+
+
 def admin_login_required(function: Callable) -> Callable:  # type: ignore
     @wraps(function)
     def wrapped(*args, **kwargs):  # type: ignore
@@ -49,6 +67,15 @@ def admin_login_required(function: Callable) -> Callable:  # type: ignore
         return function(*args, **kwargs)
 
     return wrapped
+
+
+def _get_company_id_from_request() -> Any:
+    if request.method in ["GET", "DELETE"]:
+        return request.args.get("company_id", None)
+    elif request.json:
+        return request.json.get("company_id", None)
+
+    return None
 
 
 def _get_user_id_from_request() -> Any:
