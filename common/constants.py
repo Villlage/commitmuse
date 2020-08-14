@@ -28,7 +28,10 @@ class PlaidLoanAccountSubtype(Enum):
 
 USER_FORGOT_PASSWORD_ROUTE = "web/reset-password"
 
-FORGOT_PASSWORD_TEMPLATE = "123"
+FORGOT_PASSWORD_TEMPLATE = "123 "
+SEND_CLIENT_ISA_OFFER = "d-f803e04aaaef4c7d9a1ca79419ebb3b0"
+
+SEND_CLIENT_ISA_OFFER_LINK = "client/isa-offer"
 
 
 INDUSTRY_FIELDS = [
