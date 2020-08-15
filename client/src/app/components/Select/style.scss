@@ -33,9 +33,10 @@
     text-transform: capitalize;
     color: #d4d4d4;
     position: relative;
+    align-items: center;
 
     &.value {
-      color: #888499;
+      color: $GrayIndigo;
     }
 
     .selected-icon {
@@ -96,11 +97,11 @@
     color: $Title;
 
     &.selected {
-      background: $MainLight;
+      background: $Gray1;
     }
 
     &:hover {
-      background: $MainLight;
+      background: $Gray1;
     }
   }
 

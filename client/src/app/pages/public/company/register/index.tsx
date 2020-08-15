@@ -1,8 +1,7 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import { PlaidMetadata, ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../modules/common/PageContent'
-import PageHeader from '../../../../modules/common/PageHeader'
 import Stepper from '../../../../modules/common/Stepper'
 import Select from '../../../../components/Select/Select'
 import Input from '../../../../components/Input'
@@ -150,7 +149,6 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
   return (
     <article className="CompanyOnBoarding-page">
       <PageContent>
-        <PageHeader user={props.currentUser} />
         <h2>Register</h2>
         <section className="on_boarding-form">
           <Stepper steps={on_boarding_steps} activeIndex={active_step} />

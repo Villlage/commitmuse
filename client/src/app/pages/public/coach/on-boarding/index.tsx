@@ -4,7 +4,6 @@ import Icon from '../../../../components/Icon'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import BoardingField from '../../../../modules/on-boarding/BoardingField'
 import TooltipBadge from '../../../../components/TooltipBadge'
-import PageHeader from '../../../../modules/common/PageHeader'
 import ISACalculator from '../../../../modules/on-boarding/ISACalculator'
 import PageContent from '../../../../modules/common/PageContent'
 
@@ -21,7 +20,6 @@ export default function OnBoarding(props: OnBoardingProps) {
 
   return (
     <article className="OnBoarding-page">
-      <PageHeader user={props.currentUser} />
         <PageContent>
         <section className="form_wrapper">
           <header>

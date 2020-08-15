@@ -59,7 +59,9 @@ export default function AdminHeader(props: AdminHeaderProps) {
                   {props.user.profile_picture_link && props.user.profile_picture_link.length > 6 ? (
                     <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
                   ) : (
-                    <Icon className="profile_pic" icon="person" />
+                    <div className="initials">
+                      <h2>{props.user.first_name[0]}{props.user.last_name[0]}</h2>
+                    </div>
                   )}
                   <Icon icon="caret-down" />
                   {show_menu && (

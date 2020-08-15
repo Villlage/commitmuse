@@ -1,6 +1,5 @@
 import React from 'react'
 import './style.scss'
-import PageHeader from '../../../../modules/common/PageHeader'
 import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../modules/common/PageContent'
 import Field from '../../../../components/Field'
@@ -26,7 +25,6 @@ export default function Settings(props: SettingsProps) {
 
   return (
     <article className="Settings-page">
-      <PageHeader user={props.currentUser} />
       <PageContent title="Settings">
         <div className="wrapper">
           <h2>Account Information</h2>

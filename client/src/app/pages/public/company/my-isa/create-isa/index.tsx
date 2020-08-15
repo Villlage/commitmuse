@@ -1,6 +1,5 @@
 import './style.scss'
 import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
-import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
 import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
 import React, { useState } from 'react'
@@ -102,7 +101,6 @@ export default function CreateIsa(props: CreateIsaProps) {
 
   return (
     <article className="CreateIsa-page">
-      <PageHeader user={props.currentUser} />
       <PageContent title="New ISA Offer">
         <section className="container">
           <section className="client-info">

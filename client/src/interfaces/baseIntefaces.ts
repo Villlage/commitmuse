@@ -8,6 +8,7 @@ export interface ScreenProps {
   currentUser: User
   history: H.History
   fetchUser(): void
+  setCurrentUser(u: User | null): void
 }
 
 export type UserTypes = 'coaches' | 'students'

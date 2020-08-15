@@ -72,10 +72,24 @@
         cursor: pointer;
 
         .profile_pic {
-          margin-right: 6px;
           width: 32px;
           height: 32px;
           border-radius: 32px;
+        }
+
+        .initials {
+          height: 32px;
+          width: 32px;
+          background: $Yellow2;
+          border-radius: 100%;
+          @include flex-centered;
+
+          h2 {
+            font-size: 16px;
+            color: $Yellow6;
+            opacity: 0.8;
+            text-transform: uppercase;
+          }
         }
 
         .hidden-menu {

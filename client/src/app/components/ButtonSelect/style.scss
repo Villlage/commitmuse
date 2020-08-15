@@ -9,7 +9,7 @@
     border: 1px solid #E0E0E0;
     background: #F5F5F5;
     @include heebo-normal($size: 16);
-    color: #888499;
+    color: $GrayIndigo;
     text-transform: capitalize;
     display: flex;
     justify-content: center;

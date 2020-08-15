@@ -49,17 +49,28 @@ export const icons: any = {
   arrow_to_button: generateIconLink('arrow_to_button'),
   'chevron-right': generateIconLink('chevron-right'),
   'arrow-right': generateIconLink('arrow-right'),
-  'eye': generateIconLink('eye'),
-  'mail': generateIconLink('mail'),
+  eye: generateIconLink('eye'),
+  mail: generateIconLink('mail'),
   'file-download': generateIconLink('file-download'),
-  'key': generateIconLink('key'),
-  'gear': generateIconLink('gear'),
-  'globe': generateIconLink('globe'),
-  'building': generateIconLink('building'),
-  'location': generateIconLink('location'),
-  'globus': generateIconLink('globus'),
+  key: generateIconLink('key'),
+  gear: generateIconLink('gear'),
+  globe: generateIconLink('globe'),
+  building: generateIconLink('building'),
+  location: generateIconLink('location'),
   'check-circle': generateIconLink('check-circle'),
   'blue-plus': generateIconLink('blue-plus'),
+  globus: generateIconLink('globus'),
+  'money-check': generateIconLink('money-check'),
+  'user-tie': generateIconLink('user-tie'),
+  'user-graduate': generateIconLink('user-graduate'),
+  home: generateIconLink('home'),
+  file: generateIconLink('file'),
+  'credit-card': generateIconLink('credit-card'),
+  university: generateIconLink('university'),
+  round_blue_user: generateIconLink('round_blue_user'),
+  round_blue_doc: generateIconLink('round_blue_doc'),
+  'user-circle': generateIconLink('user-circle'),
+  'emy_owens': generateIconLink('emy_owens'),
 }
 
 export type SystemIcons =
@@ -117,9 +128,21 @@ export type SystemIcons =
   | 'globus'
   | 'check-circle'
   | 'blue-plus'
+  | 'money-check'
+  | 'user-tie'
+  | 'user-graduate'
+  | 'home'
+  | 'file'
+  | 'credit-card'
+  | 'university'
+  | 'round_blue_user'
+  | 'round_blue_doc'
+  | 'user-circle'
+  | 'emy_owens'
 
 interface IconProps {
   icon: SystemIcons
+  color?: string
   style?: CSSProperties
   disabled?: boolean
   animated?: boolean
@@ -130,13 +153,20 @@ interface IconProps {
 export default function Icon(props: IconProps) {
   const icon = props.icon.replace(/ /g, '')
   return !!icons[icon] ? (
-    <img
-      onClick={props.onClick}
-      src={icons[icon]}
-      alt={props.icon + 'icon'}
-      style={props.style}
-      className={props.className}
-    />
+    props.color ? (
+      <div style={{
+        mask: `url(${icons[icon]})`,
+        backgroundColor: props.color
+      }} />
+    ) : (
+      <img
+        onClick={props.onClick}
+        src={icons[icon]}
+        alt={props.icon + 'icon'}
+        style={props.style}
+        className={props.className}
+      />
+    )
   ) : (
     <span>No such icon</span>
   )

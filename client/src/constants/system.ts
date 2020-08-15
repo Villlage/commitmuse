@@ -47,6 +47,53 @@ export const SYSTEM_COLORS = {
   HoverWhite: '#f9f9f9',
 }
 
+export const _SYSTEM_COLORS = {
+  White: '#FFFFFF',
+  Gray1: '#F5F5F5',
+  Gray2: '#E0E0E0',
+  Gray3: '#BDBDBD',
+  Gray4: '#9E9E9E',
+  Black1: '#757575',
+  Black2: '#424242',
+  Black3: '#212121',
+
+  GrayIndigo: '#888499',
+  Indigo1: '#E0E8F9',
+  Indigo2: '#BED0F7',
+  Indigo4: '#647ACB',
+  Indigo5: '#4C63B6',
+  Indigo6: '#35469C',
+  Indigo7: '#19216C',
+
+  Yellow1: '#FFFBEA',
+  Yellow2: '#FFF3C4',
+  Yellow3: '#F7C948',
+  Yellow4: '#F0B429',
+  Yellow5: '#CB6E17',
+  Yellow6: '#8D2B0B',
+
+  Green1: '#EFFCF6',
+  Green2: '#C6F7E2',
+  Green3: '#3EBD93',
+  Green4: '#199473',
+  Green5: '#147D64',
+  Green6: '#014D40',
+
+  Red1: '#FFE3E3',
+  Red2: '#FFBDBD',
+  Red3: '#EF4E4E',
+  Red4: '#CF1124',
+  Red5: '#8A041A',
+  Red6: '#610316',
+
+  Blue1: '#E6F6FF',
+  Blue2: '#BAE3FF',
+  Blue3: '#2186EB',
+  Blue4: '#0967D2',
+  Blue5: '#03449E',
+  Blue6: '#002159',
+}
+
 export const status_colors = [
   {
     label: 'created',
