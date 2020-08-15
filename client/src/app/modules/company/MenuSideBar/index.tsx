@@ -50,7 +50,7 @@ interface MenuSideBarProps {}
 
 export default function MenuSideBar(props: MenuSideBarProps) {
   return (
-    <section className="MenuSideBar-module">
+    <section className="MenuSideBar-module hover">
       {menu_items.map((item, i) => (
         <NavLink
           key={i}
@@ -58,8 +58,10 @@ export default function MenuSideBar(props: MenuSideBarProps) {
           activeClassName="is-active"
           to={item.route}
         >
-          <Icon icon={item.icon as any} />
-          {item.label}
+          <div>
+            <Icon icon={item.icon as any} />
+          </div>
+          <p>{item.label}</p>
         </NavLink>
       ))}
     </section>

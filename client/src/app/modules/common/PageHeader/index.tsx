@@ -12,6 +12,7 @@ const authService = new AuthService()
 
 interface PageHeaderProps {
   user?: User
+  setCurrentUser(u: User | null): void
 }
 
 export default function PageHeader(props: PageHeaderProps) {
@@ -21,6 +22,7 @@ export default function PageHeader(props: PageHeaderProps) {
   const onLogout = async () => {
     try {
       await authService.signOut()
+      props.setCurrentUser(null)
       history.push('/login')
     } catch (e) {
       log(e)
@@ -34,7 +36,11 @@ export default function PageHeader(props: PageHeaderProps) {
           <div className="logo" onClick={() => history.push('/my-isa')}>
             <img src="/web/assets/images/logo.png" alt="logo" />
           </div>
-          {props.user && props.user.user_role === 1 && <Link className="switch" to={'/admin/users'}>Admin portal</Link>}
+          {props.user && props.user.user_role === 1 && (
+            <Link className="switch" to={'/admin/users'}>
+              Admin portal
+            </Link>
+          )}
           <div className="profile">
             {props.user ? (
               <>
@@ -46,9 +52,14 @@ export default function PageHeader(props: PageHeaderProps) {
                   {props.user.profile_picture_link && props.user.profile_picture_link.length > 6 ? (
                     <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
                   ) : (
-                    <Icon className="profile_pic" icon="person" />
+                    <div className="initials">
+                      <h2>
+                        {props.user.first_name[0]}
+                        {props.user.last_name[0]}
+                      </h2>
+                    </div>
                   )}
-                  <Icon icon="caret-down" />
+                  <Icon style={{ marginLeft: 6 }} icon="caret-down" />
                   {show_menu && (
                     <div className="hidden-menu">
                       <Button onClick={onLogout}>Logout</Button>

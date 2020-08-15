@@ -67,7 +67,10 @@ export const icons: any = {
   file: generateIconLink('file'),
   'credit-card': generateIconLink('credit-card'),
   university: generateIconLink('university'),
+  round_blue_user: generateIconLink('round_blue_user'),
+  round_blue_doc: generateIconLink('round_blue_doc'),
   'user-circle': generateIconLink('user-circle'),
+  'emy_owens': generateIconLink('emy_owens'),
 }
 
 export type SystemIcons =
@@ -132,7 +135,10 @@ export type SystemIcons =
   | 'file'
   | 'credit-card'
   | 'university'
+  | 'round_blue_user'
+  | 'round_blue_doc'
   | 'user-circle'
+  | 'emy_owens'
 
 interface IconProps {
   icon: SystemIcons

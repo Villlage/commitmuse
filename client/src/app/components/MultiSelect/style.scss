@@ -21,7 +21,7 @@
 
   .placeholder {
     @include gothic-normal($size: 16);
-    background: $MainLight;
+    background: $Gray1;
     min-height: 50px;
     padding: 8px 16px;
     border: 1px solid $Border;
@@ -111,7 +111,7 @@
 
         input {
           width: 100%;
-          background: $MainLight;
+          background: $Gray1;
           padding: 16px;
           font-size: 16px;
           font-family: Gothic A1, sans-serif;
@@ -197,11 +197,11 @@
     background: white;
 
     &.selected {
-      background: $MainLight;
+      background: $Gray1;
     }
 
     &:hover {
-      background: $MainLight;
+      background: $Gray1;
     }
   }
 

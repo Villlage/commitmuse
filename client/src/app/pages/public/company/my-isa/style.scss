@@ -11,6 +11,24 @@
       position: absolute;
       right: 0;
       background: transparent;
+
+      .placeholder {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-left: 6px;
+        }
+
+        &.value {
+          color: white;
+          text-transform: capitalize;
+
+          .ripple {
+            display: none;
+          }
+        }
+      }
     }
   }
 

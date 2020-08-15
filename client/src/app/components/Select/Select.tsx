@@ -31,7 +31,7 @@ export default function Select(props: SelectProps) {
           <div className={`ripple${fixClass(!!props.value && 'focused')}`}>{props.placeholder}</div>
           {props.value || props.placeholder}
         </div>
-        <Icon className="caret_down" icon="select_down" />
+        <Icon style={{marginLeft: 8}} className="caret_down" icon="select_down" />
         {showOptions && notEmptyArray(props.options) && (
           <div className="options">
             {props.options!.map((option, index) => (

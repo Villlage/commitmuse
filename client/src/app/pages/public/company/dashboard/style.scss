@@ -1,0 +1,81 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.CompanyDashboard-page {
+
+  .content {
+
+    .boxes {
+      display: grid;
+      grid: 1fr / 512px 248px;
+      grid-gap: 14px;
+      align-items: flex-start;
+
+      > section {
+        background: #FFFFFF;
+        box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.08);
+        border-radius: 10px;
+      }
+
+      .total {
+        padding: 0 26px;
+
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 0;
+          border-bottom: 1px solid $Indigo1;
+
+          &:last-child {
+            border: none;
+          }
+
+          h2 {
+            font-size: 16px;
+            color: $Indigo5;
+          }
+
+          p {
+            font-weight: bold;
+            font-size: 16px;
+            color: $Indigo7;
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+
+            span {
+              font-weight: normal;
+            }
+          }
+        }
+      }
+
+      .counts {
+        div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px;
+
+          h2 {
+            font-weight: bold;
+            font-size: 20px;
+            text-transform: uppercase;
+            color: $Black3;
+            display: flex;
+            flex-direction: column;
+
+            span {
+              font-weight: bold;
+              font-size: 10px;
+              text-transform: uppercase;
+              color: $Indigo5;
+            }
+          }
+        }
+      }
+    }
+  }
+
+}

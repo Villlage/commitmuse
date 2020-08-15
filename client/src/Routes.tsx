@@ -17,9 +17,10 @@ import CompanyOnBoarding from './app/pages/public/company/register'
 import Subscription from './app/pages/public/company/subscription'
 import CompanyDashboard from './app/pages/public/company/dashboard'
 import PageHeader from './app/modules/common/PageHeader'
-import AdminHeader from './app/modules/admin/AdminHeader'
+import { ScreenProps } from './interfaces/baseIntefaces'
+import CompanyCoaches from './app/pages/public/company/dashboard/coaches'
 
-export default function Routes(routerProps: any) {
+export default function Routes(routerProps: Partial<ScreenProps>) {
   const adminRoute = (Component: any, path: string) => (
     <Route path={path}>
       {(props: any) =>
@@ -27,7 +28,6 @@ export default function Routes(routerProps: any) {
       }
     </Route>
   )
-
   const privateRoute = (Component: any, route: string) => {
     return (
       <Route
@@ -41,15 +41,7 @@ export default function Routes(routerProps: any) {
 
   return (
     <Router basename={'/web'}>
-      {routerProps.currentUser ? (
-        routerProps.currentUser.user_role === 1 ? (
-          <AdminHeader user={routerProps.currentUser} />
-        ) : (
-          <PageHeader user={routerProps.currentUser} />
-        )
-      ) : (
-        <PageHeader />
-      )}
+      <PageHeader user={routerProps.currentUser} setCurrentUser={routerProps.setCurrentUser as any}  />
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
@@ -65,6 +57,7 @@ export default function Routes(routerProps: any) {
 
         {/* Company Routes */}
         {privateRoute(CompanyDashboard, '/company/dashboard')}
+        {privateRoute(CompanyCoaches, '/company/coaches')}
 
         {/* Admin Routes */}
         {adminRoute(AdminUsers, '/admin/users')}

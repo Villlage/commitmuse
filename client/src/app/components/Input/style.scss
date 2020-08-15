@@ -3,7 +3,7 @@
 
 .Input-component {
   position: relative;
-  background: $MainLight;
+  background: $Gray1;
   border-radius: 5px;
   height: 48px;
   display: flex;
@@ -59,11 +59,11 @@
     color: $Title;
     width: 100%;
     @include gothic-normal();
-    background: $MainLight;
+    background: transparent;
     font-size: 16px;
 
     &::placeholder {
-      color: #888499;
+      color: $GrayIndigo;
     }
   }
 
