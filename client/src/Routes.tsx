@@ -19,6 +19,7 @@ import CompanyDashboard from './app/pages/public/company/dashboard'
 import PageHeader from './app/modules/common/PageHeader'
 import { ScreenProps } from './interfaces/baseIntefaces'
 import CompanyCoaches from './app/pages/public/company/dashboard/coaches'
+import BillingAndSubs from './app/pages/public/company/dashboard/billing-and-subs'
 
 export default function Routes(routerProps: Partial<ScreenProps>) {
   const adminRoute = (Component: any, path: string) => (
@@ -58,6 +59,7 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
         {/* Company Routes */}
         {privateRoute(CompanyDashboard, '/company/dashboard')}
         {privateRoute(CompanyCoaches, '/company/coaches')}
+        {privateRoute(BillingAndSubs, '/company/billing')}
 
         {/* Admin Routes */}
         {adminRoute(AdminUsers, '/admin/users')}

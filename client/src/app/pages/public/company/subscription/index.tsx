@@ -8,31 +8,11 @@ import PlaidService from '../../../../../services/plaid.service'
 import Message from '../../../../components/Message'
 import Loader from '../../../../components/Loader'
 import CompanyService from '../../../../../services/company.service'
+import SubscriptionOffer from '../../../../modules/company/SubscriptionOffer'
+import { OFFERS } from '../../../../../constants/mockData'
 
 const plaidService = new PlaidService()
 const companyService = new CompanyService()
-
-interface Offer {
-  title: string
-  description: string
-  oldCost: number
-  cost: number
-}
-
-const offers: Offer[] = [
-  {
-    title: 'Monthly Suscription',
-    description: 'Complete access to Commit Muse',
-    oldCost: 50,
-    cost: 30,
-  },
-  {
-    title: 'Client Fee',
-    description: 'Per active ISA student, each month',
-    oldCost: 8,
-    cost: 2,
-  },
-]
 
 interface SubscriptionProps extends ScreenProps {
   match: {
@@ -102,8 +82,8 @@ export default function Subscription(props: SubscriptionProps) {
           <section className="subscription-offer">
             <h2>Early adopter Discount offer:</h2>
             <div className="offer-list">
-              {offers.map((offer, i) => (
-                <Offer offer={offer} key={i} />
+              {OFFERS.map((offer, i) => (
+                <SubscriptionOffer offer={offer} key={i} />
               ))}
             </div>
             <div className="payment-method">
@@ -142,17 +122,3 @@ export default function Subscription(props: SubscriptionProps) {
   )
 }
 
-function Offer({ offer }: { offer: Offer }) {
-  return (
-    <div className="offer">
-      <div className="description">
-        <h2>{offer.title}</h2>
-        <p>{offer.description}</p>
-      </div>
-      <div className="cost">
-        <h2>${offer.oldCost}</h2>
-        <p>${offer.cost}</p>
-      </div>
-    </div>
-  )
-}

@@ -1,0 +1,78 @@
+@import '../../../../../../styles/mixins';
+@import '../../../../../../styles/colors';
+
+.BillingAndSubs-page {
+
+  .tab-title {
+    font-size: 16px;
+    color: $Indigo7;
+    margin-bottom: 10px;
+  }
+
+  .billing-info {
+    width: 512px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.15);
+
+    .Tabs-module {
+      > div {
+        background: $Gray1;
+      }
+    }
+
+    .tab {
+      padding: 24px;
+
+      .offer-list {
+        background: $Gray1;
+        border-radius: 7px;
+        padding: 0 16px;
+        margin-bottom: 32px;
+      }
+
+      .payment-method {
+        h2 {
+          color: $Indigo7;
+        }
+      }
+
+      .TableHeader-component {
+        grid-column-gap: initial;
+        text-transform: uppercase;
+        background: $Indigo1;
+
+        img {
+          visibility: hidden;
+        }
+      }
+
+      .Table-component {
+        .table-row {
+          border: 0;
+          align-items: center;
+          color: $Black3;
+          @include heebo-normal($size: 13);
+
+          &:nth-child(even) {
+            background: $Gray0;
+          }
+        }
+      }
+    }
+
+    footer {
+      background: $Gray1;
+      padding: 30px 44px;
+
+      button {
+        background: transparent;
+        border: 0;
+        font-size: 14px;
+        letter-spacing: 0.02em;
+        color: $Gray4;
+      }
+    }
+  }
+}

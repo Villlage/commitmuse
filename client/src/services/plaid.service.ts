@@ -19,7 +19,7 @@ export default class PlaidService {
     })
   }
 
-  public async getMask(companyId: string) {
+  public async getMask(companyId: string | number) {
     return await baseService.getJSON(`plaid/items?company_id=${companyId}`)
   }
 }

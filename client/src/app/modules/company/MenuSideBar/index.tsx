@@ -36,7 +36,7 @@ const menu_items = [
   },
   {
     label: 'Billing And Subscription',
-    route: 'subscription',
+    route: 'billing',
     icon: 'credit-card',
   },
   {
