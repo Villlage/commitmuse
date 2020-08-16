@@ -49,7 +49,7 @@ export default function SignIn(props: ScreenProps) {
         if (res.user_role === 1) {
           return props.history.push('admin/users')
         } else {
-          return props.history.push('/my-isa')
+          return res.company ? props.history.push('/company/dashboard') : props.history.push('/my-isa')
         }
       }
     } catch (e) {

@@ -33,7 +33,7 @@ export default function PageHeader(props: PageHeaderProps) {
     <>
       <header className="PageHeader-module">
         <nav>
-          <div className="logo" onClick={() => history.push('/my-isa')}>
+          <div className="logo" onClick={() => history.push('/company/dashboard')}>
             <img src="/web/assets/images/logo.png" alt="logo" />
           </div>
           {props.user && props.user.user_role === 1 && (

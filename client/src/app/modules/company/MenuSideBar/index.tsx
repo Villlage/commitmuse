@@ -8,6 +8,7 @@ const menu_items = [
     label: 'Overview',
     route: 'dashboard',
     icon: 'home',
+    active: true,
   },
   {
     label: 'Payments',
@@ -18,6 +19,7 @@ const menu_items = [
     label: 'Coaches',
     route: 'coaches',
     icon: 'user-tie',
+    active: true,
   },
   {
     label: 'Clients',
@@ -28,6 +30,7 @@ const menu_items = [
     label: 'My ISAs',
     route: 'isas',
     icon: 'file',
+    active: true,
   },
   {
     label: 'Payment’s Accounts',
@@ -38,6 +41,7 @@ const menu_items = [
     label: 'Billing And Subscription',
     route: 'billing',
     icon: 'credit-card',
+    active: true,
   },
   {
     label: 'My Account',
@@ -50,9 +54,15 @@ interface MenuSideBarProps {}
 
 export default function MenuSideBar(props: MenuSideBarProps) {
   return (
-    <section className="MenuSideBar-module hover">
+    <section className="MenuSideBar-module">
       {menu_items.map((item, i) => (
-        <NavLink key={i} className="menu-item" activeClassName="is-active" to={item.route}>
+        <NavLink
+          aria-disabled={!item.active}
+          key={i}
+          className="menu-item"
+          activeClassName="is-active"
+          to={item.route}
+        >
           <div>
             <Icon icon={item.icon as any} />
           </div>

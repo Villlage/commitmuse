@@ -66,6 +66,7 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
     } catch (e) {
       set_mask(null)
       set_request_error(e.error || e.toString())
+      set_loading(false)
       setTimeout(() => set_request_error(''), 3000)
       return set_loading(false)
     }
@@ -112,7 +113,7 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
   }
 
   useLayoutEffect(() => {
-    companyId && getMask()
+    companyId ? getMask() : set_loading(false)
   }, [])
 
   return loading ? (

@@ -43,7 +43,10 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
     state: '',
   })
 
-  const notValid = () => Object.values(data).some((v: any) => v.length === 0)
+  const notValid = () => {
+    const { address_line_2, ...rest } = data
+    return Object.values(rest).some((v: any) => v.length === 0)
+  }
 
   const onSuccess = async (token: string, metadata: PlaidMetadata) => {
     try {
