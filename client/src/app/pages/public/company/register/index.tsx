@@ -10,6 +10,7 @@ import CompanyService from '../../../../../services/company.service'
 import Message from '../../../../components/Message'
 import { usePlaidLink } from 'react-plaid-link'
 import PlaidService from '../../../../../services/plaid.service'
+import { log } from '../../../../../services/logging.service'
 
 const companyService = new CompanyService()
 const plaidService = new PlaidService()
@@ -46,8 +47,8 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
 
   const onSuccess = async (token: string, metadata: PlaidMetadata) => {
     try {
-      const res = await plaidService.createItem(token, metadata)
-
+      const companyId = localStorage.getItem('companyId')
+      const res = await plaidService.createCompanyItem(token, metadata, companyId as string)
       if (res) {
         const error = res.error || res.err_msg
 
@@ -55,8 +56,9 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
           set_request_error(res.error)
           return setTimeout(() => set_request_error(''), 3000)
         }
+        localStorage.removeItem('companyId')
 
-        props.history.push('/subscription')
+        props.history.push(`/subscription/${companyId}`)
       }
     } catch (e) {
       set_request_error(e.error || e.toString())
@@ -74,7 +76,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
 
   const { open } = usePlaidLink(config)
 
-  const onNext = async () => {
+  const onRegister = async () => {
     try {
       const res = await companyService.create({
         name: data.name,
@@ -82,10 +84,13 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         address: `${data.address_line_1}, ${data.address_line_2}, ${data.country}, ${data.city}, ${data.state}, ${data.zip_code}`,
       })
 
-      if (res && res.error) {
-        set_request_error(res.error)
+      if (res && res.error || res.err_msg) {
+        log(res)
+        set_request_error(res.error || res.err_msg)
         return setTimeout(() => set_request_error(''), 3000)
       }
+      localStorage.setItem('companyId', res.id)
+      await props.fetchUser()
 
       set_active_step(active_step + 1)
       open()
@@ -131,7 +136,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
           </div>
         </div>
         <footer>
-          <Button disabled={notValid()} onClick={onNext} background="MainWarning" icon="arrow-right">
+          <Button disabled={notValid()} onClick={onRegister} background="MainWarning" icon="arrow-right">
             NEXT
           </Button>
         </footer>
@@ -141,6 +146,9 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
       <section className="link_bank">
         <Button background="MainWarning" onClick={() => open()}>
           Link Bank
+        </Button>
+        <Button className="skip" onClick={() => props.history.push(`/subscription/${props.currentUser.company}`)}>
+          Skip for later
         </Button>
       </section>
     ),
