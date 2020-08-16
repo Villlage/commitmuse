@@ -2,7 +2,7 @@ import * as React from 'react'
 import './style.scss'
 import { fixClass } from '../../../helpers/base'
 
-type MessageType = {
+export type MessageType = {
   type: 'alert' | 'info'
   text: string
 }

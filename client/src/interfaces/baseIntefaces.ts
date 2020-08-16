@@ -22,6 +22,7 @@ export interface User {
   confirmed_at: null | string
   email: string
   hourly_rate: number
+  company: number
   is_active: boolean
   profile_picture: string
   profile_picture_link: string
@@ -32,6 +33,19 @@ export interface User {
   plaid_items: []
   students: []
   type: UserTypes
+}
+
+export interface Coach {
+  id: number
+  company: number
+  email: string
+  first_name: string
+  is_active: boolean
+  last_name: string
+  plaid_account: number[]
+  plaid_items: number[]
+  type: string
+  user_role: number
 }
 
 export type SystemColors =

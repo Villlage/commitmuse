@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
-import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
+import { Coach, ScreenProps } from '../../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../../modules/common/PageContent'
 import MenuSideBar from '../../../../../modules/company/MenuSideBar'
 import Icon from '../../../../../components/Icon'
@@ -8,16 +8,47 @@ import Button from '../../../../../components/Button'
 import PopUp from '../../../../../components/PopUp'
 import Input from '../../../../../components/Input'
 import Select from '../../../../../components/Select/Select'
+import CompanyService from '../../../../../../services/company.service'
+import Message from '../../../../../components/Message'
+import { makeName, notEmptyArray } from '../../../../../../helpers/base'
+
+const companyService = new CompanyService()
 
 interface CompanyCoachesProps extends ScreenProps {}
 
 export default function CompanyCoaches(props: CompanyCoachesProps) {
-  const [coaches, set_coaches] = useState([{ name: 'Amy Owens', role: 'coach' }])
+  const [loading, set_loading] = useState<boolean>(true)
+  const [request_error, set_request_error] = useState<any>('')
+  const [coaches, set_coaches] = useState<Coach[]>([])
   const [show_new_coach_popup, set_show_new_coach_popup] = useState(false)
+
+  const getCoaches = async () => {
+    try {
+      const res = await companyService.coaches(props.currentUser.company)
+      set_loading(false)
+
+      if ((res && res.error) || res.err_msg) {
+        set_request_error(res.error || res.err_msg)
+        return setTimeout(() => set_request_error(''), 3000)
+      }
+
+      set_coaches(res)
+    } catch (e) {
+      set_loading(false)
+      set_request_error(e.error || e.toString())
+      setTimeout(() => set_request_error(''), 3000)
+    }
+  }
+
+  useLayoutEffect(() => {
+    getCoaches()
+  }, [])
+
+
   return (
     <article className="CompanyCoaches-page">
       <MenuSideBar />
-      <PageContent>
+      <PageContent error={request_error}>
         <header>
           <h2 className="page-title">Coaches</h2>
           <Button background="MainWarning" onClick={() => set_show_new_coach_popup(true)}>
@@ -25,12 +56,12 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
           </Button>
         </header>
         <section className="coaches">
-          {[...coaches, ...coaches, ...coaches, ...coaches].map((coach, i) => (
+          {notEmptyArray(coaches) && coaches.map((coach, i) => (
             <div className="coach" key={i}>
               <div>
-                <Icon icon="emy_owens" />
+                <Icon icon="person" />
                 <h2>
-                  {coach.role} <span>{coach.name}</span>
+                  {coach.type} <span>{makeName(coach)}</span>
                 </h2>
               </div>
               <Icon icon="chevron-right" />
