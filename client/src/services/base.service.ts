@@ -2,12 +2,6 @@ import currentEnv from '../config/environment'
 import { objectToUrlParams } from '../helpers/base'
 import { log } from './logging.service'
 
-type PostAPIs = 'register' | 'login' | 'user' | 'isas' | 'plaid/items' | 'companies'
-
-type PatchAPIs = 'register' | 'login' | 'user' | string
-
-type GetAPIs = 'logout' | 'user' | 'check-auth' | string
-
 export default class BaseService {
   public MAIN_API = currentEnv().MAIN_API
 
@@ -46,7 +40,7 @@ export default class BaseService {
     }
   }
 
-  getJSON = async (url: GetAPIs, params?: object) => {
+  getJSON = async (url: string, params?: object) => {
     const res = await fetch(this.MAIN_API + url + `${objectToUrlParams(params)}`, {
       method: 'GET',
       headers: this.headers(),
@@ -59,7 +53,7 @@ export default class BaseService {
     return response
   }
 
-  postJSON = async (url: PostAPIs, data: any, saveCookie?: boolean) => {
+  postJSON = async (url: string, data: any, saveCookie?: boolean) => {
     try {
       const res = await fetch(this.MAIN_API + url, {
         method: 'POST',
@@ -83,7 +77,7 @@ export default class BaseService {
     }
   }
 
-  patchJSON = async (url: PatchAPIs, data: any) => {
+  patchJSON = async (url: string, data: any) => {
     try {
       const res = await fetch(this.MAIN_API + url, {
         method: 'PATCH',

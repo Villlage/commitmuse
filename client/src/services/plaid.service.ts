@@ -11,4 +11,15 @@ export default class PlaidService {
       metadata: meta,
     })
   }
+
+  public async createCompanyItem(token: string, meta: PlaidMetadata, companyId: string) {
+    return await baseService.postJSON(`plaid/items?company_id=${companyId}`, {
+      public_token: token,
+      metadata: meta,
+    })
+  }
+
+  public async getMask(companyId: string) {
+    return await baseService.getJSON(`plaid/items?company_id=${companyId}`)
+  }
 }

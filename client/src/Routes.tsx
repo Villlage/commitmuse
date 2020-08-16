@@ -52,7 +52,7 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
         {privateRoute(IsaOverview, '/isa/:id')}
         {privateRoute(Settings, '/settings')}
         {privateRoute(OnBoarding, '/on-boarding')}
-        {privateRoute(Subscription, '/subscription')}
+        {privateRoute(Subscription, '/subscription/:id')}
         {privateRoute(CompanyOnBoarding, '/company/register')}
 
         {/* Company Routes */}
