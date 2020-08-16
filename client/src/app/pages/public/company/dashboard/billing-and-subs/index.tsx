@@ -50,7 +50,7 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
   const [request_error, set_request_error] = useState<any>('')
   const [mask, set_mask] = useState<string | null>('')
   const [loading, set_loading] = useState<boolean>(true)
-  const [active_tab, set_active_tab] = useState<string>('invoices')
+  const [active_tab, set_active_tab] = useState<string>('subscription')
 
   const companyId = props.currentUser.company
 
