@@ -131,8 +131,14 @@ class TestCompanyDashboard:
     def test_copmany_overview(self) -> None:
         company = CompanyFactory.create()
         coach = CoachFactory.create(company=company)
+        CoachFactory.create(company=company)
+        CoachFactory.create(company=company)
+        ISAFactory.create(coach=coach)
+        ISAFactory.create(coach=coach)
         company_id = company.id
 
         with logged_in_client(coach) as client:
             resp = client.get(f"companies/{company_id}/overview")
             assert resp.status_code == 200
+            assert resp.json["coaches"] == 3
+            assert resp.json["isas"] == 2

@@ -20,6 +20,7 @@ from services.company_service import (
     create_company,
     get_company_coaches,
     get_company_isas,
+    get_company_overview,
 )
 from controller.common import login_required, get_current_user
 from models.user import User
@@ -78,5 +79,6 @@ def companies_coaches(company_id: int) -> Tuple[Response, int]:
 @app.route("/companies/<int:company_id>/overview", methods=["GET"])
 @login_required
 def companies_overview(company_id: int) -> Tuple[Response, int]:
-    get_current_user()
-    return jsonify(dict(total_revenue=0, last_payment=dict(value=0, date=None))), 200
+    user = get_current_user()
+    overview = get_company_overview(user=user, company_id=company_id)
+    return jsonify(overview), 200
