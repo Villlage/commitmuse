@@ -77,10 +77,10 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
               <Button background="MainWarning">SEND INVITE</Button>
             </header>
             <footer>
-              {[...coaches, ...coaches, ...coaches, ...coaches].map((coach, i) => (
+              {coaches.map((coach, i) => (
                 <div className="coach" key={i}>
                   <h2>
-                    John <span>johnsmith@email.com</span>
+                    {makeName(coach)} <span>{coach.email}</span>
                   </h2>
                   <Select value="Coach" options={['']} onChange={e => e} placeholder="Coach" />
                 </div>

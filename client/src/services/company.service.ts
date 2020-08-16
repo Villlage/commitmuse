@@ -17,7 +17,7 @@ export default class CompanyService {
     return await baseService.getJSON(`companies/${companyId}/overview`)
   }
 
-  public async createSubscription(company_id: string) {
+  public async createSubscription(company_id: string | number) {
     return await baseService.postJSON(`subscriptions`, {company_id})
   }
 
