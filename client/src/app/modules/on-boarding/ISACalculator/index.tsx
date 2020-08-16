@@ -22,7 +22,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
   }, [props.current_income])
 
   const future_bill = () => {
-    let bill = ((props.percentage / 100) * future_income) * (props.months / 12)
+    let bill = (props.percentage / 100) * future_income * (props.months / 12)
 
     if (future_income > props.max) {
       bill = props.max
@@ -48,7 +48,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
   return (
     <section className="ISACalculator-module">
       <header>
-        <h2>ISA CALCULATOR</h2>
+        <h2>ISA Calculator</h2>
       </header>
 
       <div className="body">
@@ -65,13 +65,32 @@ export default function ISACalculator(props: ISACalculatorProps) {
           </div>
 
           <section className="slider">
-            <input onChange={e => set_current_income(Number(e.target.value))} className="line" value={current_income} min={0} max={200} step={1} type="range" />
-            <input onChange={e => set_future_income(Number(e.target.value))} className="line" id="future_amount" value={future_income} min={0} max={200} step={1} type="range" />
+            <input
+              onChange={e => set_current_income(Number(e.target.value))}
+              className="line"
+              value={current_income}
+              min={0}
+              max={200}
+              step={1}
+              type="range"
+            />
+            <input
+              onChange={e => set_future_income(Number(e.target.value))}
+              className="line"
+              id="future_amount"
+              value={future_income}
+              min={0}
+              max={200}
+              step={1}
+              type="range"
+            />
           </section>
 
           <div className="future-bill">
             <label>Future Bill</label>
-            <p>${roundK(future_bill())}K ({props.percentage}%)</p>
+            <p>
+              ${roundK(future_bill())}K <span>/ YEAR</span> ({props.percentage}%)
+            </p>
           </div>
         </div>
       </div>

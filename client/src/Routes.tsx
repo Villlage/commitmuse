@@ -20,18 +20,26 @@ import PageHeader from './app/modules/common/PageHeader'
 import { ScreenProps } from './interfaces/baseIntefaces'
 import CompanyCoaches from './app/pages/public/company/dashboard/coaches'
 import BillingAndSubs from './app/pages/public/company/dashboard/billing-and-subs'
+import CompanyIsas from './app/pages/public/company/dashboard/my-isas'
+import CompanyIsaOverview from './app/pages/public/company/dashboard/my-isas/isa-overview'
+import CompanyCreateIsa from './app/pages/public/company/dashboard/my-isas/create-isa'
 
 export default function Routes(routerProps: Partial<ScreenProps>) {
   const adminRoute = (Component: any, path: string) => (
     <Route path={path}>
       {(props: any) =>
-        routerProps.currentUser && routerProps.currentUser.user_role === 1 ? <Component {...props} {...routerProps} /> : <Redirect to={'/my-isa'} />
+        routerProps.currentUser && routerProps.currentUser.user_role === 1 ? (
+          <Component {...props} {...routerProps} />
+        ) : (
+          <Redirect to={'/company/dashboard'} />
+        )
       }
     </Route>
   )
-  const privateRoute = (Component: any, route: string) => {
+  const privateRoute = (Component: any, route: string, exact?: boolean) => {
     return (
       <Route
+        exact={!!exact}
         path={route}
         render={(props: any) =>
           routerProps.currentUser ? <Component {...props} {...routerProps} /> : <Redirect to={'/login'} />
@@ -42,7 +50,7 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
 
   return (
     <Router basename={'/web'}>
-      <PageHeader user={routerProps.currentUser} setCurrentUser={routerProps.setCurrentUser as any}  />
+      <PageHeader user={routerProps.currentUser} setCurrentUser={routerProps.setCurrentUser as any} />
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
@@ -59,6 +67,9 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
         {/* Company Routes */}
         {privateRoute(CompanyDashboard, '/company/dashboard')}
         {privateRoute(CompanyCoaches, '/company/coaches')}
+        {privateRoute(CompanyIsas, '/company/isas', true)}
+        {privateRoute(CompanyCreateIsa, '/company/isas/create')}
+        {privateRoute(CompanyIsaOverview, '/company/isas/:id')}
         {privateRoute(BillingAndSubs, '/company/billing')}
 
         {/* Admin Routes */}

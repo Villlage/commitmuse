@@ -10,7 +10,7 @@
   left: 0;
   width: 56px;
   overflow: hidden;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: -4px 4px 16px rgba(16, 42, 67, 0.24);
   border-radius: 0px 25px 0px 0px;
   height: 100vh;
@@ -41,7 +41,8 @@
       display: none;
     }
 
-    &.is-active, &:hover {
+    &.is-active,
+    &:hover {
       img {
         filter: invert(35%) sepia(100%) saturate(371%) hue-rotate(188deg) brightness(91%) contrast(88%);
       }
@@ -54,10 +55,11 @@
     .menu-item {
       justify-content: normal;
 
-      &.is-active, &:hover{
-        color: #19216C;
+      &.is-active,
+      &:hover {
+        color: #19216c;
         font-weight: bold;
-        border-color: #19216C;
+        border-color: #19216c;
 
         img {
           filter: invert(35%) sepia(100%) saturate(371%) hue-rotate(188deg) brightness(91%) contrast(88%);

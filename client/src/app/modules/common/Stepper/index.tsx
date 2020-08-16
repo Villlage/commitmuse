@@ -16,10 +16,7 @@ export default function Stepper(props: StepperProps) {
   return (
     <Steps length={props.steps.length} className="Stepper-module">
       {props.steps.map((step, i) => (
-        <div
-          className={`status${fixClass(i === props.activeIndex && 'selected')}`}
-          key={i}
-        >
+        <div className={`status${fixClass(i === props.activeIndex && 'selected')}`} key={i}>
           {step}
         </div>
       ))}

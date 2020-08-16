@@ -26,7 +26,7 @@ const menu_items = [
   },
   {
     label: 'My ISAs',
-    route: 'my-isas',
+    route: 'isas',
     icon: 'file',
   },
   {
@@ -52,12 +52,7 @@ export default function MenuSideBar(props: MenuSideBarProps) {
   return (
     <section className="MenuSideBar-module hover">
       {menu_items.map((item, i) => (
-        <NavLink
-          key={i}
-          className="menu-item"
-          activeClassName="is-active"
-          to={item.route}
-        >
+        <NavLink key={i} className="menu-item" activeClassName="is-active" to={item.route}>
           <div>
             <Icon icon={item.icon as any} />
           </div>

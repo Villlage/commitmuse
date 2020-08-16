@@ -26,7 +26,6 @@ const table_headers: Header[] = [
     title: 'Invoice Number',
     sortable: true,
   },
-
   {
     key: 'billing_period',
     title: 'Billing\n' + 'Period',

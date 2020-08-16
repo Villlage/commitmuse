@@ -5,14 +5,13 @@
   font-size: 16px;
   border: 0;
   border-radius: 3px;
-  padding: 0  12px;
+  padding: 0 12px;
   transition: all 200ms;
   border: none;
   height: 36px;
   @include flex-centered;
   @include heebo-bold($size: 12);
   line-height: 12px;
-
 
   &:disabled {
     opacity: 0.5;

@@ -11,7 +11,6 @@ import { emailErrorMessage, passwordLength } from '../../../../../constants/auth
 import Button from '../../../../components/Button'
 import Message from '../../../../components/Message'
 import { Link } from 'react-router-dom'
-import PageHeader from '../../../../modules/common/PageHeader'
 
 const authService = new AuthService()
 
@@ -93,8 +92,7 @@ export default function SignIn(props: ScreenProps) {
           </div>
           <footer className="full">
             <p>
-              Don't have an account?{' '}
-              <Link to="/register">Sign Up</Link>
+              Don't have an account? <Link to="/register">Sign Up</Link>
             </p>
 
             <Button disabled={notValid()} onClick={onSubmit} loading={loading}>

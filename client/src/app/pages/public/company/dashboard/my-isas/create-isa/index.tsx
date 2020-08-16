@@ -1,18 +1,18 @@
 import './style.scss'
-import { ScreenProps } from '../../../../../../interfaces/baseIntefaces'
-import PageContent from '../../../../../modules/common/PageContent'
-import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
 import React, { useState } from 'react'
-import { fixClass, isNumber, validateEmail } from '../../../../../../helpers/base'
-import Input from '../../../../../components/Input'
-import TooltipBadge from '../../../../../components/TooltipBadge'
-import { emailErrorMessage } from '../../../../../../constants/auth'
-import Button from '../../../../../components/Button'
-import IsaService from '../../../../../../services/isa.service'
-import Message from '../../../../../components/Message'
-import IsaAssessment from '../../../../../modules/common/IsaAssessment'
-import ISACalculator from '../../../../../modules/on-boarding/ISACalculator'
-import Stepper from '../../../../../modules/common/Stepper'
+import { ScreenProps } from '../../../../../../../interfaces/baseIntefaces'
+import PageContent from '../../../../../../modules/common/PageContent'
+import FAQ from '../../../../../../modules/company/CreateIsa/FAQ'
+import { fixClass, isNumber, validateEmail } from '../../../../../../../helpers/base'
+import { emailErrorMessage } from '../../../../../../../constants/auth'
+import Input from '../../../../../../components/Input'
+import TooltipBadge from '../../../../../../components/TooltipBadge'
+import Button from '../../../../../../components/Button'
+import IsaService from '../../../../../../../services/isa.service'
+import Message from '../../../../../../components/Message'
+import IsaAssessment from '../../../../../../modules/common/IsaAssessment'
+import ISACalculator from '../../../../../../modules/on-boarding/ISACalculator'
+import MenuSideBar from '../../../../../../modules/company/MenuSideBar'
 
 const isaService = new IsaService()
 
@@ -30,7 +30,7 @@ type IncomeKeys =
 
 interface CreateIsaProps extends ScreenProps {}
 
-export default function CreateIsa(props: CreateIsaProps) {
+export default function CompanyCreateIsa(props: CreateIsaProps) {
   const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
   const [selected_pricing, set_selected_pricing] = useState(pricing[0])
@@ -112,7 +112,8 @@ export default function CreateIsa(props: CreateIsaProps) {
   }
 
   return (
-    <article className="CreateIsa-page">
+    <article className="CompanyCreateIsa-page">
+      <MenuSideBar />
       <PageContent title="New ISA Offer">
         <section className="container">
           <section className="offer-steps">

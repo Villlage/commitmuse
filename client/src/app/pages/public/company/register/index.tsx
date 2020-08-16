@@ -84,7 +84,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         address: `${data.address_line_1}, ${data.address_line_2}, ${data.country}, ${data.city}, ${data.state}, ${data.zip_code}`,
       })
 
-      if (res && res.error || res.err_msg) {
+      if ((res && res.error) || res.err_msg) {
         log(res)
         set_request_error(res.error || res.err_msg)
         return setTimeout(() => set_request_error(''), 3000)

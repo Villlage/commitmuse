@@ -18,7 +18,7 @@ export default function CompanyDashboard(props: CompanyDashboardProps) {
   const [data, set_data] = useState({
     coaches: null,
     isas: null,
-    last_payment: { date: null, value: null},
+    last_payment: { date: null, value: null },
     total_revenue: null,
   })
 
@@ -47,7 +47,9 @@ export default function CompanyDashboard(props: CompanyDashboardProps) {
   return (
     <article className="CompanyDashboard-page">
       <MenuSideBar />
-      {loading ? <Loader/> :
+      {loading ? (
+        <Loader />
+      ) : (
         <PageContent title="Overview" error={request_error}>
           <section className="boxes">
             <section className="total">
@@ -66,32 +68,33 @@ export default function CompanyDashboard(props: CompanyDashboardProps) {
             <section className="counts">
               <div>
                 <h2>
-                  {data.coaches}<span>coaches</span>
+                  {data.coaches}
+                  <span>coaches</span>
                 </h2>
-                <Icon icon="round_blue_user"/>
+                <Icon icon="round_blue_user" />
               </div>
               <div>
                 <h2>
                   - <span>isa offers completed</span>
                 </h2>
-                <Icon icon="round_blue_doc"/>
+                <Icon icon="round_blue_doc" />
               </div>
               <div>
                 <h2>
                   - <span>active Clients</span>
                 </h2>
-                <Icon icon="round_blue_user"/>
+                <Icon icon="round_blue_user" />
               </div>
               <div>
                 <h2>
                   - <span>isa offers In Progress</span>
                 </h2>
-                <Icon icon="round_blue_doc"/>
+                <Icon icon="round_blue_doc" />
               </div>
             </section>
           </section>
         </PageContent>
-      }
+      )}
     </article>
   )
 }

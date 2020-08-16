@@ -44,7 +44,6 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
     getCoaches()
   }, [])
 
-
   return (
     <article className="CompanyCoaches-page">
       <MenuSideBar />
@@ -56,17 +55,18 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
           </Button>
         </header>
         <section className="coaches">
-          {notEmptyArray(coaches) && coaches.map((coach, i) => (
-            <div className="coach" key={i}>
-              <div>
-                <Icon icon="person" />
-                <h2>
-                  {coach.type} <span>{makeName(coach)}</span>
-                </h2>
+          {notEmptyArray(coaches) &&
+            coaches.map((coach, i) => (
+              <div className="coach" key={i}>
+                <div>
+                  <Icon icon="person" />
+                  <h2>
+                    {coach.type} <span>{makeName(coach)}</span>
+                  </h2>
+                </div>
+                <Icon icon="chevron-right" />
               </div>
-              <Icon icon="chevron-right" />
-            </div>
-          ))}
+            ))}
         </section>
         <PopUp isOpen={show_new_coach_popup} onClose={() => set_show_new_coach_popup(false)}>
           <section className="new-coach">
