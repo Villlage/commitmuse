@@ -46,7 +46,7 @@ export default function Subscription(props: SubscriptionProps) {
   const [request_error, set_request_error] = useState<any>('')
   const [mask, set_mask] = useState<string | null>('')
   const [loading, set_loading] = useState<boolean>(true)
-  const companyId = props.match.params.id === '-1' ? '' : props.match.params.id
+  const companyId = props.match.params.id
 
   const getMask = async () => {
     try {

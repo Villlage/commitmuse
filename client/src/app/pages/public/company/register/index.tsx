@@ -76,7 +76,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
 
   const { open } = usePlaidLink(config)
 
-  const onNext = async () => {
+  const onRegister = async () => {
     try {
       const res = await companyService.create({
         name: data.name,
@@ -89,10 +89,11 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         set_request_error(res.error || res.err_msg)
         return setTimeout(() => set_request_error(''), 3000)
       }
+      localStorage.setItem('companyId', res.id)
+      await props.fetchUser()
 
       set_active_step(active_step + 1)
       open()
-      localStorage.setItem('companyId', res.id)
     } catch (e) {
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
@@ -135,7 +136,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
           </div>
         </div>
         <footer>
-          <Button disabled={notValid()} onClick={onNext} background="MainWarning" icon="arrow-right">
+          <Button disabled={notValid()} onClick={onRegister} background="MainWarning" icon="arrow-right">
             NEXT
           </Button>
         </footer>
@@ -146,7 +147,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         <Button background="MainWarning" onClick={() => open()}>
           Link Bank
         </Button>
-        <Button className="skip" onClick={() => props.history.push('/subscription/-1')}>
+        <Button className="skip" onClick={() => props.history.push(`/subscription/${props.currentUser.company}`)}>
           Skip for later
         </Button>
       </section>

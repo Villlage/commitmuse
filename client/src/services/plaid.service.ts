@@ -12,7 +12,7 @@ export default class PlaidService {
     })
   }
 
-  public async createCompanyItem(token: string, meta: PlaidMetadata, companyId: string) {
+  public async createCompanyItem(token: string, meta: PlaidMetadata, companyId: number | string) {
     return await baseService.postJSON(`plaid/items?company_id=${companyId}`, {
       public_token: token,
       metadata: meta,
