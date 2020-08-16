@@ -47,6 +47,11 @@ def assign_user_to_company(
 
 def get_company_isas(company_id: int, user: User) -> List[ISA]:
     company = get_company_by_id(company_id=company_id, user=user)
+    isas = _get_company_isas(company=company)
+    return isas
+
+
+def _get_company_isas(company: Company) -> List[ISA]:
     isa_list = []  # type: List[ISA]
     for user in company.users:
         isa_list.extend(user.isas)
@@ -57,3 +62,15 @@ def get_company_coaches(company_id: int, user: User) -> List[User]:
     company = get_company_by_id(company_id=company_id, user=user)
     users = company.users  # type: List[User]
     return users
+
+
+def get_company_overview(company_id: int, user: User) -> Dict[Any, Any]:
+    company = get_company_by_id(company_id=company_id, user=user)
+    coaches = company.users  # type: List[User]
+    isas = _get_company_isas(company)
+    return dict(
+        coaches=len(coaches),
+        isas=len(isas),
+        total_revenue=0,
+        last_payment=dict(value=0, date=None),
+    )
