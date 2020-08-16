@@ -21,6 +21,10 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
   const [request_error, set_request_error] = useState<any>('')
   const [coaches, set_coaches] = useState<Coach[]>([])
   const [show_new_coach_popup, set_show_new_coach_popup] = useState(false)
+  const [coach, set_coach] = useState({
+    first_name: '',
+    email: '',
+  })
 
   const getCoaches = async () => {
     try {
@@ -72,8 +76,16 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
           <section className="new-coach">
             <header>
               <h2>Invite someone to join Company Name</h2>
-              <Input onChange={e => e} value={''} placeholder="First Name" />
-              <Input onChange={e => e} value={''} placeholder="Email Address" />
+              <Input
+                onChange={e => set_coach({ ...coach, first_name: e })}
+                value={coach.first_name}
+                placeholder="First Name"
+              />
+              <Input
+                onChange={e => set_coach({ ...coach, email: e })}
+                value={coach.email}
+                placeholder="Email Address"
+              />
               <Button background="MainWarning">SEND INVITE</Button>
             </header>
             <footer>

@@ -36,7 +36,7 @@ export default function ISACalculator(props: ISACalculatorProps) {
       bill = 0
     }
 
-    return Math.round(bill)
+    return bill
   }
 
   const handleCopy = () => {

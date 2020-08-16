@@ -15,6 +15,7 @@ export default class PlaidService {
     return await baseService.postJSON(`plaid/items?company_id=${companyId}`, {
       public_token: token,
       metadata: meta,
+      company_id: companyId
     })
   }
 
