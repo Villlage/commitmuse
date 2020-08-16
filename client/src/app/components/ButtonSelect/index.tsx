@@ -18,7 +18,11 @@ export default function ButtonSelect(props: ButtonSelectProps) {
   return (
     <Options length={props.options.length} className="ButtonSelect-component">
       {props.options.map((option, i) => (
-        <div onClick={() => props.onSelect(option)} className={`option${fixClass(option === props.selected && 'selected')}`} key={i}>
+        <div
+          onClick={() => props.onSelect(option)}
+          className={`option${fixClass(option === props.selected && 'selected')}`}
+          key={i}
+        >
           {option}
         </div>
       ))}

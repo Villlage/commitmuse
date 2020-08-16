@@ -4,7 +4,7 @@
 .CreateIsa-page {
   .container {
     display: flex;
-    align-items: baseline;
+    align-items: flex-start;
 
     .client-info {
       margin-right: 32px;
@@ -101,6 +101,10 @@
           color: #ffffff;
         }
       }
+    }
+
+    .ISACalculator-module {
+      margin-bottom: 24px;
     }
   }
 }

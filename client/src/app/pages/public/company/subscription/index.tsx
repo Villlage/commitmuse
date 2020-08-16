@@ -107,7 +107,9 @@ export default function Subscription(props: SubscriptionProps) {
               </div>
             </div>
             <footer>
-              <Button onClick={() => props.history.push('/company/dashboard')} className="skip">Skip for now</Button>
+              <Button onClick={() => props.history.push('/company/dashboard')} className="skip">
+                Skip for now
+              </Button>
               <Button disabled={!companyId} onClick={subscribe} className="start" background="MainWarning">
                 START MY Subscription
               </Button>
@@ -121,4 +123,3 @@ export default function Subscription(props: SubscriptionProps) {
     </article>
   )
 }
-

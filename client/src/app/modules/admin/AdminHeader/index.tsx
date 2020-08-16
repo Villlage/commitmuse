@@ -60,7 +60,10 @@ export default function AdminHeader(props: AdminHeaderProps) {
                     <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
                   ) : (
                     <div className="initials">
-                      <h2>{props.user.first_name[0]}{props.user.last_name[0]}</h2>
+                      <h2>
+                        {props.user.first_name[0]}
+                        {props.user.last_name[0]}
+                      </h2>
                     </div>
                   )}
                   <Icon icon="caret-down" />

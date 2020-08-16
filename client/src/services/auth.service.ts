@@ -10,7 +10,7 @@ interface User {
 
 export default class AuthService {
   public async register(user: User) {
-      return await baseService.postJSON('register', user)
+    return await baseService.postJSON('register', user)
   }
 
   public async login(user: { password: string; email: string }) {

@@ -20,7 +20,7 @@ export default function OnBoarding(props: OnBoardingProps) {
 
   return (
     <article className="OnBoarding-page">
-        <PageContent>
+      <PageContent>
         <section className="form_wrapper">
           <header>
             <h1>
@@ -81,7 +81,7 @@ export default function OnBoarding(props: OnBoardingProps) {
           </footer>
         </section>
         <ISACalculator percentage={percentage} months={pay_time} max={pay_maximum} current_income={10000} />
-        </PageContent>
+      </PageContent>
     </article>
   )
 }

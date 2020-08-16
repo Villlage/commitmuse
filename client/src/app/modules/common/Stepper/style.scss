@@ -8,7 +8,7 @@
   align-items: center;
   justify-items: center;
   text-transform: uppercase;
-  background: #E0E8F9;
+  background: #e0e8f9;
   overflow: hidden;
 
   .status {
@@ -17,7 +17,7 @@
     @include flex-centered;
     justify-content: space-between;
     @include heebo-bold($size: 13);
-    color: #647ACB;
+    color: #647acb;
 
     &:after {
       content: '';
@@ -39,15 +39,15 @@
 
     &.selected {
       color: white;
-      background: #647ACB;
+      background: #647acb;
 
       &.selected:before {
-        border-color: transparent transparent transparent #E0E8F9;
+        border-color: transparent transparent transparent #e0e8f9;
       }
 
       &.selected:after {
-        background: #E0E8F9;
-        border-color: transparent transparent transparent #647ACB;
+        background: #e0e8f9;
+        border-color: transparent transparent transparent #647acb;
       }
     }
 

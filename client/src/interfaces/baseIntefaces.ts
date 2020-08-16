@@ -116,7 +116,6 @@ export interface PlaidMetadata {
   public_token: string
 }
 
-
 export interface Company {
   number_of_employees_estimate: string
   name: string

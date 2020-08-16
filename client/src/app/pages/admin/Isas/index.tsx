@@ -28,9 +28,7 @@ export default function AdminIsas(props: AdminIsasProps) {
 
   return (
     <article className="AdminIsas-page">
-      <div className="content">
-        {notEmptyArray(isas) && isas.map((isa, i) => <IsaBox key={i} isa={isa}/>)}
-      </div>
+      <div className="content">{notEmptyArray(isas) && isas.map((isa, i) => <IsaBox key={i} isa={isa} />)}</div>
     </article>
   )
 }

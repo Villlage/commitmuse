@@ -12,7 +12,6 @@ const authService = new AuthService()
 interface SettingsProps extends ScreenProps {}
 
 export default function Settings(props: SettingsProps) {
-
   const onLogout = async () => {
     try {
       await authService.signOut()
@@ -31,15 +30,25 @@ export default function Settings(props: SettingsProps) {
           <section className="account_info">
             <Field title="FIRST NAME">{props.currentUser.first_name}</Field>
             <Field title="LAST NAME">{props.currentUser.last_name}</Field>
-            <Field className="full" title="Email address">{props.currentUser.email}</Field>
-            <Field className="full" title="">Change Password</Field>
+            <Field className="full" title="Email address">
+              {props.currentUser.email}
+            </Field>
+            <Field className="full" title="">
+              Change Password
+            </Field>
           </section>
           <h2>Contract Information</h2>
           <section className="contract_info">
-            <Field className="full" title="Current income">$ - / YEAR</Field>
-            <Field className="full" title="">Cancel ISA Contract</Field>
+            <Field className="full" title="Current income">
+              $ - / YEAR
+            </Field>
+            <Field className="full" title="">
+              Cancel ISA Contract
+            </Field>
           </section>
-          <Button style={{marginTop: 16}} onClick={onLogout}>Logout</Button>
+          <Button style={{ marginTop: 16 }} onClick={onLogout}>
+            Logout
+          </Button>
         </div>
       </PageContent>
     </article>

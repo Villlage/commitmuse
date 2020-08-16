@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
 import { PlaidMetadata, ScreenProps } from '../../../../../../interfaces/baseIntefaces'
-import PageHeader from '../../../../../modules/common/PageHeader'
 import PageContent from '../../../../../modules/common/PageContent'
 import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
 import IsaOfferReview from '../../../../../modules/client/IsaOfferReview'
@@ -12,6 +11,7 @@ import PlaidService from '../../../../../../services/plaid.service'
 import Message from '../../../../../components/Message'
 import Button from '../../../../../components/Button'
 import ClientService from '../../../../../../services/client.service'
+import ISACalculator from '../../../../../modules/on-boarding/ISACalculator'
 
 const plaidService = new PlaidService()
 const clientService = new ClientService()
@@ -95,7 +95,9 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
         }}
       />
     ),
-    'sign up': isa && <ClientIsaSignUp email={isa.student.email} user_id={isa.student.id.toString()} onNext={handleSignUp} />,
+    'sign up': isa && (
+      <ClientIsaSignUp email={isa.student.email} user_id={isa.student.id.toString()} onNext={handleSignUp} />
+    ),
     'link bank': (
       <section className="link_bank">
         <Button background="MainWarning" onClick={() => open()}>
@@ -112,7 +114,18 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
           <Stepper steps={offerStatuses} activeIndex={offer_step} />
           {isa && offer_strategy[offerStatuses[offer_step]]}
         </section>
-        {isa && <FAQ maximum={isa.cap} months={isa.time_to_be_paid} percentage={isa.percentage} current_income={isa.current_income} />}
+
+        {isa && (
+          <section>
+            <ISACalculator
+              current_income={isa.current_income}
+              percentage={isa.percentage}
+              months={isa.time_to_be_paid}
+              max={isa.cap}
+            />
+            <FAQ />
+          </section>
+        )}
       </PageContent>
       <Message message={request_error} />
     </article>

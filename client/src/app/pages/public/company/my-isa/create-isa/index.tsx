@@ -11,10 +11,13 @@ import Button from '../../../../../components/Button'
 import IsaService from '../../../../../../services/isa.service'
 import Message from '../../../../../components/Message'
 import IsaAssessment from '../../../../../modules/common/IsaAssessment'
+import ISACalculator from '../../../../../modules/on-boarding/ISACalculator'
+import Stepper from '../../../../../modules/common/Stepper'
 
 const isaService = new IsaService()
 
 const pricing = ['From total income', 'From new raise', 'Placement']
+const OFFER_STEPS = ['client', 'program', 'isa offer', 'review', 'contract']
 
 type IncomeKeys =
   | 'description'
@@ -31,6 +34,7 @@ export default function CreateIsa(props: CreateIsaProps) {
   const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
   const [selected_pricing, set_selected_pricing] = useState(pricing[0])
+  const [active_step, set_active_step] = useState(0)
 
   const [client, set_client] = useState({
     email: '',
@@ -99,10 +103,22 @@ export default function CreateIsa(props: CreateIsaProps) {
     return Number(str.replace(/,/g, ''))
   }
 
+  const offer_step_strategy: any = {
+    client: '',
+    program: '',
+    'isa offer': '',
+    review: '',
+    contract: '',
+  }
+
   return (
     <article className="CreateIsa-page">
       <PageContent title="New ISA Offer">
         <section className="container">
+          <section className="offer-steps">
+            {/*<Stepper steps={OFFER_STEPS} activeIndex={active_step}/>*/}
+            {/*{offer_step_strategy[OFFER_STEPS[active_step]]}*/}
+          </section>
           <section className="client-info">
             <header>
               <h2>Client Information</h2>
@@ -200,12 +216,15 @@ export default function CreateIsa(props: CreateIsaProps) {
             )}
           </section>
 
-          <FAQ
-            current_income={removeComma(total_income.current_income)}
-            percentage={Number(total_income.percentage)}
-            months={Number(total_income.time_to_be_paid)}
-            maximum={removeComma(total_income.cap)}
-          />
+          <section className="faq-and-calc">
+            <ISACalculator
+              current_income={removeComma(total_income.current_income)}
+              percentage={Number(total_income.percentage)}
+              months={Number(total_income.time_to_be_paid)}
+              max={removeComma(total_income.cap)}
+            />
+            <FAQ />
+          </section>
         </section>
       </PageContent>
       <Message message={request_error} />

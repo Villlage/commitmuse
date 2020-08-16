@@ -28,9 +28,7 @@ export default function AdminUsers(props: AdminUsersProps) {
 
   return (
     <article className="AdminUsers-page">
-      <div className="content">
-        {notEmptyArray(users) && users.map(u => <AdminUserBox key={u.id} user={u}/>)}
-      </div>
+      <div className="content">{notEmptyArray(users) && users.map(u => <AdminUserBox key={u.id} user={u} />)}</div>
     </article>
   )
 }

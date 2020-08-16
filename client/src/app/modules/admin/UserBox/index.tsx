@@ -21,7 +21,7 @@ export default function AdminUserBox(props: AdminUserBoxProps) {
           )}
         </div>
         <div className="right-actions">
-            <Button>EDIT</Button>
+          <Button>EDIT</Button>
           <Button>VIEW</Button>
         </div>
       </header>

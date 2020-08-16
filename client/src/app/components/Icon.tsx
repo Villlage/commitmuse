@@ -70,7 +70,7 @@ export const icons: any = {
   round_blue_user: generateIconLink('round_blue_user'),
   round_blue_doc: generateIconLink('round_blue_doc'),
   'user-circle': generateIconLink('user-circle'),
-  'emy_owens': generateIconLink('emy_owens'),
+  emy_owens: generateIconLink('emy_owens'),
 }
 
 export type SystemIcons =
@@ -154,10 +154,12 @@ export default function Icon(props: IconProps) {
   const icon = props.icon.replace(/ /g, '')
   return !!icons[icon] ? (
     props.color ? (
-      <div style={{
-        mask: `url(${icons[icon]})`,
-        backgroundColor: props.color
-      }} />
+      <div
+        style={{
+          mask: `url(${icons[icon]})`,
+          backgroundColor: props.color,
+        }}
+      />
     ) : (
       <img
         onClick={props.onClick}
