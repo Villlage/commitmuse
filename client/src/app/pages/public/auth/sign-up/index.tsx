@@ -11,7 +11,6 @@ import { emailErrorMessage, passwordLength, passwordMustMatch, requiredFieldErro
 import Button from '../../../../components/Button'
 import Message from '../../../../components/Message'
 import { Link } from 'react-router-dom'
-import PageHeader from '../../../../modules/common/PageHeader'
 import ButtonSelect from '../../../../components/ButtonSelect'
 import { USER_TYPES } from '../../../../../constants/system'
 
@@ -23,7 +22,7 @@ export default function SignUp(props: ScreenProps) {
     last_name: '',
     email: '',
     password: '',
-    // type: 'company',
+    type: 'company',
   })
 
   const [password_confirm, set_password_confirm] = useState('')
@@ -47,7 +46,8 @@ export default function SignUp(props: ScreenProps) {
   const onSubmit = async () => {
     set_loading(true)
     try {
-      const res = await authService.register(user)
+      const { type, ...rest } = user
+      const res = await authService.register(rest)
 
       if (res) {
         if (res.error) {
@@ -58,6 +58,10 @@ export default function SignUp(props: ScreenProps) {
 
         await props.fetchUser()
         set_loading(false)
+
+        if (type === 'company') {
+          return props.history.push('/company/register')
+        }
 
         return props.history.push('/my-isa')
       }
@@ -140,10 +144,8 @@ export default function SignUp(props: ScreenProps) {
               <label>I am a:</label>
               <ButtonSelect
                 options={USER_TYPES}
-                selected={'company'}
-                onSelect={e => {
-                  // set_user({ ...user, type: e })
-                }}
+                selected={user.type}
+                onSelect={e => set_user({ ...user, type: e })}
               />
             </div>
           </div>
