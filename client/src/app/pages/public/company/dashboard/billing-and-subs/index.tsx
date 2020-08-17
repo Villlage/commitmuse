@@ -107,7 +107,7 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
     invoices: (
       <section className="tab">
         <h2 className="tab-title">Invoices</h2>
-        <Table rows={INVOICES} headers={table_headers} />
+        {/*<Table rows={INVOICES} headers={table_headers} />*/}
       </section>
     ),
   }

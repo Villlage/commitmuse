@@ -22,14 +22,11 @@ export default function CompanyIsas(props: CompanyIsasProps) {
   const [filter, set_filter] = useState('')
   const [loading, set_loading] = useState<boolean>(true)
   const [request_error, set_request_error] = useState<any>('')
-  const [cant_create, set_cant_create] = useState(true)
   const [isas, set_isas] = useState<ISA[]>([])
 
   const getIsas = async () => {
     try {
       const res = await companyService.isas(props.currentUser.company)
-      const mask = await plaidService.getMask(props.currentUser.company)
-      set_cant_create(!mask)
       set_loading(false)
 
       if ((res && res.error) || res.err_msg) {
@@ -93,7 +90,7 @@ export default function CompanyIsas(props: CompanyIsasProps) {
               <p>Start by creating a new one.</p>
               <Icon icon="arrow_to_button" />
             </div>
-            <Button disabled={cant_create} className="new_isa">
+            <Button onClick={() => props.history.push('isas/create')} className="new_isa">
               <Icon icon="new_isa_plus" />
               NEW ISA
             </Button>

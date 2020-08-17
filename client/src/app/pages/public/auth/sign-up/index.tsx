@@ -47,7 +47,8 @@ export default function SignUp(props: ScreenProps) {
     set_loading(true)
     try {
       const { type, ...rest } = user
-      const res = await authService.register(rest)
+      const res =
+        type === 'client' ? await authService.register({ type: 'students', ...rest }) : await authService.register(rest)
 
       if (res) {
         if (res.error) {

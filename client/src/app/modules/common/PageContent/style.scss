@@ -2,15 +2,6 @@
 @import '../../../../styles/colors';
 
 .PageContent-module {
-  position: relative;
-  .top-wrapper {
-    position: absolute;
-    top: 0;
-    background: #010162;
-    height: 100px;
-    width: 100%;
-  }
-
   > .content {
     position: relative;
     height: calc(100vh - 60px);

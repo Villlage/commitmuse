@@ -6,6 +6,7 @@ const baseService = new BaseService()
 interface User {
   email: string
   password: string
+  type?: string
 }
 
 export default class AuthService {

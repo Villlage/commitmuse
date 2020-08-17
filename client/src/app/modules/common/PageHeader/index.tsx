@@ -33,7 +33,15 @@ export default function PageHeader(props: PageHeaderProps) {
     <>
       <header className="PageHeader-module">
         <nav>
-          <div className="logo" onClick={() => history.push('/company/dashboard')}>
+          <div
+            className="logo"
+            onClick={() => {
+              if (props.user) {
+                return props.user.company ? history.push('/company/dashboard') : history.push('/my-isa')
+              }
+              history.push('/login')
+            }}
+          >
             <img src="/web/assets/images/logo.png" alt="logo" />
           </div>
           {props.user && props.user.user_role === 1 && (
@@ -74,6 +82,7 @@ export default function PageHeader(props: PageHeaderProps) {
             )}
           </div>
         </nav>
+        <div className="top-wrapper" />
       </header>
     </>
   )
