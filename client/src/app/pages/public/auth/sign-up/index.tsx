@@ -143,7 +143,11 @@ export default function SignUp(props: ScreenProps) {
             />
             <div className="select-type full">
               <label>I am a:</label>
-              <ButtonSelect options={USER_TYPES} selected={user.type} onSelect={e => set_user({ ...user, type: e })} />
+              <ButtonSelect
+                options={USER_TYPES}
+                selected={user.type}
+                onSelect={e => set_user({ ...user, type: e })}
+              />
             </div>
           </div>
           <footer className="full">
