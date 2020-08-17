@@ -11,6 +11,15 @@
   color: white;
   width: 100%;
 
+  .top-wrapper {
+    position: absolute;
+    top: 100%;
+    background: #010162;
+    height: 100px;
+    width: 100%;
+    left: 0;
+  }
+
   nav {
     height: 100%;
     align-items: center;

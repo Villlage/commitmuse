@@ -12,7 +12,6 @@ interface PageContentProps {
 export default function PageContent(props: PageContentProps) {
   return (
     <section className="PageContent-module">
-      <div className="top-wrapper" />
       <section className="content">
         {createEl('h1', props.title, { className: 'page-title' })}
         {props.children}
