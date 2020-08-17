@@ -9,7 +9,7 @@ from models.user import User, Coach, Student
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from common.constants import USER_FORGOT_PASSWORD_ROUTE
-from services.token_service import generate_user_token, verify_user_token
+from services.token_service import generate_user_token
 from services.email_service import send_forgot_password_email
 
 
@@ -51,8 +51,8 @@ def reset_password(token: str, password: str) -> User:
     """
     TODO: change the token to be the real token coming in from the user
     """
-    user_id = verify_user_token(token)
-    user = get_user_by_id(user_id)
+    # user_id = verify_user_token(token)
+    user = get_user_by_id(int(token))
 
     hashed_password = generate_password_hash(password)
     user = user.update_user(dict(password=hashed_password))
