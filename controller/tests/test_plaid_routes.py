@@ -1,5 +1,6 @@
 # type: ignore
 import pytest
+from app import app
 from copy import copy
 import json
 from tests.factories import PlaidItemFactory, UserFactory, CompanyFactory
@@ -72,3 +73,26 @@ class TestPlaidItem:
             assert resp.status_code == 200
             assert len(resp.json) == 1
             assert resp.json[0]["id"] == plaid_item3_id
+
+
+class TestPlaidToken:
+    @pytest.fixture()
+    def mock_link_token(self, mocker) -> None:
+        return mocker.patch(
+            "third_party.plaid.plaid_client.client.LinkToken.create",
+            return_value={
+                "expiration": "2020-08-20T14:45:48Z",
+                "link_token": "link-sandbox-9108da01-c4d5-495a-a16e-03ba74d33473",
+                "request_id": "yxq0mRxo3Px3ZRh",
+            },
+        )
+
+    def test_create_link_token(self, mock_link_token) -> None:
+        with app.test_client() as client:
+            resp = client.get(f"/plaid/link-token")
+            assert resp.status_code == 200
+            assert resp.json == {
+                "expiration": "2020-08-20T14:45:48Z",
+                "link_token": "link-sandbox-9108da01-c4d5-495a-a16e-03ba74d33473",
+                "request_id": "yxq0mRxo3Px3ZRh",
+            }

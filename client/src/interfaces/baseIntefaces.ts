@@ -5,6 +5,7 @@ export interface Dict {
 }
 
 export interface ScreenProps {
+  plaid_token: string
   currentUser: User
   history: H.History
   fetchUser(): void

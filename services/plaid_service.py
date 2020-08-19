@@ -66,7 +66,7 @@ def get_plaid_items(user: User, company_id: Optional[int] = None) -> List[PlaidI
     plaid_items = user.plaid_items  # type: List[PlaidItem]
 
     if company_id:
-        copmany = get_company_by_id(user=user, company_id=company_id)
-        plaid_items = copmany.plaid_items
+        company = get_company_by_id(user=user, company_id=company_id)
+        plaid_items = company.plaid_items
 
     return plaid_items

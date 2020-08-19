@@ -17,6 +17,7 @@ from common.exceptions import (
 from controller.common import login_required
 from services.plaid_service import create_plaid_item, get_plaid_items
 from typing import Tuple
+from third_party.plaid.plaid_client import get_link_token
 
 
 @app.route("/plaid/items", methods=["POST"])
@@ -41,3 +42,8 @@ def get_plaid_items_route() -> Tuple[Response, int]:
 
     response = plaid_item_schema.dump(plaid_items, many=True)
     return jsonify(response), 200
+
+
+@app.route("/plaid/link-token", methods=["GET"])
+def plaid_link_token() -> Tuple[Response, int]:
+    return jsonify(get_link_token()), 200

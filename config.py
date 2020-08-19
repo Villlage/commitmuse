@@ -15,8 +15,8 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv("SECRET_KEY", "thisisasecretkey")
 
-    PLAID_CLIENT_ID = os.getenv("PLAID_CLIENT_ID", "5ae9039e900e950013499ad4")
-    PLAID_SECRET = os.getenv("PLAID_SECRET", "b9b6191d2b3e6b4d958e70f7c80a94")
+    PLAID_CLIENT_ID = os.getenv("PLAID_CLIENT_ID", "5f3b6efe21746b00118db03f")
+    PLAID_SECRET = os.getenv("PLAID_SECRET", "feb5a4deba85df5298700197712d8d")
     PLAID_PUBLIC_KEY = os.getenv("PLAID_PUBLIC_KEY", "a004a070f0629da694fbae916414f3")
     PLAID_ENV = os.getenv("PLAID_ENV", "sandbox")
 
@@ -29,6 +29,17 @@ class Config(object):
     DOCUSIGN_BASE_PATH = os.getenv(
         "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
     )
+    # integration id and client id are synonyms here
+    DOCUSIGN_CLINET_ID = os.getenv(
+        "DOCUSIGN_CLINET_ID", "4ecc3248-c115-4782-bbb3-776260404d09"
+    )
+    DOCUSIGN_SECRET_KEY = os.getenv(
+        "DOCUSIGN_SECRET_KEY", "e4df848e-b88d-4731-a758-85765ed814be"
+    )
+    DOCUSIGN_USER_ID = os.getenv(
+        "DOCUSIGN_USER_ID", "b9d76a2a-e332-4a5d-8592-cf70f9195198"
+    )
+
     SENDGRID_API_KEY = "SOMETHING"
 
     WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")

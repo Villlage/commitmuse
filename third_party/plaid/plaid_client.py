@@ -1,3 +1,4 @@
+import time
 from common.exceptions import ValidationError
 from app import config, logger
 from plaid import Client
@@ -7,7 +8,6 @@ from typing import Any, Dict
 client = Client(
     client_id=config.PLAID_CLIENT_ID,
     secret=config.PLAID_SECRET,
-    public_key=config.PLAID_PUBLIC_KEY,
     environment=config.PLAID_ENV,
 )
 
@@ -30,3 +30,14 @@ def get_access_token(public_token: str) -> str:
 def get_plaid_accounts(access_token: str) -> Dict[Any, Any]:
     accounts = client.Accounts.get(access_token)  # type: Dict[Any, Any]
     return accounts
+
+
+def get_link_token() -> Any:
+    plaid_configs = {
+        "user": {"client_user_id": str(time.time()),},
+        "products": ["auth", "transactions"],
+        "client_name": "Commit Muse",
+        "country_codes": ["US"],
+        "language": "en",
+    }
+    return client.LinkToken.create(plaid_configs)
