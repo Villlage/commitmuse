@@ -84,6 +84,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
     env: currentEnv().PLAID_ENV,
     publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
+    token: props.plaid_token
   }
 
   const { open, ready, error } = usePlaidLink(config)

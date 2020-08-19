@@ -6,14 +6,20 @@ import UserService from './services/user.service'
 import Loader from './app/components/Loader'
 import { log } from './services/logging.service'
 import { User } from './interfaces/baseIntefaces'
+import PlaidService from './services/plaid.service'
 
 const configStore: any = store()
 const userService = new UserService()
+const plaidService = new PlaidService()
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User | null | undefined>(undefined)
+  const [plaid_token, set_plaid_token] = useState('')
   const fetchUser = async () => {
+    const tokenRes = await plaidService.getToken()
+    set_plaid_token(tokenRes.link_token)
     try {
+
       const res = await userService.checkAuth()
       if (res) {
         const user = await userService.getCurrentUser()
@@ -33,7 +39,7 @@ function App() {
 
   return currentUser !== undefined ? (
     <Provider store={configStore}>
-      <Routes currentUser={currentUser as User} fetchUser={fetchUser} setCurrentUser={(u: User | null) => setCurrentUser(u)} />
+      <Routes plaid_token={plaid_token} currentUser={currentUser as User} fetchUser={fetchUser} setCurrentUser={(u: User | null) => setCurrentUser(u)} />
     </Provider>
   ) : (
     <Loader />

@@ -76,6 +76,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
     product: ['auth', 'transactions'],
     publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
+    token: props.plaid_token
   }
 
   const { open } = usePlaidLink(config)

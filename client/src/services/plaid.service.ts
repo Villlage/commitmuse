@@ -10,24 +10,17 @@ export default class PlaidService {
   }
 
   public async createItem(token: string, meta: PlaidMetadata) {
-    const tokenRes = await this.getToken()
     return await baseService.postJSON('plaid/items', {
-      public_token: tokenRes.link_token,
-      metadata: {
-        ...meta,
-        public_token: tokenRes.link_token,
-      }
+      public_token: token,
+      metadata: meta,
     })
   }
 
   public async createCompanyItem(token: string, meta: PlaidMetadata, companyId: number | string) {
-    const tokenRes = await this.getToken()
-    return await baseService.postJSON('plaid/items', {
-      public_token: tokenRes.link_token,
-      metadata: {
-        ...meta,
-        public_token: tokenRes.link_token,
-      },
+    return await baseService.postJSON(`plaid/items?company_id=${companyId}`, {
+      public_token: token,
+      metadata: meta,
+      company_id: companyId
     })
   }
 
