@@ -81,7 +81,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
     clientName: 'Commit Muse',
     env: 'sandbox',
     product: ['auth', 'transactions'],
-    publicKey: 'a004a070f0629da694fbae916414f3',
+    publicKey: '5f3b6efe21746b00118db03f',
     onSuccess: onSuccess,
   }
 

@@ -7,7 +7,6 @@ from typing import Any, Dict
 client = Client(
     client_id=config.PLAID_CLIENT_ID,
     secret=config.PLAID_SECRET,
-    public_key=config.PLAID_PUBLIC_KEY,
     environment=config.PLAID_ENV,
 )
 
