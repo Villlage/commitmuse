@@ -12,6 +12,7 @@ import Message from '../../../../../components/Message'
 import Button from '../../../../../components/Button'
 import ClientService from '../../../../../../services/client.service'
 import ISACalculator from '../../../../../modules/on-boarding/ISACalculator'
+import currentEnv from '../../../../../../config/environment'
 
 const plaidService = new PlaidService()
 const clientService = new ClientService()
@@ -81,7 +82,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
     clientName: 'Commit Muse',
     env: 'sandbox',
     product: ['auth', 'transactions'],
-    publicKey: '5f3b6efe21746b00118db03f',
+    publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
   }
 

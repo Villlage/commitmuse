@@ -11,6 +11,7 @@ import Message from '../../../../components/Message'
 import { usePlaidLink } from 'react-plaid-link'
 import PlaidService from '../../../../../services/plaid.service'
 import { log } from '../../../../../services/logging.service'
+import currentEnv from '../../../../../config/environment'
 
 const companyService = new CompanyService()
 const plaidService = new PlaidService()
@@ -73,7 +74,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
     clientName: 'Commit Muse',
     env: 'sandbox',
     product: ['auth', 'transactions'],
-    publicKey: '5f3b6efe21746b00118db03f',
+    publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
   }
 
