@@ -16,7 +16,7 @@ const ENV = {
   production: {
     MAIN_API: 'https://commitmuse.herokuapp.com/',
     PLAID_PUBLIC_KEY: 'a004a070f0629da694fbae916414f3',
-    PLAID_ENV: 'sandbox',
+    PLAID_ENV: 'development',
   },
 }
 
