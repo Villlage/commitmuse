@@ -80,8 +80,8 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
 
   const config = {
     clientName: 'Commit Muse',
-    env: 'sandbox',
     product: ['auth', 'transactions'],
+    env: currentEnv().PLAID_ENV,
     publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
   }

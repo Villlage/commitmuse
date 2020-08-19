@@ -72,7 +72,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
 
   const config = {
     clientName: 'Commit Muse',
-    env: 'sandbox',
+    env: currentEnv().PLAID_ENV,
     product: ['auth', 'transactions'],
     publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
