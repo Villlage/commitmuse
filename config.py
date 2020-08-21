@@ -8,7 +8,10 @@ client_build_dir = (
 
 
 class Config(object):
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+        "DATABASE_URL", "postgres://postgres@localhost/village"
+    )
+    # SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
     DEBUG = False
     TESTING = False
     LOG_LEVEL = "INFO"
@@ -29,6 +32,7 @@ class Config(object):
     DOCUSIGN_BASE_PATH = os.getenv(
         "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
     )
+
     # integration id and client id are synonyms here
     DOCUSIGN_CLINET_ID = os.getenv(
         "DOCUSIGN_CLINET_ID", "4ecc3248-c115-4782-bbb3-776260404d09"
@@ -43,6 +47,30 @@ class Config(object):
     SENDGRID_API_KEY = "SOMETHING"
 
     WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")
+
+    # DOCUSIGN_CLIENT_ID = "9ece7d69-24d6-43ce-9a1c-cbfe3b11c819"
+    # DOCUSIGN_CLIENT_SECRET = "0fab5434-db92-41d7-86a1-6a71e7aefc7f"
+    AUTHORIZATION_SERVER = "https://account-d.docusign.com"
+    AUTHORIZE_URL = "https://account-d.docusign.com/oauth/auth"
+    ACCESS_TOKEN_URL = "https://account-d.docusign.com/oauth/token"
+    ALLOW_SILENT_AUTHENTICATION = True
+    BASE_URL = "https://demo.docusign.net"
+    CODE_GRANT = "code grant"
+    TARGET_ACC_ID = None
+    SIGNATURE = "signature"
+
+    DOCUSIGN_CLIENT_ID = "4ecc3248-c115-4782-bbb3-776260404d09"
+    INTEGRATION_KEY_PRODUCTION = "841c2045-208d-423d-ac21-c5e5883de495"
+
+    DOCUSIGN_CLIENT_SECRET = INTEGRATION_KEY_PRODUCTION
+    DOCUSIGN_PRODUCTION_CLIENT_SECRET = "3fe3198d-29e4-4357-ac2f-c94d904a7306"
+
+    SIGNER_EMAIL = "gilad.kahala@gmail.com"
+    SIGNER_NAME = "Gilad Kahala"
+
+    IMPERSONATED_USER_ID = "b9d76a2a-e332-4a5d-8592-cf70f9195198"
+    SECRET_KEY = "e4df848e-b88d-4731-a758-85765ed814be"
+    DS_PAYMENT_GATEWAY_ID = None
 
 
 class LocalConfig(Config):
