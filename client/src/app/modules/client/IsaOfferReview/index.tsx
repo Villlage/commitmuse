@@ -30,10 +30,10 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
           {props.isa.description}
         </Field>
         <Field className="full" title="Cancellation Period">
-          {props.isa.cancellation_period_weeks ? props.isa.cancellation_period_weeks + ' weeks' : '-'}
+          {props.isa.cancellation_period_weeks ? props.isa.cancellation_period_weeks + ' week(s)' : '-'}
         </Field>
         <Field className="full" title="Time to be paid">
-          {props.isa.time_to_be_paid ? props.isa.time_to_be_paid + ' month(s)' : '-'}
+          {props.isa.time_to_be_paid ? props.isa.time_to_be_paid + ' Month(s)' : '-'}
         </Field>
         <IsaAssessment className="full" />
       </div>

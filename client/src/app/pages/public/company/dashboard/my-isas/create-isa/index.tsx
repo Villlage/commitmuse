@@ -87,7 +87,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
       }
       set_loading(false)
 
-      return props.history.push(`/isa/${res.id}`)
+      return props.history.push(`/company/isas/${res.id}`)
     } catch (e) {
       set_loading(false)
       set_request_error(e.error || e.toString())
@@ -192,7 +192,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
                       value={addComma(total_income.cap)}
                     />
                     <Input
-                      postFix="Weeks"
+                      postFix="Week(s)"
                       onChange={e => isNumber(e) && setIncome(e, 'cancellation_period')}
                       placeholder="Cancellation Period"
                       value={total_income.cancellation_period}
