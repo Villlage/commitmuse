@@ -2,9 +2,16 @@
 @import '../../../../../../../styles/colors';
 
 .CompanyCreateIsa-page {
+
+
   .container {
     display: flex;
     align-items: flex-start;
+
+    .offer-steps {
+      border-radius: 10px;
+      overflow: hidden;
+    }
 
     .client-info {
       margin-right: 32px;

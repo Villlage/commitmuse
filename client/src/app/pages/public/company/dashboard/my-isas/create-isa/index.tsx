@@ -13,6 +13,9 @@ import Message from '../../../../../../components/Message'
 import IsaAssessment from '../../../../../../modules/common/IsaAssessment'
 import ISACalculator from '../../../../../../modules/on-boarding/ISACalculator'
 import MenuSideBar from '../../../../../../modules/company/MenuSideBar'
+import Stepper from '../../../../../../modules/common/Stepper'
+import ClientStep from '../../../../../../modules/company/CreateIsa/client-step'
+import ProgramStep from '../../../../../../modules/company/CreateIsa/program-step'
 
 const isaService = new IsaService()
 
@@ -34,7 +37,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
   const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
   const [selected_pricing, set_selected_pricing] = useState(pricing[0])
-  const [active_step, set_active_step] = useState(0)
+  const [active_step, set_active_step] = useState(1)
 
   const [client, set_client] = useState({
     email: '',
@@ -104,8 +107,22 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
   }
 
   const offer_step_strategy: any = {
-    client: '',
-    program: '',
+    client: (
+      <ClientStep
+        first_name={client.first_name}
+        last_name={client.last_name}
+        email={client.email}
+        onChange={(e, key) => set_client({ ...client, [key]: e })}
+        onNext={() => set_active_step(active_step + 1)}
+      />
+    ),
+    program: <ProgramStep
+      onChange={(e, key) => set_client({ ...client, [key]: e })}
+      onNext={() => set_active_step(active_step + 1)}
+      description={'1'}
+      duration={'1'}
+      position_field={'1'}
+    />,
     'isa offer': '',
     review: '',
     contract: '',
@@ -117,34 +134,29 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
       <PageContent title="New ISA Offer">
         <section className="container">
           <section className="offer-steps">
-            {/*<Stepper steps={OFFER_STEPS} activeIndex={active_step}/>*/}
-            {/*{offer_step_strategy[OFFER_STEPS[active_step]]}*/}
+            <Stepper steps={OFFER_STEPS} activeIndex={active_step} />
+            {offer_step_strategy[OFFER_STEPS[active_step]]}
           </section>
+        </section>
+      </PageContent>
+      <Message message={request_error} />
+    </article>
+  )
+}
+
+/*
+          <section className="faq-and-calc">
+            <ISACalculator
+              current_income={removeComma(total_income.current_income)}
+              percentage={Number(total_income.percentage)}
+              months={Number(total_income.time_to_be_paid)}
+              max={removeComma(total_income.cap)}
+            />
+            <FAQ />
+          </section>
+          
           <section className="client-info">
-            <header>
-              <h2>Client Information</h2>
-              <Input
-                onChange={e => set_client({ ...client, first_name: e })}
-                value={client.first_name}
-                placeholder="First Name"
-              />
-              <Input
-                onChange={e => set_client({ ...client, last_name: e })}
-                value={client.last_name}
-                placeholder="Last Name"
-              />
-              <Input
-                className="email"
-                error={error.email}
-                onChange={e => {
-                  set_error({ ...error, email: '' })
-                  set_client({ ...client, email: e })
-                  !validateEmail(e) && set_error({ ...error, email: emailErrorMessage })
-                }}
-                value={client.email}
-                placeholder="Email Address"
-              />
-            </header>
+
             <footer>
               <h2>Offer Details</h2>
               <TooltipBadge label="Pricing" tooltip="help text" />
@@ -216,19 +228,4 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
               </div>
             )}
           </section>
-
-          <section className="faq-and-calc">
-            <ISACalculator
-              current_income={removeComma(total_income.current_income)}
-              percentage={Number(total_income.percentage)}
-              months={Number(total_income.time_to_be_paid)}
-              max={removeComma(total_income.cap)}
-            />
-            <FAQ />
-          </section>
-        </section>
-      </PageContent>
-      <Message message={request_error} />
-    </article>
-  )
-}
+ */
