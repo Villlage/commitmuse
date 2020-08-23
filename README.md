@@ -79,7 +79,7 @@ cd village
 FLASK_ENV=development pipenv run flask run
 
 --windows--
-set FLASK_ENV=development 
+set FLASK_ENV=development
 pipenv run flask run
 ```
 * go to: http://localhost:5000/

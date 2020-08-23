@@ -2,20 +2,13 @@ import './style.scss'
 import React, { useState } from 'react'
 import { ScreenProps } from '../../../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../../../modules/common/PageContent'
-import FAQ from '../../../../../../modules/company/CreateIsa/FAQ'
-import { fixClass, isNumber, validateEmail } from '../../../../../../../helpers/base'
-import { emailErrorMessage } from '../../../../../../../constants/auth'
-import Input from '../../../../../../components/Input'
-import TooltipBadge from '../../../../../../components/TooltipBadge'
-import Button from '../../../../../../components/Button'
 import IsaService from '../../../../../../../services/isa.service'
 import Message from '../../../../../../components/Message'
-import IsaAssessment from '../../../../../../modules/common/IsaAssessment'
-import ISACalculator from '../../../../../../modules/on-boarding/ISACalculator'
 import MenuSideBar from '../../../../../../modules/company/MenuSideBar'
 import Stepper from '../../../../../../modules/common/Stepper'
-import ClientStep from '../../../../../../modules/company/CreateIsa/client-step'
-import ProgramStep from '../../../../../../modules/company/CreateIsa/program-step'
+import ClientStep from '../../../../../../modules/company/CreateIsa/ClientStep'
+import ProgramStep from '../../../../../../modules/company/CreateIsa/ProgramStep'
+import IsaOfferStep from '../../../../../../modules/company/CreateIsa/IsaOfferStep'
 
 const isaService = new IsaService()
 
@@ -37,7 +30,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
   const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
   const [selected_pricing, set_selected_pricing] = useState(pricing[0])
-  const [active_step, set_active_step] = useState(1)
+  const [active_step, set_active_step] = useState(2)
 
   const [client, set_client] = useState({
     email: '',
@@ -62,11 +55,6 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
   })
 
   const setIncome = (e: string, key: IncomeKeys) => set_total_income({ ...total_income, [key]: e })
-
-  const notValid = () =>
-    Object.values(client).some(i => i === '') ||
-    Object.values(total_income).some(i => i === '') ||
-    !validateEmail(client.email)
 
   const sendOffer = async () => {
     set_loading(true)
@@ -116,14 +104,22 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         onNext={() => set_active_step(active_step + 1)}
       />
     ),
-    program: <ProgramStep
-      onChange={(e, key) => set_client({ ...client, [key]: e })}
-      onNext={() => set_active_step(active_step + 1)}
-      description={'1'}
-      duration={'1'}
-      position_field={'1'}
-    />,
-    'isa offer': '',
+    program: (
+      <ProgramStep
+        onChange={(e, key) => set_client({ ...client, [key]: e })}
+        onNext={() => set_active_step(active_step + 1)}
+        description={'1'}
+        duration={'1'}
+        position_field={'1'}
+      />
+    ),
+    'isa offer': (
+      <IsaOfferStep
+        description={''}
+        onChange={(e, key) => set_client({ ...client, [key]: e })}
+        onNext={() => set_active_step(active_step + 1)}
+      />
+    ),
     review: '',
     contract: '',
   }
