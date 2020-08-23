@@ -33,6 +33,7 @@ interface CompanyOnBoardingProps extends ScreenProps {}
 export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
   const [request_error, set_request_error] = useState('')
   const [active_step, set_active_step] = useState(0)
+  const [loading, set_loading] = useState(false)
   const [data, set_data] = useState({
     number_of_employees_estimate: '1',
     name: '',
@@ -76,13 +77,14 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
     product: ['auth', 'transactions'],
     publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
-    token: props.plaid_token
+    token: props.plaid_token,
   }
 
   const { open } = usePlaidLink(config)
 
   const onRegister = async () => {
     try {
+      set_loading(true)
       const res = await companyService.create({
         name: data.name,
         number_of_employees_estimate: data.number_of_employees_estimate,
@@ -91,15 +93,18 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
 
       if ((res && res.error) || res.err_msg) {
         log(res)
+        set_loading(false)
         set_request_error(res.error || res.err_msg)
         return setTimeout(() => set_request_error(''), 3000)
       }
       localStorage.setItem('companyId', res.id)
       await props.fetchUser()
+      set_loading(false)
 
       set_active_step(active_step + 1)
       open()
     } catch (e) {
+      set_loading(false)
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
     }
@@ -141,7 +146,13 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
           </div>
         </div>
         <footer>
-          <Button disabled={notValid()} onClick={onRegister} background="MainWarning" icon="arrow-right">
+          <Button
+            loading={loading}
+            disabled={notValid()}
+            onClick={onRegister}
+            background="MainWarning"
+            icon="arrow-right"
+          >
             NEXT
           </Button>
         </footer>

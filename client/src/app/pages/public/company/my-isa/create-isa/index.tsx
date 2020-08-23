@@ -191,7 +191,7 @@ export default function CreateIsa(props: CreateIsaProps) {
                       value={addComma(total_income.cap)}
                     />
                     <Input
-                      postFix="Weeks"
+                      postFix="Week(s)"
                       onChange={e => isNumber(e) && setIncome(e, 'cancellation_period')}
                       placeholder="Cancellation Period"
                       value={total_income.cancellation_period}

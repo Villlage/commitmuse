@@ -98,7 +98,7 @@ export default function CompanyIsaOverview(props: IsaOverviewProps) {
                       ${isa.current_income} / YEAR
                     </Field>
                     <Field className="full" title="time to be paid">
-                      {isa.time_to_be_paid || '-'} weeks
+                      {isa.time_to_be_paid || '-'} Month(s)
                     </Field>
                     <Field className="full" title="Percentage to be paid">
                       {isa.percentage || '-'}%
@@ -107,7 +107,7 @@ export default function CompanyIsaOverview(props: IsaOverviewProps) {
                       {isa.description || '-'}
                     </Field>
                     <Field className="full" title="Cancellation Period">
-                      {isa.cancellation_period_weeks || '-'} weeks
+                      {isa.cancellation_period_weeks || '-'} Week(s)
                     </Field>
                   </div>
                 </>

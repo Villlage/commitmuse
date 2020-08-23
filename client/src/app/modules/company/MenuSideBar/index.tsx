@@ -6,46 +6,46 @@ import Icon from '../../../components/Icon'
 const menu_items = [
   {
     label: 'Overview',
-    route: 'dashboard',
+    route: '/company/dashboard',
     icon: 'home',
     active: true,
   },
   {
     label: 'Payments',
-    route: 'payments',
+    route: '/company/payments',
     icon: 'money-check',
   },
   {
     label: 'Coaches',
-    route: 'coaches',
+    route: '/company/coaches',
     icon: 'user-tie',
     active: true,
   },
   {
     label: 'Clients',
-    route: 'clients',
+    route: '/company/clients',
     icon: 'user-graduate',
   },
   {
     label: 'My ISAs',
-    route: 'isas',
+    route: '/company/isas',
     icon: 'file',
     active: true,
   },
   {
     label: 'Payment’s Accounts',
-    route: 'payment-accounts',
+    route: '/company/payment-accounts',
     icon: 'university',
   },
   {
     label: 'Billing And Subscription',
-    route: 'billing',
+    route: '/company/billing',
     icon: 'credit-card',
     active: true,
   },
   {
     label: 'My Account',
-    route: 'settings',
+    route: '/company/settings',
     icon: 'user-circle',
   },
 ]
