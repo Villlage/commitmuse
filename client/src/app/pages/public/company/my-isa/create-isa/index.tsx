@@ -74,10 +74,12 @@ export default function CreateIsa(props: CreateIsaProps) {
         cap: removeComma(total_income.cap),
         cancellation_period_weeks: Number(total_income.cancellation_period),
         time_to_be_paid: Number(total_income.time_to_be_paid),
-        status: 'created',
         description: total_income.description,
         client,
         coach_id: props.currentUser.id,
+        industry_field: '',
+        program_duration_weeks: '',
+        status: 'created'
       })
 
       if (res && res.error) {

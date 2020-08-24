@@ -11,6 +11,8 @@ import ProgramStep from '../../../../../../modules/company/CreateIsa/ProgramStep
 import IsaOfferStep from '../../../../../../modules/company/CreateIsa/IsaOfferStep'
 import ReviewStep from '../../../../../../modules/company/CreateIsa/ReviewStep'
 import ContractStep from '../../../../../../modules/company/CreateIsa/ContractStep/ContractStep'
+import ISACalculator from '../../../../../../modules/on-boarding/ISACalculator'
+import FAQ from '../../../../../../modules/company/CreateIsa/FAQ'
 
 const isaService = new IsaService()
 
@@ -20,7 +22,7 @@ interface CreateIsaProps extends ScreenProps {}
 
 export default function CompanyCreateIsa(props: CreateIsaProps) {
   const [request_error, set_request_error] = useState('')
-  const [active_step, set_active_step] = useState(3)
+  const [active_step, set_active_step] = useState(0)
 
   const [client, set_client] = useState<IsaClient>({
     email: '',
@@ -57,10 +59,12 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         cap: removeComma(total_income.cap),
         cancellation_period_weeks: Number(total_income.cancellation_period),
         time_to_be_paid: Number(total_income.time_to_be_paid),
-        status: 'created',
         description: total_income.description,
         client,
         coach_id: props.currentUser.id,
+        industry_field: program.field,
+        program_duration_weeks: program.duration,
+        status: 'created'
       })
 
       if (res && res.error) {
@@ -68,15 +72,11 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         return setTimeout(() => set_request_error(''), 3000)
       }
 
-      return props.history.push(`/company/isas/${res.id}`)
+      set_active_step(active_step + 1)
     } catch (e) {
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
     }
-  }
-
-  const addComma = (str: string) => {
-    return Number(str.replace(/,/g, '')).toLocaleString()
   }
 
   const removeComma = (str: string) => {
@@ -112,10 +112,12 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         offer={offer}
         total_income={total_income}
         onChange={(e, key) => set_total_income({ ...total_income, [key]: e })}
-        onNext={() => set_active_step(active_step + 1)}
+        onNext={async () => {
+          await sendOffer()
+        }}
       />
     ),
-    contract: <ContractStep onNext={() => null}/>,
+    contract: <ContractStep onNext={() => props.history.push(`/company/isas`)} />,
   }
 
   return (
@@ -126,6 +128,15 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
           <section className="offer-steps">
             <Stepper steps={OFFER_STEPS} activeIndex={active_step} />
             {offer_step_strategy[OFFER_STEPS[active_step]]}
+          </section>
+          <section className="faq-and-calc">
+            <ISACalculator
+              current_income={removeComma(total_income.current_income)}
+              percentage={Number(total_income.percentage)}
+              months={Number(total_income.time_to_be_paid)}
+              max={removeComma(total_income.cap)}
+            />
+            <FAQ />
           </section>
         </section>
       </PageContent>

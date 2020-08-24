@@ -27,26 +27,27 @@ type IsaStatusProps = {
 }
 
 export default function IsaStatus(props: IsaStatusProps) {
+  const status = props.status || 'created'
   return (
     <div className="IsaStatus-module" onClick={props.onClick}>
       <div>
         <h2>{props.name}</h2>
-        {props.status === 'paying' && (
+        {status === 'paying' && (
           <p
             style={{
-              color: status_colors[props.status].text,
+              color: status_colors[status].text,
             }}
-            className={props.status}
+            className={status}
           >
             PAYING - 5K of 20K
           </p>
         )}
-        {props.status === 'completed' && (
+        {status === 'completed' && (
           <p
             style={{
-              color: status_colors[props.status].text,
+              color: status_colors[status].text,
             }}
-            className={props.status}
+            className={status}
           >
             COMPLETED - 20K
           </p>
@@ -54,33 +55,31 @@ export default function IsaStatus(props: IsaStatusProps) {
       </div>
 
       <div
-        // className={props.status + fixClass(props.status !== 'active' && 'round')}
-        className={props.status}
+        // className={status + fixClass(status !== 'active' && 'round')}
+        className={status}
         style={{
-          color: status_colors[props.status] ? status_colors[props.status].text : status_colors.status_colors.text,
-          background: status_colors[props.status] ? status_colors[props.status].bg : status_colors.status_colors.text,
-          borderColor: status_colors[props.status]
-            ? status_colors[props.status].text
-            : status_colors.status_colors.text,
+          color: status_colors[status] ? status_colors[status].text : status_colors.status_colors.text,
+          background: status_colors[status] ? status_colors[status].bg : status_colors.status_colors.text,
+          borderColor: status_colors[status] ? status_colors[status].text : status_colors.status_colors.text,
         }}
       >
-        {/*{props.status === 'paying' && (*/}
+        {/*{status === 'paying' && (*/}
         {/*  <CircularProgressbar*/}
-        {/*    lineColor={status_colors[props.status].text}*/}
-        {/*    textColor={status_colors[props.status].text}*/}
+        {/*    lineColor={status_colors[status].text}*/}
+        {/*    textColor={status_colors[status].text}*/}
         {/*    value={25}*/}
         {/*    text={`${25}%`}*/}
         {/*  />*/}
         {/*)}*/}
-        {/*{props.status === 'completed' && (*/}
+        {/*{status === 'completed' && (*/}
         {/*  <CircularProgressbar*/}
-        {/*    lineColor={status_colors[props.status].text}*/}
-        {/*    textColor={status_colors[props.status].text}*/}
+        {/*    lineColor={status_colors[status].text}*/}
+        {/*    textColor={status_colors[status].text}*/}
         {/*    value={100}*/}
         {/*    text={`${100}%`}*/}
         {/*  />*/}
         {/*)}*/}
-        {props.status}
+        {status}
       </div>
     </div>
   )

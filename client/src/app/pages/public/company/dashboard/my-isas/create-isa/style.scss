@@ -2,8 +2,6 @@
 @import '../../../../../../../styles/colors';
 
 .CompanyCreateIsa-page {
-
-
   .container {
     display: flex;
     align-items: flex-start;
@@ -26,6 +24,10 @@
       img {
         margin-bottom: 2px;
       }
+    }
+
+    .faq-and-calc {
+      margin-left: 32px;
     }
   }
 }
