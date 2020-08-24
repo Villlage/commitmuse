@@ -20,13 +20,15 @@ class TemplateRoleType(Enum):
 
 
 class Docusign:
-    def __init__(self, request) -> None:
+
+    def __init__(self):
+        self.ds_app = None
         self.account_id = config.DOCUSIGN_ACCOUNT_ID
         self.base_path = config.DOCUSIGN_BASE_PATH
-        self.access_token = self.get_token(request)
-        self.api_client = self._create_api_client()
+        self.access_token = self._auth_code_grant()
+        # self.api_client = self._create_api_client()
 
-    def _create_api_client(self) -> ApiClient:
+    def _create_api_client(self):
         api_client = ApiClient()
         api_client.host = self.base_path
         api_client.set_default_header("Authorization", "Bearer " + self.access_token)
@@ -39,35 +41,59 @@ class Docusign:
             "scope": config.SIGNATURE,
             "state": lambda: uuid.uuid4().hex.upper(),
         }
-        ds_response = oauth.remote_app(
+        self.ds_app = oauth.remote_app(
             "docusign",
             consumer_key=config.DOCUSIGN_CLIENT_ID,
             consumer_secret=config.DOCUSIGN_CLIENT_SECRET,
-            access_token_url=config.ACCESS_TOKEN_URL,
-            authorize_url=config.AUTHORIZE_URL,
+            access_token_url=config.AUTHORIZATION_SERVER + "/oauth/token",
+            authorize_url=config.AUTHORIZATION_SERVER + "/oauth/auth",
             request_token_params=request_token_params,
-            base_url=config.BASE_URL,
+            base_url=None,
             request_token_url=None,
             access_token_method="POST",
         )
-        return ds_response
 
-    def get_token(self, request):
-        # resp = self.get().authorized_response()
-        resp = self.get().authorize(callback=url_for("ds_callback", _external=True))
 
+    def get_token(self):
+        resp = None
+        from app import app
+        with app.app_context():
+            resp = self.ds_app.authorized_response()
         if resp is None or resp.get("access_token") is None:
             return "Access denied: reason=%s error=%s resp=%s" % (
                 request.args["error"],
                 request.args["error_description"],
-                resp,
+                resp
             )
 
         return resp
 
+
+    def get_user(self, access_token):
+        """Make request to the API to get the user information"""
+        # Determine user, account_id, base_url by calling OAuth::getUserInfo
+        # See https://developers.docusign.com/esign-rest-api/guides/authentication/user-info-endpoints
+        url = DS_CONFIG["authorization_server"] + "/oauth/userinfo"
+        auth = {"Authorization": "Bearer " + access_token}
+        response = requests.get(url, headers=auth).json()
+
+        return response
+
+    # def get_token(self):
+    #     # resp = self.get().authorized_response()
+    #     resp = self.get().authorize(callback=url_for("ds_callback", _external=True))
+
+    #     if resp is None or resp.get("access_token") is None:
+    #         return "Access denied: reason=%s error=%s resp=%s" % (
+    #             request.args["error"],
+    #             request.args["error_description"],
+    #             resp,
+    #         )
+
+    #     return resp
+
     def get(self):
-        docusign_response = self._auth_code_grant()
-        return docusign_response
+        return self.ds_app
 
     def get_envelope_definition(self, coach: Coach, student: Student) -> Any:
         signer_email = "gilad.kahala@gmail.com"
@@ -123,4 +149,4 @@ class Docusign:
         return {"envelope_id": envelope_id}
 
 
-# docusign_client = Docusign()
+docusign_client = Docusign()
