@@ -15,105 +15,17 @@
       box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.15);
     }
 
-    .client-info {
-      margin-right: 32px;
-
-      background: #ffffff;
-      box-shadow: 0 4px 16px rgba(16, 42, 67, 0.2);
-      border-radius: 10px;
-      overflow: hidden;
-
-      header {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-row-gap: 9px;
-        grid-column-gap: 16px;
-        margin-bottom: 32px;
-        padding: 20px 20px 0;
-
-        h2 {
-          color: #19216c;
-        }
-
-        h2,
-        .email {
-          grid-column-start: 1;
-          grid-column-end: span 2;
-        }
-
-        .email {
-          margin-top: 7px;
-        }
-      }
-
-      footer {
-        padding: 0 20px 0;
-
-        h2 {
-          color: #19216c;
-          margin-bottom: 4px;
-        }
-
-        .selects {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          margin-top: 4px;
-          margin-bottom: 16px;
-
-          button {
-            padding: 14px 0;
-            background: #f5f5f5;
-            border: 1px solid #bdbdbd;
-
-            color: $GrayIndigo;
-
-            &:first-child {
-              border-left: 1px solid #bdbdbd;
-              border-top-left-radius: 5px;
-              border-bottom-left-radius: 5px;
-            }
-
-            &:last-child {
-              border-top-right-radius: 5px;
-              border-bottom-right-radius: 5px;
-            }
-
-            &.selected {
-              background: #bed0f7;
-              font-weight: bold;
-              color: #35469c;
-              border-color: #647acb;
-            }
-          }
-        }
-
-        .form {
-          .Input-component {
-            margin-bottom: 16px;
-          }
-        }
-      }
-
-      .actions {
-        padding: 16px 24px;
-        display: flex;
-        justify-content: flex-end;
-        background: #f5f5f5;
-
-        button {
-          background: #f0b429;
-          border-radius: 5px;
-          padding: 8px 16px;
-          border: 0;
-          text-transform: uppercase;
-          font-size: 12px;
-          color: #ffffff;
-        }
-      }
-    }
-
     .ISACalculator-module {
       margin-bottom: 24px;
+    }
+
+    .next-btn {
+      padding: 8px 44px;
+      text-transform: uppercase;
+
+      img {
+        margin-bottom: 2px;
+      }
     }
   }
 }

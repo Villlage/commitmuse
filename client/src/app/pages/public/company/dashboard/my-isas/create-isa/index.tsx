@@ -1,6 +1,6 @@
 import './style.scss'
 import React, { useState } from 'react'
-import { ScreenProps } from '../../../../../../../interfaces/baseIntefaces'
+import { IsaClient, IsaProgram, ScreenProps } from '../../../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../../../modules/common/PageContent'
 import IsaService from '../../../../../../../services/isa.service'
 import Message from '../../../../../../components/Message'
@@ -9,39 +9,34 @@ import Stepper from '../../../../../../modules/common/Stepper'
 import ClientStep from '../../../../../../modules/company/CreateIsa/ClientStep'
 import ProgramStep from '../../../../../../modules/company/CreateIsa/ProgramStep'
 import IsaOfferStep from '../../../../../../modules/company/CreateIsa/IsaOfferStep'
+import ReviewStep from '../../../../../../modules/company/CreateIsa/ReviewStep'
+import ContractStep from '../../../../../../modules/company/CreateIsa/ContractStep/ContractStep'
 
 const isaService = new IsaService()
 
-const pricing = ['From total income', 'From new raise', 'Placement']
 const OFFER_STEPS = ['client', 'program', 'isa offer', 'review', 'contract']
-
-type IncomeKeys =
-  | 'description'
-  | 'percentage'
-  | 'time_to_be_paid'
-  | 'cap'
-  | 'cancellation_period'
-  | 'risk'
-  | 'current_income'
 
 interface CreateIsaProps extends ScreenProps {}
 
 export default function CompanyCreateIsa(props: CreateIsaProps) {
-  const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
-  const [selected_pricing, set_selected_pricing] = useState(pricing[0])
-  const [active_step, set_active_step] = useState(2)
+  const [active_step, set_active_step] = useState(3)
 
-  const [client, set_client] = useState({
+  const [client, set_client] = useState<IsaClient>({
     email: '',
     first_name: '',
     last_name: '',
   })
 
-  const [error, set_error] = useState({
-    email: '',
-    first_name: '',
-    last_name: '',
+  const [program, set_program] = useState<IsaProgram>({
+    field: '',
+    duration: '',
+    description: '',
+  })
+
+  const [offer, set_offer] = useState({
+    type: 'From total income',
+    description: '',
   })
 
   const [total_income, set_total_income] = useState({
@@ -54,10 +49,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
     current_income: '80000',
   })
 
-  const setIncome = (e: string, key: IncomeKeys) => set_total_income({ ...total_income, [key]: e })
-
   const sendOffer = async () => {
-    set_loading(true)
     try {
       const res = await isaService.create({
         current_income: removeComma(total_income.current_income),
@@ -72,15 +64,12 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
       })
 
       if (res && res.error) {
-        set_loading(false)
         set_request_error(res.error)
         return setTimeout(() => set_request_error(''), 3000)
       }
-      set_loading(false)
 
       return props.history.push(`/company/isas/${res.id}`)
     } catch (e) {
-      set_loading(false)
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
     }
@@ -97,31 +86,36 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
   const offer_step_strategy: any = {
     client: (
       <ClientStep
-        first_name={client.first_name}
-        last_name={client.last_name}
-        email={client.email}
+        client={client}
         onChange={(e, key) => set_client({ ...client, [key]: e })}
         onNext={() => set_active_step(active_step + 1)}
       />
     ),
     program: (
       <ProgramStep
-        onChange={(e, key) => set_client({ ...client, [key]: e })}
+        onChange={(e, key) => set_program({ ...program, [key]: e })}
         onNext={() => set_active_step(active_step + 1)}
-        description={'1'}
-        duration={'1'}
-        position_field={'1'}
+        program={program}
       />
     ),
     'isa offer': (
       <IsaOfferStep
-        description={''}
-        onChange={(e, key) => set_client({ ...client, [key]: e })}
+        offer={offer}
+        onChange={(e, key) => set_offer({ ...offer, [key]: e })}
         onNext={() => set_active_step(active_step + 1)}
       />
     ),
-    review: '',
-    contract: '',
+    review: (
+      <ReviewStep
+        client={client}
+        program={program}
+        offer={offer}
+        total_income={total_income}
+        onChange={(e, key) => set_total_income({ ...total_income, [key]: e })}
+        onNext={() => set_active_step(active_step + 1)}
+      />
+    ),
+    contract: <ContractStep onNext={() => null}/>,
   }
 
   return (
@@ -139,89 +133,3 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
     </article>
   )
 }
-
-/*
-          <section className="faq-and-calc">
-            <ISACalculator
-              current_income={removeComma(total_income.current_income)}
-              percentage={Number(total_income.percentage)}
-              months={Number(total_income.time_to_be_paid)}
-              max={removeComma(total_income.cap)}
-            />
-            <FAQ />
-          </section>
-          
-          <section className="client-info">
-
-            <footer>
-              <h2>Offer Details</h2>
-              <TooltipBadge label="Pricing" tooltip="help text" />
-              <div className="selects">
-                {pricing.map((item, i) => (
-                  <button
-                    key={i}
-                    className={`${fixClass(selected_pricing === item && 'selected')}`}
-                    onClick={() => set_selected_pricing(item)}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-              <div className="form">
-                <Input
-                  onChange={e => setIncome(e, 'description')}
-                  placeholder="Description"
-                  value={total_income.description}
-                />
-                {selected_pricing === 'From total income' && (
-                  <>
-                    <Input
-                      postFix="$"
-                      onChange={e => setIncome(e, 'current_income')}
-                      placeholder="Current income"
-                      value={addComma(total_income.current_income)}
-                    />
-                    <Input
-                      postFix="%"
-                      onChange={e => isNumber(e) && Number(e) > 0 && Number(e) < 100 && setIncome(e, 'percentage')}
-                      placeholder="Percentage to be Paid"
-                      value={total_income.percentage}
-                    />
-                    <Input
-                      postFix="Months"
-                      onChange={e => isNumber(e) && setIncome(e, 'time_to_be_paid')}
-                      placeholder="Time to be Paid"
-                      value={total_income.time_to_be_paid}
-                    />
-                    <Input
-                      postFix="USD"
-                      onChange={e => setIncome(e, 'cap')}
-                      placeholder="Maximum to be paid"
-                      value={addComma(total_income.cap)}
-                    />
-                    <Input
-                      postFix="Week(s)"
-                      onChange={e => isNumber(e) && setIncome(e, 'cancellation_period')}
-                      placeholder="Cancellation Period"
-                      value={total_income.cancellation_period}
-                    />
-                    <Input
-                      postFix="%"
-                      onChange={e => isNumber(e) && setIncome(e, 'risk')}
-                      placeholder="Risk Assessment"
-                      value={total_income.risk}
-                    />
-                    {!notValid() && <IsaAssessment />}
-                  </>
-                )}
-              </div>
-            </footer>
-            {selected_pricing.length > 0 && (
-              <div className="actions">
-                <Button disabled={notValid()} onClick={sendOffer} loading={loading}>
-                  REVIEW and send offer
-                </Button>
-              </div>
-            )}
-          </section>
- */

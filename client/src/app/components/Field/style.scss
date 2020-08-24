@@ -1,3 +1,6 @@
+@import '../../../styles/colors';
+@import '../../../styles/mixins';
+
 .Field-component {
   display: flex;
   flex-direction: column;
@@ -9,11 +12,11 @@
   label {
     font-size: 10px;
     text-transform: uppercase;
-    color: #647acb;
+    color: $Indigo4;
   }
 
   p {
     font-size: 16px;
-    color: #19216c;
+    color: $Indigo7;
   }
 }
