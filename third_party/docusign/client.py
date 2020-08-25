@@ -3,8 +3,8 @@ from app import config
 from typing import Any, Dict
 
 from enum import Enum
-
-from flask import current_app, url_for
+import requests
+from flask import current_app as app, url_for, request
 from flask_oauthlib.client import OAuth
 
 from docusign_esign import EnvelopesApi, EnvelopeDefinition, TemplateRole, ApiClient
@@ -21,81 +21,99 @@ class TemplateRoleType(Enum):
 
 class Docusign:
 
-    def __init__(self):
-        self.ds_app = None
-        self.account_id = config.DOCUSIGN_ACCOUNT_ID
-        self.base_path = config.DOCUSIGN_BASE_PATH
-        self.access_token = self._auth_code_grant()
-        # self.api_client = self._create_api_client()
+    ds_app = None
+    base_path = config.DOCUSIGN_BASE_PATH
+    account_id = config.DOCUSIGN_ACCOUNT_ID
+    access_token = None
 
-    def _create_api_client(self):
-        api_client = ApiClient()
-        api_client.host = self.base_path
-        api_client.set_default_header("Authorization", "Bearer " + self.access_token)
-        return api_client
+    # def __init__(self):
+    #     self.ds_app = None
+    #     self.account_id = config.DOCUSIGN_ACCOUNT_ID
+    #     self.base_path = config.DOCUSIGN_BASE_PATH
+    #     self.access_token = self._auth_code_grant()
+    #     # self.api_client = self._create_api_client()
 
-    def _auth_code_grant(self):
+    @classmethod
+    def _init(cls, auth_type):
+        cls._auth_code_grant()
+
+    @classmethod
+    def _auth_code_grant(cls):
         """Authorize with the Authorization Code Grant - OAuth 2.0 flow"""
-        oauth = OAuth(current_app)
+        oauth = OAuth(app)
         request_token_params = {
-            "scope": config.SIGNATURE,
-            "state": lambda: uuid.uuid4().hex.upper(),
+            "scope": "signature",
+            "state": lambda: uuid.uuid4().hex.upper()
         }
-        self.ds_app = oauth.remote_app(
+        
+        cls.ds_app = oauth.remote_app(
             "docusign",
-            consumer_key=config.DOCUSIGN_CLIENT_ID,
-            consumer_secret=config.DOCUSIGN_CLIENT_SECRET,
-            access_token_url=config.AUTHORIZATION_SERVER + "/oauth/token",
-            authorize_url=config.AUTHORIZATION_SERVER + "/oauth/auth",
+            consumer_key="9ece7d69-24d6-43ce-9a1c-cbfe3b11c819",
+            consumer_secret="8306a2ca-9cfb-4cab-b7c6-9cdaffe89174",
+            access_token_url="https://account-d.docusign.com" + "/oauth/token",
+            authorize_url="https://account-d.docusign.com" + "/oauth/auth",
             request_token_params=request_token_params,
             base_url=None,
             request_token_url=None,
-            access_token_method="POST",
+            access_token_method="POST"
         )
 
+    @classmethod
+    def destroy(cls):
+        cls.ds_app = None
 
-    def get_token(self):
+    @classmethod
+    def login(cls, auth_type):
+        with app.test_request_context():
+            callback_url = url_for("ds_callback", _external=True)
+            if app.config.get("ENV") == "development":
+                callback_url = callback_url.replace('://localhost/', '://localhost:%d/' % (config.PORT))
+
+            return cls.get("code_grant").authorize(callback=callback_url)
+
+
+    @classmethod
+    def get_token(cls, auth_type):
         resp = None
-        from app import app
-        with app.app_context():
-            resp = self.ds_app.authorized_response()
+        with app.test_request_context():
+            resp = cls.get("code_grant").authorized_response()
+
         if resp is None or resp.get("access_token") is None:
             return "Access denied: reason=%s error=%s resp=%s" % (
                 request.args["error"],
                 request.args["error_description"],
                 resp
             )
-
+        cls.access_token = resp.get("access_token")
         return resp
 
-
-    def get_user(self, access_token):
+    @classmethod
+    def get_user(cls, access_token):
         """Make request to the API to get the user information"""
         # Determine user, account_id, base_url by calling OAuth::getUserInfo
         # See https://developers.docusign.com/esign-rest-api/guides/authentication/user-info-endpoints
-        url = DS_CONFIG["authorization_server"] + "/oauth/userinfo"
+        url = config.AUTHORIZATION_SERVER + "/oauth/userinfo"
         auth = {"Authorization": "Bearer " + access_token}
         response = requests.get(url, headers=auth).json()
 
         return response
 
-    # def get_token(self):
-    #     # resp = self.get().authorized_response()
-    #     resp = self.get().authorize(callback=url_for("ds_callback", _external=True))
+    @classmethod
+    def get(cls, auth_type):
+        if not cls.ds_app:
+            cls._init(auth_type)
+        return cls.ds_app
 
-    #     if resp is None or resp.get("access_token") is None:
-    #         return "Access denied: reason=%s error=%s resp=%s" % (
-    #             request.args["error"],
-    #             request.args["error_description"],
-    #             resp,
-    #         )
 
-    #     return resp
+    @classmethod
+    def _create_api_client(cls):
+        api_client = ApiClient()
+        api_client.host = cls.base_path
+        api_client.set_default_header("Authorization", "Bearer " + cls.access_token)
+        return api_client
 
-    def get(self):
-        return self.ds_app
-
-    def get_envelope_definition(self, coach: Coach, student: Student) -> Any:
+    @classmethod
+    def get_envelope_definition(cls, coach: Coach, student: Student) -> Any:
         signer_email = "gilad.kahala@gmail.com"
         signer_name = "Gilad Kahala"
         cc_email = "gilad.kahala@gmail.com"
@@ -110,9 +128,9 @@ class Docusign:
         }
 
         args = {
-            "account_id": self.account_id,
-            "base_path": self.base_path,
-            "access_token": self.access_token,
+            "account_id": cls.account_id,
+            "base_path": cls.base_path,
+            "access_token": cls.access_token,
             "envelope_args": envelope_args,
         }
 
@@ -147,6 +165,3 @@ class Docusign:
         )
         envelope_id = results.envelope_id
         return {"envelope_id": envelope_id}
-
-
-docusign_client = Docusign()

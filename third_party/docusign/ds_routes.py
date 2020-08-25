@@ -7,7 +7,9 @@ from flask import redirect, request, url_for, flash, render_template, Blueprint,
 from .client import Docusign
 import config
 
-# ds = Blueprint("ds", __name__, url_prefix="/ds")
+@app.route("/ds/login", methods=["GET"])
+def ds_login():
+    return Docusign.login("code_grant")
 
 @app.route("/ds/callback", methods=["GET"])
 def ds_callback():
@@ -17,9 +19,9 @@ def ds_callback():
     """
 
     # Save the redirect eg if present
-    # redirect_url = session.pop("eg", None)
+    redirect_url = session.pop("eg", None)
     # ds = Docusign()
-    resp = Docusign.get_token()
+    resp = Docusign.get_token("code_grant")
 
     # app.logger.info("Authenticated with DocuSign.")
     session["ds_access_token"] = resp["access_token"]

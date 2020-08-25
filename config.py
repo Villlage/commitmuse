@@ -75,9 +75,9 @@ class Config(object):
 
 class LocalConfig(Config):
     DEBUG = True
+    PORT = 5000
     LOG_LEVEL = "DEBUG"
     SQLALCHEMY_DATABASE_URI = "postgres://localhost/village"
-
     WEB_APP_DOMAIN = "http://localhost:5000/web"
 
 
