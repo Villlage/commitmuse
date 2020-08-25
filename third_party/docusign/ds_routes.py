@@ -1,16 +1,15 @@
 from datetime import datetime, timedelta
 
+from app import app
+
 from flask import redirect, request, url_for, flash, render_template, Blueprint, session
 
 from .client import Docusign
-from .utils import ds_logout_internal
-from ..consts import base_uri_suffix
-from ..ds_config import DS_CONFIG
+import config
 
-ds = Blueprint("ds", __name__, url_prefix="/ds")
+# ds = Blueprint("ds", __name__, url_prefix="/ds")
 
-
-@ds.route("/callback")
+@app.route("/ds/callback", methods=["GET"])
 def ds_callback():
     """
     Save the token information in session.
@@ -18,8 +17,9 @@ def ds_callback():
     """
 
     # Save the redirect eg if present
-    redirect_url = session.pop("eg", None)
-    resp = Docusign.get_token(session["auth_type"])
+    # redirect_url = session.pop("eg", None)
+    # ds = Docusign()
+    resp = Docusign.get_token()
 
     # app.logger.info("Authenticated with DocuSign.")
     session["ds_access_token"] = resp["access_token"]
@@ -34,7 +34,7 @@ def ds_callback():
         session["ds_user_email"] = response["email"]
         accounts = response["accounts"]
         # Find the account...
-        target_account_id = DS_CONFIG["target_account_id"]
+        target_account_id = config.target_account_id
         if target_account_id:
             account = next((a for a in accounts if a["account_id"] == target_account_id), None)
             if not account:
@@ -54,22 +54,3 @@ def ds_callback():
     if not redirect_url:
         redirect_url = url_for("core.index")
     return redirect(redirect_url)
-
-
-@ds.route("/must_authenticate")
-def ds_must_authenticate():
-    return render_template("must_authenticate.html", title="Must authenticate")
-
-
-@ds.route("/ds_return")
-def ds_return():
-    event = request.args.get("event")
-    state = request.args.get("state")
-    envelope_id = request.args.get("envelopeId")
-    return render_template(
-        "ds_return.html",
-        title="Return from DocuSign",
-        event=event,
-        envelope_id=envelope_id,
-        state=state
-    )
