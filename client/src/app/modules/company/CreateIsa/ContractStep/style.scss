@@ -1,0 +1,19 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.ContractStep-module {
+  padding: 24px 20px 32px;
+  background: white;
+
+  h2 {
+    font-size: 16px;
+    color: $Indigo7;
+    margin-bottom: 16px;
+  }
+
+  .next-btn {
+    width: 100%;
+    border-radius: 7px;
+    text-transform: uppercase;
+  }
+}

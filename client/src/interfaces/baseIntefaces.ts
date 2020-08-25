@@ -122,3 +122,15 @@ export interface Company {
   name: string
   address: string
 }
+
+export interface IsaClient {
+  first_name: string
+  last_name: string
+  email: string
+}
+
+export interface IsaProgram {
+  field: string
+  duration: string
+  description: string
+}

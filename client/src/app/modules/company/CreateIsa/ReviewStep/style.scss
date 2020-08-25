@@ -1,0 +1,64 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.ReviewStep-module {
+  background: white;
+  padding: 24px 0 0;
+
+  .Field-component label {
+    font-weight: bold;
+  }
+
+  h2 {
+    color: $Indigo7;
+    font-size: 14px;
+  }
+
+  > h2 {
+    color: $Indigo7;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  header {
+    display: grid;
+    grid: 1fr / 1fr 1fr;
+    grid-gap: 16px;
+    padding: 0 20px;
+    margin-bottom: 32px;
+
+    .full {
+      grid-column: 1 / span 2;
+    }
+  }
+
+  .program-info {
+    padding: 0 20px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .offer-details {
+    padding: 0 20px;
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-row-gap: 16px;
+    margin-bottom: 32px;
+
+    h2, > .TooltipBadge-component {
+      margin-bottom: -10px;
+    }
+  }
+
+  footer {
+    background: $Gray1;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

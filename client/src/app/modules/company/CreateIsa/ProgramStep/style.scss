@@ -1,0 +1,29 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.ProgramStep-module {
+  background: white;
+  padding: 24px 0 0;
+
+  h2 {
+    font-size: 16px;
+    color: $Indigo7;
+    padding: 0 20px 10px;
+  }
+
+  header {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    grid-gap: 16px;
+    padding: 0 20px;
+    margin-bottom: 32px;
+  }
+
+  footer {
+    background: $Gray1;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
