@@ -5,11 +5,13 @@ from app import app
 from flask import redirect, request, url_for, flash, render_template, Blueprint, session
 
 from .client import Docusign
-import config
+from config import Config
+
 
 @app.route("/ds/login", methods=["GET"])
 def ds_login():
     return Docusign.login("code_grant")
+
 
 @app.route("/ds/callback", methods=["GET"])
 def ds_callback():
@@ -22,7 +24,6 @@ def ds_callback():
     redirect_url = session.pop("eg", None)
     # ds = Docusign()
     resp = Docusign.get_token("code_grant")
-
     # app.logger.info("Authenticated with DocuSign.")
     session["ds_access_token"] = resp["access_token"]
     session["ds_refresh_token"] = resp["refresh_token"]

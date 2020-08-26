@@ -1,17 +1,21 @@
 import uuid
 from app import config
 from typing import Any, Dict
+import base64
+from os import path
 
 from enum import Enum
 import requests
-from flask import current_app as app, url_for, request
+from flask import current_app as app, url_for, request, session
 from flask_oauthlib.client import OAuth
+from consts import authentication_method, demo_docs_path, pattern, signer_client_id
 
-from docusign_esign import EnvelopesApi, EnvelopeDefinition, TemplateRole, ApiClient
+from docusign_esign import EnvelopesApi, EnvelopeDefinition, TemplateRole, ApiClient, RecipientViewRequest, Document, Signer, SignHere, Tabs, Recipients
 from models.user import Coach, Student
 from services.user_service import get_user_name
+from config import Config
 
-ISA_TEMPLATE_ID = "4652a178-cac7-491a-b03d-bdba57b6f175"
+ISA_TEMPLATE_ID = "36f49c10-b824-43bd-b6c3-860624ed8b55"
 
 
 class TemplateRoleType(Enum):
@@ -76,7 +80,6 @@ class Docusign:
     def get_token(cls, auth_type):
         resp = None
         resp = cls.get("code_grant").authorized_response()
-
         if resp is None or resp.get("access_token") is None:
             return "Access denied: reason=%s error=%s resp=%s" % (
                 request.args["error"],
@@ -108,7 +111,7 @@ class Docusign:
     def _create_api_client(cls):
         api_client = ApiClient()
         api_client.host = cls.base_path
-        api_client.set_default_header("Authorization", "Bearer " + cls.access_token)
+        api_client.set_default_header("Authorization", "Bearer " + session.get('ds_access_token'))
         return api_client
 
     @classmethod
@@ -156,11 +159,12 @@ class Docusign:
 
         return envelope_definition
 
-    def send_envelope(self, coach: Coach, student: Student) -> Dict[Any, Any]:
-        envelope_definition = self.get_envelope_definition(coach=coach, student=student)
-        envelope_api = EnvelopesApi(self.api_client)
+    @classmethod
+    def send_envelope(cls, coach: Coach, student: Student) -> Dict[Any, Any]:
+        envelope_definition = cls.get_envelope_definition(coach=coach, student=student)
+        envelope_api = EnvelopesApi(cls._create_api_client())
         results = envelope_api.create_envelope(
-            account_id=self.account_id, envelope_definition=envelope_definition
+            account_id=cls.account_id, envelope_definition=envelope_definition
         )
         envelope_id = results.envelope_id
         return {"envelope_id": envelope_id}
