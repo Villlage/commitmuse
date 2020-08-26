@@ -48,8 +48,8 @@ class Docusign:
         
         cls.ds_app = oauth.remote_app(
             "docusign",
-            consumer_key="9ece7d69-24d6-43ce-9a1c-cbfe3b11c819",
-            consumer_secret="8306a2ca-9cfb-4cab-b7c6-9cdaffe89174",
+            consumer_key=config.DOCUSIGN_CLIENT_ID,
+            consumer_secret=config.DOCUSIGN_CLIENT_SECRET,
             access_token_url="https://account-d.docusign.com" + "/oauth/token",
             authorize_url="https://account-d.docusign.com" + "/oauth/auth",
             request_token_params=request_token_params,
@@ -75,8 +75,7 @@ class Docusign:
     @classmethod
     def get_token(cls, auth_type):
         resp = None
-        with app.test_request_context():
-            resp = cls.get("code_grant").authorized_response()
+        resp = cls.get("code_grant").authorized_response()
 
         if resp is None or resp.get("access_token") is None:
             return "Access denied: reason=%s error=%s resp=%s" % (
