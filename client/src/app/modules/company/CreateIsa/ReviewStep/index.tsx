@@ -52,11 +52,6 @@ export default function ReviewStep(props: ReviewStepProps) {
         <TooltipBadge label="Pricing" tooltip="help text" />
         <ButtonSelect options={pricing} selected={props.offer.type} onSelect={() => null} />
         <Input
-          onChange={e => props.onChange(e, 'description')}
-          placeholder="Description"
-          value={props.total_income.description}
-        />
-        <Input
           postFix="$"
           onChange={e => props.onChange(e, 'current_income')}
           placeholder="Current income"

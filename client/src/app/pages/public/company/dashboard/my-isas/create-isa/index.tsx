@@ -38,11 +38,9 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
 
   const [offer, set_offer] = useState({
     type: 'From total income',
-    description: '',
   })
 
   const [total_income, set_total_income] = useState({
-    description: '',
     percentage: '17',
     time_to_be_paid: '2',
     cap: '10000',
@@ -59,7 +57,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         cap: removeComma(total_income.cap),
         cancellation_period_weeks: Number(total_income.cancellation_period),
         time_to_be_paid: Number(total_income.time_to_be_paid),
-        description: total_income.description,
+        description: program.description,
         client,
         coach_id: props.currentUser.id,
         industry_field: program.field,

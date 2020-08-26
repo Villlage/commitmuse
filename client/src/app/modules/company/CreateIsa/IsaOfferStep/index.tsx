@@ -22,12 +22,6 @@ export default function IsaOfferStep(props: IsaOfferStepProps) {
           options={['From total income', 'From new raise', 'Placement']}
           selected={props.offer.type}
         />
-        <Input
-          placeholder="Description"
-          onChange={e => props.onChange(e, 'description')}
-          value={props.offer.description}
-          className="full"
-        />
       </header>
       <footer>
         <Button disabled={notValid()} background="MainWarning" onClick={props.onNext} className="next-btn">
