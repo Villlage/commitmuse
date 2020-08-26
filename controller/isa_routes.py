@@ -22,7 +22,6 @@ from services.isa_service import (
 from controller.common import login_required, get_current_user
 from models.user import User
 from models.isa import ISA
-from services.documents_service import send_isa_offer
 
 
 @app.route("/isas/<int:isa_id>", methods=["GET", "PATCH", "DELETE"])
@@ -64,7 +63,7 @@ def create_isa_route() -> Tuple[Response, int]:
     get_current_user()
     schema = create_isa_schema.load(request.json)
     isa = create_student_and_isa(schema)
-    send_isa_offer(isa)
+    # send_isa_offer(isa)
     result = isa_schema.dump(isa)
     return jsonify(result), 200
 
