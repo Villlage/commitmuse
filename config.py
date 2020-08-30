@@ -44,6 +44,29 @@ class Config(object):
 
     WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")
 
+    # DOCUSIGN Constants
+    AUTHORIZATION_SERVER = "https://account-d.docusign.com"
+    AUTHORIZE_URL = "https://account-d.docusign.com/oauth/auth"
+    ACCESS_TOKEN_URL = "https://account-d.docusign.com/oauth/token"
+    ALLOW_SILENT_AUTHENTICATION = True
+    BASE_URL = "https://demo.docusign.net"
+    CODE_GRANT = "code grant"
+    TARGET_ACC_ID = None
+    SIGNATURE = "signature"
+
+    DOCUSIGN_CLIENT_ID = "4ecc3248-c115-4782-bbb3-776260404d09"
+    INTEGRATION_KEY_PRODUCTION = "841c2045-208d-423d-ac21-c5e5883de495"
+
+    DOCUSIGN_CLIENT_SECRET = "977e4ea2-6676-41dd-8acd-49d254c94b8e"
+    DOCUSIGN_PRODUCTION_CLIENT_SECRET = "3fe3198d-29e4-4357-ac2f-c94d904a7306"
+
+    SIGNER_EMAIL = "gilad.kahala@gmail.com"
+    SIGNER_NAME = "Gilad Kahala"
+
+    IMPERSONATED_USER_ID = "b9d76a2a-e332-4a5d-8592-cf70f9195198"
+    SECRET_KEY = "e4df848e-b88d-4731-a758-85765ed814be"
+    DS_PAYMENT_GATEWAY_ID = None
+
 
 class LocalConfig(Config):
     DEBUG = True

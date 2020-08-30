@@ -74,3 +74,17 @@ def get_isas() -> Tuple[Response, int]:
     user = get_current_user()  # type: User
     result = isa_schema.dump(user.isas, many=True)  # type: List[Dict[Any, Any]]
     return jsonify(result), 200
+
+
+@app.route("/sign/isas/<int:isa_id>", methods=["GET"])
+@login_required
+def signme(isa_id: int) -> Tuple[Response, int]:
+    from third_party.docusign.client import docusign_client
+    from flask import redirect
+
+    user = get_current_user()
+    isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
+
+    results = docusign_client.embedded_signing(coach=isa.coach, student=isa.student)
+
+    return redirect(results.url), 302
