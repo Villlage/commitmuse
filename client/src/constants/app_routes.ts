@@ -30,13 +30,15 @@ let APP_ROUTES: any = {
     { component: CompanyIsaOverview, path: '/company/isas/:id' },
     { component: BillingAndSubs, path: '/company/billing' },
   ],
+  coach: [
+    { component: MyIsa, path: '/coach/my-isa' },
+    { component: CreateIsa, path: '/coach/isa/create' },
+    { component: IsaOverview, path: '/coach/isa/:id' },
+    { component: Settings, path: '/coach/settings' },
+    { component: Subscription, path: '/coach/subscription/:id' },
+  ],
   student: [
-    { component: MyIsa, path: '/my-isa' },
-    { component: CreateIsa, path: '/isa/create' },
-    { component: IsaOverview, path: '/isa/:id' },
-    { component: Settings, path: '/settings' },
-    { component: OnBoarding, path: '/on-boarding' },
-    { component: Subscription, path: '/subscription/:id' },
+    { component: OnBoarding, path: '/student/on-boarding' },
   ],
 }
 

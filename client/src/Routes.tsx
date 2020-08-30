@@ -14,9 +14,15 @@ export default function Routes(properties: Partial<ScreenProps>) {
     if (user.user_role === 1) {
       return 'admin'
     }
+
     if (user.user_role === 2 && user.type === 'coaches') {
       return 'company'
     }
+
+    if (user.type === 'coaches') {
+      return 'coach'
+    }
+
     return 'student'
   }
 
@@ -32,17 +38,6 @@ export default function Routes(properties: Partial<ScreenProps>) {
       : null,
   }
 
-  const adminRoute = (Component: any, path: string) => (
-    <Route path={path}>
-      {(props: any) =>
-        routerProps.currentUser && routerProps.currentUser.user_role === 1 ? (
-          <Component {...props} {...routerProps} />
-        ) : (
-          <Redirect to={'/company/dashboard'} />
-        )
-      }
-    </Route>
-  )
   const privateRoute = (Component: any, route: string, index: number, exact?: boolean) => {
     return (
       <Route
