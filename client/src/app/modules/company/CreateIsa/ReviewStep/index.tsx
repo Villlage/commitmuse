@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import TooltipBadge from '../../../../components/TooltipBadge'
-import { isNumber } from '../../../../../helpers/base'
+import { intOrFloat, isNumber } from '../../../../../helpers/base'
 import IsaAssessment from '../../../common/IsaAssessment'
 import Field from '../../../../components/Field'
 import ButtonSelect from '../../../../components/ButtonSelect'
@@ -59,7 +59,7 @@ export default function ReviewStep(props: ReviewStepProps) {
         />
         <Input
           postFix="%"
-          onChange={e => isNumber(e) && Number(e) > 0 && Number(e) < 100 && props.onChange(e, 'percentage')}
+          onChange={e => intOrFloat(e) && Number(e) < 100 && props.onChange(e, 'percentage')}
           placeholder="Percentage to be Paid"
           value={props.total_income.percentage}
         />

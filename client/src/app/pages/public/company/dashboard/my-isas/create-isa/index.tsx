@@ -13,6 +13,7 @@ import ReviewStep from '../../../../../../modules/company/CreateIsa/ReviewStep'
 import ContractStep from '../../../../../../modules/company/CreateIsa/ContractStep/ContractStep'
 import ISACalculator from '../../../../../../modules/on-boarding/ISACalculator'
 import FAQ from '../../../../../../modules/company/CreateIsa/FAQ'
+import Icon from '../../../../../../components/Icon'
 
 const isaService = new IsaService()
 
@@ -62,7 +63,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         coach_id: props.currentUser.id,
         industry_field: program.field,
         program_duration_weeks: program.duration,
-        status: 'created'
+        status: 'created',
       })
 
       if (res && res.error) {
@@ -121,7 +122,11 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
   return (
     <article className="CompanyCreateIsa-page">
       <MenuSideBar />
-      <PageContent title="New ISA Offer">
+      <PageContent>
+        <h1 className="page-title">
+          {active_step !== 0 && <Icon onClick={() => set_active_step(active_step - 1)} icon="arrow-left" />} New ISA
+          Offer
+        </h1>
         <section className="container">
           <section className="offer-steps">
             <Stepper steps={OFFER_STEPS} activeIndex={active_step} />
