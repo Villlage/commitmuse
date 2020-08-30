@@ -23,6 +23,9 @@ from controller.common import login_required, get_current_user
 from models.user import User
 from models.isa import ISA
 
+from third_party.docusign.client import docusign_client
+from flask import redirect, url_for
+
 
 @app.route("/isas/<int:isa_id>", methods=["GET", "PATCH", "DELETE"])
 @login_required
@@ -61,11 +64,19 @@ def get_isa_by_access_token(isa_id: int) -> Tuple[Response, int]:
 @login_required
 def create_isa_route() -> Tuple[Response, int]:
     get_current_user()
+    request.json["program_duration_weeks"] = 22
     schema = create_isa_schema.load(request.json)
     isa = create_student_and_isa(schema)
+
+    if not docusign_client.ds_token_ok():
+        return redirect(url_for("ds_login")), 302
+
+    results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
+    return redirect(results.url), 302
+
     # send_isa_offer(isa)
-    result = isa_schema.dump(isa)
-    return jsonify(result), 200
+    # result = isa_schema.dump(isa)
+    # return jsonify(results.url), 200
 
 
 @app.route("/isas", methods=["GET"])
@@ -85,6 +96,6 @@ def signme(isa_id: int) -> Tuple[Response, int]:
     user = get_current_user()
     isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
 
-    results = docusign_client.embedded_signing(coach=isa.coach, student=isa.student)
+    results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
 
     return redirect(results.url), 302
