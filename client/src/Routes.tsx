@@ -2,29 +2,36 @@ import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Route, Switch, Redirect } from 'react-router'
 import NotFound from './app/pages/public/404'
-import MyIsa from './app/pages/public/company/my-isa'
-import OnBoarding from './app/pages/public/coach/on-boarding'
-import CreateIsa from './app/pages/public/company/my-isa/create-isa'
 import SignUp from './app/pages/public/auth/sign-up'
 import SignIn from './app/pages/public/auth/sign-in'
-import IsaOverview from './app/pages/public/company/my-isa/isa-overview'
 import ClientIsaOffer from './app/pages/public/client/isa-offer-steps/review'
-import Settings from './app/pages/public/client/settings'
-import AdminIsas from './app/pages/admin/Isas'
-import AdminPlaid from './app/pages/admin/Plaid'
-import AdminUsers from './app/pages/admin/Users'
-import CompanyOnBoarding from './app/pages/public/company/register'
-import Subscription from './app/pages/public/company/subscription'
-import CompanyDashboard from './app/pages/public/company/dashboard'
 import PageHeader from './app/modules/common/PageHeader'
-import { ScreenProps } from './interfaces/baseIntefaces'
-import CompanyCoaches from './app/pages/public/company/dashboard/coaches'
-import BillingAndSubs from './app/pages/public/company/dashboard/billing-and-subs'
-import CompanyIsas from './app/pages/public/company/dashboard/my-isas'
-import CompanyIsaOverview from './app/pages/public/company/dashboard/my-isas/isa-overview'
-import CompanyCreateIsa from './app/pages/public/company/dashboard/my-isas/create-isa'
+import { ScreenProps, User } from './interfaces/baseIntefaces'
+import APP_ROUTES from './constants/app_routes'
 
-export default function Routes(routerProps: Partial<ScreenProps>) {
+export default function Routes(properties: Partial<ScreenProps>) {
+  const setUserType = (user: User) => {
+    if (user.user_role === 1) {
+      return 'admin'
+    }
+    if (user.user_role === 2 && user.type === 'coaches') {
+      return 'company'
+    }
+    return 'student'
+  }
+
+  const userType = properties.currentUser ? setUserType(properties.currentUser) : null
+
+  const routerProps = {
+    ...properties,
+    currentUser: properties.currentUser
+      ? {
+          ...properties.currentUser,
+          type: userType,
+        }
+      : null,
+  }
+
   const adminRoute = (Component: any, path: string) => (
     <Route path={path}>
       {(props: any) =>
@@ -36,9 +43,10 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
       }
     </Route>
   )
-  const privateRoute = (Component: any, route: string, exact?: boolean) => {
+  const privateRoute = (Component: any, route: string, index: number, exact?: boolean) => {
     return (
       <Route
+        key={index}
         exact={!!exact}
         path={route}
         render={(props: any) =>
@@ -50,32 +58,17 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
 
   return (
     <Router basename={'/web'}>
-      <PageHeader user={routerProps.currentUser} setCurrentUser={routerProps.setCurrentUser as any} />
+      <PageHeader user={routerProps.currentUser as any} setCurrentUser={routerProps.setCurrentUser as any} />
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
 
         {/* Private Routes */}
-        {privateRoute(MyIsa, '/my-isa')}
-        {privateRoute(CreateIsa, '/isa/create')}
-        {privateRoute(IsaOverview, '/isa/:id')}
-        {privateRoute(Settings, '/settings')}
-        {privateRoute(OnBoarding, '/on-boarding')}
-        {privateRoute(Subscription, '/subscription/:id')}
-        {privateRoute(CompanyOnBoarding, '/company/register')}
-
-        {/* Company Routes */}
-        {privateRoute(CompanyDashboard, '/company/dashboard')}
-        {privateRoute(CompanyCoaches, '/company/coaches')}
-        {privateRoute(CompanyIsas, '/company/isas', true)}
-        {privateRoute(CompanyCreateIsa, '/company/isas/create')}
-        {privateRoute(CompanyIsaOverview, '/company/isas/:id')}
-        {privateRoute(BillingAndSubs, '/company/billing')}
-
-        {/* Admin Routes */}
-        {adminRoute(AdminUsers, '/admin/users')}
-        {adminRoute(AdminIsas, '/admin/isas')}
-        {adminRoute(AdminPlaid, '/admin/plaid')}
+        {routerProps.currentUser &&
+          routerProps.currentUser.type &&
+          APP_ROUTES[routerProps.currentUser.type].map((route: any, index: number) =>
+            privateRoute(route.component, route.path, index, route.exact),
+          )}
 
         <Route path="/client/isa-offer/:id" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
 

@@ -1,9 +1,13 @@
 import './style.scss'
-import React from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
 import { IsaProgram } from '../../../../../interfaces/baseIntefaces'
-import { isNumber, validateEmail } from '../../../../../helpers/base'
+import { isNumber } from '../../../../../helpers/base'
+import UserService from '../../../../../services/user.service'
+import Select from '../../../../components/Select/Select'
+
+const userService = new UserService()
 
 interface ProgramStepProps {
   program: IsaProgram
@@ -12,13 +16,29 @@ interface ProgramStepProps {
 }
 
 export default function ProgramStep(props: ProgramStepProps) {
+  const [industry_fields, set_industry_fields] = useState<string[]>([])
+
   const notValid = () => Object.values(props.program).some(i => i === '')
+
+  const fetchFields = async () => {
+    const res = await userService.getIndustryFields()
+    set_industry_fields(res)
+  }
+
+  useLayoutEffect(() => {
+    fetchFields()
+  }, [])
 
   return (
     <section className="ProgramStep-module">
       <h2>Program Information</h2>
       <header>
-        <Input placeholder="Position Field" onChange={e => props.onChange(e, 'field')} value={props.program.field} />
+        <Select
+          value={props.program.field}
+          options={industry_fields}
+          onChange={e => props.onChange(e, 'field')}
+          placeholder="Position Field"
+        />
         <Input
           placeholder="Duration"
           onChange={e => isNumber(e) && props.onChange(e, 'duration')}
