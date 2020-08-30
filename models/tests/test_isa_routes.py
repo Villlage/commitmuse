@@ -22,6 +22,7 @@ class TestISA:
             assert resp.status_code == 200
             assert len(resp.json) == 2
 
+    @pytest.mark.skip("we're making it into a redirect now")
     def test_create(self, mock_send_document) -> None:
         coach = CoachFactory.create()
 
