@@ -10,16 +10,14 @@ type MenuItem = {
   active: boolean
 }
 
-interface Props {
+interface MainNavigationProps {
   items: Array<{ label: string; subItems: Array<MenuItem> }>
 }
 
-const MainNavigation = (props: Props) => {
-  const { items } = props
-
+export default function MainNavigation(props: MainNavigationProps) {
   return (
-    <section className="mainNavigation">
-      {items.map((item, index) => {
+    <section className="MainNavigation-module">
+      {props.items.map((item, index) => {
         return (
           <div className="menuItems" key={`menu-items-${index}`}>
             {item.label && <div className="header">{item.label}</div>}
@@ -43,5 +41,3 @@ const MainNavigation = (props: Props) => {
     </section>
   )
 }
-
-export default MainNavigation

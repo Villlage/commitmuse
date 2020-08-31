@@ -1,6 +1,6 @@
 import Settings from '../app/pages/public/client/settings'
 
-export const NAVIGATION_ITEMS: any = {
+let NAVIGATION_ITEMS: any = {
   admin: [],
   company: [
     {
@@ -129,3 +129,10 @@ export const NAVIGATION_ITEMS: any = {
     },
   ],
 }
+
+NAVIGATION_ITEMS.admin = [
+  ...NAVIGATION_ITEMS.company,
+  ...NAVIGATION_ITEMS.coach,
+]
+
+export default NAVIGATION_ITEMS

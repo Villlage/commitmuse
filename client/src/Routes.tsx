@@ -8,8 +8,8 @@ import ClientIsaOffer from './app/pages/public/client/isa-offer-steps/review'
 import PageHeader from './app/modules/common/PageHeader'
 import { ScreenProps, User } from './interfaces/baseIntefaces'
 import APP_ROUTES from './constants/app_routes'
-import { NAVIGATION_ITEMS } from './constants/navigationItems'
-import MainNavigation from './app/components/MainNavigation'
+import NAVIGATION_ITEMS from './constants/navigationItems'
+import MainNavigation from './app/modules/common/MainNavigation'
 import { USER_TYPES } from './constants/userTypes'
 
 export default function Routes(properties: Partial<ScreenProps>) {
@@ -68,7 +68,7 @@ export default function Routes(properties: Partial<ScreenProps>) {
     <Router basename={'/web'}>
       <PageHeader user={routerProps.currentUser as any} setCurrentUser={routerProps.setCurrentUser as any} />
 
-      <MainNavigation items={NAVIGATION_ITEMS[userType || USER_TYPES.COACH]} />
+      {userType && <MainNavigation items={NAVIGATION_ITEMS[userType || USER_TYPES.COACH]} />}
 
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
