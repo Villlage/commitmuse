@@ -3,7 +3,7 @@ from faker import Faker
 
 from app import db
 from models.user import User, Coach, Student
-from models.isa import ISA
+from models.isa import ISA, ISA_STATUS
 from models.company import Company, CompanyStatus
 from models.plaid_item import PlaidItem
 from models.plaid_account import PlaidAccount
@@ -101,7 +101,7 @@ class ISAFactory(factory.alchemy.SQLAlchemyModelFactory):  # type: ignore
     cancellation_period_weeks = factory.Faker("random_int", min=0, max=10, step=1)
 
     description = factory.Faker("word")
-    status = factory.Faker("word")
+    status = ISA_STATUS.INACTIVE.value
 
     student = factory.SubFactory(StudentFactory)
     coach = factory.SubFactory(CoachFactory)

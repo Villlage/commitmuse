@@ -64,19 +64,12 @@ def get_isa_by_access_token(isa_id: int) -> Tuple[Response, int]:
 @login_required
 def create_isa_route() -> Tuple[Response, int]:
     get_current_user()
-    request.json["program_duration_weeks"] = 22
     schema = create_isa_schema.load(request.json)
+
     isa = create_student_and_isa(schema)
 
-    if not docusign_client.ds_token_ok():
-        return redirect(url_for("ds_login")), 302
-
-    results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
-    return redirect(results.url), 302
-
-    # send_isa_offer(isa)
-    # result = isa_schema.dump(isa)
-    # return jsonify(results.url), 200
+    result = isa_schema.dump(isa)
+    return jsonify(result), 200
 
 
 @app.route("/isas", methods=["GET"])
@@ -87,14 +80,21 @@ def get_isas() -> Tuple[Response, int]:
     return jsonify(result), 200
 
 
-@app.route("/sign/isas/<int:isa_id>", methods=["GET"])
+@app.route("/isas/<int:isa_id>/sign", methods=["GET"])
 @login_required
-def signme(isa_id: int) -> Tuple[Response, int]:
-    from third_party.docusign.client import docusign_client
-    from flask import redirect
-
+def sign_isa(isa_id: int) -> Tuple[Response, int]:
+    """
+    sign ISA by the coach/company
+    """
     user = get_current_user()
     isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
+
+    if not docusign_client.ds_token_ok():
+        return redirect(url_for("ds_login")), 302
+
+    results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
+    # send_isa_offer(isa)
+    return redirect(results.url), 302
 
     results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
 

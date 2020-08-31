@@ -22,8 +22,7 @@ class TestISA:
             assert resp.status_code == 200
             assert len(resp.json) == 2
 
-    @pytest.mark.skip("we're making it into a redirect now")
-    def test_create(self, mock_send_document) -> None:
+    def test_create(self) -> None:
         coach = CoachFactory.create()
 
         payload = dict(
@@ -36,6 +35,7 @@ class TestISA:
             cancellation_period_weeks=2,
             industry_field="Information technology",
             program_duration_weeks=4,
+            expiration_period_months=3,
             client=dict(
                 email="client@gmail.com", first_name="client", last_name="student"
             ),
@@ -50,11 +50,13 @@ class TestISA:
             assert resp.json["time_to_be_paid"] == payload["time_to_be_paid"]
             assert resp.json["industry_field"] == payload["industry_field"]
             assert (
+                resp.json["expiration_period_months"]
+                == payload["expiration_period_months"]
+            )
+            assert (
                 resp.json["program_duration_weeks"] == payload["program_duration_weeks"]
             )
             assert resp.json["id"]
-
-            # mock_send_document.assert_called_once()
 
     def test_bad_create(self) -> None:
         coach = CoachFactory.create()
