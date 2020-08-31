@@ -74,13 +74,13 @@ let NAVIGATION_ITEMS: any = {
         },
         {
           label: 'Payments',
-          route: '/company/payments',
+          route: '/coach/payments',
           icon: 'money-check',
           active: false,
         },
         {
           label: 'My ISAs',
-          route: '/company/isas',
+          route: '/coach/isas',
           icon: 'file',
           active: false,
         },
@@ -91,7 +91,7 @@ let NAVIGATION_ITEMS: any = {
       subItems: [
         {
           label: 'My Account',
-          route: '/company/settings',
+          route: '/coach/settings',
           icon: 'user-circle',
           active: false,
         },
@@ -104,13 +104,13 @@ let NAVIGATION_ITEMS: any = {
       subItems: [
         {
           label: 'Payments',
-          route: '/company/payments',
+          route: '/student/payments',
           icon: 'money-check',
-          active: false,
+          active: true,
         },
         {
           label: 'My ISAs',
-          route: '/company/isas',
+          route: '/student/isas',
           icon: 'file',
           active: false,
         },
@@ -121,7 +121,7 @@ let NAVIGATION_ITEMS: any = {
       subItems: [
         {
           label: 'My Account',
-          route: '/company/settings',
+          route: '/student/settings',
           icon: 'user-circle',
           active: false,
         },
