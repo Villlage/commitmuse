@@ -54,7 +54,7 @@
       &.active,
       &:hover:not([aria-disabled="true"]) {
         img {
-          filter: invert(35%) sepia(100%) saturate(371%) hue-rotate(188deg) brightness(91%) contrast(88%);
+          filter: invert(1%) sepia(17%) saturate(1242%) hue-rotate(349deg) brightness(120%) contrast(110%)
         }
       }
     }
@@ -78,7 +78,7 @@
         background-color: $Indigo4;
 
         img {
-          filter: invert(35%) sepia(100%) saturate(371%) hue-rotate(188deg) brightness(91%) contrast(88%);
+          filter: invert(1%) sepia(17%) saturate(1242%) hue-rotate(349deg) brightness(120%) contrast(110%)
         }
       }
 
