@@ -50,7 +50,6 @@ export default function CompanyIsas(props: CompanyIsasProps) {
     <Loader />
   ) : (
     <article className="CompanyIsas-page">
-      <MenuSideBar />
       <PageContent error={request_error}>
         <header className="page-header">
           <h1 className="page-title">My ISA’s</h1>

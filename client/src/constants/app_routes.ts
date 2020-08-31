@@ -14,6 +14,8 @@ import IsaOverview from '../app/pages/public/company/my-isa/isa-overview'
 import Settings from '../app/pages/public/client/settings'
 import OnBoarding from '../app/pages/public/coach/on-boarding'
 import Subscription from '../app/pages/public/company/subscription'
+import CoachClients from 'app/pages/public/coach/CoachClients'
+import ClientPayments from 'app/pages/public/client/ClientPayments'
 
 let APP_ROUTES: any = {
   admin: [
@@ -23,7 +25,7 @@ let APP_ROUTES: any = {
   ],
   company: [
     { component: CompanyOnBoarding, path: '/company/register' },
-    { component: CompanyDashboard, path: '/company/dashboard' },
+    { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true},
     { component: CompanyCoaches, path: '/company/coaches' },
     { component: CompanyIsas, path: '/company/isas', exact: true },
     { component: CompanyCreateIsa, path: '/company/isas/create' },
@@ -36,9 +38,11 @@ let APP_ROUTES: any = {
     { component: IsaOverview, path: '/coach/isa/:id' },
     { component: Settings, path: '/coach/settings' },
     { component: Subscription, path: '/coach/subscription/:id' },
+    { component: CoachClients, path: '/coach/clients', defaultPage: true},
   ],
   student: [
     { component: OnBoarding, path: '/student/on-boarding' },
+    { component: ClientPayments, path: '/student/payments', defaultPage: true },
   ],
 }
 

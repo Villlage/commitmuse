@@ -50,7 +50,6 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
 
   return (
     <article className="CompanyCoaches-page">
-      <MenuSideBar />
       <PageContent error={request_error}>
         <header>
           <h2 className="page-title">Coaches</h2>
