@@ -68,7 +68,7 @@ export default function Routes(properties: Partial<ScreenProps>) {
     <Router basename={'/web'}>
       <PageHeader user={routerProps.currentUser as any} setCurrentUser={routerProps.setCurrentUser as any} />
 
-      {userType && <MainNavigation items={NAVIGATION_ITEMS[userType || USER_TYPES.COACH]} />}
+      {userType && <MainNavigation items={NAVIGATION_ITEMS[userType]} />}
 
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
