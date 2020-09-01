@@ -22,7 +22,7 @@ class ISA(db.Model):  # type: ignore
     percentage = db.Column(db.Float, nullable=False, default=0)
     cap = db.Column(db.Integer, nullable=False, default=0)
     cancellation_period_weeks = db.Column(db.Integer, nullable=False, default=0)
-    expiration_period_months = db.Column(db.Integer, nullable=True, default=0)
+    # expiration_period_months = db.Column(db.Integer, nullable=True, default=0)
 
     time_to_be_paid = db.Column(db.Integer, nullable=False, default=0)
 
