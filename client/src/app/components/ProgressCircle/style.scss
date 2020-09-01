@@ -1,0 +1,71 @@
+@import '../../../styles/mixins';
+@import '../../../styles/colors';
+
+/* PROGRESSCIRCLE */
+.progressCircle {
+  $circleSize: 48px;
+  $insetSize: 42px;
+
+  $circle-background: $Yellow2;
+  $circle-color: $Yellow5;
+  $inset-color: $Yellow1;
+
+  display: inline-block;
+
+  width:  $circleSize;
+  height: $circleSize;
+
+  border-radius: 50%;
+  background-color: $circle-background;
+
+  .circle {
+    .mask, .fill {
+      width:    $circleSize;
+      height:   $circleSize;
+      position: absolute;
+      border-radius: 50%;
+    }
+    .mask {
+      clip: rect(0px, $circleSize, $circleSize, $circleSize/2);
+      .fill {
+        clip: rect(0px, $circleSize/2, $circleSize, 0px);
+        background-color: $circle-color;
+      }
+    }
+  }
+  .inset {
+    position: absolute;
+    width: $insetSize;
+    height: $insetSize;
+    margin-left: ($circleSize - $insetSize)/2;
+    margin-top: ($circleSize - $insetSize)/2;
+
+    background-color: $inset-color;
+    border-radius: 50%;
+
+    font-size: 12px;
+    font-weight: 500;
+    color: $Yellow5;
+    text-align: center;
+    line-height: $insetSize;
+
+    svg {
+      transform: translate(-1px, -1px);
+    }
+  }
+
+  $i: 0;
+  $increment: 180deg / 100;
+  @for $i from 0 through 100 {
+    &[data-progress='#{$i}'] {
+      .circle {
+        .mask.full, .fill {
+          transform: rotate($increment * $i);
+        }
+        .fill.fix {
+          transform: rotate($increment * $i * 2);
+        }
+      }
+    }
+  }
+}

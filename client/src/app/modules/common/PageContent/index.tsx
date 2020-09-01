@@ -1,7 +1,6 @@
 import React from 'react'
 import './style.scss'
-import { createEl } from '../../../../helpers/base'
-import Message, { MessageType } from '../../../components/Message'
+import Message, { MessageType } from 'app/components/Message'
 
 interface PageContentProps {
   children: React.ReactChild | React.ReactChild[]
@@ -10,13 +9,15 @@ interface PageContentProps {
 }
 
 export default function PageContent(props: PageContentProps) {
+  const { title, error, children } = props
+
   return (
     <section className="PageContent-module">
       <section className="content">
-        {createEl('h1', props.title, { className: 'page-title' })}
-        {props.children}
+        {title && <div className={'page-title'}>{title}</div>}
+        {children}
       </section>
-      <Message message={props.error || ''} />
+      <Message message={error || ''} />
     </section>
   )
 }

@@ -46,7 +46,6 @@ export default function CompanyDashboard(props: CompanyDashboardProps) {
 
   return (
     <article className="CompanyDashboard-page">
-      <MenuSideBar />
       {loading ? (
         <Loader />
       ) : (

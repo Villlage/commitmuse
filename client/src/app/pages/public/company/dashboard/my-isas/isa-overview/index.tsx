@@ -51,7 +51,6 @@ export default function CompanyIsaOverview(props: IsaOverviewProps) {
 
   return (
     <article className="CompanyIsaOverview-page">
-      <MenuSideBar />
       {loading ? (
         <Loader />
       ) : (

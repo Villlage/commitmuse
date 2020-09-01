@@ -121,7 +121,6 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
 
   return (
     <article className="CompanyCreateIsa-page">
-      <MenuSideBar />
       <PageContent>
         <h1 className="page-title">
           {active_step !== 0 && <Icon onClick={() => set_active_step(active_step - 1)} icon="arrow-left" />} New ISA
