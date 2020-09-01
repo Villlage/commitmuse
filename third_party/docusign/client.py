@@ -86,9 +86,6 @@ class Docusign:
             role_name=TemplateRoleType.CLIENT.value,
         )
 
-        import pytest
-
-        pytest.set_trace()
         envelope_definition = EnvelopeDefinition(
             status="sent",  # requests that the envelope be created and sent.
             template_id=ISA_TEMPLATE_ID,
