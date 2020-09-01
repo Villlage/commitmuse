@@ -15,6 +15,8 @@ base_uri_suffix = "/restapi"
 
 @app.route("/ds/login", methods=["GET"])
 def ds_login():
+    isa_id = request.args.get("isa_id")
+    session["isa_id"] = isa_id
     session["auth_type"] = "jwt"
     return DSClient.login("jwt")
 
@@ -70,7 +72,8 @@ def ds_callback():
         session["ds_base_path"] = account["base_uri"] + base_uri_suffix
 
     if not redirect_url:
-        redirect_url = url_for("index")
+        isa_id = session["isa_id"]
+        redirect_url = url_for(f"/web/company/isas/contract/{isa_id}")
     return redirect(redirect_url)
 
 

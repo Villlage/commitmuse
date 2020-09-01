@@ -52,11 +52,7 @@ class DSClient:
         api_client = ApiClient()
         api_client.set_base_path(DS_JWT["authorization_server"])
 
-        # Catch IO error
-        try:
-            private_key = cls._get_private_key().encode("ascii").decode("utf-8")
-        except (OSError, IOError) as err:
-            return render_template("error.html", err=err)
+        private_key = cls._get_private_key().encode("ascii").decode("utf-8")
 
         try:
             cls.ds_app = api_client.request_jwt_user_token(
