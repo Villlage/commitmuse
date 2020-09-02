@@ -28,6 +28,14 @@ class ClientSchema(Schema):  # type: ignore
     type = "students"
 
 
+class CoachSchema(Schema):  # type: ignore
+    email = fields.Email(allow_none=False, required=True)
+    first_name = fields.Str(required=False)
+    last_name = fields.Str(required=False)
+    user_role = fields.Int(required=False, missing=0)
+    type = "coaches"
+
+
 class CreateSubscriptionSchema(Schema):  # type: ignore
     company_id = fields.Int(required=True)
     is_active = True
@@ -67,7 +75,7 @@ class CreateISASchema(Schema):  # type: ignore
     description = fields.Str(required=True)
     industry_field = fields.Str(required=False)
     program_duration_weeks = fields.Int(required=False, missing=0)
-    expiration_period_months = fields.Int(required=False, missing=0)
+    # expiration_period_months = fields.Int(required=False, missing=0)
     cancellation_period_weeks = fields.Int(required=True)
     coach_id = fields.Int(required=True)
     client = fields.Nested(ClientSchema, required=True)
@@ -143,3 +151,5 @@ create_subscription_schema = CreateSubscriptionSchema()
 subscription_schema = SubscriptionSchema()
 create_subscription_schema = CreateSubscriptionSchema()
 update_subscription_schema = UpdateSubscriptionSchema()
+
+coach_schema = CoachSchema()

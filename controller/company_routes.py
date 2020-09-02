@@ -13,6 +13,7 @@ from serializers.user_serializers import (
     create_company_schema,
     user_schema,
     isa_schema,
+    coach_schema,
 )
 
 from services.company_service import (
@@ -21,6 +22,7 @@ from services.company_service import (
     get_company_coaches,
     get_company_isas,
     get_company_overview,
+    invite_coach_to_company,
 )
 from controller.common import login_required, get_current_user
 from models.user import User
@@ -82,3 +84,13 @@ def companies_overview(company_id: int) -> Tuple[Response, int]:
     user = get_current_user()
     overview = get_company_overview(user=user, company_id=company_id)
     return jsonify(overview), 200
+
+
+@app.route("/companies/<int:company_id>/invitation", methods=["POST"])
+def invite_coach(company_id: int) -> Tuple[Response, int]:
+    user = get_current_user()
+    schema = coach_schema.load(request.json)
+
+    invite_coach_to_company(company_id=company_id, user=user, schema=schema)
+
+    return jsonify(), 204

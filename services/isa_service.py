@@ -7,7 +7,7 @@ from models.isa import ISA
 from typing import Any, Dict, Optional
 
 from typing import Optional
-from models.user import Student
+from models.user import Student, User
 
 
 def get_isa_by_id(isa_id: int, coach_id: int, student_id: Optional[int] = None) -> ISA:
@@ -29,7 +29,9 @@ def create_student_and_isa(schema: Dict[Any, Any]) -> ISA:
     """
     creating student from the dictionary and removing the client payload
     """
-    student = Student.create_user(**schema["client"])
+    student = User.get_user_by_email(schema["client"]["email"])
+    if not student:
+        student = Student.create_user(**schema["client"])
     schema.pop("client")
     schema["student_id"] = student.id
 

@@ -6,11 +6,12 @@ from common.exceptions import (
     AuthenticationError,
     AuthorizationError,
 )
-from tests.factories import CompanyFactory, UserFactory
+from tests.factories import CompanyFactory, UserFactory, CoachFactory
 from services.company_service import (
     get_company_by_id,
     create_company,
     assign_user_to_company,
+    invite_coach_to_company,
 )
 from models.user import UserRole
 
@@ -54,3 +55,35 @@ class TestCompanyService:
 
         assert patched_user == user
         assert patched_user.user_role == UserRole.REGULAR.value
+
+
+class TestCoachInvitation:
+    @pytest.fixture()
+    def mock_sendgrid_send_email(self, mocker) -> None:
+        return mocker.patch(
+            "third_party.sendgrid.sendgrid_client.SendgridEmail.send",
+            return_value=None,
+        )
+
+    def test_invite_coach_to_company(self, mock_sendgrid_send_email) -> None:
+        company = CompanyFactory.create()
+        user = UserFactory.create(company=company)
+        schema = dict(
+            first_name="some", last_name="one", user_role=1, email="someone@gmail.com"
+        )
+
+        invite_coach_to_company(company_id=company.id, user=user, schema=schema)
+        mock_sendgrid_send_email.assert_called_once()
+
+    def test_invite_coach_to_company_coach_exists(
+        self, mock_sendgrid_send_email
+    ) -> None:
+        company = CompanyFactory.create()
+        user = UserFactory.create(company=company)
+        email = "someoneelse@gmail.com"
+        coach = CoachFactory.create(email=email)
+
+        schema = dict(first_name="some", last_name="one", user_role=1, email=email)
+
+        invite_coach_to_company(company_id=company.id, user=user, schema=schema)
+        mock_sendgrid_send_email.assert_called_once()
