@@ -85,6 +85,7 @@ from models.plaid_account import PlaidAccount
 from models.isa import ISA
 from models.subscription import Subscription
 from models.company import Company
+from models.feature_flag import FeatureFlag
 
 
 # Routes
