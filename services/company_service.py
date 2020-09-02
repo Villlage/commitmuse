@@ -6,8 +6,10 @@ from common.exceptions import (
 from models.company import Company
 from typing import Any, Dict, List
 
-from models.user import User, UserRole
+from models.user import User, UserRole, Coach
 from models.isa import ISA
+
+from services.email_service import send_coach_invitation
 
 
 def get_company_by_id(company_id: int, user: User) -> Company:
@@ -74,3 +76,14 @@ def get_company_overview(company_id: int, user: User) -> Dict[Any, Any]:
         total_revenue=0,
         last_payment=dict(value=0, date=None),
     )
+
+
+def invite_coach_to_company(
+    company_id: int, user: User, schema: Dict[Any, Any]
+) -> None:
+    company = get_company_by_id(company_id=company_id, user=user)
+    coach = User.get_user_by_email(schema["email"])
+    if not coach:
+        coach = Coach.create_user(**schema)
+
+    send_coach_invitation(coach=coach, company=company)
