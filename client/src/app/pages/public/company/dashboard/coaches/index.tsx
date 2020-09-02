@@ -50,7 +50,6 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
 
   return (
     <article className="CompanyCoaches-page">
-      <MenuSideBar />
       <PageContent error={request_error}>
         <header>
           <h2 className="page-title">Coaches</h2>
@@ -75,7 +74,7 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
         <PopUp isOpen={show_new_coach_popup} onClose={() => set_show_new_coach_popup(false)}>
           <section className="new-coach">
             <header>
-              <h2>Invite someone to join Company Name</h2>
+              <h2>Invite someone to join as coach</h2>
               <Input
                 onChange={e => set_coach({ ...coach, first_name: e })}
                 value={coach.first_name}
@@ -88,16 +87,6 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
               />
               <Button background="MainWarning">SEND INVITE</Button>
             </header>
-            <footer>
-              {coaches.map((coach, i) => (
-                <div className="coach" key={i}>
-                  <h2>
-                    {makeName(coach)} <span>{coach.email}</span>
-                  </h2>
-                  <Select value="Coach" options={['']} onChange={e => e} placeholder="Coach" />
-                </div>
-              ))}
-            </footer>
           </section>
         </PopUp>
       </PageContent>

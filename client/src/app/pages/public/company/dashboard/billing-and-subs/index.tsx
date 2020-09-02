@@ -120,7 +120,6 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
     <Loader />
   ) : (
     <article className="BillingAndSubs-page">
-      <MenuSideBar />
       <PageContent title="Billing and Subscription">
         <section className="billing-info">
           <header>

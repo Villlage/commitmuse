@@ -8,6 +8,9 @@ import ClientIsaOffer from './app/pages/public/client/isa-offer-steps/review'
 import PageHeader from './app/modules/common/PageHeader'
 import { ScreenProps, User } from './interfaces/baseIntefaces'
 import APP_ROUTES from './constants/app_routes'
+import NAVIGATION_ITEMS from './constants/navigationItems'
+import MainNavigation from './app/modules/common/MainNavigation'
+import { USER_TYPES } from './constants/userTypes'
 
 export default function Routes(properties: Partial<ScreenProps>) {
   const setUserType = (user: User) => {
@@ -51,9 +54,22 @@ export default function Routes(properties: Partial<ScreenProps>) {
     )
   }
 
+  const getDefaultPage = () => {
+    if (!routerProps.currentUser || !routerProps.currentUser.type) {
+      return '/my-isa'
+    }
+
+    const defaultRoute = APP_ROUTES[routerProps.currentUser.type].find((route: any) => route.defaultPage)
+
+    return defaultRoute ? defaultRoute.path : '/my-isa'
+  }
+
   return (
     <Router basename={'/web'}>
       <PageHeader user={routerProps.currentUser as any} setCurrentUser={routerProps.setCurrentUser as any} />
+
+      {userType && <MainNavigation items={NAVIGATION_ITEMS[userType]} />}
+
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
@@ -68,7 +84,7 @@ export default function Routes(properties: Partial<ScreenProps>) {
         <Route path="/client/isa-offer/:id" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
 
         {/*404*/}
-        <Redirect path="/" to={routerProps.currentUser ? '/my-isa' : '/login'} exact />
+        <Redirect path="/" to={routerProps.currentUser ? getDefaultPage() : '/login'} exact />
         <Route path="*" render={(props: any) => <NotFound {...props} />} />
       </Switch>
     </Router>
