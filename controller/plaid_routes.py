@@ -1,19 +1,14 @@
-from flask import request
-from controller.common import get_current_user, login_required
+from controller.common import get_current_user
 from serializers.plaid_serializers import (
     plaid_request_schema,
     plaid_item_schema,
     plaid_item_get_schema,
 )
-from app import app
 from werkzeug import Response
 
 from flask import request, jsonify
 from app import app
-from common.exceptions import (
-    ResourceNotFound,
-    AuthenticationError,
-)
+
 from controller.common import login_required
 from services.plaid_service import create_plaid_item, get_plaid_items
 from typing import Tuple

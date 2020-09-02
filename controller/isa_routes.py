@@ -2,12 +2,7 @@ from flask import request, jsonify
 from typing import Any, Dict, List, Tuple
 from werkzeug import Response
 from app import app
-from common.exceptions import (
-    ResourceConflictError,
-    ResourceNotFound,
-    AuthenticationError,
-    AuthorizationError,
-)
+
 from serializers.user_serializers import (
     update_isa_schema,
     create_isa_schema,
@@ -95,5 +90,5 @@ def sign_isa(isa_id: int) -> Tuple[Response, int]:
 
 
 @app.route("/docusign/login", methods=["GET"])
-def login_to_docusign(isa_id: int) -> Tuple[Response, int]:
-    return redirect(url_for("ds_login")), 302
+def login_to_docusign() -> Tuple[Response, int]:
+    return jsonify(url=url_for("ds_login")), 200
