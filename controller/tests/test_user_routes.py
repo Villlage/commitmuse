@@ -1,4 +1,3 @@
-import pytest
 from app import app
 from tests.factories import faker, UserFactory
 from conftest import logged_in_client  # type: ignore
@@ -118,7 +117,6 @@ class TestUser:
             assert resp.json["first_name"] == user.first_name
 
 
-@pytest.mark.skip("need to add the forgot password token")
 class TestResetPassword:
     def test_reset_password_success(self) -> None:
         user = UserFactory.create()
