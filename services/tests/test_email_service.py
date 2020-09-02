@@ -8,6 +8,7 @@ from services.email_service import (
     _coach_invitation_link,
 )
 from tests.factories import UserFactory, ISAFactory, CoachFactory, CompanyFactory
+from services.token_service import generate_user_token
 
 
 class TestEmails:
@@ -34,16 +35,20 @@ class TestEmails:
     def test_send_client_isa_offer_link(self) -> None:
         isa = ISAFactory.create()
         client_offer_link = _client_offer_link(isa)
+        token = generate_user_token(isa.student.id)
         assert (
-            client_offer_link == f"http://localhost:5000/web/client/isa-offer/{isa.id}"
+            client_offer_link
+            == f"http://localhost:5000/web/client/isa-offer/{isa.id}?token={token}"
         )
 
     def test_coach_invitation_link(self):
         coach = CoachFactory.create()
+        token = generate_user_token(coach.id)
         coach_invitation_link = _coach_invitation_link(coach)
+
         assert (
             coach_invitation_link
-            == f"http://localhost:5000/web/coach/invitation/{coach.id}"
+            == f"http://localhost:5000/web/coach/invitation/{coach.id}?token={token}"
         )
 
     def test_send_coach_invitation(self, mock_sendgrid_send_email):

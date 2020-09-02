@@ -3,6 +3,7 @@ from third_party.sendgrid.sendgrid_client import SendgridEmail
 from models.user import User, Coach
 from models.company import Company
 from models.isa import ISA
+from services.token_service import generate_user_token
 from common.constants import (
     FORGOT_PASSWORD_TEMPLATE,
     SEND_CLIENT_ISA_OFFER,
@@ -25,11 +26,17 @@ def send_forgot_password_email(user: User, reset_password_link: str) -> None:
 
 
 def _client_offer_link(isa: ISA) -> str:
-    return f"{config.WEB_APP_DOMAIN}/{SEND_CLIENT_ISA_OFFER_LINK}/{isa.id}"
+    token = generate_user_token(isa.student.id)
+    return (
+        f"{config.WEB_APP_DOMAIN}/{SEND_CLIENT_ISA_OFFER_LINK}/{isa.id}?token={token}"
+    )
 
 
 def _coach_invitation_link(coach: Coach) -> str:
-    return f"{config.WEB_APP_DOMAIN}/{SEND_COACH_INVITATION_LINK}/{coach.id}"
+    token = generate_user_token(coach.id)
+    return (
+        f"{config.WEB_APP_DOMAIN}/{SEND_COACH_INVITATION_LINK}/{coach.id}?token={token}"
+    )
 
 
 def send_client_isa_offer_email(isa: ISA) -> None:
