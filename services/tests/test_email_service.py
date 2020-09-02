@@ -4,8 +4,10 @@ from services.email_service import (
     send_forgot_password_email,
     send_client_isa_offer_email,
     _client_offer_link,
+    send_coach_invitation,
+    _coach_invitation_link,
 )
-from tests.factories import UserFactory, ISAFactory
+from tests.factories import UserFactory, ISAFactory, CoachFactory, CompanyFactory
 
 
 class TestEmails:
@@ -35,3 +37,17 @@ class TestEmails:
         assert (
             client_offer_link == f"http://localhost:5000/web/client/isa-offer/{isa.id}"
         )
+
+    def test_coach_invitation_link(self):
+        coach = CoachFactory.create()
+        coach_invitation_link = _coach_invitation_link(coach)
+        assert (
+            coach_invitation_link
+            == f"http://localhost:5000/web/coach/invitation/{coach.id}"
+        )
+
+    def test_send_coach_invitation(self, mock_sendgrid_send_email):
+        company = CompanyFactory.create()
+        coach = CoachFactory.create()
+        send_coach_invitation(coach=coach, company=company)
+        mock_sendgrid_send_email.assert_called_once()
