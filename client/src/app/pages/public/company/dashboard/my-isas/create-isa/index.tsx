@@ -71,7 +71,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
       }
 
       set_active_step(active_step + 1)
-      return props.history.push(`/company/isas/sign/${res.id}`)
+      return props.history.push(`/company/isas/contract/${res.id}`)
     } catch (e) {
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)

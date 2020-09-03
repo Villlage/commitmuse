@@ -163,7 +163,7 @@ class Docusign:
     def _get_return_url(isa: ISA) -> str:
         isa_id = isa.id  # type: int
         isa_id_str = str(isa_id)  # type: str
-        return_url = config.WEB_APP_DOMAIN + "/isa/" + isa_id_str  # type: str
+        return_url = config.WEB_APP_DOMAIN + "/company/isas/" + isa_id_str  # type: str
         return return_url
 
 

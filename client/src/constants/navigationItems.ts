@@ -130,9 +130,6 @@ let NAVIGATION_ITEMS: any = {
   ],
 }
 
-NAVIGATION_ITEMS.admin = [
-  ...NAVIGATION_ITEMS.company,
-  ...NAVIGATION_ITEMS.coach,
-]
+NAVIGATION_ITEMS.admin = [...NAVIGATION_ITEMS.company, ...NAVIGATION_ITEMS.coach]
 
 export default NAVIGATION_ITEMS

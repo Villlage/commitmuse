@@ -15,10 +15,11 @@ export default function ContractStep(props: ContractStepProps) {
       <h2>Review and Sign Your Contract</h2>
       <Button
         background="MainWarning"
-        onClick={() => {
-          set_show_msg(true)
-          setTimeout(() => props.onNext(), 3000)
-        }}
+        onClick={props.onNext}
+        // onClick={() => {
+        //   set_show_msg(true)
+        //   setTimeout(() => props.onNext(), 3000)
+        // }}
         className="next-btn"
       >
         Send Contract to Review

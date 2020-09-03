@@ -1,5 +1,6 @@
 import BaseService from './base.service'
 import { IsaClient } from '../interfaces/baseIntefaces'
+import { objectToUrlParams } from '../helpers/base'
 
 const baseService = new BaseService()
 
@@ -32,7 +33,7 @@ export default class IsaService {
     return await baseService.getJSON(`isas/${isa_id}/sign`)
   }
 
-  public async docusignLogin() {
-    return await baseService.getJSON(`ds/login`)
+  public async docusignLogin(isa_id: number) {
+    return await baseService.getJSON(`ds/login?isa_id=${objectToUrlParams({isa_id})}`)
   }
 }
