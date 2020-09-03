@@ -26,7 +26,7 @@ let APP_ROUTES: any = {
   ],
   company: [
     { component: CompanyOnBoarding, path: '/company/register' },
-    { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true},
+    { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true },
     { component: CompanyCoaches, path: '/company/coaches' },
     { component: CompanyIsas, path: '/company/isas', exact: true },
     { component: CompanyCreateIsa, path: '/company/isas/create' },
@@ -40,7 +40,7 @@ let APP_ROUTES: any = {
     { component: IsaOverview, path: '/coach/isa/:id' },
     { component: Settings, path: '/coach/settings' },
     { component: Subscription, path: '/coach/subscription/:id' },
-    { component: CoachClients, path: '/coach/clients', defaultPage: true},
+    { component: CoachClients, path: '/coach/clients', defaultPage: true },
   ],
   student: [
     { component: OnBoarding, path: '/student/on-boarding' },
@@ -49,10 +49,6 @@ let APP_ROUTES: any = {
 }
 
 // admins can access to all routes
-APP_ROUTES.admin = [
-  ...APP_ROUTES.admin,
-  ...APP_ROUTES.company,
-  ...APP_ROUTES.student,
-]
+APP_ROUTES.admin = [...APP_ROUTES.admin, ...APP_ROUTES.company, ...APP_ROUTES.student]
 
 export default APP_ROUTES
