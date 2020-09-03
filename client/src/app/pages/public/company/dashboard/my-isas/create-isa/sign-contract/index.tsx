@@ -11,26 +11,38 @@ const isaService = new IsaService()
 const OFFER_STEPS = ['client', 'program', 'isa offer', 'review', 'contract']
 
 interface SignContractProps {
-
+  match: any
+  location: Location
 }
 
 export default function SignContract(props: SignContractProps) {
   const [request_error, set_request_error] = useState('')
 
+  const onSign = async () => {
+    try {
+      const res = await isaService.signIsa(props.match.params.id)
+      if (res && res.error) {
+        set_request_error(res.error)
+        return setTimeout(() => set_request_error(''), 3000)
+      }
+
+      if (res) {
+        return (window.location.href = res.url)
+      }
+    } catch (e) {
+      set_request_error(e.error || e.toString())
+      setTimeout(() => set_request_error(''), 3000)
+    }
+  }
+
   return (
     <article className="CompanyCreateIsa-page">
       <PageContent>
-        <h1 className="page-title">
-          New ISA Offer
-        </h1>
+        <h1 className="page-title">New ISA Offer</h1>
         <section className="container">
           <section className="offer-steps">
             <Stepper steps={OFFER_STEPS} activeIndex={4} />
-            <ContractStep onNext={async () => {
-              console.log('', 111)
-              const res = await isaService.docusignLogin()
-              // props.history.push(`/company/isas`)
-            }}/>
+            <ContractStep onNext={onSign} />
           </section>
           <section className="faq-and-calc">
             {/*<ISACalculator*/}
