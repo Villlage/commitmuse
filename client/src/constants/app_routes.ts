@@ -29,10 +29,12 @@ let APP_ROUTES: any = {
     { component: CompanyCoaches, path: '/company/coaches' },
     { component: CompanyIsas, path: '/company/isas', exact: true },
     { component: CompanyCreateIsa, path: '/company/isas/create' },
+    { component: Subscription, path: '/company/subscription/:id' },
     { component: CompanyIsaOverview, path: '/company/isas/:id' },
     { component: BillingAndSubs, path: '/company/billing' },
   ],
   coach: [
+    { component: CompanyOnBoarding, path: '/company/register' }, //temporary solution
     { component: MyIsa, path: '/coach/my-isa' },
     { component: CreateIsa, path: '/coach/isa/create' },
     { component: IsaOverview, path: '/coach/isa/:id' },
