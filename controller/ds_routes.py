@@ -1,8 +1,8 @@
 # type: ignore
-from app import app
+from app import app, config
 from datetime import datetime, timedelta
 
-from flask import flash, jsonify, redirect, request, session, url_for
+from flask import flash, jsonify, redirect, request, session
 
 from third_party.docusign.docusign import DSClient
 from third_party.docusign.ds_config import DS_CONFIG
@@ -70,5 +70,5 @@ def ds_callback():
 
     if not redirect_url:
         isa_id = session["isa_id"]
-        redirect_url = url_for(f"/web/company/isas/contract/{isa_id}")
+        redirect_url = f"{config.WEB_APP_DOMAIN}/company/isas/contract/{isa_id}"
     return redirect(redirect_url)
