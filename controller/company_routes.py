@@ -2,11 +2,7 @@ from flask import request, jsonify
 from typing import Tuple
 from werkzeug import Response
 from app import app
-from common.exceptions import (
-    ResourceNotFound,
-    AuthenticationError,
-    AuthorizationError,
-)
+
 from serializers.user_serializers import (
     company_schema,
     update_company_schema,

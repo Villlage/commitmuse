@@ -27,4 +27,12 @@ export default class IsaService {
   public async getIsaById(isa_id: number) {
     return await baseService.getJSON(`isas/${isa_id}`)
   }
+
+  public async signIsa(isa_id: number) {
+    return await baseService.getJSON(`isas/${isa_id}/sign`)
+  }
+
+  public async docusignLogin() {
+    return await baseService.getJSON(`ds/login`)
+  }
 }

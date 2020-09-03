@@ -16,6 +16,7 @@ import OnBoarding from '../app/pages/public/coach/on-boarding'
 import Subscription from '../app/pages/public/company/subscription'
 import CoachClients from 'app/pages/public/coach/CoachClients'
 import ClientPayments from 'app/pages/public/client/ClientPayments'
+import SignContract from '../app/pages/public/company/dashboard/my-isas/create-isa/sign-contract'
 
 let APP_ROUTES: any = {
   admin: [
@@ -29,6 +30,7 @@ let APP_ROUTES: any = {
     { component: CompanyCoaches, path: '/company/coaches' },
     { component: CompanyIsas, path: '/company/isas', exact: true },
     { component: CompanyCreateIsa, path: '/company/isas/create' },
+    { component: SignContract, path: '/company/isas/sign/:id' },
     { component: CompanyIsaOverview, path: '/company/isas/:id' },
     { component: BillingAndSubs, path: '/company/billing' },
   ],
