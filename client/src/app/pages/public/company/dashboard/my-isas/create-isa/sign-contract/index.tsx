@@ -20,6 +20,7 @@ export default function SignContract(props: SignContractProps) {
 
   const onSign = async () => {
     try {
+      await isaService.docusignLogin(props.match.params.id)
       const res = await isaService.signIsa(props.match.params.id)
       if (res && res.error) {
         set_request_error(res.error)
