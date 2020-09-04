@@ -5,6 +5,7 @@ from tests.factories import CoachFactory, ISAFactory
 from conftest import logged_in_client
 from common.exceptions import ResourceNotFound
 from services.isa_service import get_isa_by_id
+from unittest.mock import MagicMock
 
 
 class TestISA:
@@ -143,3 +144,23 @@ class TestISA:
             resp = client.get(f"/client/isas/{isa_id}")
             assert resp.status_code == 200
             assert resp.json["id"] == isa_id
+
+
+class TestSigning:
+    @pytest.fixture()
+    def mock_embedded_signing(self, mocker):
+        return mocker.patch(
+            "controller.isa_routes.docusign_client.embedded_signing",
+            return_value=MagicMock(url="url"),
+        )
+
+    def test_sign_isa(self, mock_embedded_signing) -> None:
+        coach = CoachFactory.create()
+        isa = ISAFactory.create(coach=coach)
+        isa_id = isa.id
+
+        with logged_in_client(coach) as client:
+            resp = client.get(f"/isas/{isa_id}/sign")
+            assert resp.status_code == 200
+            assert resp.json["url"] == "url"
+            mock_embedded_signing.assert_called_once()

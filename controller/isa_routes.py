@@ -76,14 +76,13 @@ def get_isas() -> Tuple[Response, int]:
 
 
 @app.route("/isas/<int:isa_id>/sign", methods=["GET"])
+@login_required
 def sign_isa(isa_id: int) -> Tuple[Response, int]:
     """
     sign ISA by the coach/company
     """
-    from flask import jsonify
-
-    # user = get_current_user()
-    isa = get_isa_by_id(coach_id=1, isa_id=isa_id)  # type: ISA
+    user = get_current_user()
+    isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
 
     results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
     return jsonify(url=results.url), 200
