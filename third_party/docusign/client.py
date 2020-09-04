@@ -104,7 +104,7 @@ class Docusign:
         return {"envelope_id": envelope_id}
 
     @classmethod
-    def ds_token_ok(cls, buffer_min: int = 1) -> bool:
+    def ds_token_ok(cls, buffer_min: int = 60) -> bool:
         """
         :param buffer_min: buffer time needed in minutes
         :return: true iff the user has an access token that will be good for another buffer min
