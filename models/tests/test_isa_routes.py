@@ -35,6 +35,7 @@ class TestISA:
             cancellation_period_weeks=2,
             industry_field="Information technology",
             program_duration_weeks=4,
+            expiration_period_months=3,
             client=dict(
                 email="client@gmail.com", first_name="client", last_name="student"
             ),
@@ -48,10 +49,10 @@ class TestISA:
             assert resp.json["cap"] == payload["cap"]
             assert resp.json["time_to_be_paid"] == payload["time_to_be_paid"]
             assert resp.json["industry_field"] == payload["industry_field"]
-            # assert (
-            #     resp.json["expiration_period_months"]
-            #     == payload["expiration_period_months"]
-            # )
+            assert (
+                resp.json["expiration_period_months"]
+                == payload["expiration_period_months"]
+            )
             assert (
                 resp.json["program_duration_weeks"] == payload["program_duration_weeks"]
             )

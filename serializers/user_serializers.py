@@ -75,7 +75,7 @@ class CreateISASchema(Schema):  # type: ignore
     description = fields.Str(required=True)
     industry_field = fields.Str(required=False)
     program_duration_weeks = fields.Int(required=False, missing=0)
-    # expiration_period_months = fields.Int(required=False, missing=0)
+    expiration_period_months = fields.Int(required=False, missing=0)
     cancellation_period_weeks = fields.Int(required=True)
     coach_id = fields.Int(required=True)
     client = fields.Nested(ClientSchema, required=True)
