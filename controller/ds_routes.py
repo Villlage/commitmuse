@@ -2,7 +2,7 @@
 from app import app, config
 from datetime import datetime, timedelta
 
-from flask import flash, jsonify, redirect, request, session
+from flask import flash, redirect, request, session
 
 from third_party.docusign.docusign import DSClient
 from third_party.docusign.ds_config import DS_CONFIG
@@ -16,11 +16,6 @@ def ds_login():
     session["isa_id"] = isa_id
     session["auth_type"] = "jwt"
     return DSClient.login("jwt")
-
-
-@app.route("/ds/gilad", methods=["GET", "POST"])
-def ds_stuff():
-    return jsonify("hello")
 
 
 @app.route("/ds/callback")

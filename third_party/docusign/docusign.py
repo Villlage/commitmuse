@@ -4,14 +4,12 @@ from os import path
 
 
 import requests
-from flask import current_app as app, url_for, redirect, render_template, request
+from flask import current_app as app, redirect, request, url_for
 from flask_oauthlib.client import OAuth
 from docusign_esign import ApiClient
 from docusign_esign.client.api_exception import ApiException
 
 from third_party.docusign.ds_config import DS_CONFIG, DS_JWT
-
-# from ..error_handlers import process_error
 
 
 class DSClient:
@@ -78,8 +76,7 @@ class DSClient:
                 )
                 return redirect(consent_url)
             else:
-                print("ERRRRRRRROR")
-                # process_error(err)
+                print("error")
 
     @classmethod
     def destroy(cls):
