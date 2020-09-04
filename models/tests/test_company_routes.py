@@ -142,3 +142,28 @@ class TestCompanyDashboard:
             assert resp.status_code == 200
             assert resp.json["coaches"] == 3
             assert resp.json["isas"] == 2
+
+
+class TestInvite:
+    @pytest.fixture()
+    def mock_sendgrid_send_email(self, mocker) -> None:
+        return mocker.patch(
+            "third_party.sendgrid.sendgrid_client.SendgridEmail.send",
+            return_value=None,
+        )
+
+    def test_send_invite(self, mock_sendgrid_send_email) -> None:
+        company = CompanyFactory.create()
+        user = CoachFactory.create(company=company)
+        company_id = company.id
+        payload = dict(
+            email="coach@company.com",
+            first_name="someone",
+            last_name="surname",
+            user_role=1,
+        )
+        with logged_in_client(user) as client:
+            resp = client.post(f"companies/{company_id}/invitation", json=payload)
+
+            assert resp.status_code == 204
+            mock_sendgrid_send_email.assert_called_once()

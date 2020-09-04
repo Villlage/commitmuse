@@ -2,12 +2,7 @@ from flask import request, jsonify
 from typing import Tuple
 from werkzeug import Response
 from app import app
-from common.exceptions import (
-    ResourceConflictError,
-    ResourceNotFound,
-    AuthenticationError,
-    AuthorizationError,
-)
+
 from serializers.user_serializers import (
     update_subscription_schema,
     create_subscription_schema,

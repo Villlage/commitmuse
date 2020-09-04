@@ -4,7 +4,6 @@ import { IsaClient, IsaProgram, ScreenProps } from '../../../../../../../interfa
 import PageContent from '../../../../../../modules/common/PageContent'
 import IsaService from '../../../../../../../services/isa.service'
 import Message from '../../../../../../components/Message'
-import MenuSideBar from '../../../../../../modules/company/MenuSideBar'
 import Stepper from '../../../../../../modules/common/Stepper'
 import ClientStep from '../../../../../../modules/company/CreateIsa/ClientStep'
 import ProgramStep from '../../../../../../modules/company/CreateIsa/ProgramStep'
@@ -72,6 +71,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
       }
 
       set_active_step(active_step + 1)
+      return props.history.push(`/company/isas/contract/${res.id}`)
     } catch (e) {
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
@@ -111,12 +111,10 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         offer={offer}
         total_income={total_income}
         onChange={(e, key) => set_total_income({ ...total_income, [key]: e })}
-        onNext={async () => {
-          await sendOffer()
-        }}
+        onNext={async () => await sendOffer()}
       />
     ),
-    contract: <ContractStep onNext={() => props.history.push(`/company/isas`)} />,
+    contract: <ContractStep onNext={() => null}/>,
   }
 
   return (

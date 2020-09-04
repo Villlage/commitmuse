@@ -43,11 +43,16 @@ export default function SignIn(props: ScreenProps) {
           return setTimeout(() => set_request_error(''), 3000)
         }
 
-        await props.fetchUser()
+        props.setCurrentUser(res)
         set_loading(false)
 
         //if user is an admin
         if (res.user_role === 1) {
+          return props.history.push('admin/users')
+        } else {
+          return res.user_role === 2 && res.type === 'coaches'
+            ? props.history.push('/company/dashboard')
+            : props.history.push('/coach/clients')
           return props.history.push('/admin/users')
         }
 

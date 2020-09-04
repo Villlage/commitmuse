@@ -16,6 +16,7 @@ import OnBoarding from '../app/pages/public/coach/on-boarding'
 import Subscription from '../app/pages/public/company/subscription'
 import CoachClients from 'app/pages/public/coach/CoachClients'
 import ClientPayments from 'app/pages/public/client/ClientPayments'
+import SignContract from 'app/pages/public/company/dashboard/my-isas/create-isa/sign-contract'
 
 let APP_ROUTES: any = {
   admin: [
@@ -25,10 +26,11 @@ let APP_ROUTES: any = {
   ],
   company: [
     { component: CompanyOnBoarding, path: '/company/register' },
-    { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true},
+    { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true },
     { component: CompanyCoaches, path: '/company/coaches' },
     { component: CompanyIsas, path: '/company/isas', exact: true },
     { component: CompanyCreateIsa, path: '/company/isas/create' },
+    { component: SignContract, path: '/company/isas/contract/:id' },
     { component: Subscription, path: '/company/subscription/:id' },
     { component: CompanyIsaOverview, path: '/company/isas/:id' },
     { component: BillingAndSubs, path: '/company/billing' },
@@ -40,7 +42,7 @@ let APP_ROUTES: any = {
     { component: IsaOverview, path: '/coach/isa/:id' },
     { component: Settings, path: '/coach/settings' },
     { component: Subscription, path: '/coach/subscription/:id' },
-    { component: CoachClients, path: '/coach/clients', defaultPage: true},
+    { component: CoachClients, path: '/coach/clients', defaultPage: true },
   ],
   student: [
     { component: OnBoarding, path: '/student/on-boarding' },
@@ -49,10 +51,6 @@ let APP_ROUTES: any = {
 }
 
 // admins can access to all routes
-APP_ROUTES.admin = [
-  ...APP_ROUTES.admin,
-  ...APP_ROUTES.company,
-  ...APP_ROUTES.student,
-]
+APP_ROUTES.admin = [...APP_ROUTES.admin, ...APP_ROUTES.company, ...APP_ROUTES.student]
 
 export default APP_ROUTES

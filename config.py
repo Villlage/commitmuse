@@ -40,7 +40,9 @@ class Config(object):
         "DOCUSIGN_USER_ID", "b9d76a2a-e332-4a5d-8592-cf70f9195198"
     )
 
-    SENDGRID_API_KEY = "SOMETHING"
+    SENDGRID_API_KEY = (
+        "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"
+    )
 
     WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")
 
@@ -71,7 +73,7 @@ class Config(object):
 class LocalConfig(Config):
     DEBUG = True
     LOG_LEVEL = "DEBUG"
-    SQLALCHEMY_DATABASE_URI = "postgres://localhost/village"
+    SQLALCHEMY_DATABASE_URI = "postgresql://localhost/village"
 
     WEB_APP_DOMAIN = "http://localhost:5000/web"
 
