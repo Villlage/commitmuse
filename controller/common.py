@@ -1,12 +1,7 @@
 import traceback
-from flask import request
-from flask_login import current_user
 from typing import Optional, Any
 import marshmallow
 from common.exceptions import (
-    ResourceConflictError,
-    ResourceNotFound,
-    AuthenticationError,
     AuthorizationError,
     TokenValidationError,
 )

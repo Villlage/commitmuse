@@ -10,7 +10,6 @@ import { ScreenProps, User } from './interfaces/baseIntefaces'
 import APP_ROUTES from './constants/app_routes'
 import NAVIGATION_ITEMS from './constants/navigationItems'
 import MainNavigation from './app/modules/common/MainNavigation'
-import { USER_TYPES } from './constants/userTypes'
 
 export default function Routes(properties: Partial<ScreenProps>) {
   const setUserType = (user: User) => {

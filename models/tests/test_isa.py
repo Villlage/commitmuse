@@ -20,6 +20,7 @@ class TestISA:
             description="becoming a product manager",
             student_id=student.id,
             coach_id=coach.id,
+            expiration_period_months=2,
             cancellation_period_weeks=2,
             industry_field="Information Technology",
             program_duration_weeks=10,
@@ -30,6 +31,7 @@ class TestISA:
         assert isa
         assert isa.current_income == arguments["current_income"]
         assert isa.percentage == arguments["percentage"]
+        assert isa.expiration_period_months == arguments["expiration_period_months"]
         assert isa.coach == coach
         assert isa.student == student
 

@@ -3,6 +3,14 @@ from datetime import datetime
 from app import db
 from common.database import db_session
 
+from enum import Enum
+
+
+class ISA_STATUS(Enum):
+    INACTIVE = "inactive"
+    SIGNED_BY_COMPANY = "signed_by_company"
+    ACTIVE = "active"
+
 
 class ISA(db.Model):  # type: ignore
     __tablename__ = "isas"
@@ -14,13 +22,17 @@ class ISA(db.Model):  # type: ignore
     percentage = db.Column(db.Float, nullable=False, default=0)
     cap = db.Column(db.Integer, nullable=False, default=0)
     cancellation_period_weeks = db.Column(db.Integer, nullable=False, default=0)
+    expiration_period_months = db.Column(db.Integer, nullable=True, default=0)
+
     time_to_be_paid = db.Column(db.Integer, nullable=False, default=0)
 
     industry_field = db.Column(db.String(255), nullable=True, default="")
     program_duration_weeks = db.Column(db.Integer, nullable=True, default=0)
     description = db.Column(db.String(2047), nullable=False, server_default="")
 
-    status = db.Column(db.String(255), nullable=False, server_default="")
+    status = db.Column(
+        db.String(255), nullable=False, server_default=ISA_STATUS.INACTIVE.value
+    )
 
     coach_id = db.Column(
         db.Integer, db.ForeignKey("coaches.id", ondelete="CASCADE"), nullable=True

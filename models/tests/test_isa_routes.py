@@ -5,6 +5,7 @@ from tests.factories import CoachFactory, ISAFactory
 from conftest import logged_in_client
 from common.exceptions import ResourceNotFound
 from services.isa_service import get_isa_by_id
+from unittest.mock import MagicMock
 
 
 class TestISA:
@@ -22,7 +23,7 @@ class TestISA:
             assert resp.status_code == 200
             assert len(resp.json) == 2
 
-    def test_create(self, mock_send_document) -> None:
+    def test_create(self) -> None:
         coach = CoachFactory.create()
 
         payload = dict(
@@ -35,6 +36,7 @@ class TestISA:
             cancellation_period_weeks=2,
             industry_field="Information technology",
             program_duration_weeks=4,
+            expiration_period_months=3,
             client=dict(
                 email="client@gmail.com", first_name="client", last_name="student"
             ),
@@ -49,11 +51,13 @@ class TestISA:
             assert resp.json["time_to_be_paid"] == payload["time_to_be_paid"]
             assert resp.json["industry_field"] == payload["industry_field"]
             assert (
+                resp.json["expiration_period_months"]
+                == payload["expiration_period_months"]
+            )
+            assert (
                 resp.json["program_duration_weeks"] == payload["program_duration_weeks"]
             )
             assert resp.json["id"]
-
-            # mock_send_document.assert_called_once()
 
     def test_bad_create(self) -> None:
         coach = CoachFactory.create()
@@ -140,3 +144,23 @@ class TestISA:
             resp = client.get(f"/client/isas/{isa_id}")
             assert resp.status_code == 200
             assert resp.json["id"] == isa_id
+
+
+class TestSigning:
+    @pytest.fixture()
+    def mock_embedded_signing(self, mocker):
+        return mocker.patch(
+            "controller.isa_routes.docusign_client.embedded_signing",
+            return_value=MagicMock(url="url"),
+        )
+
+    def test_sign_isa(self, mock_embedded_signing) -> None:
+        coach = CoachFactory.create()
+        isa = ISAFactory.create(coach=coach)
+        isa_id = isa.id
+
+        with logged_in_client(coach) as client:
+            resp = client.get(f"/isas/{isa_id}/sign")
+            assert resp.status_code == 200
+            assert resp.json["url"] == "url"
+            mock_embedded_signing.assert_called_once()

@@ -2,12 +2,7 @@ from flask import request, jsonify
 from typing import Any, Dict, List, Tuple
 from werkzeug import Response
 from app import app
-from common.exceptions import (
-    ResourceConflictError,
-    ResourceNotFound,
-    AuthenticationError,
-    AuthorizationError,
-)
+
 from serializers.user_serializers import (
     update_isa_schema,
     create_isa_schema,
@@ -22,6 +17,9 @@ from services.isa_service import (
 from controller.common import login_required, get_current_user
 from models.user import User
 from models.isa import ISA
+
+from third_party.docusign.client import docusign_client
+from flask import redirect, url_for
 
 
 @app.route("/isas/<int:isa_id>", methods=["GET", "PATCH", "DELETE"])
@@ -62,8 +60,9 @@ def get_isa_by_access_token(isa_id: int) -> Tuple[Response, int]:
 def create_isa_route() -> Tuple[Response, int]:
     get_current_user()
     schema = create_isa_schema.load(request.json)
+
     isa = create_student_and_isa(schema)
-    # send_isa_offer(isa)
+
     result = isa_schema.dump(isa)
     return jsonify(result), 200
 
@@ -76,15 +75,19 @@ def get_isas() -> Tuple[Response, int]:
     return jsonify(result), 200
 
 
-@app.route("/sign/isas/<int:isa_id>", methods=["GET"])
+@app.route("/isas/<int:isa_id>/sign", methods=["GET"])
 @login_required
-def signme(isa_id: int) -> Tuple[Response, int]:
-    from third_party.docusign.client import docusign_client
-    from flask import redirect
-
+def sign_isa(isa_id: int) -> Tuple[Response, int]:
+    """
+    sign ISA by the coach/company
+    """
     user = get_current_user()
     isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
 
-    results = docusign_client.embedded_signing(coach=isa.coach, student=isa.student)
+    results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
+    return jsonify(url=results.url), 200
 
-    return redirect(results.url), 302
+
+@app.route("/docusign/login", methods=["GET"])
+def login_to_docusign(isa_id: int) -> Tuple[Response, int]:
+    return redirect(url_for("ds_login")), 302
