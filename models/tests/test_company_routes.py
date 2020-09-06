@@ -165,5 +165,5 @@ class TestInvite:
         with logged_in_client(user) as client:
             resp = client.post(f"companies/{company_id}/invitation", json=payload)
 
-            assert resp.status_code == 204
+            assert resp.status_code == 200
             mock_sendgrid_send_email.assert_called_once()

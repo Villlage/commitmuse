@@ -56,9 +56,9 @@
       }
 
       &.active,
-      &:hover:not([aria-disabled="true"]) {
+      &:hover:not([aria-disabled='true']) {
         img {
-          filter: invert(1%) sepia(17%) saturate(1242%) hue-rotate(349deg) brightness(120%) contrast(110%)
+          filter: invert(1%) sepia(17%) saturate(1242%) hue-rotate(349deg) brightness(120%) contrast(110%);
         }
       }
     }
@@ -77,12 +77,12 @@
       justify-content: normal;
 
       &.active,
-      &:hover:not([aria-disabled="true"]) {
+      &:hover:not([aria-disabled='true']) {
         font-weight: 500;
         background-color: $Indigo4;
 
         img {
-          filter: invert(1%) sepia(17%) saturate(1242%) hue-rotate(349deg) brightness(120%) contrast(110%)
+          filter: invert(1%) sepia(17%) saturate(1242%) hue-rotate(349deg) brightness(120%) contrast(110%);
         }
       }
 
@@ -93,7 +93,7 @@
         display: flex;
       }
 
-      &[aria-disabled="true"] {
+      &[aria-disabled='true'] {
         opacity: 0.5;
         pointer-events: none;
       }

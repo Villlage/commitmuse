@@ -18,7 +18,7 @@ export default function IsaOfferStep(props: IsaOfferStepProps) {
       <h2>Offer Details</h2>
       <header>
         <ButtonSelect
-          onSelect={(e) => props.onChange(e, 'type')}
+          onSelect={e => props.onChange(e, 'type')}
           options={['From total income', 'From new raise', 'Placement']}
           selected={props.offer.type}
         />
