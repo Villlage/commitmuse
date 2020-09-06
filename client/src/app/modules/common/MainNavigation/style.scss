@@ -18,6 +18,10 @@
   white-space: nowrap;
   transition: all 300ms;
 
+  &.hidden {
+    display: none;
+  }
+
   .menuItems {
     width: 100%;
     .header {
