@@ -64,7 +64,12 @@ export default function SignUp(props: ScreenProps) {
           return props.history.push('/company/register')
         }
 
-        return props.history.push('/my-isa')
+        if (type === 'coach') {
+          props.history.push('/coach/clients')
+          return
+        }
+
+        props.history.push('/student/payments')
       }
     } catch (e) {
       set_loading(false)
@@ -143,11 +148,7 @@ export default function SignUp(props: ScreenProps) {
             />
             <div className="select-type full">
               <label>I am a:</label>
-              <ButtonSelect
-                options={USER_TYPES}
-                selected={user.type}
-                onSelect={e => set_user({ ...user, type: e })}
-              />
+              <ButtonSelect options={USER_TYPES} selected={user.type} onSelect={e => set_user({ ...user, type: e })} />
             </div>
           </div>
           <footer className="full">

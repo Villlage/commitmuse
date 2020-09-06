@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import Icon from 'app/components/Icon'
+
+const forbiddenRoutes = ['register', 'company/register', 'company/subscription']
 
 type MenuItem = {
   label: string
@@ -15,8 +17,23 @@ interface MainNavigationProps {
 }
 
 export default function MainNavigation(props: MainNavigationProps) {
+  const history = useHistory()
+
+  const [isHidden, setIsHidden] = useState(forbiddenRoutes.some(route => history.location.pathname.includes(route)))
+
+  let unListen: Function
+  useEffect(() => {
+    unListen = history.listen(() => {
+      setIsHidden(forbiddenRoutes.some(route => history.location.pathname.includes(route)))
+    })
+
+    return () => {
+      unListen()
+    }
+  }, [])
+
   return (
-    <section className="MainNavigation-module">
+    <section className={`MainNavigation-module ${isHidden && 'hidden'}`}>
       {props.items.map((item, index) => {
         return (
           <div className="menuItems" key={`menu-items-${index}`}>

@@ -63,7 +63,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         }
         localStorage.removeItem('companyId')
 
-        props.history.push(`/subscription/${companyId}`)
+        props.history.push(`/company/subscription/${companyId}`)
       }
     } catch (e) {
       set_request_error(e.error || e.toString())
@@ -163,7 +163,7 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         <Button background="MainWarning" onClick={() => open()}>
           Link Bank
         </Button>
-        <Button className="skip" onClick={() => props.history.push(`/subscription/${props.currentUser.company}`)}>
+        <Button className="skip" onClick={() => props.history.push(`/company/subscription/${props.currentUser.company}`)}>
           Skip for later
         </Button>
       </section>
