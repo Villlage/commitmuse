@@ -27,4 +27,11 @@ export default class CompanyService {
   public async isas(company_id: number) {
     return await baseService.getJSON(`companies/${company_id}/isas`)
   }
+
+  public async inviteCoach(
+    company_id: number,
+    coach: { first_name: string; last_name: string; email: string; user_role: 0 | 1 },
+  ) {
+    return await baseService.postJSON(`companies/${company_id}/invitation`, coach)
+  }
 }

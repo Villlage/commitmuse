@@ -12,7 +12,7 @@ export interface ScreenProps {
   setCurrentUser(u: User | null): void
 }
 
-export type UserTypes = 'coaches' | 'students'
+export type UserTypes = 'student' | 'coach' | 'company_admin' | 'admin'
 
 export interface User {
   id: number
@@ -33,7 +33,7 @@ export interface User {
   plaid_account: []
   plaid_items: []
   students: []
-  type: UserTypes
+  user_type: UserTypes
 }
 
 export interface Coach {

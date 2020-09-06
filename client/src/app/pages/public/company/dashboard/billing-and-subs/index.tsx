@@ -5,43 +5,16 @@ import Icon from '../../../../../components/Icon'
 import Message from '../../../../../components/Message'
 import PageContent from '../../../../../modules/common/PageContent'
 import SubscriptionOffer from '../../../../../modules/company/SubscriptionOffer'
-import { INVOICES, OFFERS } from '../../../../../../constants/mockData'
+import { OFFERS } from '../../../../../../constants/mockData'
 import Loader from '../../../../../components/Loader'
 import PlaidService from '../../../../../../services/plaid.service'
-import MenuSideBar from '../../../../../modules/company/MenuSideBar'
 import Tabs from '../../../../../components/Tabs'
-import Table, { Header } from '../../../../../components/Table'
 import Button from '../../../../../components/Button'
+import UserService from '../../../../../../services/user.service'
+import { fixClass } from '../../../../../../helpers/base'
 
 const plaidService = new PlaidService()
-
-const table_headers: Header[] = [
-  {
-    key: 'date',
-    title: 'DATE',
-    sortable: true,
-  },
-  {
-    key: 'invoice_number',
-    title: 'Invoice Number',
-    sortable: true,
-  },
-  {
-    key: 'billing_period',
-    title: 'Billing\n' + 'Period',
-    sortable: true,
-  },
-  {
-    key: 'amount',
-    title: 'Amount',
-    sortable: true,
-  },
-  {
-    key: 'status',
-    title: 'Status',
-    sortable: true,
-  },
-]
+const userService = new UserService()
 
 interface BillingAndSubsProps extends ScreenProps {}
 
@@ -49,6 +22,7 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
   const [request_error, set_request_error] = useState<any>('')
   const [mask, set_mask] = useState<string | null>('')
   const [loading, set_loading] = useState<boolean>(true)
+  const [btn_loading, set_btn_loading] = useState<boolean>(false)
   const [active_tab, set_active_tab] = useState<string>('subscription')
 
   const companyId = props.currentUser.company
@@ -62,13 +36,32 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
       if ((res && res.error) || res.err_msg) {
         set_request_error(res.error || res.err_msg)
         set_mask(null)
+        return setTimeout(() => set_request_error(''), 3000)
       }
     } catch (e) {
       set_mask(null)
       set_request_error(e.error || e.toString())
       set_loading(false)
       setTimeout(() => set_request_error(''), 3000)
-      return set_loading(false)
+    }
+  }
+
+  const cancel_subscription = async () => {
+    try {
+      set_btn_loading(true)
+      const res = await userService.editUser({ is_active: !props.currentUser.is_active })
+
+      if ((res && res.error) || res.err_msg) {
+        set_request_error(res.error || res.err_msg)
+        return setTimeout(() => set_request_error(''), 3000)
+      }
+
+      props.setCurrentUser(res)
+      set_btn_loading(false)
+    } catch (e) {
+      set_btn_loading(false)
+      set_request_error(e.error || e.toString())
+      setTimeout(() => set_request_error(''), 3000)
     }
   }
 
@@ -99,7 +92,9 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
           </div>
         </div>
         <footer>
-          <button>Cancel Subscription</button>
+          <Button onClick={cancel_subscription} loading={btn_loading} className={fixClass(props.currentUser.is_active && 'active')}>
+            {props.currentUser.is_active ? 'Cancel Subscription' : 'Activate Subscription'}
+          </Button>
         </footer>
       </>
     ),
@@ -137,3 +132,35 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
     </article>
   )
 }
+
+/*
+
+const table_headers: Header[] = [
+  {
+    key: 'date',
+    title: 'DATE',
+    sortable: true,
+  },
+  {
+    key: 'invoice_number',
+    title: 'Invoice Number',
+    sortable: true,
+  },
+  {
+    key: 'billing_period',
+    title: 'Billing\n' + 'Period',
+    sortable: true,
+
+  },
+  {
+    key: 'amount',
+    title: 'Amount',
+    sortable: true,
+  },
+  {
+    key: 'status',
+    title: 'Status',
+    sortable: true,
+  },
+]
+ */

@@ -78,10 +78,16 @@
       background: #ffffff;
       box-shadow: 0 4px 16px rgba(16, 42, 67, 0.08);
       border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      padding: 24px;
+
+      .list {
+        max-height: 600px;
+        overflow: hidden;
+        overflow-y: auto;
+        @include custom-scroll;
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+      }
 
       header {
         display: flex;

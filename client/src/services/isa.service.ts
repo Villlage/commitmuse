@@ -21,6 +21,7 @@ export default class IsaService {
     coach_id: number
     client: IsaClient
     status: string
+    expiration_period_months: string
   }) {
     return await baseService.postJSON('isas', isa)
   }

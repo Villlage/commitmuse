@@ -18,6 +18,7 @@ class UpdateUserSchema(Schema):  # type: ignore
     email = fields.Email(required=False)
     first_name = fields.Str(required=False)
     last_name = fields.Str(required=False)
+    is_active = fields.Boolean(required=False)
 
 
 class ClientSchema(Schema):  # type: ignore

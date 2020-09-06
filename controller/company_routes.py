@@ -89,4 +89,4 @@ def invite_coach(company_id: int) -> Tuple[Response, int]:
 
     invite_coach_to_company(company_id=company_id, user=user, schema=schema)
 
-    return jsonify(), 204
+    return jsonify("success"), 200

@@ -64,16 +64,18 @@ export default function CompanyIsas(props: CompanyIsasProps) {
         </header>
         {notEmptyArray(isas) ? (
           <section className="my_isa">
-            {isas
-              .filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter))
-              .map((isa: any, index: number) => (
-                <IsaStatus
-                  onClick={() => props.history.push('isas/' + isa.id)}
-                  key={index}
-                  name={isa.student.first_name + ' ' + isa.student.last_name}
-                  status={isa.status}
-                />
-              ))}
+            <div className="list">
+              {[...isas, ...isas]
+                .filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter))
+                .map((isa: any, index: number) => (
+                  <IsaStatus
+                    onClick={() => props.history.push('isas/' + isa.id)}
+                    key={index}
+                    name={isa.student.first_name + ' ' + isa.student.last_name}
+                    status={isa.status}
+                  />
+                ))}
+            </div>
             <Link to="isas/create" className="new_isa">
               <Icon icon="new_isa_plus" />
               NEW ISA

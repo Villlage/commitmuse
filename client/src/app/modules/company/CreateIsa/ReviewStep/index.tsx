@@ -82,6 +82,12 @@ export default function ReviewStep(props: ReviewStepProps) {
           value={props.total_income.cancellation_period}
         />
         <Input
+          postFix="Month(s)"
+          onChange={e => isNumber(e) && props.onChange(e, 'expiration_period_months')}
+          placeholder="Expiration Period"
+          value={props.total_income.expiration_period_months}
+        />
+        <Input
           postFix="%"
           onChange={e => isNumber(e) && props.onChange(e, 'risk')}
           placeholder="Risk Assessment"

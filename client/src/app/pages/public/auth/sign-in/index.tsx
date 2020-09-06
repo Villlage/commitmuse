@@ -46,13 +46,14 @@ export default function SignIn(props: ScreenProps) {
         props.setCurrentUser(res)
         set_loading(false)
 
-        if (res.user_role === 1) {
-          return props.history.push('admin/users')
-        } else {
-          return res.user_role === 2 && res.type === 'coaches'
-            ? props.history.push('/company/dashboard')
-            : props.history.push('/coach/clients')
+        const initial_routes: any = {
+          admin: '/admin/users',
+          company_admin: '/company/dashboard',
+          coach: '/coach/clients',
+          student: '/student/payments',
         }
+
+        return props.history.push(initial_routes[res.user_type])
       }
     } catch (e) {
       set_loading(false)

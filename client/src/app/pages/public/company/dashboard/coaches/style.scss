@@ -80,27 +80,36 @@
   }
 
   .new-coach {
-    width: 512px;
+    width: 614px;
     background: #ffffff;
     box-shadow: 0px 4px 16px rgba(16, 42, 67, 0.08);
     border-radius: 10px;
-    padding: 32px 24px;
 
     header {
       display: grid;
-      grid: 24px 1fr / 150px 200px 100px;
-      grid-gap: 10px 8px;
+      grid: 24px 1fr / 1fr 1fr;
+      grid-gap: 16px;
       align-items: center;
-      margin-bottom: 24px;
+      padding: 32px 24px;
 
       h2 {
-        grid-column: 1 / span 3;
+        grid-column: 1 / 2 span ;
         font-size: 16px;
         color: $Indigo7;
       }
 
-      button {
-        height: 48px;
+      .half {
+        display: grid;
+        grid: 1fr / 1fr 1fr;
+        grid-column-gap: 16px;
+
+        .Select-component {
+          border-radius: 5px;
+        }
+
+        button {
+          height: 48px;
+        }
       }
     }
 

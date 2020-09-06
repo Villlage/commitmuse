@@ -31,7 +31,7 @@ export default function AdminUserBox(props: AdminUserBoxProps) {
           {props.user.first_name} {props.user.last_name}
         </Field>
         <Field title="Email">{props.user.email}</Field>
-        <Field title="Type">{props.user.type}</Field>
+        <Field title="Type">{props.user.user_type}</Field>
       </div>
       <footer></footer>
     </section>
