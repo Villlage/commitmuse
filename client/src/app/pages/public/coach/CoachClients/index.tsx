@@ -9,6 +9,9 @@ export default function CoachClients() {
   const FileIcon = IconsSvg.FileContract
   const ArrowRightIcon = IconsSvg.ArrowRight
 
+  //show nothing until mock data is replaced with real data
+  return null
+
   return (
     <article className="CoachClients-page">
       <PageContent title="Clients">
