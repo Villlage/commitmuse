@@ -1,5 +1,5 @@
 from app import app
-from tests.factories import faker, UserFactory
+from tests.factories import faker, UserFactory, StudentFactory
 from conftest import logged_in_client  # type: ignore
 from werkzeug.security import generate_password_hash
 
@@ -110,11 +110,12 @@ class TestLogOut:
 
 class TestUser:
     def test_user_route(self) -> None:
-        user = UserFactory.create()
+        user = StudentFactory.create()
         with logged_in_client(user) as client:
             resp = client.get("/user")
             assert resp.status_code == 200
             assert resp.json["first_name"] == user.first_name
+            assert resp.json["user_type"] == "student"
 
 
 class TestResetPassword:
