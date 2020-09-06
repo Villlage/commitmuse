@@ -4,12 +4,13 @@ import { Route, Switch, Redirect } from 'react-router'
 import NotFound from './app/pages/public/404'
 import SignUp from './app/pages/public/auth/sign-up'
 import SignIn from './app/pages/public/auth/sign-in'
-import ClientIsaOffer from './app/pages/public/client/isa-offer-steps/review'
 import PageHeader from './app/modules/common/PageHeader'
 import { ScreenProps } from './interfaces/baseIntefaces'
 import APP_ROUTES from './constants/app_routes'
 import NAVIGATION_ITEMS from './constants/navigationItems'
 import MainNavigation from './app/modules/common/MainNavigation'
+import ClientIsaOfferSigning from './app/pages/public/client/isa-offer-steps'
+import CoachSignUp from './app/pages/public/auth/coach-sign-up'
 
 export default function Routes(routerProps: Partial<ScreenProps>) {
   const privateRoute = (Component: any, route: string, index: number, exact?: boolean) => {
@@ -45,6 +46,9 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
 
+        <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
+        <Route path="/coach/invitation/:id" render={(props: any) => <CoachSignUp {...props} {...routerProps} />} />
+
         {/* Private Routes */}
         {routerProps.currentUser &&
           routerProps.currentUser.user_type &&
@@ -52,7 +56,10 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
             privateRoute(route.component, route.path, index, route.exact),
           )}
 
-        <Route path="/client/isa-offer/:id" render={(props: any) => <ClientIsaOffer {...props} {...routerProps} />} />
+        <Route
+          path="/client/isa-offer/:id"
+          render={(props: any) => <ClientIsaOfferSigning {...props} {...routerProps} />}
+        />
 
         {/*404*/}
         <Redirect path="/" to={routerProps.currentUser ? getDefaultPage() : '/login'} exact />

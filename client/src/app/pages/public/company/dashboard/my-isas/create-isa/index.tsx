@@ -64,7 +64,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         industry_field: program.field,
         program_duration_weeks: program.duration,
         status: 'created',
-        expiration_period_months: total_income.expiration_period_months
+        expiration_period_months: total_income.expiration_period_months,
       })
 
       if (res && res.error) {
@@ -116,7 +116,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         onNext={async () => await sendOffer()}
       />
     ),
-    contract: <ContractStep onNext={() => null}/>,
+    contract: <ContractStep onNext={() => null} />,
   }
 
   return (

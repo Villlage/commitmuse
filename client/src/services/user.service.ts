@@ -18,4 +18,15 @@ export default class UserService {
   public async getIndustryFields() {
     return await baseService.getJSON('industry-fields')
   }
+
+  public async resetPassword(user_id: number, password: string, token?: string) {
+    return await baseService.patchJSON(`users/reset-password`, {
+      token: token || user_id,
+      password: password,
+    })
+  }
+
+  public async getCoach(coach_id: number) {
+    return await baseService.getJSON(`coach/${coach_id}`)
+  }
 }

@@ -2,6 +2,7 @@ from flask import request, jsonify
 from typing import Tuple
 from werkzeug import Response
 from app import app
+from models.user import User
 from services.user_service import create_user, get_user, reset_password
 from serializers.user_serializers import (
     login_schema,
@@ -41,6 +42,14 @@ def user() -> Tuple[Response, int]:
         user = user.update_user(attributes=schema)
 
     result = user_schema.dump(user)
+
+    return jsonify(result), 200
+
+
+@app.route("/coach/<int:user_id>", methods=["GET"])
+def get_coach(user_id: int) -> Tuple[Response, int]:
+    coach = User.get_user(user_id)
+    result = user_schema.dump(coach)
 
     return jsonify(result), 200
 

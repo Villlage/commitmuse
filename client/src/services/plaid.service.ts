@@ -4,7 +4,6 @@ import { PlaidMetadata } from '../interfaces/baseIntefaces'
 const baseService = new BaseService()
 
 export default class PlaidService {
-
   public async getToken() {
     return await baseService.getJSON('plaid/link-token')
   }
@@ -20,7 +19,7 @@ export default class PlaidService {
     return await baseService.postJSON(`plaid/items?company_id=${companyId}`, {
       public_token: token,
       metadata: meta,
-      company_id: companyId
+      company_id: companyId,
     })
   }
 
