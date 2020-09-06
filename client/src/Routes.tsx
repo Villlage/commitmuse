@@ -6,40 +6,12 @@ import SignUp from './app/pages/public/auth/sign-up'
 import SignIn from './app/pages/public/auth/sign-in'
 import ClientIsaOffer from './app/pages/public/client/isa-offer-steps/review'
 import PageHeader from './app/modules/common/PageHeader'
-import { ScreenProps, User } from './interfaces/baseIntefaces'
+import { ScreenProps } from './interfaces/baseIntefaces'
 import APP_ROUTES from './constants/app_routes'
 import NAVIGATION_ITEMS from './constants/navigationItems'
 import MainNavigation from './app/modules/common/MainNavigation'
 
-export default function Routes(properties: Partial<ScreenProps>) {
-  const setUserType = (user: User) => {
-    if (user.user_role === 1) {
-      return 'admin'
-    }
-
-    if (user.user_role === 2 && user.type === 'coaches') {
-      return 'company'
-    }
-
-    if (user.type === 'coaches') {
-      return 'coach'
-    }
-
-    return 'student'
-  }
-
-  const userType = properties.currentUser ? setUserType(properties.currentUser) : null
-
-  const routerProps = {
-    ...properties,
-    currentUser: properties.currentUser
-      ? {
-          ...properties.currentUser,
-          type: userType,
-        }
-      : null,
-  }
-
+export default function Routes(routerProps: Partial<ScreenProps>) {
   const privateRoute = (Component: any, route: string, index: number, exact?: boolean) => {
     return (
       <Route
@@ -54,11 +26,11 @@ export default function Routes(properties: Partial<ScreenProps>) {
   }
 
   const getDefaultPage = () => {
-    if (!routerProps.currentUser || !routerProps.currentUser.type) {
+    if (!routerProps.currentUser || !routerProps.currentUser.user_type) {
       return '/my-isa'
     }
 
-    const defaultRoute = APP_ROUTES[routerProps.currentUser.type].find((route: any) => route.defaultPage)
+    const defaultRoute = APP_ROUTES[routerProps.currentUser.user_type].find((route: any) => route.defaultPage)
 
     return defaultRoute ? defaultRoute.path : '/my-isa'
   }
@@ -67,7 +39,7 @@ export default function Routes(properties: Partial<ScreenProps>) {
     <Router basename={'/web'}>
       <PageHeader user={routerProps.currentUser as any} setCurrentUser={routerProps.setCurrentUser as any} />
 
-      {userType && <MainNavigation items={NAVIGATION_ITEMS[userType]} />}
+      {routerProps.currentUser && <MainNavigation items={NAVIGATION_ITEMS[routerProps.currentUser.user_type]} />}
 
       <Switch>
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
@@ -75,8 +47,8 @@ export default function Routes(properties: Partial<ScreenProps>) {
 
         {/* Private Routes */}
         {routerProps.currentUser &&
-          routerProps.currentUser.type &&
-          APP_ROUTES[routerProps.currentUser.type].map((route: any, index: number) =>
+          routerProps.currentUser.user_type &&
+          APP_ROUTES[routerProps.currentUser.user_type].map((route: any, index: number) =>
             privateRoute(route.component, route.path, index, route.exact),
           )}
 

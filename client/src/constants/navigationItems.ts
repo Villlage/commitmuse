@@ -1,8 +1,6 @@
-import Settings from '../app/pages/public/client/settings'
-
 let NAVIGATION_ITEMS: any = {
   admin: [],
-  company: [
+  company_admin: [
     {
       label: '',
       subItems: [
@@ -130,6 +128,6 @@ let NAVIGATION_ITEMS: any = {
   ],
 }
 
-NAVIGATION_ITEMS.admin = [...NAVIGATION_ITEMS.company, ...NAVIGATION_ITEMS.coach]
+NAVIGATION_ITEMS.admin = [...NAVIGATION_ITEMS.company_admin, ...NAVIGATION_ITEMS.coach]
 
 export default NAVIGATION_ITEMS

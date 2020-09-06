@@ -10,16 +10,17 @@ interface ContractStepProps {
 
 export default function ContractStep(props: ContractStepProps) {
   const [show_msg, set_show_msg] = useState(false)
+  const [loading, set_loading] = useState(false)
   return (
     <section className="ContractStep-module">
       <h2>Review and Sign Your Contract</h2>
       <Button
+        loading={loading}
         background="MainWarning"
-        onClick={props.onNext}
-        // onClick={() => {
-        //   set_show_msg(true)
-        //   setTimeout(() => props.onNext(), 3000)
-        // }}
+        onClick={() => {
+          set_loading(true)
+          props.onNext()
+        }}
         className="next-btn"
       >
         Send Contract to Review

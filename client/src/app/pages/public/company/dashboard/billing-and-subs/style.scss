@@ -70,7 +70,11 @@
         border: 0;
         font-size: 14px;
         letter-spacing: 0.02em;
-        color: $Gray4;
+        color: $Green4;
+
+        &.active {
+          color: $Gray4;
+        }
       }
     }
   }

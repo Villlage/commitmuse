@@ -24,7 +24,7 @@ let APP_ROUTES: any = {
     { component: AdminIsas, path: '/admin/isas' },
     { component: AdminPlaid, path: '/admin/plaid' },
   ],
-  company: [
+  company_admin: [
     { component: CompanyOnBoarding, path: '/company/register' },
     { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true },
     { component: CompanyCoaches, path: '/company/coaches' },
@@ -51,6 +51,6 @@ let APP_ROUTES: any = {
 }
 
 // admins can access to all routes
-APP_ROUTES.admin = [...APP_ROUTES.admin, ...APP_ROUTES.company, ...APP_ROUTES.student]
+APP_ROUTES.admin = [...APP_ROUTES.admin, ...APP_ROUTES.company_admin, ...APP_ROUTES.student]
 
 export default APP_ROUTES

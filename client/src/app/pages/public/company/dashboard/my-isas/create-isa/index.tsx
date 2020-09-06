@@ -45,6 +45,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
     time_to_be_paid: '2',
     cap: '10000',
     cancellation_period: '2',
+    expiration_period_months: '2',
     risk: '20',
     current_income: '80000',
   })
@@ -63,6 +64,7 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
         industry_field: program.field,
         program_duration_weeks: program.duration,
         status: 'created',
+        expiration_period_months: total_income.expiration_period_months
       })
 
       if (res && res.error) {
