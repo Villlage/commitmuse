@@ -84,7 +84,9 @@ def sign_isa(isa_id: int) -> Tuple[Response, int]:
     user = get_current_user()
     isa = get_isa_by_id(coach_id=user.id, isa_id=isa_id)  # type: ISA
 
-    results = docusign_client.embedded_signing(user=isa.coach, isa=isa)
+    results = docusign_client.embedded_signing(
+        user=isa.coach, isa=isa, company_name=user.company.name
+    )
     return jsonify(url=results.url), 200
 
 
