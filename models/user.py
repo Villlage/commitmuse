@@ -12,6 +12,13 @@ class UserRole(Enum):
     COMPANY_ADMIN = 2
 
 
+class UserType(Enum):
+    STUDENT = "student"
+    COACH = "coach"
+    COMPANY_ADMIN = "company_admin"
+    ADMIN = "admin"
+
+
 class User(db.Model, UserMixin):  # type: ignore
     __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
@@ -95,6 +102,21 @@ class User(db.Model, UserMixin):  # type: ignore
         with db_session() as session:
             users = session.query(cls).all()  # type: List[User]
             return users
+
+    def user_type(self) -> str:
+        """
+        return the user type based on type and role
+        """
+        if self.user_role == UserRole.ADMIN.value:
+            return UserType.ADMIN.value
+
+        elif self.user_role == UserRole.COMPANY_ADMIN.value:
+            return UserType.COMPANY_ADMIN.value
+
+        elif self.user_role == UserRole.REGULAR.value and self.type == "coaches":
+            return UserType.COACH.value
+
+        return UserType.STUDENT.value
 
 
 class Coach(User):

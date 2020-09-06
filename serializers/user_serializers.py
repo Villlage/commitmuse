@@ -93,6 +93,8 @@ class UserSchema(ma.ModelSchema):  # type: ignore
             "students",
         )
 
+    user_type = fields.Function(lambda user: user.user_type())
+
 
 class ResetPasswordSchema(Schema):  # type: ignore
     token = fields.Str(allow_none=False, required=True)
