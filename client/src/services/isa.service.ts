@@ -35,6 +35,6 @@ export default class IsaService {
   }
 
   public async docusignLogin(isa_id: number) {
-    return await baseService.getJSON(`ds/login?isa_id=${objectToUrlParams({isa_id})}`)
+    return await baseService.getJSON(`ds/login?isa_id=${objectToUrlParams({ isa_id })}`)
   }
 }

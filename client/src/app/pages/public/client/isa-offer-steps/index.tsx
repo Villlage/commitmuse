@@ -1,33 +1,34 @@
 import React, { useLayoutEffect, useState } from 'react'
 import './style.scss'
-import { PlaidMetadata, ScreenProps } from '../../../../../../interfaces/baseIntefaces'
-import PageContent from '../../../../../modules/common/PageContent'
-import FAQ from '../../../../../modules/company/CreateIsa/FAQ'
-import IsaOfferReview from '../../../../../modules/client/IsaOfferReview'
-import Stepper from '../../../../../modules/common/Stepper'
-import ClientIsaSignUp from '../sign-up'
+import { PlaidMetadata, ScreenProps } from '../../../../../interfaces/baseIntefaces'
+import currentEnv from '../../../../../config/environment'
 import { usePlaidLink } from 'react-plaid-link'
-import PlaidService from '../../../../../../services/plaid.service'
-import Message from '../../../../../components/Message'
-import Button from '../../../../../components/Button'
-import ClientService from '../../../../../../services/client.service'
-import ISACalculator from '../../../../../modules/on-boarding/ISACalculator'
-import currentEnv from '../../../../../../config/environment'
+import IsaOfferReview from '../../../../modules/client/IsaOfferReview'
+import ClientIsaSignUp from './sign-up'
+import Button from '../../../../components/Button'
+import PageContent from '../../../../modules/common/PageContent'
+import Stepper from '../../../../modules/common/Stepper'
+import ISACalculator from '../../../../modules/on-boarding/ISACalculator'
+import FAQ from '../../../../modules/company/CreateIsa/FAQ'
+import Message from '../../../../components/Message'
+import PlaidService from '../../../../../services/plaid.service'
+import ClientService from '../../../../../services/client.service'
 
 const plaidService = new PlaidService()
 const clientService = new ClientService()
 const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
 
-interface ClientIsaOfferProps extends ScreenProps {
+interface ClientIsaOfferSigningProps extends ScreenProps {
   match: any
 }
 
-export default function ClientIsaOffer(props: ClientIsaOfferProps) {
+export default function ClientIsaOfferSigning(props: ClientIsaOfferSigningProps) {
   const [isa, set_isa] = useState<any>(null)
   const [offer_step, set_offer_step] = useState(0)
   const [request_error, set_request_error] = useState('')
 
   const isa_id = props.match.params.id
+  const token = props.location.search.split('?token=')[1]
 
   const getIsa = async () => {
     try {
@@ -84,7 +85,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
     env: currentEnv().PLAID_ENV,
     publicKey: currentEnv().PLAID_PUBLIC_KEY,
     onSuccess: onSuccess,
-    token: props.plaid_token
+    token: props.plaid_token,
   }
 
   const { open, ready, error } = usePlaidLink(config)
@@ -98,7 +99,12 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
       />
     ),
     'sign up': isa && (
-      <ClientIsaSignUp email={isa.student.email} user_id={isa.student.id.toString()} onNext={handleSignUp} />
+      <ClientIsaSignUp
+        email={isa.student.email}
+        user_id={isa.student.id.toString()}
+        onNext={handleSignUp}
+        token={token}
+      />
     ),
     'link bank': (
       <section className="link_bank">
@@ -110,7 +116,7 @@ export default function ClientIsaOffer(props: ClientIsaOfferProps) {
   }
 
   return (
-    <article className="ClientIsaOffer-page">
+    <article className="ClientIsaOfferSigning-page">
       <PageContent>
         <section className="offer-steps">
           <Stepper steps={offerStatuses} activeIndex={offer_step} />

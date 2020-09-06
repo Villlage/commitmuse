@@ -92,7 +92,11 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
           </div>
         </div>
         <footer>
-          <Button onClick={cancel_subscription} loading={btn_loading} className={fixClass(props.currentUser.is_active && 'active')}>
+          <Button
+            onClick={cancel_subscription}
+            loading={btn_loading}
+            className={fixClass(props.currentUser.is_active && 'active')}
+          >
             {props.currentUser.is_active ? 'Cancel Subscription' : 'Activate Subscription'}
           </Button>
         </footer>

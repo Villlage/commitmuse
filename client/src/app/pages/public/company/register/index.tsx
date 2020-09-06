@@ -163,7 +163,10 @@ export default function CompanyOnBoarding(props: CompanyOnBoardingProps) {
         <Button background="MainWarning" onClick={() => open()}>
           Link Bank
         </Button>
-        <Button className="skip" onClick={() => props.history.push(`/company/subscription/${props.currentUser.company}`)}>
+        <Button
+          className="skip"
+          onClick={() => props.history.push(`/company/subscription/${props.currentUser.company}`)}
+        >
           Skip for later
         </Button>
       </section>

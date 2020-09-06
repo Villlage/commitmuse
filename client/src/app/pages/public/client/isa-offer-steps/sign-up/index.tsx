@@ -2,18 +2,17 @@ import React, { useState } from 'react'
 import './style.scss'
 import Input from '../../../../../components/Input'
 import Button from '../../../../../components/Button'
-import { validateEmail } from '../../../../../../helpers/base'
-import AuthService from '../../../../../../services/auth.service'
 import { log } from '../../../../../../services/logging.service'
-import { emailErrorMessage, passwordLength, passwordMustMatch } from '../../../../../../constants/auth'
+import { passwordLength, passwordMustMatch } from '../../../../../../constants/auth'
 import Message from '../../../../../components/Message'
-import ClientService from '../../../../../../services/client.service'
+import UserService from '../../../../../../services/user.service'
 
-const clientService = new ClientService()
+const userService = new UserService()
 
 interface ClientIsaSignUpProps {
   user_id: number
   email: string
+  token: string
   onNext(): void
 }
 
@@ -32,7 +31,7 @@ export default function ClientIsaSignUp(props: ClientIsaSignUpProps) {
   const onSubmit = async () => {
     set_loading(true)
     try {
-      const res = await clientService.resetPassword(props.user_id, password)
+      const res = await userService.resetPassword(props.user_id, password, props.token)
 
       if (res) {
         if (res.error) {
