@@ -46,9 +46,9 @@ def user() -> Tuple[Response, int]:
     return jsonify(result), 200
 
 
-@app.route("/coach/<int:coach_id>", methods=["GET"])
-def get_coach(coach_id: int) -> Tuple[Response, int]:
-    coach = User.get_user(coach_id)
+@app.route("/coach/<int:user_id>", methods=["GET"])
+def get_coach(user_id: int) -> Tuple[Response, int]:
+    coach = User.get_user(user_id)
     result = user_schema.dump(coach)
 
     return jsonify(result), 200
