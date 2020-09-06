@@ -9,8 +9,14 @@ import PopUp from 'app/components/PopUp'
 import Message from 'app/components/Message'
 import { emailErrorMessage, passwordLength, passwordMustMatch } from 'constants/auth'
 import { validateEmail } from 'helpers/base'
+import Tabs from 'app/components/Tabs'
 
 const userService = new UserService()
+
+const TABS = {
+  PERSONAL: 'Personal Info',
+  COMPANY: 'Company Info',
+}
 
 const MyAccount = (props: ScreenProps) => {
   const [firstName, setFirstName] = useState()
@@ -23,6 +29,8 @@ const MyAccount = (props: ScreenProps) => {
 
   const [buttonLoading, setButtonLoading] = useState(false)
   const [requestError, setRequestError] = useState('')
+
+  const [activeTab, setActiveTab] = useState('Personal Info')
 
   const [validationMessages, setValidationMessages] = useState({
     email: '',
@@ -44,11 +52,17 @@ const MyAccount = (props: ScreenProps) => {
     <div className="MyAccount-page">
       <PageContent title="My Account">
         <div className={'wrapper'}>
-          {/*NAVIGATION HEADER*/}
-          <div className={'navigationHeader'}>
-            <div className={'navigationItem active'}>Personal Info</div>
-            <div className={'navigationItem disabled'}>Company Info</div>
-          </div>
+          <Tabs
+            tabs={[TABS.PERSONAL, TABS.COMPANY]}
+            activeTab={activeTab}
+            onChange={tab => {
+              //'Company Info' tab is disabled temporarily
+              if (tab === TABS.COMPANY) {
+                return
+              }
+              setActiveTab(tab)
+            }}
+          />
 
           {/*CONTENT*/}
           <div className={'content'}>
