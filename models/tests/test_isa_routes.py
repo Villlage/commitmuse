@@ -5,7 +5,6 @@ from tests.factories import CoachFactory, ISAFactory
 from conftest import logged_in_client
 from common.exceptions import ResourceNotFound
 from services.isa_service import get_isa_by_id
-from unittest.mock import MagicMock
 
 
 class TestISA:
@@ -151,7 +150,7 @@ class TestSigning:
     def mock_embedded_signing(self, mocker):
         return mocker.patch(
             "controller.isa_routes.docusign_client.embedded_signing",
-            return_value=MagicMock(url="url"),
+            return_value="url",
         )
 
     def test_sign_isa(self, mock_embedded_signing) -> None:
