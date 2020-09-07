@@ -33,3 +33,11 @@ def logged_in_client(user):
         with client.session_transaction() as sess:
             sess["user_id"] = user.id
         yield client
+
+
+@contextmanager
+def logged_in_docusign_client(user):
+    with app.test_client() as client:
+        with client.session_transaction() as session:
+            session["ds_access_token"] = user.id
+        yield client

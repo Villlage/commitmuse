@@ -33,9 +33,7 @@ class Config(object):
     DOCUSIGN_BASE_PATH = os.getenv(
         "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
     )
-    AUTHORIZATION_SERVER = os.getenv(
-        "AUTHORIZATION_SERVER", "https://account-d.docusign.com"
-    )
+    AUTHORIZATION_SERVER = os.getenv("AUTHORIZATION_SERVER", "account-d.docusign.com")
     DOCUSIGN_CLIENT_ID = os.getenv(
         "DOCUSIGN_CLIENT_ID", "4ecc3248-c115-4782-bbb3-776260404d09"
     )
@@ -43,6 +41,9 @@ class Config(object):
         "IMPERSONATED_USER_ID", "b9d76a2a-e332-4a5d-8592-cf70f9195198"
     )
     PRIVATE_KEY_LOCATION = os.getenv("PRIVATE_KEY_LOCATION", "./demo-private.key")
+    ISA_TEMPLATE_ID = os.getenv(
+        "PRIVATE_KEY_LOCATION", "4652a178-cac7-491a-b03d-bdba57b6f175"
+    )
 
 
 class LocalConfig(Config):
@@ -83,3 +84,4 @@ class ProductionConfig(Config):
     DOCUSIGN_CLIENT_ID = "4ecc3248-c115-4782-bbb3-776260404d09"
     IMPERSONATED_USER_ID = "9a5159c4-ff31-4f7c-834b-784e0941365a"
     PRIVATE_KEY_LOCATION = "./private.key"
+    ISA_TEMPLATE_ID = "c87731cd-8404-4834-9a9e-d28a1714c893"

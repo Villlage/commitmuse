@@ -23,7 +23,6 @@ class DSClient:
         """JSON Web Token authorization"""
         api_client = ApiClient()
         api_client.set_base_path(config.AUTHORIZATION_SERVER)
-
         private_key = cls._get_private_key().encode("ascii").decode("utf-8")
 
         try:
