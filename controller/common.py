@@ -18,6 +18,7 @@ from common.exceptions import (
 from flask_login import current_user
 import plaid
 from services.company_service import _get_company_by_id
+from datadog import statsd
 
 
 @login_manager.user_loader
@@ -128,6 +129,7 @@ def handle_exception(exc):  # type:ignore
 
     if isinstance(exc, plaid.errors.PlaidError):
         logger.error("Plaid error - request id: {}".format(exc.request_id))
+        statsd.increment("500", tags=["error"])
         return jsonify(error=exc.display_message or exc.code), 500
 
     # now you're handling non-HTTP exceptions only

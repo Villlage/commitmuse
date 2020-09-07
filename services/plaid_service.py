@@ -31,7 +31,7 @@ def create_plaid_item(user: User, schema: Dict[Any, Any]) -> PlaidItem:
         accounts_response=accounts_response,
         company_id=company_id,
     )
-    statsd.increment("plaid.item.create")
+    statsd.increment("plaid.item.create", tags=["plaid"])
 
     return plaid_item
 

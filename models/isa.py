@@ -64,7 +64,7 @@ class ISA(db.Model):  # type: ignore
             isa = cls(**args)
             session.add(isa)
             session.commit()
-            statsd.increment("isas.create")
+            statsd.increment("isas.create", tags=["isas"])
             return isa
 
     def update_isa(self, **kwargs: Any) -> "ISA":

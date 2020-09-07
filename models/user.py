@@ -58,7 +58,7 @@ class User(db.Model, UserMixin):  # type: ignore
             user = cls(**args)
             session.add(user)
             session.commit()
-            statsd.increment("users.create")
+            statsd.increment("users.create", tags=["users"])
             return user
 
     @classmethod

@@ -63,7 +63,7 @@ class SendgridEmail:
 
         try:
             sendgrid_client.client.mail.send.post(request_body=self.mail.get())
-            statsd.increment("sendgrid.send_email.success")
+            statsd.increment("sendgrid.send_email.success", tags=["sendgrid"])
         except Exception as error:
             logger.error(error)
-            statsd.increment("sendgrid.send_email.error")
+            statsd.increment("sendgrid.send_email.error", tags=["sendgrid"])

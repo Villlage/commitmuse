@@ -157,7 +157,7 @@ class Docusign:
         return ok
 
     def embedded_signing(self, user: User, isa: ISA, company_name: str) -> Any:
-        statsd.increment("docusign.embedded_signing")
+        statsd.increment("docusign.embedded_signing", tags=["docusign"])
 
         self.api_client = self._create_api_client(
             access_token=session["ds_access_token"]
