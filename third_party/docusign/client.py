@@ -107,7 +107,7 @@ class Docusign:
         # to the template
         copmany = TemplateRole(
             email=coach.email,
-            name=coach.first_name,
+            name=get_user_name(coach),
             role_name=TemplateRoleType.COMPANY.value,
             tabs=tabs,
         )

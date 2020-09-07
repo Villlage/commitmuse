@@ -30,9 +30,7 @@ def create_user(schema: Dict[Any, Any]) -> User:
 
 
 def get_user(email: str, password: str) -> Optional[User]:
-    user = User.get_user_by_email(email=email)
-    if not user:
-        raise ResourceNotFound("Could not find user. Please Register.")
+    user = get_user_by_email(email=email)
 
     if not check_password_hash(user.password, password):  # type: ignore
         raise AuthenticationError("Bad Email or password. Please try again.")
@@ -44,6 +42,13 @@ def get_user_by_id(user_id: int) -> User:
     user = User.get_user(user_id=user_id)
     if not user:
         raise ResourceNotFound("Could not find user. Please Register.")
+    return user
+
+
+def get_user_by_email(email: str) -> User:
+    user = User.get_user_by_email(email)
+    if not user:
+        raise ResourceNotFound(f"Could not find user with email: {email}")
     return user
 
 
@@ -67,9 +72,7 @@ def _reset_password_link(user: User, url_root: str) -> str:
 
 
 def send_user_forgot_password_email(email: str, url_root: str) -> None:
-    user = User.get_user_by_email(email)
-    if not user:
-        raise ResourceNotFound(f"Could not find user with email: {email}")
+    user = get_user_by_email(email=email)
     reset_password_link = _reset_password_link(user, url_root)
     send_forgot_password_email(user=user, reset_password_link=reset_password_link)
 
