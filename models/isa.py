@@ -2,6 +2,7 @@ from typing import Any, List
 from datetime import datetime
 from app import db
 from common.database import db_session
+from datadog import statsd
 
 from enum import Enum
 
@@ -63,6 +64,7 @@ class ISA(db.Model):  # type: ignore
             isa = cls(**args)
             session.add(isa)
             session.commit()
+            statsd.increment("isas.create", tags=["isas"])
             return isa
 
     def update_isa(self, **kwargs: Any) -> "ISA":

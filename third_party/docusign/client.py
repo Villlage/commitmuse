@@ -20,6 +20,7 @@ from datetime import datetime, timedelta
 from models.feature_flag import get_feature_flag_by_name
 from common import feature_flags
 from common.utils import to_dollar, to_percentage
+from datadog import statsd
 
 
 class TemplateRoleType(Enum):
@@ -156,6 +157,8 @@ class Docusign:
         return ok
 
     def embedded_signing(self, user: User, isa: ISA, company_name: str) -> Any:
+        statsd.increment("docusign.embedded_signing", tags=["docusign"])
+
         self.api_client = self._create_api_client(
             access_token=session["ds_access_token"]
         )
