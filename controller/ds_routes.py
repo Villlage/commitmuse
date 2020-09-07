@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from flask import flash, redirect, request, session
 
 from third_party.docusign.docusign import DSClient
-from third_party.docusign.ds_config import DS_CONFIG
 
 base_uri_suffix = "/restapi"
 
@@ -44,7 +43,7 @@ def ds_callback():
         session["ds_user_email"] = response["email"]
         accounts = response["accounts"]
         # Find the account...
-        target_account_id = DS_CONFIG["target_account_id"]
+        target_account_id = None
         if target_account_id:
             account = next(
                 (a for a in accounts if a["account_id"] == target_account_id), None

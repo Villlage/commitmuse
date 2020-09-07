@@ -17,8 +17,12 @@ from docusign_esign import (
     Text,
 )
 from datetime import datetime, timedelta
+from models.feature_flag import get_feature_flag_by_name
+from common import feature_flags
 
-ISA_TEMPLATE_ID = "4652a178-cac7-491a-b03d-bdba57b6f175"
+
+ISA_TEMPLATE_ID_STAGING = "4652a178-cac7-491a-b03d-bdba57b6f175"
+ISA_TEMPLATE_ID = "c87731cd-8404-4834-9a9e-d28a1714c893"
 
 
 class TemplateRoleType(Enum):
@@ -130,19 +134,21 @@ class Docusign:
         results = envelope_api.create_envelope(
             account_id=self.account_id, envelope_definition=envelope_definition
         )
+
         envelope_id = results.envelope_id
 
         # 3. Create the Recipient View request object
         authentication_method = "None"  # How is this application authenticating
-        # the signer? See the "authenticationMethod" definition
-        # https://goo.gl/qUhGTm
 
         return_url = Docusign._get_return_url(isa=isa)
+
+        if get_feature_flag_by_name(feature_flags.SEND_DOCUMENT, True):
+            return return_url
 
         recipient_view_request = RecipientViewRequest(
             authentication_method=authentication_method,
             client_user_id=None,
-            recipient_id="1",
+            recipient_id=user.id,
             return_url=return_url,
             user_name=user.first_name,
             email=user.email,
@@ -155,8 +161,7 @@ class Docusign:
             recipient_view_request=recipient_view_request,
         )
 
-        return results
-        # return {"envelope_id": envelope_id, "redirect_url": results.url}
+        return results.url
 
     @typing.no_type_check
     def _get_return_url(isa: ISA) -> str:
