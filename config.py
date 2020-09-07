@@ -69,13 +69,13 @@ class TestingConfig(Config):
 class StagingConfig(Config):
     LOG_LEVEL = "INFO"
     WEB_APP_DOMAIN = "https://staging.commitmuse.com/web"
-    WEB_APP_DOMAIN = "https://staging.commitmuse.com"
+    WEB_APP_SERVER = "https://staging.commitmuse.com"
 
 
 class ProductionConfig(Config):
     LOG_LEVEL = "INFO"
     WEB_APP_DOMAIN = "https://app.commitmuse.com/web"
-    WEB_APP_DOMAIN = "https://app.commitmuse.com"
+    WEB_APP_SERVER = "https://app.commitmuse.com"
 
     # docusign config
     DOCUSIGN_ACCOUNT_ID = 35738896
