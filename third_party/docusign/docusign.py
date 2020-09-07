@@ -44,7 +44,7 @@ class DSClient:
                 consent_scopes = "signature%20impersonation"
                 redirect_uri = config.WEB_APP_SERVER + url_for("ds_callback")
                 consent_url = (
-                    f"{config.AUTHORIZATION_SERVER}/oauth/auth?response_type=code&"
+                    f"https://{config.AUTHORIZATION_SERVER}/oauth/auth?response_type=code&"
                     f"scope={consent_scopes}&client_id={config.DOCUSIGN_CLIENT_ID}&redirect_uri={redirect_uri}"
                 )
                 return redirect(consent_url)
