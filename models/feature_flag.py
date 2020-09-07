@@ -1,9 +1,11 @@
 from common.database import db_session
 from app import db
 from typing import Optional, List
+from enum import Enum
 
 
-send_document = "send_document"
+class FeatureFlags(Enum):
+    SEND_DOCUMENT = "send_document"
 
 
 class FeatureFlag(db.Model):  # type: ignore
