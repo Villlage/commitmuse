@@ -4,6 +4,7 @@ from app import db
 from common.database import db_session
 from flask_login import UserMixin
 from enum import Enum
+from datadog import statsd
 
 
 class UserRole(Enum):
@@ -57,6 +58,7 @@ class User(db.Model, UserMixin):  # type: ignore
             user = cls(**args)
             session.add(user)
             session.commit()
+            statsd.increment("users.create")
             return user
 
     @classmethod

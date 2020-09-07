@@ -8,6 +8,7 @@ from models.plaid_item import PlaidItem
 from models.plaid_account import PlaidAccount
 from models.user import User
 from services.company_service import get_company_by_id
+from datadog import statsd
 
 
 def create_plaid_item(user: User, schema: Dict[Any, Any]) -> PlaidItem:
@@ -30,6 +31,8 @@ def create_plaid_item(user: User, schema: Dict[Any, Any]) -> PlaidItem:
         accounts_response=accounts_response,
         company_id=company_id,
     )
+    statsd.increment("plaid.item.create")
+
     return plaid_item
 
 
