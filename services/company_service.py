@@ -80,10 +80,19 @@ def get_company_overview(company_id: int, user: User) -> Dict[Any, Any]:
 
 def invite_coach_to_company(
     company_id: int, user: User, schema: Dict[Any, Any]
-) -> None:
+) -> Coach:
+    """
+    invite a new user as a coach and and assign them to a company.
+    """
+
     company = get_company_by_id(company_id=company_id, user=user)
     coach = User.get_user_by_email(schema["email"])
+    schema["company_id"] = company_id
     if not coach:
         coach = Coach.create_user(**schema)
+    else:
+        coach.update_user(dict(company_id=company_id))
 
     send_coach_invitation(coach=coach, company=company)
+
+    return coach

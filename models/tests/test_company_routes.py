@@ -4,6 +4,7 @@ from tests.factories import CoachFactory, CompanyFactory, ISAFactory
 from conftest import logged_in_client
 from common.exceptions import ResourceNotFound
 from services.company_service import get_company_by_id
+from services.user_service import get_user_by_email
 
 
 class TestCompany:
@@ -155,15 +156,17 @@ class TestInvite:
     def test_send_invite(self, mock_sendgrid_send_email) -> None:
         company = CompanyFactory.create()
         user = CoachFactory.create(company=company)
+        email = "coach@company.com"
         company_id = company.id
         payload = dict(
-            email="coach@company.com",
-            first_name="someone",
-            last_name="surname",
-            user_role=1,
+            email=email, first_name="someone", last_name="surname", user_role=1,
         )
         with logged_in_client(user) as client:
             resp = client.post(f"companies/{company_id}/invitation", json=payload)
 
             assert resp.status_code == 200
+            invited_coach = get_user_by_email(email)
+            assert invited_coach
+            assert invited_coach.email == email
+            assert invited_coach.user_role == 2
             mock_sendgrid_send_email.assert_called_once()
