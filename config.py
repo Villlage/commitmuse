@@ -33,9 +33,7 @@ class Config(object):
     DOCUSIGN_BASE_PATH = os.getenv(
         "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
     )
-    AUTHORIZATION_SERVER = os.getenv(
-        "AUTHORIZATION_SERVER", "https://account-d.docusign.com"
-    )
+    AUTHORIZATION_SERVER = os.getenv("AUTHORIZATION_SERVER", "account-d.docusign.com")
     DOCUSIGN_CLIENT_ID = os.getenv(
         "DOCUSIGN_CLIENT_ID", "4ecc3248-c115-4782-bbb3-776260404d09"
     )
