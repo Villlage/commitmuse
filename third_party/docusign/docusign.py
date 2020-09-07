@@ -101,7 +101,7 @@ class DSClient:
         """Make request to the API to get the user information"""
         # Determine user, account_id, base_url by calling OAuth::getUserInfo
         # See https://developers.docusign.com/esign-rest-api/guides/authentication/user-info-endpoints
-        url = config.AUTHORIZATION_SERVER + "/oauth/userinfo"
+        url = "https://" + config.AUTHORIZATION_SERVER + "/oauth/userinfo"
         auth = {"Authorization": "Bearer " + access_token}
         response = requests.get(url, headers=auth).json()
 
