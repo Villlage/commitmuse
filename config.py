@@ -70,6 +70,8 @@ class StagingConfig(Config):
     LOG_LEVEL = "INFO"
     WEB_APP_DOMAIN = "https://staging.commitmuse.com/web"
     WEB_APP_SERVER = "https://staging.commitmuse.com"
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = 'None'
 
 
 class ProductionConfig(Config):
