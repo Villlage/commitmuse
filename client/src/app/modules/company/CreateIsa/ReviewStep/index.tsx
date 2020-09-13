@@ -93,13 +93,6 @@ export default function ReviewStep(props: ReviewStepProps) {
           value={props.total_income.expiration_period_months}
           tooltip="This period indicates how long the client has, post graduation, to secure a higher income before the ISA expires."
         />
-        <Input
-          postFix="%"
-          onChange={e => isNumber(e) && props.onChange(e, 'risk')}
-          placeholder="Risk Assessment"
-          value={props.total_income.risk}
-          tooltip="The assessment measures how risky the client is based on several factors."
-        />
         {!notValid() && <IsaAssessment />}
       </section>
       <footer>

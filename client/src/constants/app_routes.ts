@@ -36,10 +36,10 @@ let APP_ROUTES: any = {
   ],
   coach: [
     { component: CoachClients, path: '/coach/clients' },
-    { component: IsaOverview, path: '/coach/isas/:id' },
-    { component: CompanyIsas, path: '/coach/isas' },
-    { component: CreateIsa, path: '/coach/isas/create' },
     { component: SignContract, path: '/coach/isas/contract/:id' },
+    { component: CreateIsa, path: '/coach/isas/create' },
+    { component: IsaOverview, path: '/coach/isas/:id' },
+    { component: CompanyIsas, path: '/coach/isas', exact: true },
     { component: Settings, path: '/coach/settings' },
     { component: Subscription, path: '/coach/subscription/:id' },
     { component: CoachClients, path: '/coach/clients', defaultPage: true },
