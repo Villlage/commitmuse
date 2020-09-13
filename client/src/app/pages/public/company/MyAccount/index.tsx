@@ -10,6 +10,7 @@ import Message from 'app/components/Message'
 import { emailErrorMessage, passwordLength, passwordMustMatch } from 'constants/auth'
 import { validateEmail } from 'helpers/base'
 import Tabs from 'app/components/Tabs'
+import Card from 'app/modules/common/Card'
 
 const userService = new UserService()
 
@@ -51,7 +52,7 @@ const MyAccount = (props: ScreenProps) => {
   return (
     <div className="MyAccount-page">
       <PageContent title="My Account">
-        <div className={'wrapper'}>
+        <Card>
           <Tabs
             tabs={[TABS.PERSONAL, TABS.COMPANY]}
             activeTab={activeTab}
@@ -124,7 +125,7 @@ const MyAccount = (props: ScreenProps) => {
               Save changes
             </Button>
           </div>
-        </div>
+        </Card>
       </PageContent>
 
       <PopUp isOpen={showChangePassword} onClose={() => setShowChangePassword(false)}>
