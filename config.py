@@ -20,54 +20,30 @@ class Config(object):
     PLAID_PUBLIC_KEY = os.getenv("PLAID_PUBLIC_KEY", "a004a070f0629da694fbae916414f3")
     PLAID_ENV = os.getenv("PLAID_ENV", "sandbox")
 
-    # docusign config
-    DOCUSIGN_ACCESS_TOKEN = os.getenv(
-        "DOCUSIGN_ACCESS_TOKEN",
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjY4MTg1ZmYxLTRlNTEtNGNlOS1hZjFjLTY4OTgxMjIwMzMxNyJ9.eyJUb2tlblR5cGUiOjUsIklzc3VlSW5zdGFudCI6MTU5NjQ2ODY5NCwiZXhwIjoxNTk2NDk3NDk0LCJVc2VySWQiOiJiOWQ3NmEyYS1lMzMyLTRhNWQtODU5Mi1jZjcwZjkxOTUxOTgiLCJzaXRlaWQiOjEsInNjcCI6WyJzaWduYXR1cmUiLCJjbGljay5tYW5hZ2UiLCJvcmdhbml6YXRpb25fcmVhZCIsInJvb21fZm9ybXMiLCJncm91cF9yZWFkIiwicGVybWlzc2lvbl9yZWFkIiwidXNlcl9yZWFkIiwidXNlcl93cml0ZSIsImFjY291bnRfcmVhZCIsImRvbWFpbl9yZWFkIiwiaWRlbnRpdHlfcHJvdmlkZXJfcmVhZCIsImR0ci5yb29tcy5yZWFkIiwiZHRyLnJvb21zLndyaXRlIiwiZHRyLmRvY3VtZW50cy5yZWFkIiwiZHRyLmRvY3VtZW50cy53cml0ZSIsImR0ci5wcm9maWxlLnJlYWQiLCJkdHIucHJvZmlsZS53cml0ZSIsImR0ci5jb21wYW55LnJlYWQiLCJkdHIuY29tcGFueS53cml0ZSJdLCJhdWQiOiJmMGYyN2YwZS04NTdkLTRhNzEtYTRkYS0zMmNlY2FlM2E5NzgiLCJhenAiOiJmMGYyN2YwZS04NTdkLTRhNzEtYTRkYS0zMmNlY2FlM2E5NzgiLCJpc3MiOiJodHRwczovL2FjY291bnQtZC5kb2N1c2lnbi5jb20vIiwic3ViIjoiYjlkNzZhMmEtZTMzMi00YTVkLTg1OTItY2Y3MGY5MTk1MTk4IiwiYXV0aF90aW1lIjoxNTk2NDU4MDgwLCJwd2lkIjoiYjBkNTNhNGMtZmVhYy00ZjY4LThlOWUtZjE4MzM4MTNkYTQ5In0.iy7e8NQIJyjco9sbzhRKlcBudso9XHQb3E8cHLaI-BqsJOds2Z2cS2IvyoiUTf3A81tUxNWdA2Boi0-wTc4W9bXJ-HUBJxGPd2jXGANPGdvOvO4B_bqfmRyhiPkzb21pt54CJUyRngq3cbRnCe9QYDcdai393NSC_DCpa-r2f7uIOoA9ULvFi_mig76R1eNlJK3d0dONPlmIa_BPAajW1vjguNERp59pKo6PW8wNRI9UHoSURcDW5NNlU3G3HpmMsqPVfkn1_2yLal04Llt1gJdJpr1MP1Iovipfuw3tJGNl_nb45sZ8qB8Bf7NlHapiLF5XZD-rElJteA1xyU5sNQ",
-    )
-    DOCUSIGN_ACCOUNT_ID = os.getenv("DOCUSIGN_ACCOUNT_ID", 11042268)
-    DOCUSIGN_BASE_PATH = os.getenv(
-        "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
-    )
-    # integration id and client id are synonyms here
-    DOCUSIGN_CLINET_ID = os.getenv(
-        "DOCUSIGN_CLINET_ID", "4ecc3248-c115-4782-bbb3-776260404d09"
-    )
-    DOCUSIGN_SECRET_KEY = os.getenv(
-        "DOCUSIGN_SECRET_KEY", "e4df848e-b88d-4731-a758-85765ed814be"
-    )
-    DOCUSIGN_USER_ID = os.getenv(
-        "DOCUSIGN_USER_ID", "b9d76a2a-e332-4a5d-8592-cf70f9195198"
-    )
+    WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")
+    WEB_APP_SERVER = os.getenv("WEB_APP_SERVER")
 
+    # Sendgrid
     SENDGRID_API_KEY = (
         "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"
     )
 
-    WEB_APP_DOMAIN = os.getenv("WEB_APP_DOMAIN")
-
-    # DOCUSIGN Constants
-    AUTHORIZATION_SERVER = "https://account-d.docusign.com"
-    AUTHORIZE_URL = "https://account-d.docusign.com/oauth/auth"
-    ACCESS_TOKEN_URL = "https://account-d.docusign.com/oauth/token"
-    ALLOW_SILENT_AUTHENTICATION = True
-    BASE_URL = "https://demo.docusign.net"
-    CODE_GRANT = "code grant"
-    TARGET_ACC_ID = None
-    SIGNATURE = "signature"
-
-    DOCUSIGN_CLIENT_ID = "4ecc3248-c115-4782-bbb3-776260404d09"
-    INTEGRATION_KEY_PRODUCTION = "841c2045-208d-423d-ac21-c5e5883de495"
-
-    DOCUSIGN_CLIENT_SECRET = "977e4ea2-6676-41dd-8acd-49d254c94b8e"
-    DOCUSIGN_PRODUCTION_CLIENT_SECRET = "3fe3198d-29e4-4357-ac2f-c94d904a7306"
-
-    SIGNER_EMAIL = "gilad.kahala@gmail.com"
-    SIGNER_NAME = "Gilad Kahala"
-
-    IMPERSONATED_USER_ID = "b9d76a2a-e332-4a5d-8592-cf70f9195198"
-    SECRET_KEY = "e4df848e-b88d-4731-a758-85765ed814be"
-    DS_PAYMENT_GATEWAY_ID = None
+    # Docusign
+    DOCUSIGN_ACCOUNT_ID = os.getenv("DOCUSIGN_ACCOUNT_ID", 11042268)
+    DOCUSIGN_BASE_PATH = os.getenv(
+        "DOCUSIGN_BASE_PATH", "https://demo.docusign.net/restapi"
+    )
+    AUTHORIZATION_SERVER = os.getenv("AUTHORIZATION_SERVER", "account-d.docusign.com")
+    DOCUSIGN_CLIENT_ID = os.getenv(
+        "DOCUSIGN_CLIENT_ID", "4ecc3248-c115-4782-bbb3-776260404d09"
+    )
+    IMPERSONATED_USER_ID = os.getenv(
+        "IMPERSONATED_USER_ID", "b9d76a2a-e332-4a5d-8592-cf70f9195198"
+    )
+    PRIVATE_KEY_LOCATION = os.getenv("PRIVATE_KEY_LOCATION", "./demo-private.key")
+    ISA_TEMPLATE_ID = os.getenv(
+        "PRIVATE_KEY_LOCATION", "4652a178-cac7-491a-b03d-bdba57b6f175"
+    )
 
 
 class LocalConfig(Config):
@@ -76,6 +52,7 @@ class LocalConfig(Config):
     SQLALCHEMY_DATABASE_URI = "postgresql://localhost/village"
 
     WEB_APP_DOMAIN = "http://localhost:5000/web"
+    WEB_APP_SERVER = "http://localhost:5000"
 
 
 class TestingConfig(Config):
@@ -86,13 +63,27 @@ class TestingConfig(Config):
         "DATABASE_URL", "postgresql://localhost/village_test"
     )
     WEB_APP_DOMAIN = "http://localhost:5000/web"
+    WEB_APP_SERVER = "http://localhost:5000"
 
 
 class StagingConfig(Config):
     LOG_LEVEL = "INFO"
-    WEB_APP_DOMAIN = "https://commitmuse-staging.herokuapp.com/web"
+    WEB_APP_DOMAIN = "https://staging.commitmuse.com/web"
+    WEB_APP_SERVER = "https://staging.commitmuse.com"
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_SAMESITE = 'None'
 
 
 class ProductionConfig(Config):
     LOG_LEVEL = "INFO"
-    WEB_APP_DOMAIN = "https://commitmuse.herokuapp.com/web"
+    WEB_APP_DOMAIN = "https://app.commitmuse.com/web"
+    WEB_APP_SERVER = "https://app.commitmuse.com"
+
+    # docusign config
+    DOCUSIGN_ACCOUNT_ID = 35738896
+    DOCUSIGN_BASE_PATH = "https://na2.docusign.net/restapi"
+    AUTHORIZATION_SERVER = "account.docusign.com"
+    DOCUSIGN_CLIENT_ID = "4ecc3248-c115-4782-bbb3-776260404d09"
+    IMPERSONATED_USER_ID = "9a5159c4-ff31-4f7c-834b-784e0941365a"
+    PRIVATE_KEY_LOCATION = "./private.key"
+    ISA_TEMPLATE_ID = "c87731cd-8404-4834-9a9e-d28a1714c893"

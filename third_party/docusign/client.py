@@ -5,7 +5,7 @@ from typing import Any, Dict
 
 from enum import Enum
 from docusign_esign import EnvelopesApi, EnvelopeDefinition, TemplateRole, ApiClient
-from models.user import Coach, Student, User
+from models.user import Coach, User
 from models.isa import ISA
 from services.user_service import get_user_name
 from docusign_esign import (
@@ -17,8 +17,10 @@ from docusign_esign import (
     Text,
 )
 from datetime import datetime, timedelta
-
-ISA_TEMPLATE_ID = "4652a178-cac7-491a-b03d-bdba57b6f175"
+from models.feature_flag import get_feature_flag_by_name
+from common import feature_flags
+from common.utils import to_dollar, to_percentage
+from datadog import statsd
 
 
 class TemplateRoleType(Enum):
@@ -42,59 +44,95 @@ class Docusign:
         api_client.set_default_header("Authorization", "Bearer " + access_token)
         return api_client
 
-    def get_envelope_definition(self, coach: Coach, student: Student) -> Any:
-        signer_email = "gilad.kahala@gmail.com"
-        signer_name = "Gilad Kahala"
-        cc_email = "gilad.kahala@gmail.com"
-        cc_name = "CC Gilad Kahala"
+    def get_envelope_definition(self, coach: Coach, isa: ISA, company_name: str) -> Any:
+        signer_email = coach.email
+        signer_name = get_user_name(coach)
+        cc_email = "gilad@commitmuse.com"
+        cc_name = "Commit Muse"
 
         envelope_args = {
             "signer_email": signer_email,
             "signer_name": signer_name,
             "cc_email": cc_email,
             "cc_name": cc_name,
-            "template_id": ISA_TEMPLATE_ID,
+            "template_id": config.ISA_TEMPLATE_ID,
         }
 
         args = {
             "account_id": self.account_id,
             "base_path": self.base_path,
-            "access_token": self.access_token or session["ds_access_token"],
+            "access_token": session["ds_access_token"],
             "envelope_args": envelope_args,
         }
 
-        text = Text(tab_label="current_income", value="Jabberywocky!")
+        company_name = Text(tab_label="company_name", value=company_name)
+
+        program_period_weeks = Text(
+            tab_label="program_period_weeks", value=isa.program_duration_weeks
+        )
+        cancellation_period_weeks = Text(
+            tab_label="cancellation_period_weeks", value=isa.cancellation_period_weeks
+        )
+        expiration_period_months = Text(
+            tab_label="expiration_period_months", value=isa.expiration_period_months
+        )
+
+        isa_percentage = Text(
+            tab_label="isa_percentage", value=to_percentage(isa.percentage)
+        )
+        current_income = Text(
+            tab_label="current_income", value=to_dollar(isa.current_income)
+        )
+        minimum_monthly = Text(
+            tab_label="minimum_monthly", value=to_dollar(isa.current_income / 12)
+        )
+        payment_cap = Text(tab_label="payment_cap", value=to_dollar(isa.cap))
 
         # Add the tabs model (including the SignHere tab) to the signer.
         # The Tabs object wants arrays of the different field/tab types
         # Tabs are set per recipient / signer
-        tabs = Tabs(text_tabs=[text])
+        tabs = Tabs(
+            text_tabs=[
+                cancellation_period_weeks,
+                company_name,
+                current_income,
+                expiration_period_months,
+                isa_percentage,
+                minimum_monthly,
+                payment_cap,
+                program_period_weeks,
+            ]
+        )
 
         # Create template role elements to connect the signer and cc recipients
         # to the template
         copmany = TemplateRole(
             email=coach.email,
-            name=coach.first_name,
+            name=get_user_name(coach),
             role_name=TemplateRoleType.COMPANY.value,
             tabs=tabs,
         )
         # Create a cc template role.
         client = TemplateRole(
-            email=student.email,
-            name=get_user_name(student),
+            email=isa.student.email,
+            name=get_user_name(isa.student),
             role_name=TemplateRoleType.CLIENT.value,
         )
 
         envelope_definition = EnvelopeDefinition(
             status="sent",  # requests that the envelope be created and sent.
-            template_id=ISA_TEMPLATE_ID,
+            template_id=config.ISA_TEMPLATE_ID,
             template_roles=[copmany, client],
         )
 
         return envelope_definition
 
-    def send_envelope(self, coach: Coach, student: Student) -> Dict[Any, Any]:
-        envelope_definition = self.get_envelope_definition(coach=coach, student=student)
+    def send_envelope(
+        self, coach: Coach, isa: ISA, company_name: str
+    ) -> Dict[Any, Any]:
+        envelope_definition = self.get_envelope_definition(
+            coach=coach, isa=isa, company_name=company_name
+        )
         envelope_api = EnvelopesApi(self.api_client)
         results = envelope_api.create_envelope(
             account_id=self.account_id, envelope_definition=envelope_definition
@@ -118,31 +156,35 @@ class Docusign:
 
         return ok
 
-    def embedded_signing(self, user: User, isa: ISA) -> Any:
+    def embedded_signing(self, user: User, isa: ISA, company_name: str) -> Any:
+        statsd.increment("docusign.embedded_signing", tags=["docusign"])
+
         self.api_client = self._create_api_client(
             access_token=session["ds_access_token"]
         )
 
         envelope_definition = self.get_envelope_definition(
-            coach=isa.coach, student=isa.student
+            coach=isa.coach, isa=isa, company_name=company_name
         )
         envelope_api = EnvelopesApi(self.api_client)
         results = envelope_api.create_envelope(
             account_id=self.account_id, envelope_definition=envelope_definition
         )
+
         envelope_id = results.envelope_id
 
         # 3. Create the Recipient View request object
         authentication_method = "None"  # How is this application authenticating
-        # the signer? See the "authenticationMethod" definition
-        # https://goo.gl/qUhGTm
 
-        return_url = Docusign._get_return_url(isa=isa)
+        return_url = Docusign._get_return_url(isa_id=isa.id)
+
+        if get_feature_flag_by_name(feature_flags.SEND_DOCUMENT, True):
+            return return_url
 
         recipient_view_request = RecipientViewRequest(
             authentication_method=authentication_method,
             client_user_id=None,
-            recipient_id="1",
+            recipient_id=user.id,
             return_url=return_url,
             user_name=user.first_name,
             email=user.email,
@@ -155,14 +197,11 @@ class Docusign:
             recipient_view_request=recipient_view_request,
         )
 
-        return results
-        # return {"envelope_id": envelope_id, "redirect_url": results.url}
+        return results.url
 
     @typing.no_type_check
-    def _get_return_url(isa: ISA) -> str:
-        isa_id = isa.id  # type: int
-        isa_id_str = str(isa_id)  # type: str
-        return_url = config.WEB_APP_DOMAIN + "/company/isas/" + isa_id_str  # type: str
+    def _get_return_url(isa_id: int) -> str:
+        return_url = f"{config.WEB_APP_DOMAIN}/company/isas/{isa_id}"
         return return_url
 
 

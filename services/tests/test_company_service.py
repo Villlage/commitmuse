@@ -72,7 +72,10 @@ class TestCoachInvitation:
             first_name="some", last_name="one", user_role=1, email="someone@gmail.com"
         )
 
-        invite_coach_to_company(company_id=company.id, user=user, schema=schema)
+        coach = invite_coach_to_company(company_id=company.id, user=user, schema=schema)
+        assert coach
+        assert coach.company_id == company.id
+
         mock_sendgrid_send_email.assert_called_once()
 
     def test_invite_coach_to_company_coach_exists(
@@ -85,5 +88,7 @@ class TestCoachInvitation:
 
         schema = dict(first_name="some", last_name="one", user_role=1, email=email)
 
-        invite_coach_to_company(company_id=company.id, user=user, schema=schema)
+        coach = invite_coach_to_company(company_id=company.id, user=user, schema=schema)
+        assert coach.company_id == company.id
+        assert coach.email == email
         mock_sendgrid_send_email.assert_called_once()

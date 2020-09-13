@@ -13,9 +13,9 @@ export default function FAQ(props: FAQProps) {
       content: (
         <p>
           Income Share Agreements (ISAs) relieve the upfront financial burden of a student. The educator agrees to a
-          contract where the student does not pay tuition until they secure a salary. Then, a fixed percentage of
-          their income is paid to the educator via the app for a fixed duration. It is not a traditional loan or
-          grant, and there is no principal balance or interest rate.
+          contract where the student does not pay tuition until they secure a salary. Then, a fixed percentage of their
+          income is paid to the educator via the app for a fixed duration. It is not a traditional loan or grant, and
+          there is no principal balance or interest rate.
         </p>
       ),
     },

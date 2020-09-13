@@ -9,7 +9,7 @@ export default function CoachClients() {
   const FileIcon = IconsSvg.FileContract
   const ArrowRightIcon = IconsSvg.ArrowRight
 
-  //show nothing until mock data is replaced with real data
+  //don't render the page until mock-data replaced with real data
   return null
 
   return (

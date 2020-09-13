@@ -7,7 +7,7 @@ from common.exceptions import (
     AuthenticationError,
 )
 from tests.factories import faker, UserFactory
-from services.user_service import create_user, get_user
+from services.user_service import create_user, get_user, get_user_by_email
 
 
 class TestCreateUser:
@@ -54,3 +54,12 @@ class TestGetUser:
         user = UserFactory.create(email=email, password=hashed_password)
         with pytest.raises(AuthenticationError):
             get_user(email=email, password=bad_password)
+
+    def test_get_user_by_email(self) -> None:
+        email = "someone@gmail.com"
+        user = UserFactory.create(email=email)
+        assert get_user_by_email(email=email) == user
+
+    def test_get_user_by_email(self) -> None:
+        with pytest.raises(ResourceNotFound):
+            get_user_by_email(email="someemail")

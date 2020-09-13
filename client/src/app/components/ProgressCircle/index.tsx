@@ -1,12 +1,12 @@
-import React from 'react';
-import './style.scss';
+import React from 'react'
+import './style.scss'
 
 interface Props {
   progress: number
-};
+}
 
 const ProgressCircle = (props: Props) => {
-  const { progress } = props;
+  const { progress } = props
 
   return (
     <div className={'progressCircle'} data-progress={Math.round(progress)}>
@@ -27,4 +27,4 @@ const ProgressCircle = (props: Props) => {
   )
 }
 
-export default ProgressCircle;
+export default ProgressCircle

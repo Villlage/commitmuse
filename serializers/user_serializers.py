@@ -1,4 +1,5 @@
 from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 from app import ma
 from models.isa import ISA
 from models.company import Company
@@ -35,6 +36,16 @@ class CoachSchema(Schema):  # type: ignore
     last_name = fields.Str(required=False)
     user_role = fields.Int(required=False, missing=0)
     type = "coaches"
+
+    @post_load
+    def assign_user_role(self, data, **kwargs):  # type: ignore
+        """Change and check the user role"""
+        if data.get("user_role") is None:
+            data["user_role"] = 0
+        elif data["user_role"] == 1:
+            data["user_role"] = 2
+
+        return data
 
 
 class CreateSubscriptionSchema(Schema):  # type: ignore

@@ -56,13 +56,7 @@ export default function MenuSideBar(props: MenuSideBarProps) {
   return (
     <section className="MenuSideBar-module">
       {menu_items.map((item, i) => (
-        <NavLink
-          aria-disabled={!item.active}
-          key={i}
-          className="menu-item"
-          activeClassName="is-active"
-          to={item.route}
-        >
+        <NavLink aria-disabled={!item.active} key={i} className="menu-item" activeClassName="is-active" to={item.route}>
           <div>
             <Icon icon={item.icon as any} />
           </div>

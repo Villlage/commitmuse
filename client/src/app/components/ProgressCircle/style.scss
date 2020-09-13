@@ -12,16 +12,17 @@
 
   display: inline-block;
 
-  width:  $circleSize;
+  width: $circleSize;
   height: $circleSize;
 
   border-radius: 50%;
   background-color: $circle-background;
 
   .circle {
-    .mask, .fill {
-      width:    $circleSize;
-      height:   $circleSize;
+    .mask,
+    .fill {
+      width: $circleSize;
+      height: $circleSize;
       position: absolute;
       border-radius: 50%;
     }
@@ -59,7 +60,8 @@
   @for $i from 0 through 100 {
     &[data-progress='#{$i}'] {
       .circle {
-        .mask.full, .fill {
+        .mask.full,
+        .fill {
           transform: rotate($increment * $i);
         }
         .fill.fix {
