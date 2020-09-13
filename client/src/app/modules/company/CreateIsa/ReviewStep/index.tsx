@@ -56,42 +56,49 @@ export default function ReviewStep(props: ReviewStepProps) {
           onChange={e => props.onChange(e, 'current_income')}
           placeholder="Current income"
           value={addComma(props.total_income.current_income)}
+          tooltip="This is how much the client is currently making."
         />
         <Input
           postFix="%"
           onChange={e => intOrFloat(e) && Number(e) < 100 && props.onChange(e, 'percentage')}
           placeholder="Percentage to be Paid"
           value={props.total_income.percentage}
+          tooltip="This percentage indicates how much of the client’s future income will be collected by the educational program per month."
         />
         <Input
           postFix="Months"
           onChange={e => isNumber(e) && props.onChange(e, 'time_to_be_paid')}
           placeholder="Time to be Paid"
           value={props.total_income.time_to_be_paid}
+          tooltip="This number indicates how long it will take for the client to complete their monthly payments. If the client’s income drops below their previous salary, they will automatically stop making payments."
         />
         <Input
           postFix="USD"
           onChange={e => props.onChange(e, 'cap')}
           placeholder="Maximum to be paid"
           value={addComma(props.total_income.cap)}
+          tooltip="This number indicates the program cost that the client will pay back via ISA."
         />
         <Input
           postFix="Week(s)"
           onChange={e => isNumber(e) && props.onChange(e, 'cancellation_period')}
           placeholder="Cancellation Period"
           value={props.total_income.cancellation_period}
+          tooltip="The period indicates how many weeks the client has to decide whether or not they want to cancel their ISA."
         />
         <Input
           postFix="Month(s)"
           onChange={e => isNumber(e) && props.onChange(e, 'expiration_period_months')}
           placeholder="Expiration Period"
           value={props.total_income.expiration_period_months}
+          tooltip="This period indicates how long the client has, post graduation, to secure a higher income before the ISA expires."
         />
         <Input
           postFix="%"
           onChange={e => isNumber(e) && props.onChange(e, 'risk')}
           placeholder="Risk Assessment"
           value={props.total_income.risk}
+          tooltip="The assessment measures how risky the client is based on several factors."
         />
         {!notValid() && <IsaAssessment />}
       </section>

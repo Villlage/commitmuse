@@ -20,7 +20,7 @@ const OFFER_STEPS = ['client', 'program', 'isa offer', 'review', 'contract']
 
 interface CreateIsaProps extends ScreenProps {}
 
-export default function CompanyCreateIsa(props: CreateIsaProps) {
+export default function CreateIsa(props: CreateIsaProps) {
   const [request_error, set_request_error] = useState('')
   const [active_step, set_active_step] = useState(0)
 
@@ -73,7 +73,9 @@ export default function CompanyCreateIsa(props: CreateIsaProps) {
       }
 
       set_active_step(active_step + 1)
-      return props.history.push(`/company/isas/contract/${res.id}`)
+      return props.history.push(
+        `/${props.currentUser.user_type === 'coach' ? 'coach' : 'company'}/isas/contract/${res.id}`,
+      )
     } catch (e) {
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
