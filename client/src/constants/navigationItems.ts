@@ -80,7 +80,7 @@ let NAVIGATION_ITEMS: any = {
           label: 'My ISAs',
           route: '/coach/isas',
           icon: 'file',
-          active: false,
+          active: true,
         },
       ],
     },

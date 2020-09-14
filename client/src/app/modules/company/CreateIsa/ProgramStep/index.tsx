@@ -38,18 +38,21 @@ export default function ProgramStep(props: ProgramStepProps) {
           options={industry_fields}
           onChange={e => props.onChange(e, 'field')}
           placeholder="Position Field"
+          tooltip="This is the field the client will enter post- graduation"
         />
         <Input
           placeholder="Duration"
           onChange={e => isNumber(e) && props.onChange(e, 'duration')}
           value={props.program.duration}
           postFix="Weeks"
+          tooltip="This is how long the program is"
         />
         <Input
           placeholder="Description"
           onChange={e => props.onChange(e, 'description')}
           value={props.program.description}
           className="full"
+          tooltip="This is the client’s objective upon graduating from <programName>"
         />
       </header>
       <footer>

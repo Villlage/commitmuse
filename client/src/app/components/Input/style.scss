@@ -9,6 +9,20 @@
   display: flex;
   padding: 0 0 0 12px;
 
+  &.has-tooltip {
+    .tooltip {
+      position: absolute;
+      padding: 16px 0;
+      color: transparent;
+    }
+
+    .TooltipBadge-component .question_circle .tooltip {
+      bottom: 160%;
+      margin-left: 15px;
+      font-weight: 500;
+    }
+  }
+
   .input-container {
     overflow: hidden;
     width: 100%;
@@ -27,6 +41,7 @@
       top: 10px;
       opacity: 0;
       transition: all 200ms;
+      display: flex;
 
       &.focused {
         opacity: 1;
