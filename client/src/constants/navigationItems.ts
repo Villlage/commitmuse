@@ -53,9 +53,9 @@ let NAVIGATION_ITEMS: any = {
         },
         {
           label: 'My Account',
-          route: '/company/settings',
+          route: '/company/settings/my-account',
           icon: 'user-circle',
-          active: false,
+          active: true,
         },
       ],
     },
