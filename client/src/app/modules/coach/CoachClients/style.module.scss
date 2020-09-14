@@ -1,0 +1,101 @@
+@import 'src/styles/colors';
+
+.CoachClients-module {
+  //HEADER
+  header {
+    display: flex;
+    padding: 0 24px;
+    height: 56px;
+
+    .left,
+    .right {
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 16px;
+
+      > div:first-child {
+        span:first-child {
+          display: block;
+
+          font-size: 20px;
+          font-weight: bold;
+          color: $Black3;
+          text-transform: uppercase;
+        }
+
+        span:last-child {
+          display: block;
+          margin-top: 2px;
+
+          font-size: 10px;
+          font-weight: bold;
+          color: $Indigo5;
+          text-transform: uppercase;
+        }
+      }
+
+      .icon {
+        width: 34px;
+        height: 34px;
+        padding: 8px 9px;
+        background-color: $Indigo1;
+        border-radius: 50%;
+
+        svg {
+          path {
+            fill: $Indigo4;
+          }
+        }
+      }
+    }
+
+    .right {
+      margin-left: 16px;
+    }
+  }
+
+  //CONTENT
+  .content {
+    padding: 0 19px;
+    margin-top: 13px;
+
+    .row {
+      display: flex;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid $Indigo1;
+
+      .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+      }
+
+      .personalInfo {
+        margin-left: 10px;
+        flex: 1;
+
+        .name {
+          font-size: 16px;
+          color: $Indigo7;
+          line-height: 24px;
+        }
+
+        .payment {
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 18px;
+          color: $Yellow5;
+          text-transform: uppercase;
+        }
+      }
+
+      svg:last-child {
+        margin-left: 16px;
+      }
+    }
+  }
+}

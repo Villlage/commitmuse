@@ -1,58 +1,57 @@
-import React, {useState} from 'react'
-import './style.scss'
+import React, { useState } from 'react'
+import styles from './style.module.scss'
 import PageContent from 'app/modules/common/PageContent'
 import ImgCircle from 'app/components/ImgCircle'
 import Tabs from 'app/components/Tabs'
-import {useSelector} from "react-redux";
+import Card from 'app/modules/common/Card'
+import CoachClientsModule from 'app/modules/coach/CoachClients'
 
 const TAB_LABELS = {
   COACH_OVERVIEW: 'Coach overview',
-  CLIENTS: 'Clients'
-};
+  CLIENTS: 'Clients',
+}
 
 const Coach = () => {
-  const [activeTab, setActiveTab] = useState(TAB_LABELS.COACH_OVERVIEW);
+  const [activeTab, setActiveTab] = useState(TAB_LABELS.COACH_OVERVIEW)
 
   return (
-    <div className={'Coach-page'}>
+    <div className={styles['Coach-page']}>
       <PageContent title={'Coach'}>
-        <div className={'wrapper'}>
+        <Card>
           {/*HEADER*/}
-          <div className={'header'}>
+          <div className={styles.header}>
             <ImgCircle size={'small'} />
-            <div className={'name'}>Amy Owens</div>
+            <div className={styles.name}>Amy Owens</div>
           </div>
 
-          <Tabs
-            activeTab={activeTab}
-            tabs={Object.values(TAB_LABELS)}
-            onChange={(tab) => setActiveTab(tab)}
-          />
+          <Tabs activeTab={activeTab} tabs={Object.values(TAB_LABELS)} onChange={tab => setActiveTab(tab)} />
 
           {/*CONTENT*/}
-          <div className={'content'}>
-            {activeTab === TAB_LABELS.COACH_OVERVIEW ?
-              <div className={'rows'}>
-                <div className={'row'}>
-                  <span className={'title'}>Total Revenue</span>
-                  <div className={'value'}>
+          {activeTab === TAB_LABELS.COACH_OVERVIEW ? (
+            <div className={styles.coachOverviewContent}>
+              <div className={styles.rows}>
+                <div className={styles.row}>
+                  <span className={styles.title}>Total Revenue</span>
+                  <div className={styles.value}>
                     <span>5,000 USD</span>
                   </div>
                 </div>
 
-                <div className={'row'}>
-                  <div className={'title'}>Last Payment</div>
-                  <div className={'value'}>
+                <div className={styles.row}>
+                  <div className={styles.title}>Last Payment</div>
+                  <div className={styles.value}>
                     <span>5,000 USD</span>
                     <span>August 8th 2020</span>
                   </div>
                 </div>
-              </div> :
-
-              <h1>CLIENTS</h1>
-            }
-          </div>
-        </div>
+              </div>
+            </div>
+          ) : (
+            <div className={styles.coachClientsContent}>
+              <CoachClientsModule />
+            </div>
+          )}
+        </Card>
       </PageContent>
     </div>
   )
