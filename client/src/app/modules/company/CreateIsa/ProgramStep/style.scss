@@ -4,6 +4,7 @@
 .ProgramStep-module {
   background: white;
   padding: 24px 0 0;
+  border-radius: 0 0 10px 10px;
 
   h2 {
     font-size: 16px;
@@ -25,6 +26,7 @@
     padding: 18px 20px;
     display: flex;
     justify-content: flex-end;
+    border-radius: 0 0 10px 10px;
   }
 
   .Select-component {

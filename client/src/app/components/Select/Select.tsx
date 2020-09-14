@@ -3,6 +3,7 @@ import './style.scss'
 import { useState } from 'react'
 import { notEmptyArray, fixClass } from '../../../helpers/base'
 import Icon, { SystemIcons } from '../Icon'
+import TooltipBadge from '../TooltipBadge'
 
 interface SelectProps {
   value: string
@@ -11,6 +12,7 @@ interface SelectProps {
   placeholder: string
   label?: string
   error?: string
+  tooltip?: string
   disabled?: boolean
   icon?: SystemIcons
 }
@@ -19,17 +21,25 @@ export default function Select(props: SelectProps) {
   const [showOptions, setShowOptions] = useState(false)
   const isError = props.error && props.error.length > 0
   return (
-    <div className={`Select-component${fixClass(isError && 'has-error')}${fixClass(props.disabled && 'disabled')}`}>
+    <div
+      className={`Select-component${fixClass(isError && 'has-error')}${fixClass(
+        props.tooltip && 'has-tooltip',
+      )}${fixClass(props.disabled && 'disabled')}`}
+    >
       {props.label && <label>{props.label}</label>}
       <div
         onClick={() => !props.disabled && setShowOptions(!showOptions)}
         className={`placeholder ${!!props.value ? 'value' : ''}`}
       >
         {props.icon && <Icon className="selected-icon" icon={props.icon} />}
-
         <div className="select-container">
           <div className={`ripple${fixClass(!!props.value && 'focused')}`}>{props.placeholder}</div>
-          {props.value || props.placeholder}
+
+          {props.tooltip ? (
+            <TooltipBadge tooltip={props.tooltip} label={props.value || props.placeholder} />
+          ) : (
+            props.value || props.placeholder
+          )}
         </div>
         <Icon style={{ marginLeft: 8 }} className="caret_down" icon="select_down" />
         {showOptions && notEmptyArray(props.options) && (
