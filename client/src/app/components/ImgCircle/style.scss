@@ -1,0 +1,23 @@
+@import "src/styles/colors";
+
+.ImgCircle-component {
+  img {
+    &.small {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    &.large {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    &.hasBorder {
+      border: 1px solid $Indigo7;
+    }
+  }
+}

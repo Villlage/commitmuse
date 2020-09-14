@@ -12,12 +12,15 @@ import CompanyService from '../../../../../../services/company.service'
 import Message from '../../../../../components/Message'
 import { makeName, notEmptyArray, validateEmail } from '../../../../../../helpers/base'
 import { emailErrorMessage } from '../../../../../../constants/auth'
+import {useHistory} from "react-router";
 
 const companyService = new CompanyService()
 
 interface CompanyCoachesProps extends ScreenProps {}
 
 export default function CompanyCoaches(props: CompanyCoachesProps) {
+  const history = useHistory();
+
   const [loading, set_loading] = useState<boolean>(true)
   const [request_error, set_request_error] = useState<any>('')
   const [email_error, set_email_error] = useState<any>('')
@@ -90,7 +93,7 @@ export default function CompanyCoaches(props: CompanyCoachesProps) {
         <section className="coaches">
           {notEmptyArray(coaches) &&
             coaches.map((coach, i) => (
-              <div className="coach" key={i}>
+              <div className="coach" key={i} onClick={() => history.push(`/company/coaches/${coach.id}`)}>
                 <div>
                   <Icon icon="person" />
                   <h2>
