@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/web/static/css/main.0dbd408a.chunk.css",
-    "main.js": "/web/static/js/main.12e3c95c.chunk.js",
-    "main.js.map": "/web/static/js/main.12e3c95c.chunk.js.map",
-    "runtime-main.js": "/web/static/js/runtime-main.3ce4d6d5.js",
-    "runtime-main.js.map": "/web/static/js/runtime-main.3ce4d6d5.js.map",
-    "static/js/2.2ec771f8.chunk.js": "/web/static/js/2.2ec771f8.chunk.js",
-    "static/js/2.2ec771f8.chunk.js.map": "/web/static/js/2.2ec771f8.chunk.js.map",
+    "main.css": "/web/static/css/main.39de1315.chunk.css",
+    "main.js": "/web/static/js/main.7beed4fd.chunk.js",
+    "main.js.map": "/web/static/js/main.7beed4fd.chunk.js.map",
+    "runtime-main.js": "/web/static/js/runtime-main.f5548c72.js",
+    "runtime-main.js.map": "/web/static/js/runtime-main.f5548c72.js.map",
+    "static/js/2.8e7e1406.chunk.js": "/web/static/js/2.8e7e1406.chunk.js",
+    "static/js/2.8e7e1406.chunk.js.map": "/web/static/js/2.8e7e1406.chunk.js.map",
     "index.html": "/web/index.html",
-    "precache-manifest.eba4f30e8cdfa8c4ee5b7303c4454fcd.js": "/web/precache-manifest.eba4f30e8cdfa8c4ee5b7303c4454fcd.js",
+    "precache-manifest.926c34ee70a91ae12c890c3c60a09ed7.js": "/web/precache-manifest.926c34ee70a91ae12c890c3c60a09ed7.js",
     "service-worker.js": "/web/service-worker.js",
-    "static/css/main.0dbd408a.chunk.css.map": "/web/static/css/main.0dbd408a.chunk.css.map",
-    "static/js/2.2ec771f8.chunk.js.LICENSE.txt": "/web/static/js/2.2ec771f8.chunk.js.LICENSE.txt",
-    "static/media/account.svg": "/web/static/media/account.1f747636.svg",
-    "static/media/arrow-right.svg": "/web/static/media/arrow-right.594744e9.svg",
-    "static/media/file-contract.svg": "/web/static/media/file-contract.2393f368.svg"
+    "static/css/main.39de1315.chunk.css.map": "/web/static/css/main.39de1315.chunk.css.map",
+    "static/js/2.8e7e1406.chunk.js.LICENSE.txt": "/web/static/js/2.8e7e1406.chunk.js.LICENSE.txt",
+    "static/media/account.svg": "/web/static/media/account.45d28c39.svg",
+    "static/media/arrow-right.svg": "/web/static/media/arrow-right.33964afc.svg",
+    "static/media/file-contract.svg": "/web/static/media/file-contract.5feb3c94.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.3ce4d6d5.js",
-    "static/js/2.2ec771f8.chunk.js",
-    "static/css/main.0dbd408a.chunk.css",
-    "static/js/main.12e3c95c.chunk.js"
+    "static/js/runtime-main.f5548c72.js",
+    "static/js/2.8e7e1406.chunk.js",
+    "static/css/main.39de1315.chunk.css",
+    "static/js/main.7beed4fd.chunk.js"
   ]
 }

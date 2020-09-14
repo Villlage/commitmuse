@@ -2,14 +2,13 @@ import CompanyOnBoarding from '../app/pages/public/company/register'
 import CompanyDashboard from '../app/pages/public/company/dashboard'
 import CompanyCoaches from '../app/pages/public/company/dashboard/coaches'
 import CompanyIsas from '../app/pages/public/company/dashboard/my-isas'
-import CompanyCreateIsa from '../app/pages/public/company/dashboard/my-isas/create-isa'
+import CreateIsa from '../app/pages/public/company/dashboard/my-isas/create-isa'
 import CompanyIsaOverview from '../app/pages/public/company/dashboard/my-isas/isa-overview'
 import BillingAndSubs from '../app/pages/public/company/dashboard/billing-and-subs'
 import AdminUsers from '../app/pages/admin/Users'
 import AdminIsas from '../app/pages/admin/Isas'
 import AdminPlaid from '../app/pages/admin/Plaid'
 import MyIsa from '../app/pages/public/company/my-isa'
-import CreateIsa from '../app/pages/public/company/my-isa/create-isa'
 import IsaOverview from '../app/pages/public/company/my-isa/isa-overview'
 import Settings from '../app/pages/public/client/settings'
 import OnBoarding from '../app/pages/public/coach/on-boarding'
@@ -30,7 +29,7 @@ const APP_ROUTES: any = {
     { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true },
     { component: CompanyCoaches, path: '/company/coaches' },
     { component: CompanyIsas, path: '/company/isas', exact: true },
-    { component: CompanyCreateIsa, path: '/company/isas/create' },
+    { component: CreateIsa, path: '/company/isas/create' },
     { component: SignContract, path: '/company/isas/contract/:id' },
     { component: Subscription, path: '/company/subscription/:id' },
     { component: CompanyIsaOverview, path: '/company/isas/:id' },
@@ -38,10 +37,11 @@ const APP_ROUTES: any = {
     { component: MyAccount, path: '/company/settings/my-account' }
   ],
   coach: [
-    { component: CompanyOnBoarding, path: '/company/register' }, //temporary solution
-    { component: MyIsa, path: '/coach/my-isa' },
-    { component: CreateIsa, path: '/coach/isa/create' },
-    { component: IsaOverview, path: '/coach/isa/:id' },
+    { component: CoachClients, path: '/coach/clients' },
+    { component: SignContract, path: '/coach/isas/contract/:id' },
+    { component: CreateIsa, path: '/coach/isas/create' },
+    { component: IsaOverview, path: '/coach/isas/:id' },
+    { component: CompanyIsas, path: '/coach/isas', exact: true },
     { component: Settings, path: '/coach/settings' },
     { component: Subscription, path: '/coach/subscription/:id' },
     { component: CoachClients, path: '/coach/clients', defaultPage: true },

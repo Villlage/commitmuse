@@ -4,7 +4,7 @@ import Icon from '../Icon'
 
 interface TooltipBadgeProps {
   tooltip: string
-  label: string
+  label?: string
 }
 
 export default function TooltipBadge(props: TooltipBadgeProps) {
@@ -12,7 +12,7 @@ export default function TooltipBadge(props: TooltipBadgeProps) {
   const icon = show ? `/web/assets/icons/question-circle-active.svg` : `/web/assets/icons/question-circle.svg`
   return (
     <div className="TooltipBadge-component">
-      <label onClick={() => set_show(!show)}>{props.label}</label>
+      {props.label && <label onClick={() => set_show(!show)}>{props.label}</label>}
       <div onClick={() => set_show(!show)} className="question_circle">
         <img alt="circle" src={icon} />
         {show && (
