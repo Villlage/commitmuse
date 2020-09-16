@@ -5,6 +5,7 @@ import ImgCircle from 'app/components/ImgCircle'
 import Tabs from 'app/components/Tabs'
 import Card from 'app/modules/common/Card'
 import CoachClientsModule from 'app/modules/coach/CoachClients'
+import OptionsMenu from './OptionsMenu'
 
 const TAB_LABELS = {
   COACH_OVERVIEW: 'Coach overview',
@@ -20,8 +21,12 @@ const Coach = () => {
         <Card>
           {/*HEADER*/}
           <div className={styles.header}>
-            <ImgCircle size={'small'} />
+            <ImgCircle src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" size={'small'} />
             <div className={styles.name}>Amy Owens</div>
+          </div>
+
+          <div className={styles.optionsMenu}>
+            <OptionsMenu />
           </div>
 
           <Tabs activeTab={activeTab} tabs={Object.values(TAB_LABELS)} onChange={tab => setActiveTab(tab)} />

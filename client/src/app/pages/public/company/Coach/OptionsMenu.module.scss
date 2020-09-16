@@ -1,0 +1,98 @@
+@import 'src/styles/colors';
+
+.optionsMenuContainer {
+  border: none;
+  outline: none;
+  user-select: none;
+
+  .optionsMenu {
+    position: relative;
+
+    .optionsLabel {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+
+      transition: background-color 300ms ease-in-out;
+    }
+
+    &.active, &:hover {
+      .optionsLabel {
+        background-color: #E0E0E0;
+      }
+    }
+
+    .flyout {
+      position: absolute;
+      top: 46px;
+      left: 0;
+      width: 320px;
+      box-sizing: border-box;
+
+      border-radius: 7px;
+      border: 1px solid #ececec;
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+      background-color: #ffffff;
+      .more {
+        display: flex;
+        align-items: center;
+        padding: 23px 15px 22px;
+        border-bottom: 1px solid #E0E0E0;
+
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        span {
+          padding-left: 12px;
+        }
+      }
+      .content {
+        padding: 0 16px 8px;
+        .roleBlock {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #E0E0E0;
+
+          padding: 16px 0;
+          cursor: pointer;
+          .left {
+            .title {
+              font-size: 12px;
+              font-weight: 500;
+              color: $Indigo5;
+              text-transform: uppercase;
+            }
+            .value {
+              font-size: 14px;
+              margin-top: 8px;
+            }
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+        .deleteUser {
+          display: flex;
+          align-items: center;
+
+          padding: 26px 0;
+          font-size: 12px;
+          font-weight: 500;
+          color: $Indigo5;
+          text-transform: uppercase;
+          span {
+            padding-left: 8px;
+          }
+        }
+      }
+    }
+  }
+}

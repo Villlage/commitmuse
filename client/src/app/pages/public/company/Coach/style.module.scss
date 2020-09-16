@@ -1,11 +1,12 @@
 @import 'src/styles/colors';
 
 .Coach-page {
+  position: relative;
+
   //HEADER
   .header {
     display: flex;
     justify-content: center;
-
     margin-top: 14px;
     .name {
       font-size: 18px;
@@ -15,6 +16,12 @@
 
       margin-left: 9px;
     }
+  }
+
+  .optionsMenu {
+    position: absolute;
+    right: 17px;
+    top: 6px;
   }
 
   //COACH OVERVIEW CONTENT
