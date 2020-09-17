@@ -3,7 +3,7 @@ from typing import Tuple
 from werkzeug import Response
 from app import app
 from models.user import User
-from services.user_service import create_user, get_user, reset_password
+from services.user_service import create_user, get_user, reset_password, update_user
 from serializers.user_serializers import (
     login_schema,
     user_schema,
@@ -39,7 +39,7 @@ def user() -> Tuple[Response, int]:
 
     if request.method == "PATCH":
         schema = update_user_schema.load(request.json)
-        user = user.update_user(attributes=schema)
+        user = update_user(user=user, schema=schema)
 
     result = user_schema.dump(user)
 
@@ -76,7 +76,7 @@ def logout() -> Tuple[Response, int]:
     return jsonify("logged out user successfully"), 200
 
 
-@app.route("/users/reset-password", methods=["PATCH", "GET"])
+@app.route("/users/reset-password", methods=["PATCH"])
 def reset_user_password() -> Tuple[Response, int]:
     schema = reset_password_schema.load(request.json)
     user = reset_password(token=schema["token"], password=schema["password"])
