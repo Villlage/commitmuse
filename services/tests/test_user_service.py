@@ -7,7 +7,7 @@ from common.exceptions import (
     AuthenticationError,
 )
 from tests.factories import faker, UserFactory
-from services.user_service import create_user, get_user, get_user_by_email
+from services.user_service import create_user, get_user, get_user_by_email, update_user
 
 
 class TestCreateUser:
@@ -26,6 +26,16 @@ class TestCreateUser:
         UserFactory.create(email=email)
         with pytest.raises(ResourceConflictError):
             create_user(schema=payload)
+
+
+class TestCreateUser:
+    def test_update_user(self) -> None:
+        user = UserFactory.create()
+        new_password = "new_password"
+        first_name = "someone"
+        user = update_user(user, dict(password=new_password, first_name=first_name))
+        assert check_password_hash(user.password, new_password)
+        assert user.first_name == first_name
 
 
 class TestGetUser:
