@@ -6,6 +6,7 @@ import Tabs from 'app/components/Tabs'
 import Card from 'app/modules/common/Card'
 import CoachClientsModule from 'app/modules/coach/CoachClients'
 import OptionsMenu from './OptionsMenu'
+import BarChart from 'app/modules/common/BarChart'
 
 const TAB_LABELS = {
   COACH_OVERVIEW: 'Coach overview',
@@ -49,6 +50,10 @@ const Coach = () => {
                     <span>August 8th 2020</span>
                   </div>
                 </div>
+              </div>
+
+              <div className={styles.chart}>
+                <BarChart />
               </div>
             </div>
           ) : (

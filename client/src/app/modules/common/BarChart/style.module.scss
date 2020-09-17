@@ -1,0 +1,14 @@
+@import 'src/styles/colors';
+
+svg.barChart {
+  text {
+    font-size: 11px;
+    fill: #C0C7CE;
+  }
+  text.value {
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: capitalize;
+    fill: #263238;
+  }
+}
