@@ -1,5 +1,4 @@
-@import '../../../../styles/mixins';
-@import '../../../../styles/colors';
+@import 'src/styles/colors';
 
 .PageContent-module {
   > .content {
@@ -10,9 +9,26 @@
     flex-direction: column;
 
     .page-title {
+      width: 512px;
+      position: relative;
+
       font-size: 22px;
+      font-weight: 500;
       color: white;
       margin-bottom: 18px;
+      text-align: center;
+      .page-under-title {
+        font-size: 12px;
+        font-weight: 500;
+        color: white;
+      }
+
+      svg {
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        cursor: pointer;
+      }
     }
   }
 }
