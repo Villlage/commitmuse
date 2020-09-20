@@ -49,7 +49,7 @@ export default function Button(props: ButtonProps) {
       color={['MainLight', 'MainWhite'].includes(props.background || '') ? SYSTEM_COLORS.Title : props.color}
     >
       {props.loading ? (
-        <Loader />
+        <LoadingRing />
       ) : (
         <>
           {props.children} {props.icon && <Icon icon={props.icon} style={{ marginLeft: 6 }} />}
@@ -59,7 +59,7 @@ export default function Button(props: ButtonProps) {
   )
 }
 
-const Loader = () => {
+const LoadingRing = () => {
   return (
     <div className="lds-ring">
       <div />
