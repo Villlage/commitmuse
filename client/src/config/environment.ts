@@ -4,7 +4,7 @@ export type ENVs = 'staging' | 'production' | 'dev'
 
 const ENV = {
   dev: {
-    MAIN_API: 'https://staging.commitmuse.com/',
+    MAIN_API: 'http://localhost:5000/',
     PLAID_PUBLIC_KEY: 'a004a070f0629da694fbae916414f3',
     PLAID_ENV: 'sandbox',
   },
