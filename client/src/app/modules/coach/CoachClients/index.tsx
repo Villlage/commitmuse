@@ -1,15 +1,25 @@
 import React from 'react'
 import styles from './style.module.scss'
+import { useHistory } from 'react-router'
 import { IconsSvg } from 'icons'
 import ProgressCircle from 'app/components/ProgressCircle'
-import { useHistory } from 'react-router'
+import ImgCircle from 'app/components/ImgCircle'
 
-const CoachClientsModule = () => {
+interface CoachClientsModuleProps {
+  coachId?: number
+  clients?: Array<any>
+}
+
+const CoachClientsModule = ({ coachId, clients }: CoachClientsModuleProps) => {
   const history = useHistory()
 
   const UserIcon = IconsSvg.Account
   const FileIcon = IconsSvg.FileContract
   const ArrowRightIcon = IconsSvg.ArrowRight
+
+  if (!clients) {
+    return null
+  }
 
   return (
     <div className={styles['CoachClients-module']}>
@@ -37,25 +47,21 @@ const CoachClientsModule = () => {
 
       {/*CONTENT*/}
       <div className={styles.content}>
-        <div className={styles.row} onClick={() => history.push(`/company/coaches/25/clients/1`)}>
-          <img src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" className={styles.avatar} />
-          <div className={styles.personalInfo}>
-            <div className={styles.name}>Jonah Serna</div>
-            <div className={styles.payment}>Paying - 5K of 20K </div>
+        {clients.map((client, index) => (
+          <div
+            className={styles.row}
+            key={`coachClient-${index}`}
+            onClick={() => history.push(`/company/coaches/${coachId}/clients/${client.id}`)}
+          >
+            <ImgCircle size={'large'} />
+            <div className={styles.personalInfo}>
+              <div className={styles.name}>{client.first_name}</div>
+              <div className={styles.payment}>Paying - 5K of 20K </div>
+            </div>
+            <ProgressCircle progress={50} />
+            <ArrowRightIcon />
           </div>
-          <ProgressCircle progress={50} />
-          <ArrowRightIcon />
-        </div>
-
-        <div className={styles.row}>
-          <img src="http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png" className={styles.avatar} />
-          <div className={styles.personalInfo}>
-            <div className={styles.name}>Jonah Serna</div>
-            <div className={styles.payment}>Paying - 5K of 20K </div>
-          </div>
-          <ProgressCircle progress={25} />
-          <ArrowRightIcon />
-        </div>
+        ))}
       </div>
     </div>
   )

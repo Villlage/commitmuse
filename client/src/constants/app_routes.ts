@@ -41,7 +41,6 @@ const APP_ROUTES: any = {
     { component: MyAccount, path: '/company/settings/my-account' }
   ],
   coach: [
-    { component: CoachClients, path: '/coach/clients' },
     { component: SignContract, path: '/coach/isas/contract/:id' },
     { component: CreateIsa, path: '/coach/isas/create' },
     { component: IsaOverview, path: '/coach/isas/:id' },

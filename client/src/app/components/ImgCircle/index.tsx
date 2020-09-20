@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.scss'
 import classNames from 'classnames'
-import Avatar from 'icons/person.svg';
+import Avatar from 'icons/person.svg'
 
 interface ImgCircleProps {
   src?: string
@@ -13,16 +13,13 @@ const ImgCircle = (props: ImgCircleProps) => {
 
   return (
     <div className={'ImgCircle-component'}>
-      <img
-        src={src || Avatar}
-        className={classNames(size, {['hasBorder']: !src})}
-      />
+      <img src={src || Avatar} className={classNames(size, { ['hasBorder']: !src })} />
     </div>
   )
 }
 
 ImgCircle.defaultProps = {
-  size: 'large'
+  size: 'large',
 }
 
 export default ImgCircle

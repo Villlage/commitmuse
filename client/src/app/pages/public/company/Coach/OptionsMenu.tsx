@@ -5,8 +5,14 @@ import { ReactComponent as ArrowRight } from 'icons/arrow-right.svg'
 import { ReactComponent as ArrowLeft } from 'icons/arrow-left.svg'
 import { ReactComponent as Trash } from 'icons/trash.svg'
 import { ReactComponent as CheckMark } from 'icons/check-mark.svg'
+import { USER_TYPES } from 'constants/userTypes'
+import { Coach } from 'interfaces/baseIntefaces'
 
-const OptionsMenu = () => {
+interface OptionsMenuProps {
+  user: Coach
+}
+
+const OptionsMenu = ({ user }: OptionsMenuProps) => {
   const [flyoutIsOpen, setFlyOutIsOpen] = useState(false)
   const [roleClicked, setRoleClicked] = useState(false)
 
@@ -48,15 +54,11 @@ const OptionsMenu = () => {
                 <div className={styles.content}>
                   <div className={styles.roleBlock}>
                     <div className={styles.left}>
-                      <div className={styles.value}>Administrator</div>
+                      <div className={styles.value}>
+                        {(user && user.user_type) ? USER_TYPES[user.user_type] : ''}
+                      </div>
                     </div>
                     <CheckMark />
-                  </div>
-
-                  <div className={styles.roleBlock}>
-                    <div className={styles.left}>
-                      <div className={styles.value}>Administrator</div>
-                    </div>
                   </div>
                 </div>
               </>
@@ -67,7 +69,7 @@ const OptionsMenu = () => {
                   <div className={styles.roleBlock} onClick={() => setRoleClicked(true)}>
                     <div className={styles.left}>
                       <div className={styles.title}>Role</div>
-                      <div className={styles.value}>Administrator</div>
+                      <div className={styles.value}>{(user && user.user_type) ? USER_TYPES[user.user_type] : ''}</div>
                     </div>
                     <ArrowRight />
                   </div>
