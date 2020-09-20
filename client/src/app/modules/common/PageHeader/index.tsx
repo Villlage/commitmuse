@@ -53,9 +53,6 @@ export default function PageHeader(props: PageHeaderProps) {
             {props.user ? (
               <>
                 <Icon icon="bell" className="notification" />
-                <Link to="/settings">
-                  <Icon icon="gear" /> Settings
-                </Link>
                 <div className="auth-menu" onClick={() => set_show_menu(!show_menu)}>
                   {props.user.profile_picture_link && props.user.profile_picture_link.length > 6 ? (
                     <img src={props.user.profile_picture_link} className="profile_pic" alt="profile_pic" />
