@@ -4,7 +4,7 @@ import { ScreenProps } from '../../../../../interfaces/baseIntefaces'
 import PageContent from '../../../../modules/common/PageContent'
 import Input from '../../../../components/Input'
 import Icon from '../../../../components/Icon'
-import { validateEmail } from '../../../../../helpers/base'
+import { isMobile, validateEmail } from '../../../../../helpers/base'
 import { log } from '../../../../../services/logging.service'
 import AuthService from '../../../../../services/auth.service'
 import { emailErrorMessage, passwordLength } from '../../../../../constants/auth'
@@ -95,7 +95,7 @@ export default function SignIn(props: ScreenProps) {
           </div>
           <footer className="full">
             <p>
-              Don't have an account? <Link to="/register">Sign Up</Link>
+              Don't have an account? {isMobile && <br/>}<Link to="/register">Sign Up</Link>
             </p>
 
             <Button disabled={notValid()} onClick={onSubmit} loading={loading}>

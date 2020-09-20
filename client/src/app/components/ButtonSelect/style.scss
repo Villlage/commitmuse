@@ -32,4 +32,10 @@
       border-radius: 0px 5px 5px 0px;
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .option {
+      font-size: 12px;
+    }
+  }
 }

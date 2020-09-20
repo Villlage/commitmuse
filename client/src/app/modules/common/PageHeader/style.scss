@@ -27,7 +27,7 @@
     justify-content: space-between;
     padding: 0 80px 0 110px;
 
-    .switch {
+    .admin-link {
       color: $MainSuccess;
       font-weight: bold;
 
@@ -121,7 +121,15 @@
     nav {
       display: flex;
       justify-content: space-between;
-      padding: 0 20px;
+      padding: 0 10px;
+
+      .logo img {
+        height: 50px;
+      }
+
+      .admin-link {
+        display: none;
+      }
 
       .navigation a {
         border: 0 !important;
@@ -137,6 +145,31 @@
         display: flex;
         flex-direction: initial;
         justify-content: center;
+
+        > img {
+          height: 14px;
+        }
+
+        .auth-menu {
+          margin-left: 15px;
+
+          .initials {
+            height: 24px;
+            width: 24px;
+
+            h2 {
+              font-size: 12px;
+            }
+          }
+
+          .hidden-menu {
+            right: 0px;
+
+            button {
+              height: 24px;
+            }
+          }
+        }
       }
     }
   }
