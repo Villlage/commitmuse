@@ -144,6 +144,8 @@ class AdminUserSchema(ma.ModelSchema):  # type: ignore
         model = User
         exclude = ("password",)
 
+    user_type = fields.Function(lambda user: user.user_type())
+
 
 login_schema = LoginSchema()
 user_schema = UserSchema()

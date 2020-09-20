@@ -1,0 +1,10 @@
+.InputRow-module {
+  display: grid;
+  grid: 1fr / 1fr 50px;
+  background: #f2f5f9;
+  border-radius: 4px;
+
+  button {
+    height: 100%;
+  }
+}
