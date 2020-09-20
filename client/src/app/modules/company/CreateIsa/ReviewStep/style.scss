@@ -50,6 +50,15 @@
     grid-row-gap: 16px;
     margin-bottom: 32px;
 
+    .pricing {
+      font-family: Heebo, sans-serif;
+      font-style: normal;
+      font-size: 14px;
+      color: $Indigo5;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
     h2,
     > .TooltipBadge-component {
       margin-bottom: -10px;
