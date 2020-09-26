@@ -1,11 +1,18 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
 .AdminUserBox-module {
-  box-shadow: 0 0 2px 1px #0000002b;
+  box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 3px;
+  background: white;
 
   header {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     padding: 0 10px;
+    border-bottom: 1px inset #0000001f;
 
     img {
       height: 60px;
@@ -25,8 +32,49 @@
   }
 
   .body {
+    .Field-component {
+      background: transparent;
+      border-bottom: 1px dashed $Gray2;
+      border-radius: 0;
+    }
   }
 
   footer {
+  }
+
+  &.admin {
+    background: $Green5;
+
+    * {
+      color: white;
+    }
+
+    label {
+      color: $Gray3;
+    }
+  }
+
+  &.coach {
+    background: $Indigo5;
+
+    *:not(button) {
+      color: white;
+    }
+
+    label {
+      color: black;
+    }
+  }
+
+  &.company_admin {
+    background: $Green4;
+
+    *:not(button) {
+      color: white;
+    }
+
+    label {
+      color: black;
+    }
   }
 }
