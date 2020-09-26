@@ -20,6 +20,7 @@ class UpdateUserSchema(Schema):  # type: ignore
     first_name = fields.Str(required=False)
     last_name = fields.Str(required=False)
     is_active = fields.Boolean(required=False)
+    password = fields.Str(required=False)
 
 
 class ClientSchema(Schema):  # type: ignore
@@ -142,6 +143,8 @@ class AdminUserSchema(ma.ModelSchema):  # type: ignore
     class Meta:
         model = User
         exclude = ("password",)
+
+    user_type = fields.Function(lambda user: user.user_type())
 
 
 login_schema = LoginSchema()

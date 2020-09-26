@@ -41,4 +41,26 @@
       padding: 20px 60px;
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      color: white;
+
+      h2 {
+        margin-bottom: 16px;
+      }
+
+      .on_boarding-form {
+        width: calc(100% - 20px);
+
+        .fields {
+          grid-gap: 10px;
+
+          .zip-code {
+            grid-gap: 10px;
+          }
+        }
+      }
+    }
+  }
 }

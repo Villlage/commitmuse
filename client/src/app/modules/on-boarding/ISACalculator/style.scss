@@ -233,4 +233,8 @@
   .Message-component {
     opacity: 0.8;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: calc(100% - 20px);
+  }
 }

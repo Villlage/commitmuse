@@ -98,5 +98,18 @@
         border-color: transparent transparent transparent #0967d2;
       }
     }
+
+    &:first-child {
+      &.selected:before {
+        border-color: transparent transparent transparent transparent;
+      }
+    }
+
+    &:last-child {
+      &.selected:after {
+        border-width: 0;
+        border-color: transparent transparent transparent transparent;
+      }
+    }
   }
 }

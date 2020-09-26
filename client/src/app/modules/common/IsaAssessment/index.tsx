@@ -10,7 +10,7 @@ interface IsaAssessmentProps {
 export default function IsaAssessment(props: IsaAssessmentProps) {
   return (
     <div className={`IsaAssessment-module${fixClass(props.className)}`}>
-      <TooltipBadge label="Isa assessment" tooltip="good" />
+      <label>Isa assessment</label>
       <p>This ISA looks good!</p>
     </div>
   )

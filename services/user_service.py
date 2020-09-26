@@ -29,6 +29,13 @@ def create_user(schema: Dict[Any, Any]) -> User:
     return user
 
 
+def update_user(user: User, schema: Dict[Any, Any]) -> User:
+    if schema.get("password"):
+        schema["password"] = generate_password_hash(schema["password"])
+
+    return user.update_user(attributes=schema)
+
+
 def get_user(email: str, password: str) -> Optional[User]:
     user = get_user_by_email(email=email)
 

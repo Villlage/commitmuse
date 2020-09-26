@@ -9,34 +9,45 @@ interface PageContentProps {
   allowStepBack?: boolean
   underTitle?: string | React.ReactElement
   error?: MessageType | string
+  loading?: boolean
   onStepBack?: Function
 }
 
 export default function PageContent(props: PageContentProps) {
-  const { title, underTitle, allowStepBack, error, children, onStepBack } = props
-
   return (
-    <section className={'PageContent-module'}>
-      <section className={'content'}>
-        {title && (
-          <div className={'page-title'}>
-            {title}
-            {underTitle && <div className={'page-under-title'}>{underTitle}</div>}
+    <section className="PageContent-module">
+      <section className="content">
+        {props.title && (
+          <div className="page-title">
+            {props.title}
+            {props.underTitle && <div className="page-under-title">{props.underTitle}</div>}
 
-            {allowStepBack && (
+            {props.allowStepBack && (
               <ArrowLeft
                 onClick={() => {
-                  if (onStepBack) {
-                    onStepBack()
+                  if (props.onStepBack) {
+                    props.onStepBack()
                   }
                 }}
               />
             )}
           </div>
         )}
-        {children}
+        {props.loading ? <Loader loading={true} /> : props.children}
       </section>
-      <Message message={error || ''} />
+      <Message message={props.error || ''} />
     </section>
+  )
+}
+
+interface LoaderProps {
+  loading: boolean
+}
+
+function Loader(props: LoaderProps) {
+  return (
+    <div className="Loader-indicator">
+      <div className="loading-line" />
+    </div>
   )
 }
