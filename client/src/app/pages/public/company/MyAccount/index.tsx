@@ -20,12 +20,12 @@ const TABS = {
 }
 
 const MyAccount = (props: ScreenProps) => {
-  const [firstName, setFirstName] = useState()
-  const [lastName, setLastName] = useState()
-  const [email, setEmail] = useState()
-  const [oldPassword, setOldPassword] = useState()
-  const [newPassword, setNewPassword] = useState()
-  const [confirmedPassword, setConfirmedPassword] = useState()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [oldPassword, setOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+  const [confirmedPassword, setConfirmedPassword] = useState('')
   const [showChangePassword, setShowChangePassword] = useState(false)
 
   const [buttonLoading, setButtonLoading] = useState(false)

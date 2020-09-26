@@ -2,7 +2,6 @@ import './style.scss'
 import React, { useState } from 'react'
 import Input from '../../../../components/Input'
 import Button from '../../../../components/Button'
-import TooltipBadge from '../../../../components/TooltipBadge'
 import { intOrFloat, isNumber } from '../../../../../helpers/base'
 import IsaAssessment from '../../../common/IsaAssessment'
 import Field from '../../../../components/Field'
@@ -43,13 +42,32 @@ export default function ReviewStep(props: ReviewStepProps) {
       </header>
       <section className="program-info">
         <h2>Program Information</h2>
-        <Field title="Job Field">{props.program.field}</Field>
-        <Input disabled onChange={e => null} placeholder="Duration" value={props.program.duration} postFix="Weeks" />
-        <Field title="description">{props.program.description}</Field>
+        <Input
+          disabled
+          onChange={() => null}
+          placeholder="Job Field"
+          value={props.program.field}
+          tooltip="This is the field the client will enter post- graduation"
+        />
+        <Input
+          disabled
+          onChange={() => null}
+          placeholder="Duration"
+          value={props.program.duration}
+          postFix="Weeks"
+          tooltip="This is how long the program is"
+        />
+        <Input
+          disabled
+          placeholder="Description"
+          onChange={() => null}
+          value={props.program.description}
+          tooltip="This is the client’s objective upon graduating from <programName>"
+        />
       </section>
       <section className="offer-details">
         <h2>Offer Details</h2>
-        <TooltipBadge label="Pricing" tooltip="help text" />
+        <label className="pricing">Pricing</label>
         <ButtonSelect options={pricing} selected={props.offer.type} onSelect={() => null} />
         <Input
           postFix="$"
@@ -84,14 +102,14 @@ export default function ReviewStep(props: ReviewStepProps) {
           onChange={e => isNumber(e) && props.onChange(e, 'cancellation_period')}
           placeholder="Cancellation Period"
           value={props.total_income.cancellation_period}
-          tooltip="The period indicates how many weeks the client has to decide whether or not they want to cancel their ISA."
+          tooltip="The period indicates how many weeks the client has to decide whether or not they want to cancel their ISA. If you don’t want to have a cancellation period - leave it blank."
         />
         <Input
           postFix="Month(s)"
           onChange={e => isNumber(e) && props.onChange(e, 'expiration_period_months')}
           placeholder="Expiration Period"
           value={props.total_income.expiration_period_months}
-          tooltip="This period indicates how long the client has, post graduation, to secure a higher income before the ISA expires."
+          tooltip="This period indicates how long the client has, post graduation, to secure a higher income before the ISA expires. If you don’t want to have an expiration period - leave it blank "
         />
         {!notValid() && <IsaAssessment />}
       </section>
