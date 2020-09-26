@@ -82,4 +82,24 @@
       }
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      padding: 0 12px 0;
+
+      .form .fields {
+        grid-gap: 10px;
+      }
+
+      .ButtonSelect-component .option {
+        font-size: 13px;
+      }
+
+      .form footer {
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }

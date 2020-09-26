@@ -110,4 +110,23 @@
       }
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      grid-template-columns: 1fr;
+      justify-items: center;
+
+      .form_wrapper {
+        width: calc(100% - 20px);
+
+        footer {
+          .fields {
+            margin-bottom: 12px;
+            grid-template-columns: 1fr;
+            grid-gap: 10px;
+          }
+        }
+      }
+    }
+  }
 }

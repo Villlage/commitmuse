@@ -155,4 +155,39 @@
       }
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      > header {
+        width: 100%;
+
+        button {
+          height: 24px;
+          @include heebo-normal($size: 10);
+          right: 6px;
+
+          img {
+            height: 10px;
+          }
+        }
+      }
+
+      .coaches {
+        width: calc(100% - 40px);
+      }
+
+      .new-coach {
+        width: 100%;
+
+        header {
+          grid-gap: 10px;
+          padding: 12px;
+
+          .half {
+            grid-gap: 10px;
+          }
+        }
+      }
+    }
+  }
 }
