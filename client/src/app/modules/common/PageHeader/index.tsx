@@ -7,6 +7,7 @@ import Button from '../../../components/Button'
 import { useState } from 'react'
 import AuthService from '../../../../services/auth.service'
 import { log } from '../../../../services/logging.service'
+import { isMobile } from '../../../../helpers/base'
 
 const authService = new AuthService()
 
@@ -45,7 +46,7 @@ export default function PageHeader(props: PageHeaderProps) {
             <img src="/web/assets/images/logo.png" alt="logo" />
           </div>
           {props.user && props.user.user_role === 1 && (
-            <Link className="switch" to={'/admin/users'}>
+            <Link className="admin-link" to={'/admin/users'}>
               Admin portal
             </Link>
           )}

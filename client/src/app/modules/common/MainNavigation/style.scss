@@ -99,4 +99,58 @@
       }
     }
   }
+
+  &.mobile {
+    height: initial;
+    width: initial;
+    background: transparent;
+    top: 50px;
+    position: absolute;
+    box-shadow: none;
+
+    .mobile_menu-btn {
+      background: transparent;
+      @include heebo-normal();
+      font-size: 16px;
+      font-weight: 400;
+      opacity: 0.8;
+      padding: 0 6px;
+
+      img {
+        margin-right: 6px;
+      }
+    }
+
+    .mobile-menu {
+      background: $BlackIndigo;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      overflow-y: auto;
+
+      .menuItems {
+        .header {
+          display: block;
+        }
+
+        .menuItem {
+          width: 100%;
+          height: 36px;
+          justify-content: initial;
+
+          > div {
+            margin-right: 8px;
+          }
+
+          &.active {
+            background: $Indigo4;
+          }
+
+          p {
+            display: block;
+          }
+        }
+      }
+    }
+  }
 }

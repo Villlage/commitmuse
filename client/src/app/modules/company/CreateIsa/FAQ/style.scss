@@ -12,4 +12,8 @@
     @include heebo-bold($size: 16);
     color: #212121;
   }
+
+  @media only screen and (max-width: 600px) {
+    width: calc(100% - 20px);
+  }
 }

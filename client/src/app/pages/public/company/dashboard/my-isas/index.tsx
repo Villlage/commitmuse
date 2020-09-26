@@ -46,11 +46,9 @@ export default function CompanyIsas(props: CompanyIsasProps) {
     getIsas()
   }, [])
 
-  return loading ? (
-    <Loader />
-  ) : (
+  return  (
     <article className="CompanyIsas-page">
-      <PageContent error={request_error}>
+      <PageContent error={request_error} loading={loading}>
         <header className="page-header">
           <h1 className="page-title">My ISA’s</h1>
           {notEmptyArray(isas) && (

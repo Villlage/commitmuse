@@ -14,5 +14,42 @@
       color: white;
       margin-bottom: 18px;
     }
+
+    .Loader-indicator {
+      height: 6px;
+      position: absolute;
+      top: 100px;
+      width: 100%;
+      background: $BlackIndigo;
+
+      .loading-line {
+        height: 100%;
+        background: $Yellow3;
+        width: 0%;
+        animation-duration: 2s;
+        animation-name: width_anim;
+        animation-iteration-count: infinite;
+        animation-direction: normal;
+      }
+
+      @keyframes width_anim {
+        from {
+          width: 0%;
+        }
+
+        to {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    > .content {
+      .page-title {
+        font-size: 16px;
+        margin-bottom: 18px;
+      }
+    }
   }
 }

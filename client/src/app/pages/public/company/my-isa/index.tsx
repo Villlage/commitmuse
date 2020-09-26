@@ -47,56 +47,52 @@ export default function MyIsa(props: MyIsa) {
 
   return (
     <article className="MyIsa-page">
-      {loading ? (
-        <Loader />
-      ) : (
-        <PageContent>
-          <header className="page-header">
-            <h1 className="page-title">My ISA’s</h1>
-            {notEmptyArray(isas) && (
-              <Select
-                value={filter}
-                options={['View all', 'active', 'paying', 'completed']}
-                onChange={e => set_filter(e)}
-                placeholder={'View all'}
-              />
-            )}
-          </header>
-          {notEmptyArray(isas) ? (
-            <section className="my_isa">
-              {isas
-                .filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter))
-                .map((isa: any, index: number) => (
-                  <IsaStatus
-                    onClick={() => props.history.push('/isa/' + isa.id)}
-                    key={index}
-                    name={isa.student.first_name + ' ' + isa.student.last_name}
-                    status={isa.status}
-                  />
-                ))}
-              <Link to="isa/create" className="new_isa">
-                <Icon icon="new_isa_plus" />
-                NEW ISA
-              </Link>
-            </section>
-          ) : (
-            <section className="empty-isa">
-              <div className="icon">
-                <Icon icon="empty_isa" />
-              </div>
-              <h2>You have no ISA offers.</h2>
-              <div className="text_with_icon">
-                <p>Start by creating a new one.</p>
-                <Icon icon="arrow_to_button" />
-              </div>
-              <Link to="isa/create" className="new_isa">
-                <Icon icon="new_isa_plus" />
-                NEW ISA
-              </Link>
-            </section>
+      <PageContent loading={loading}>
+        <header className="page-header">
+          <h1 className="page-title">My ISA’s</h1>
+          {notEmptyArray(isas) && (
+            <Select
+              value={filter}
+              options={['View all', 'active', 'paying', 'completed']}
+              onChange={e => set_filter(e)}
+              placeholder={'View all'}
+            />
           )}
-        </PageContent>
-      )}
+        </header>
+        {notEmptyArray(isas) ? (
+          <section className="my_isa">
+            {isas
+              .filter((i: any) => i.status.includes(filter === 'View all' ? '' : filter))
+              .map((isa: any, index: number) => (
+                <IsaStatus
+                  onClick={() => props.history.push('/isa/' + isa.id)}
+                  key={index}
+                  name={isa.student.first_name + ' ' + isa.student.last_name}
+                  status={isa.status}
+                />
+              ))}
+            <Link to="isa/create" className="new_isa">
+              <Icon icon="new_isa_plus" />
+              NEW ISA
+            </Link>
+          </section>
+        ) : (
+          <section className="empty-isa">
+            <div className="icon">
+              <Icon icon="empty_isa" />
+            </div>
+            <h2>You have no ISA offers.</h2>
+            <div className="text_with_icon">
+              <p>Start by creating a new one.</p>
+              <Icon icon="arrow_to_button" />
+            </div>
+            <Link to="isa/create" className="new_isa">
+              <Icon icon="new_isa_plus" />
+              NEW ISA
+            </Link>
+          </section>
+        )}
+      </PageContent>
       <Message message={request_error} />
     </article>
   )
