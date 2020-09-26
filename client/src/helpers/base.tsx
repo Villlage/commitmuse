@@ -58,6 +58,9 @@ export const capitalize = (str: string) =>
 // helper to check if MacOs is used by current user
 export const isMac: boolean = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
 
+// helper to check if MacOs is used by current user
+export const isMobile = window.innerWidth <= 800
+
 // helper to use debounce from lodash
 export const withDebounce = (func: any, delay: number) => _.debounce(func, delay)
 

@@ -1,0 +1,26 @@
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/colors';
+
+.EditUser-sidebar {
+  .slide-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+
+    h2 {
+      margin-bottom: 16px;
+
+      span {
+        color: $Gray4;
+      }
+    }
+
+    .form {
+      display: grid;
+      grid: auto auto / 1fr 1fr;
+      grid-gap: 12px;
+      align-items: center;
+    }
+  }
+}

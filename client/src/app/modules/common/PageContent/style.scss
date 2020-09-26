@@ -43,4 +43,13 @@
       }
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    > .content {
+      .page-title {
+        font-size: 16px;
+        margin-bottom: 18px;
+      }
+    }
+  }
 }
