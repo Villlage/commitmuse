@@ -1,9 +1,20 @@
+@import 'src/styles/colors';
+
 .IsaAssessment-module {
   background: #effcf6;
   border: 2px solid #3ebd93;
   box-sizing: border-box;
   border-radius: 5px;
   padding: 12px 20px;
+
+  label {
+    font-family: Heebo, sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    color: $Indigo5;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
 
   p {
     font-weight: bold;

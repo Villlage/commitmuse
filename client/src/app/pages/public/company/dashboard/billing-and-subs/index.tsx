@@ -115,11 +115,9 @@ export default function BillingAndSubs(props: BillingAndSubsProps) {
     companyId ? getMask() : set_loading(false)
   }, [])
 
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <article className="BillingAndSubs-page">
-      <PageContent title="Billing and Subscription">
+      <PageContent title="Billing and Subscription" loading={loading}>
         <section className="billing-info">
           <header>
             <Tabs

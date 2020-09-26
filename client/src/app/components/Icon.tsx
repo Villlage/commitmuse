@@ -72,6 +72,7 @@ export const icons: any = {
   'user-circle': generateIconLink('user-circle'),
   'arrow-left': generateIconLink('arrow-left'),
   emy_owens: generateIconLink('emy_owens'),
+  menu_line: generateIconLink('menu-line'),
 }
 
 export type SystemIcons =
@@ -141,6 +142,7 @@ export type SystemIcons =
   | 'user-circle'
   | 'arrow-left'
   | 'emy_owens'
+  | 'menu_line'
 
 interface IconProps {
   icon: SystemIcons

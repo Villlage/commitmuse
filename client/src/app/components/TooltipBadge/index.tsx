@@ -11,7 +11,7 @@ export default function TooltipBadge(props: TooltipBadgeProps) {
   const [show, set_show] = useState(false)
   const icon = show ? `/web/assets/icons/question-circle-active.svg` : `/web/assets/icons/question-circle.svg`
   return (
-    <div className="TooltipBadge-component">
+    <div className="TooltipBadge-component" onMouseEnter={() => set_show(true)} onMouseLeave={() => set_show(false)}>
       {props.label && <label onClick={() => set_show(!show)}>{props.label}</label>}
       <div onClick={() => set_show(!show)} className="question_circle">
         <img alt="circle" src={icon} />

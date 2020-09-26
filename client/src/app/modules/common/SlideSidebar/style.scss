@@ -1,0 +1,41 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
+.SlideSidebar-module {
+  opacity: 0;
+  transition: all 100ms;
+
+  .slide-content {
+    z-index: 2;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    transition: 0.3s ease-out 0s;
+    will-change: transform;
+    overflow-y: auto;
+    right: 0px;
+    box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 4px;
+    height: 100vh;
+    background: white;
+    overflow-x: hidden;
+    width: 0;
+    @include custom-scroll;
+  }
+
+  &.open {
+    opacity: 1;
+
+    .slide-overlay {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: #0000004d;
+    }
+
+    .slide-content {
+      width: 700px;
+    }
+  }
+}
