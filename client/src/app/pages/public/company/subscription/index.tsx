@@ -73,11 +73,9 @@ export default function Subscription(props: SubscriptionProps) {
     companyId && getMask()
   }, [])
 
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <article className="Subscription-page">
-      <PageContent title="Subscription">
+      <PageContent title="Subscription" loading={loading}>
         {mask !== null ? (
           <section className="subscription-offer">
             <h2>Early adopter Discount offer:</h2>

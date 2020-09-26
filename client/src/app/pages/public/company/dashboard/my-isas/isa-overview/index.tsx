@@ -51,71 +51,61 @@ export default function CompanyIsaOverview(props: IsaOverviewProps) {
 
   return (
     <article className="CompanyIsaOverview-page">
-      {loading ? (
-        <Loader />
-      ) : (
-        isa && (
-          <PageContent>
-            <h1 className="page-title">{makeName(isa.student)}</h1>
-            <section className="form">
-              <Tabs tabs={['overview', 'isa offer']} onChange={tab => set_active_tab(tab)} activeTab={active_tab} />
-              {active_tab === 'overview' ? (
-                <div className="overview">
-                  <div>
-                    <label>Total Paid</label>
-                    <p>
-                      0 USD
-                      <span>of {isa.cap} USD</span>
-                    </p>
-                  </div>
-                  <div>
-                    <label>Last Payment</label>
-                    <p>
-                      {/*1,250 USD*/}
-                      {/*<span>August 8th 2020</span>*/}
-                      N/A
-                    </p>
-                  </div>
-                  <div>
-                    <label>Current Income</label>
-                    {/*<p>95K / YEAR</p>*/}
-                    <p>${isa.current_income} / YEAR</p>
-                  </div>
-                  <div>
-                    <label>Previous Income</label>
-                    {/*<p>95K / YEAR</p>*/}
-                    <p>${isa.current_income} / YEAR</p>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  <Status selected={isa.status} />
-                  <div className="fields">
-                    <Field title="company">{makeName(props.currentUser)}</Field>
-                    <Field title="Client">{makeName(isa.student)}</Field>
-                    <Field className="full" title="Current Income">
-                      ${isa.current_income} / YEAR
-                    </Field>
-                    <Field className="full" title="time to be paid">
-                      {isa.time_to_be_paid || '-'} Month(s)
-                    </Field>
-                    <Field className="full" title="Percentage to be paid">
-                      {isa.percentage || '-'}%
-                    </Field>
-                    <Field className="full" title="Description">
-                      {isa.description || '-'}
-                    </Field>
-                    <Field className="full" title="Cancellation Period">
-                      {isa.cancellation_period_weeks || '-'} Week(s)
-                    </Field>
-                  </div>
-                </>
-              )}
-            </section>
-            <Message message={request_error} />
-          </PageContent>
-        )
-      )}
+      <PageContent loading={loading}>
+        <h1 className="page-title">{makeName(isa.student)}</h1>
+        <section className="form">
+          <Tabs tabs={['overview', 'isa offer']} onChange={tab => set_active_tab(tab)} activeTab={active_tab} />
+          {active_tab === 'overview' ? (
+            <div className="overview">
+              <div>
+                <label>Total Paid</label>
+                <p>
+                  0 USD
+                  <span>of {isa.cap} USD</span>
+                </p>
+              </div>
+              <div>
+                <label>Last Payment</label>
+                <p>
+                  N/A
+                </p>
+              </div>
+              <div>
+                <label>Current Income</label>
+                <p>${isa.current_income} / YEAR</p>
+              </div>
+              <div>
+                <label>Previous Income</label>
+                <p>${isa.current_income} / YEAR</p>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Status selected={isa.status} />
+              <div className="fields">
+                <Field title="company">{makeName(props.currentUser)}</Field>
+                <Field title="Client">{makeName(isa.student)}</Field>
+                <Field className="full" title="Current Income">
+                  ${isa.current_income} / YEAR
+                </Field>
+                <Field className="full" title="time to be paid">
+                  {isa.time_to_be_paid || '-'} Month(s)
+                </Field>
+                <Field className="full" title="Percentage to be paid">
+                  {isa.percentage || '-'}%
+                </Field>
+                <Field className="full" title="Description">
+                  {isa.description || '-'}
+                </Field>
+                <Field className="full" title="Cancellation Period">
+                  {isa.cancellation_period_weeks || '-'} Week(s)
+                </Field>
+              </div>
+            </>
+          )}
+        </section>
+        <Message message={request_error} />
+      </PageContent>
     </article>
   )
 }

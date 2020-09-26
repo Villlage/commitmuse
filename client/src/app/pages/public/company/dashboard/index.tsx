@@ -46,54 +46,50 @@ export default function CompanyDashboard(props: CompanyDashboardProps) {
 
   return (
     <article className="CompanyDashboard-page">
-      {loading ? (
-        <Loader />
-      ) : (
-        <PageContent title="Overview" error={request_error}>
-          <section className="boxes">
-            <section className="total">
-              <div>
-                <h2>Total Revenue</h2>
-                <p>{data.total_revenue} USD</p>
-              </div>
-              <div>
-                <h2>Last Payment</h2>
-                <p>
-                  {data.last_payment.value} USD
-                  <span>{data.last_payment.date ? formatDate(data.last_payment.date as any) : '-/-/-'}</span>
-                </p>
-              </div>
-            </section>
-            <section className="counts">
-              <div>
-                <h2>
-                  {data.coaches}
-                  <span>coaches</span>
-                </h2>
-                <Icon icon="round_blue_user" />
-              </div>
-              <div>
-                <h2>
-                  - <span>isa offers completed</span>
-                </h2>
-                <Icon icon="round_blue_doc" />
-              </div>
-              <div>
-                <h2>
-                  - <span>active Clients</span>
-                </h2>
-                <Icon icon="round_blue_user" />
-              </div>
-              <div>
-                <h2>
-                  - <span>isa offers In Progress</span>
-                </h2>
-                <Icon icon="round_blue_doc" />
-              </div>
-            </section>
+      <PageContent title="Overview" error={request_error} loading={loading}>
+        <section className="boxes">
+          <section className="total">
+            <div>
+              <h2>Total Revenue</h2>
+              <p>{data.total_revenue} USD</p>
+            </div>
+            <div>
+              <h2>Last Payment</h2>
+              <p>
+                {data.last_payment.value} USD
+                <span>{data.last_payment.date ? formatDate(data.last_payment.date as any) : '-/-/-'}</span>
+              </p>
+            </div>
           </section>
-        </PageContent>
-      )}
+          <section className="counts">
+            <div>
+              <h2>
+                {data.coaches}
+                <span>coaches</span>
+              </h2>
+              <Icon icon="round_blue_user" />
+            </div>
+            <div>
+              <h2>
+                - <span>isa offers completed</span>
+              </h2>
+              <Icon icon="round_blue_doc" />
+            </div>
+            <div>
+              <h2>
+                - <span>active Clients</span>
+              </h2>
+              <Icon icon="round_blue_user" />
+            </div>
+            <div>
+              <h2>
+                - <span>isa offers In Progress</span>
+              </h2>
+              <Icon icon="round_blue_doc" />
+            </div>
+          </section>
+        </section>
+      </PageContent>
     </article>
   )
 }
