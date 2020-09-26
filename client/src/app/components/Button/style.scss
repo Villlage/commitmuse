@@ -65,5 +65,7 @@
 
   @media only screen and (max-width: 600px) {
     height: 30px;
+    @include heebo-normal();
+    font-size: 12px;
   }
 }

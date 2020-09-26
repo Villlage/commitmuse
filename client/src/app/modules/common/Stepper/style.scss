@@ -64,4 +64,11 @@
       }
     }
   }
+
+  @media only screen and (max-width: 600px) {
+    .status {
+      @include heebo-normal();
+      font-size: 11px;
+    }
+  }
 }

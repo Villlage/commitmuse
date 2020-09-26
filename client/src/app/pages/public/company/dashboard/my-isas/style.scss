@@ -144,9 +144,24 @@
 
   @media only screen and (max-width: 600px) {
     .content {
+      .page-header {
+        width: calc(100% - 40px);
+
+        .Select-component {
+          .placeholder {
+            height: 33px;
+            padding: 0px 18px 18px;
+          }
+        }
+      }
+
       .my_isa {
-        width: 100%;
+        width: calc(100% - 40px);
         margin: 20px;
+
+        .list {
+          max-height: 340px;
+        }
       }
     }
   }

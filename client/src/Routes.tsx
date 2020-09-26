@@ -46,7 +46,6 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
         <Route path="/login" render={(props: any) => <SignIn {...props} {...routerProps} />} />
         <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
 
-        <Route path="/register" render={(props: any) => <SignUp {...props} {...routerProps} />} />
         <Route path="/coach/invitation/:id" render={(props: any) => <CoachSignUp {...props} {...routerProps} />} />
 
         {/* Private Routes */}
