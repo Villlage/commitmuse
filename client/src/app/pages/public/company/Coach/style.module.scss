@@ -1,0 +1,69 @@
+@import 'src/styles/colors';
+
+.Coach-page {
+  position: relative;
+
+  //HEADER
+  .header {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+    .name {
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 26px;
+      color: $Indigo7;
+
+      margin-left: 9px;
+    }
+  }
+
+  .optionsMenu {
+    position: absolute;
+    right: 17px;
+    top: 6px;
+  }
+
+  //COACH OVERVIEW CONTENT
+  .coachOverviewContent {
+    padding: 0 26px 30px 23px;
+    .rows {
+      .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 20px 0;
+        border-bottom: 1px solid $Indigo1;
+
+        .title {
+          font-size: 16px;
+          font-weight: 500;
+          color: $Indigo5;
+        }
+
+        .value {
+          font-size: 16px;
+          font-weight: 500;
+          color: $Indigo7;
+          span {
+            display: block;
+            text-align: right;
+          }
+          span:last-child {
+            font-size: 14px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    .chart {
+      margin-top: 27px;
+    }
+  }
+
+  //COACH CLIENTS CONTENT
+  .coachClientsContent {
+    padding: 8px 0 24px;
+  }
+}

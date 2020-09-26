@@ -1,25 +1,30 @@
 {
   "files": {
-    "main.css": "/web/static/css/main.73798e01.chunk.css",
-    "main.js": "/web/static/js/main.9446d5d6.chunk.js",
-    "main.js.map": "/web/static/js/main.9446d5d6.chunk.js.map",
+    "main.css": "/web/static/css/main.c171b22d.chunk.css",
+    "main.js": "/web/static/js/main.111f6298.chunk.js",
+    "main.js.map": "/web/static/js/main.111f6298.chunk.js.map",
     "runtime-main.js": "/web/static/js/runtime-main.f5548c72.js",
     "runtime-main.js.map": "/web/static/js/runtime-main.f5548c72.js.map",
-    "static/js/2.c4033602.chunk.js": "/web/static/js/2.c4033602.chunk.js",
-    "static/js/2.c4033602.chunk.js.map": "/web/static/js/2.c4033602.chunk.js.map",
+    "static/js/2.36b14542.chunk.js": "/web/static/js/2.36b14542.chunk.js",
+    "static/js/2.36b14542.chunk.js.map": "/web/static/js/2.36b14542.chunk.js.map",
     "index.html": "/web/index.html",
-    "precache-manifest.bbf40342143aaa44224fc1df7f40f7f3.js": "/web/precache-manifest.bbf40342143aaa44224fc1df7f40f7f3.js",
+    "precache-manifest.86deccc6dd199a96333a0d713e51f17e.js": "/web/precache-manifest.86deccc6dd199a96333a0d713e51f17e.js",
     "service-worker.js": "/web/service-worker.js",
-    "static/css/main.73798e01.chunk.css.map": "/web/static/css/main.73798e01.chunk.css.map",
-    "static/js/2.c4033602.chunk.js.LICENSE.txt": "/web/static/js/2.c4033602.chunk.js.LICENSE.txt",
+    "static/css/main.c171b22d.chunk.css.map": "/web/static/css/main.c171b22d.chunk.css.map",
+    "static/js/2.36b14542.chunk.js.LICENSE.txt": "/web/static/js/2.36b14542.chunk.js.LICENSE.txt",
     "static/media/account.svg": "/web/static/media/account.45d28c39.svg",
+    "static/media/arrow-left-white.c89bce3c.svg": "/web/static/media/arrow-left-white.c89bce3c.svg",
+    "static/media/arrow-left.e415b1cd.svg": "/web/static/media/arrow-left.e415b1cd.svg",
     "static/media/arrow-right.svg": "/web/static/media/arrow-right.33964afc.svg",
-    "static/media/file-contract.svg": "/web/static/media/file-contract.5feb3c94.svg"
+    "static/media/check-mark.5a56a35f.svg": "/web/static/media/check-mark.5a56a35f.svg",
+    "static/media/file-contract.svg": "/web/static/media/file-contract.5feb3c94.svg",
+    "static/media/person.svg": "/web/static/media/person.6db04d7e.svg",
+    "static/media/trash.cd4f263f.svg": "/web/static/media/trash.cd4f263f.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.f5548c72.js",
-    "static/js/2.c4033602.chunk.js",
-    "static/css/main.73798e01.chunk.css",
-    "static/js/main.9446d5d6.chunk.js"
+    "static/js/2.36b14542.chunk.js",
+    "static/css/main.c171b22d.chunk.css",
+    "static/js/main.111f6298.chunk.js"
   ]
 }

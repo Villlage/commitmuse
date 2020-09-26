@@ -16,6 +16,8 @@ import CoachClients from 'app/pages/public/coach/CoachClients'
 import ClientPayments from 'app/pages/public/client/ClientPayments'
 import SignContract from 'app/pages/public/company/dashboard/my-isas/create-isa/sign-contract'
 import MyAccount from '../app/pages/public/company/MyAccount'
+import Coach from 'app/pages/public/company/Coach'
+import CoachClient from 'app/pages/public/coach/CoachClient'
 
 const APP_ROUTES: any = {
   admin: [
@@ -26,7 +28,9 @@ const APP_ROUTES: any = {
   company_admin: [
     { component: CompanyOnBoarding, path: '/company/register' },
     { component: CompanyDashboard, path: '/company/dashboard', defaultPage: true },
-    { component: CompanyCoaches, path: '/company/coaches' },
+    { component: CompanyCoaches, path: '/company/coaches', exact: true },
+    { component: Coach, path: '/company/coaches/:coachId', exact: true },
+    { component: CoachClient, path: '/company/coaches/:coachId/clients/:clientId', exact: true },
     { component: CompanyIsas, path: '/company/isas', exact: true },
     { component: CreateIsa, path: '/company/isas/create' },
     { component: SignContract, path: '/company/isas/contract/:id' },

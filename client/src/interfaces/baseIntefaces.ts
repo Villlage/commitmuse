@@ -48,6 +48,7 @@ export interface Coach {
   plaid_items: number[]
   type: string
   user_role: number
+  user_type: string
 }
 
 export type SystemColors =
