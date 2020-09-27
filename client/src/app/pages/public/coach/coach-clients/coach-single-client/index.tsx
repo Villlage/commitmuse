@@ -12,7 +12,7 @@ const TAB_LABELS = {
   ISA_OFFER: 'ISA offer',
 }
 
-const CoachClient = () => {
+export default function CoachSingleClient() {
   const history = useHistory()
 
   const [activeTab, setActiveTab] = useState(TAB_LABELS.CLIENT_OVERVIEW)
@@ -83,4 +83,3 @@ const CoachClient = () => {
   )
 }
 
-export default CoachClient

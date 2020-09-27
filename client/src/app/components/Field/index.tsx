@@ -4,7 +4,7 @@ import { fixClass } from '../../../helpers/base'
 
 interface FieldProps {
   children: any
-  title: string
+  title?: string
   className?: string
 }
 

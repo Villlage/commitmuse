@@ -1,0 +1,94 @@
+@import 'src/styles/colors';
+@import 'src/styles/mixins';
+
+.IsaOfferReview-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $Background;
+
+  .content {
+    height: 100%;
+
+    .offer {
+      background: white;
+      box-shadow: 0px 4px 32px rgba(16, 42, 67, 0.08);
+      border-radius: 10px;
+      max-width: 944px;
+
+      header {
+        padding: 70px 40px 32px;
+
+        .logo {
+          display: flex;
+          justify-content: space-between;
+
+          div {
+            text-align: right;
+
+            h2 {
+              color: $BlackIndigo;
+              font-size: 24px;
+            }
+
+            p {
+              font-size: 16px;
+              color: $Black1;
+            }
+          }
+        }
+
+        .fields {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-column-gap: 32px;
+
+          .Field-component {
+            background: white;
+            border-bottom: 1px solid $Gray2;
+            border-radius: 0;
+            padding: 20px 6px;
+            height: initial;
+
+            &:first-child {
+              label {
+                color: $Black1;
+              }
+
+              p {
+                font-weight: bold;
+              }
+            }
+
+            label {
+              margin-bottom: 10px;
+              font-size: 14px;
+            }
+
+            p {
+              font-size: 22px;
+              color: $Black3;
+            }
+
+            &.full {
+              grid-column: 1 / span 2;
+
+              p {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+
+      .select-plan {
+
+      }
+    }
+
+    > footer {
+
+    }
+  }
+}

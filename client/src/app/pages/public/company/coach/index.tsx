@@ -7,10 +7,9 @@ import Tabs from 'app/components/Tabs'
 import Card from 'app/modules/common/Card'
 import Message from 'app/components/Message'
 import CoachClientsModule from 'app/modules/coach/CoachClients'
-import OptionsMenu from './OptionsMenu'
-import BarChart from 'app/modules/common/BarChart'
+import OptionsMenu from 'app/modules/company/Coach'
 import CompanyService from 'services/company.service'
-import { ISA, ScreenProps } from 'interfaces/baseIntefaces'
+import { ScreenProps } from 'interfaces/baseIntefaces'
 import * as baseInterfaces from 'interfaces/baseIntefaces'
 
 const TAB_LABELS = {
@@ -20,7 +19,7 @@ const TAB_LABELS = {
 
 const companyService = new CompanyService()
 
-const Coach = (props: ScreenProps) => {
+export default function CompanySingleCoach(props: ScreenProps) {
   const params: any = useParams()
 
   const [activeTab, setActiveTab] = useState(TAB_LABELS.COACH_OVERVIEW)
@@ -111,4 +110,3 @@ const Coach = (props: ScreenProps) => {
   )
 }
 
-export default Coach

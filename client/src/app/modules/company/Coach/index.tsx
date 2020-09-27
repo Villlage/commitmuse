@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styles from './OptionsMenu.module.scss'
+import styles from './style.module.scss'
 import classNames from 'classnames'
 import { ReactComponent as ArrowRight } from 'icons/arrow-right.svg'
 import { ReactComponent as ArrowLeft } from 'icons/arrow-left.svg'
@@ -12,7 +12,7 @@ interface OptionsMenuProps {
   user: Coach
 }
 
-const OptionsMenu = ({ user }: OptionsMenuProps) => {
+export default function OptionsMenu({ user }: OptionsMenuProps) {
   const [flyoutIsOpen, setFlyOutIsOpen] = useState(false)
   const [roleClicked, setRoleClicked] = useState(false)
 
@@ -88,4 +88,3 @@ const OptionsMenu = ({ user }: OptionsMenuProps) => {
   )
 }
 
-export default OptionsMenu
