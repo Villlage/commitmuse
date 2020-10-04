@@ -45,39 +45,46 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
             <h2>Select your payment Plan</h2>
             <div className="plans">
               <div className="plan">
-                <h2>Single</h2>
-                <p>
-                  $5,000 <span>usd</span>
-                </p>
-                <p>
-                  <i>1</i>Upfront payment of $5,000
-                </p>
-                <p>Make a single upfront payment and get a huge discount on your ISA.</p>
+                <div>
+                  <h2>Single</h2>
+                  <p className="plan_price">
+                    $5,000 <span>usd</span>
+                  </p>
+                  <p className="upfront_payment">
+                    <i>1</i>Upfront payment of $5,000
+                  </p>
+                  <p className="plan_desc">Make a single upfront payment and get a huge discount on your ISA.</p>
+                </div>
+
                 <Button>Select Plan</Button>
               </div>
-              <div className="plan">
-                <h2>combined</h2>
-                <p>
-                  $7,000 <span>usd</span>
-                </p>
-                <p>
-                  <i>1</i>Upfront payment of $3,500
-                </p>
-                <p>
-                  <i>1</i>Split payments of $500
-                </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suscipit.</p>
-                <Button>Select Plan</Button>
+              <div className="plan selected">
+                <div>
+                  <h2>Combined</h2>
+                  <p className="plan_price">
+                    $7,000 <span>usd</span>
+                  </p>
+                  <p className="upfront_payment">
+                    <i>1</i>Upfront payment of $3,500
+                  </p>
+                  <p className="upfront_payment">
+                    <i>1</i>Split payments of $500
+                  </p>
+                  <p className="plan_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suscipit.</p>
+                </div>
+                <Button>Selected</Button>
               </div>
               <div className="plan">
-                <h2>Split</h2>
-                <p>
-                  $8,000 <span>usd</span>
-                </p>
-                <p>
-                  <i>16</i>Split payments of $500
-                </p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suscipit.</p>
+                <div>
+                  <h2>Split</h2>
+                  <p className="plan_price">
+                    $8,000 <span>usd</span>
+                  </p>
+                  <p className="upfront_payment">
+                    <i>16</i>Split payments of $500
+                  </p>
+                  <p className="plan_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suscipit.</p>
+                </div>
                 <Button>Select Plan</Button>
               </div>
             </div>
@@ -85,65 +92,69 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
             <div className="plan-desc">
               <h2>Combined Plan</h2>
               <div className="plan-carousel">
-                <div>
-                  <h2>Upfront Payment</h2>
-                  <p>
-                    January, <span>2020</span>
-                  </p>
-                  <p>
-                    $3,500 <span>USD</span>
-                  </p>
-                </div>
-                <div>
-                  <h2>
-                    1st <span>split Payment</span>
-                  </h2>
-                  <p>
-                    February, <span>2020</span>
-                  </p>
-                  <p>
-                    $500 <span>USD</span>
-                  </p>
-                </div>
-                <div>
-                  <h2>
-                    2nd <span>split Payment</span>
-                  </h2>
-                  <p>
-                    March, <span>2020</span>
-                  </p>
-                  <p>
-                    $500 <span>USD</span>
-                  </p>
-                </div>
-                <div>
-                  <h2>
-                    3rd <span>split Payment</span>
-                  </h2>
-                  <p>
-                    May, <span>2020</span>
-                  </p>
-                  <p>
-                    $500 <span>USD</span>
-                  </p>
-                </div>
-                <div>
-                  <h2>
-                    4th <span>split Payment</span>
-                  </h2>
-                  <p>
-                    June, <span>2020</span>
-                  </p>
-                  <p>
-                    $500 <span>USD</span>
-                  </p>
+                <div className="wrapper">
+                  <div>
+                    <h2>Upfront Payment</h2>
+                    <p className="date">
+                      January, <span>2020</span>
+                    </p>
+                    <p>
+                      $3,500 <span>USD</span>
+                    </p>
+                  </div>
+                  <div>
+                    <h2>
+                      1<i>st</i> <span>split Payment</span>
+                    </h2>
+                    <p className="date">
+                      February, <span>2020</span>
+                    </p>
+                    <p>
+                      $500 <span>USD</span>
+                    </p>
+                  </div>
+                  <div>
+                    <h2>
+                      2<i>nd</i> <span>split Payment</span>
+                    </h2>
+                    <p className="date">
+                      March, <span>2020</span>
+                    </p>
+                    <p>
+                      $500 <span>USD</span>
+                    </p>
+                  </div>
+                  <div>
+                    <h2>
+                      3<i>rd</i> <span>split Payment</span>
+                    </h2>
+                    <p className="date">
+                      May, <span>2020</span>
+                    </p>
+                    <p>
+                      $500 <span>USD</span>
+                    </p>
+                  </div>
+                  <div>
+                    <h2>
+                      4<i>th</i> <span>split Payment</span>
+                    </h2>
+                    <p className="date">
+                      June, <span>2020</span>
+                    </p>
+                    <p>
+                      $500 <span>USD</span>
+                    </p>
+                  </div>
                 </div>
               </div>
 
               <div className="offer-actions">
                 <h2>You can cancel your offer within two weeks of accepting it.</h2>
-                <Button>DOWNLOAD CONTRACT</Button>
-                <Button>ACCEPT OFFER</Button>
+                <div className="actions">
+                  <Button>DOWNLOAD CONTRACT</Button>
+                  <Button>ACCEPT OFFER</Button>
+                </div>
               </div>
             </div>
           </div>

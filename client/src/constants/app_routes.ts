@@ -40,6 +40,7 @@ const APP_ROUTES: any = {
     { component: MyAccount, path: '/company/settings/my-account' }
   ],
   coach: [
+    { component: CompanyOnBoarding, path: '/company/register' },
     { component: CoachClients, path: '/coach/clients', defaultPage: true },
     { component: CompanyIsas, path: '/coach/isas', exact: true },
     { component: SignContract, path: '/coach/isas/contract/:id' },

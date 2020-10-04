@@ -6,8 +6,6 @@ import { fixClass, isMobile } from '../../../../helpers/base'
 import Button from '../../../components/Button'
 import PopUp from '../../../components/PopUp'
 
-const forbiddenRoutes = ['register', 'company/register', 'company/subscription']
-
 type MenuItem = {
   label: string
   route: string
@@ -21,21 +19,6 @@ interface MainNavigationProps {
 
 export default function MainNavigation(props: MainNavigationProps) {
   const [show_mobile_menu, set_show_mobile_menu] = useState(false)
-
-  const history = useHistory()
-
-  const [isHidden, setIsHidden] = useState(forbiddenRoutes.some(route => history.location.pathname.includes(route)))
-
-  let unListen: Function
-  useEffect(() => {
-    unListen = history.listen(() => {
-      setIsHidden(forbiddenRoutes.some(route => history.location.pathname.includes(route)))
-    })
-
-    return () => {
-      unListen()
-    }
-  }, [])
 
   const navLinks = props.items.map((item, index) => (
     <div className="menuItems" key={`menu-items-${index}`}>
@@ -59,7 +42,7 @@ export default function MainNavigation(props: MainNavigationProps) {
   ))
 
   return (
-    <section className={`MainNavigation-module${fixClass(isHidden && 'hidden')}${fixClass(isMobile && 'mobile')}`}>
+    <section className={`MainNavigation-module${fixClass(isMobile && 'mobile')}`}>
       {isMobile ? (
         <Button onClick={() => set_show_mobile_menu(true)} className="mobile_menu-btn">
           <Icon icon="menu_line" />
