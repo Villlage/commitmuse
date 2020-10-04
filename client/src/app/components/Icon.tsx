@@ -6,6 +6,7 @@ const iconsFolder = '/web/assets/icons/'
 const generateIconLink = (icon: SystemIcons | string) => iconsFolder + icon + '.svg'
 
 export const icons: any = {
+  transparent_logo: generateIconLink('transparent_logo'),
   active_star: generateIconLink('active_star'),
   arrow_right: generateIconLink('arrow_right'),
   save_profile: generateIconLink('save_profile'),
@@ -143,6 +144,7 @@ export type SystemIcons =
   | 'arrow-left'
   | 'emy_owens'
   | 'menu_line'
+  | 'transparent_logo'
 
 interface IconProps {
   icon: SystemIcons

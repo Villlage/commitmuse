@@ -46,9 +46,15 @@
     .logo {
       display: flex;
       cursor: pointer;
+      align-content: center;
+      width: 150px;
+      height: 150px;
+      align-self: baseline;
+      background: #010162;
 
       img {
-        height: 80px;
+        position: relative;
+        z-index: 1;
       }
 
       p {

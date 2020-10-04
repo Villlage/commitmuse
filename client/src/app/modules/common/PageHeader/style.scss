@@ -39,10 +39,13 @@
     .logo {
       display: flex;
       cursor: pointer;
-
-      img {
-        height: 80px;
-      }
+      align-content: center;
+      width: 150px;
+      height: 150px;
+      align-self: baseline;
+      background: #010162;
+      position: relative;
+      z-index: 1;
 
       p {
         font-size: 16px;

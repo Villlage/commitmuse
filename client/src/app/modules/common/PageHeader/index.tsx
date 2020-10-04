@@ -43,7 +43,7 @@ export default function PageHeader(props: PageHeaderProps) {
               history.push('/login')
             }}
           >
-            <img src="/web/assets/images/logo.png" alt="logo" />
+            <Icon icon="transparent_logo"/>
           </div>
           {props.user && props.user.user_role === 1 && (
             <Link className="admin-link" to={'/admin/users'}>
