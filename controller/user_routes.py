@@ -62,8 +62,9 @@ def register() -> Tuple[Response, int]:
     schema = login_schema.load(request.json)
     user = create_user(schema)
     login_user(user)
+    result = user_schema.dump(user)
 
-    return jsonify("user registered successfully"), 200
+    return jsonify(result), 200
 
 
 @app.route("/logout", methods=["GET", "POST"])

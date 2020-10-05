@@ -57,14 +57,14 @@ export default function SignUp(props: ScreenProps) {
           return setTimeout(() => set_request_error(''), 3000)
         }
 
-        await props.fetchUser()
+        props.setCurrentUser(res)
         set_loading(false)
 
         if (type === 'company') {
           return props.history.push('/company/register')
         }
 
-        if (type === 'coach') {
+        if (res.user_type  === 'coach') {
           props.history.push('/coach/clients')
           return
         }

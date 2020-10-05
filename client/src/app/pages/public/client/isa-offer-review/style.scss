@@ -1,0 +1,304 @@
+@import 'src/styles/colors';
+@import 'src/styles/mixins';
+
+.IsaOfferReview-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $Background;
+
+  .content {
+    height: 100%;
+
+    .offer {
+      background: white;
+      box-shadow: 0px 4px 32px rgba(16, 42, 67, 0.08);
+      border-radius: 10px;
+      max-width: 944px;
+
+      header {
+        padding: 70px 40px 32px;
+
+        .logo {
+          display: flex;
+          justify-content: space-between;
+
+          div {
+            text-align: right;
+
+            h2 {
+              color: $BlackIndigo;
+              font-size: 24px;
+            }
+
+            p {
+              font-size: 16px;
+              color: $Black1;
+            }
+          }
+        }
+
+        .fields {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-column-gap: 32px;
+          margin-bottom: 24px;
+
+          .Field-component {
+            background: white;
+            border-bottom: 1px solid $Gray2;
+            border-radius: 0;
+            padding: 20px 6px;
+            height: initial;
+
+            &:first-child {
+              label {
+                color: $Black1;
+              }
+
+              p {
+                font-weight: bold;
+              }
+            }
+
+            label {
+              margin-bottom: 10px;
+              font-size: 14px;
+            }
+
+            p {
+              font-size: 22px;
+              color: $Black3;
+            }
+
+            &.full {
+              grid-column: 1 / span 2;
+
+              p {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+
+      .select-plan {
+        background: $Gray1;
+        padding-top: 56px;
+
+        > h2 {
+          font-size: 24px;
+          line-height: 16px;
+          text-transform: capitalize;
+          color: #040727;
+          margin-bottom: 36px;
+          text-align: center;
+        }
+
+        .plans {
+          display: grid;
+          grid: 1fr / 1fr 1fr 1fr;
+          grid-gap: 16px;
+          padding: 0 40px 32px;
+
+          .plan {
+            background: white;
+            padding: 32px 24px 24px;
+            box-shadow: 0px 2px 24px rgba(25, 33, 108, 0.06);
+            border-radius: 7px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            h2 {
+              font-size: 18px;
+              color: $BlackIndigo;
+              margin-bottom: 16px;
+              justify-self: flex-start;
+            }
+
+            .plan_price {
+              font-size: 24px;
+              color: $BlackIndigo;
+              margin-bottom: 30px;
+              font-weight: 600;
+
+              span {
+                font-weight: 500;
+                text-transform: uppercase;
+                font-size: 18px;
+              }
+            }
+
+            .upfront_payment {
+              font-size: 14px;
+              color: $Indigo6;
+              font-weight: 600;
+              margin-bottom: 10px;
+              display: inline-flex;
+              align-items: center;
+              justify-content: flex-start;
+
+              i {
+                width: 20px;
+                height: 20px;
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                font-style: normal;
+                background: $Indigo2;
+                color: $Indigo7;
+                border-radius: 50%;
+                margin-right: 6px;
+                font-size: 12px;
+              }
+            }
+
+            .plan_desc {
+              font-size: 14px;
+              color: $BlackIndigo;
+              margin: 10px 0 50px;
+            }
+
+            > button {
+              background: $Gray1;
+              color: $Indigo6;
+
+              &:hover {
+                color: $Gray1;
+                background: $Indigo6;
+              }
+            }
+
+            &.selected {
+              background: $Indigo6;
+
+              * {
+                color: white;
+              }
+
+              .upfront_payment {
+                color: $Yellow7;
+                font-weight: 500;
+
+                i {
+                  background: $Indigo7;
+                  color: $Yellow3;
+                  font-weight: 600;
+                }
+              }
+
+              > button {
+                background: $BlackIndigo;
+                color: $Yellow7;
+              }
+            }
+
+          }
+        }
+
+        .plan-desc {
+          background: $Indigo6;
+          padding-top: 48px;
+          border-radius: 0px 0px 10px 10px;
+          overflow: hidden;
+
+          > h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 18px;
+            color: white;
+          }
+
+          .plan-carousel {
+            display: flex;
+            overflow: hidden;
+            overflow-x: auto;
+            margin: 0 50px 30px;
+            @include custom-scroll;
+
+            .wrapper {
+              display: flex;
+              padding-bottom: 16px;
+
+              > div {
+                width: 200px;
+                height: 136px;
+                background: white;
+                margin-right: 10px;
+                padding: 24px 16px;
+
+                h2 {
+                  color: $GrayIndigo;
+                  font-size: 14px;
+                  text-transform: uppercase;
+                  margin-bottom: 16px;
+
+                  i {
+                    font-style: normal;
+                    font-size: 10px;
+                    font-weight: normal;
+                  }
+                }
+
+                p.date {
+                  font-size: 14px;
+                  font-weight: bold;
+                  color: $Indigo6;
+                  margin-bottom: 12px;
+
+                  span {
+                    font-weight: normal;
+                    font-size: 12px;
+                  }
+                }
+
+                p {
+                  color: $Black3;
+                  font-weight: bold;
+                  font-size: 14px;
+
+                  span {
+                    font-size: 10px;
+                  }
+                }
+              }
+            }
+          }
+
+          .offer-actions {
+            background: $BlackIndigo;
+            padding: 32px 0;
+            overflow: hidden;
+
+            h2 {
+              color: $Indigo1;
+              font-size: 14px;
+              font-weight: normal;
+              text-align: center;
+              margin-bottom: 12px;
+            }
+
+            .actions {
+              display: flex;
+              justify-content: center;
+
+              button {
+                margin: 0 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    > footer {
+      background: white;
+      margin-top: 48px;
+      display: flex;
+      justify-content: center;
+
+    }
+  }
+}
