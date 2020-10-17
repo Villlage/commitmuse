@@ -161,7 +161,7 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
         </section>
         <footer>
           <FAQ />
-          <ISACalculator current_income={1} percentage={1} months={1} max={1} />
+          <ISACalculator current_income={10000} percentage={17} months={12} max={100000} />
         </footer>
       </PageContent>
     </article>

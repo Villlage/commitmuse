@@ -7,6 +7,7 @@
   flex-direction: column;
   align-items: center;
   background: $Background;
+  overflow: hidden;
 
   .content {
     height: 100%;
@@ -296,9 +297,52 @@
     > footer {
       background: white;
       margin-top: 48px;
-      display: flex;
+      width: calc(100vw);
+      padding: 48px 0 70px;
+      display: grid;
+      grid: 1fr / minmax(auto, 450px) minmax(auto, 450px);
       justify-content: center;
+      grid-gap: 44px;
+      align-items: flex-start;
 
+      .FAQ-module {
+        width: 100%;
+        box-shadow: none;
+        padding-top: 0;
+
+        .faq-title {
+          font-size: 22px;
+          margin-bottom: 40px;
+        }
+
+        .ExpansionPanel-component {
+          border-bottom: $border;
+
+          .answer.is-open {
+            padding-bottom: 30px;
+          }
+        }
+      }
+
+      .ISACalculator-module {
+        box-shadow: none;
+        background: $Gray1;
+
+        header {
+          padding: 28px 24px;
+          h2 {
+            font-size: 22px;
+          }
+        }
+
+        .slider-wrapper {
+          padding: 0 24px 24px;
+        }
+
+        header, .body .slider-wrapper {
+          background: transparent;
+        }
+      }
     }
   }
 }
