@@ -6,8 +6,6 @@ import { log } from '../../../../services/logging.service'
 import { notEmptyArray } from '../../../../helpers/base'
 import AdminUserBox from '../../../modules/admin/UserBox'
 import PageContent from '../../../modules/common/PageContent'
-import SlideSidebar from '../../../modules/common/SlideSidebar'
-import Input from '../../../components/Input'
 import EditUser from './EditUser'
 
 const adminService = new AdminService()

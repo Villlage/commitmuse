@@ -16,7 +16,7 @@ export default function EditUser(props: EditUserProps) {
       {props.user && (
         <>
           <h2>
-            <span>Edit user:</span> {makeName(props.user)}[{props.user.id}]
+            <span>Edit user: </span> {makeName(props.user)} [{props.user.id}]
           </h2>
           <section className="form">
             <InputRow userId={props.user.id} placeholder="First name" value={props.user.first_name} key="first_name" />

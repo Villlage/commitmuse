@@ -27,12 +27,19 @@
     justify-content: space-between;
     padding: 0 80px 0 110px;
 
-    .admin-link {
-      color: $MainSuccess;
-      font-weight: bold;
-
-      &:hover {
+    .admin-links {
+      .admin-link {
         color: white;
+        font-weight: bold;
+        padding: 8px 12px;
+
+        &:hover {
+          background: $Indigo5;
+        }
+
+        &.is-active {
+          background: $Indigo5;
+        }
       }
     }
 

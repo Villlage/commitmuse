@@ -1,13 +1,12 @@
 import * as React from 'react'
 import './style.scss'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, NavLink, useHistory } from 'react-router-dom'
 import { User } from '../../../../interfaces/baseIntefaces'
 import Icon from '../../../components/Icon'
 import Button from '../../../components/Button'
 import { useState } from 'react'
 import AuthService from '../../../../services/auth.service'
 import { log } from '../../../../services/logging.service'
-import { isMobile } from '../../../../helpers/base'
 
 const authService = new AuthService()
 
@@ -43,12 +42,20 @@ export default function PageHeader(props: PageHeaderProps) {
               history.push('/login')
             }}
           >
-            <Icon icon="transparent_logo"/>
+            <Icon icon="transparent_logo" />
           </div>
           {props.user && props.user.user_role === 1 && (
-            <Link className="admin-link" to={'/admin/users'}>
-              Admin portal
-            </Link>
+            <div className="admin-links">
+              <NavLink activeClassName="is-active" className="admin-link" to={'/admin/users'}>
+                Users
+              </NavLink>
+              <NavLink activeClassName="is-active" className="admin-link" to={'/admin/isas'}>
+                ISAs
+              </NavLink>
+              {/*<NavLink activeClassName="is-active" className="admin-link" to={'/admin/plaid'}>*/}
+              {/*  Plaid*/}
+              {/*</NavLink>*/}
+            </div>
           )}
           <div className="profile">
             {props.user ? (

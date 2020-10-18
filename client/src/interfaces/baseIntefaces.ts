@@ -96,6 +96,7 @@ export interface ISA {
   student: number
   cancellation_period_weeks: number
   created_at: string
+  expiration_period_months: null | string
   updated_at: null | string
 }
 

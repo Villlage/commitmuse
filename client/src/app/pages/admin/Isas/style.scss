@@ -1,10 +1,33 @@
+@import '../../../../styles/mixins';
+@import '../../../../styles/colors';
+
 .AdminIsas-page {
   .content {
-    padding: 20px;
-    height: calc(100vh - 80px);
-    display: grid;
-    grid: 1fr / 1fr 1fr 1fr;
-    grid-gap: 16px 16px;
-    align-items: baseline;
+    background: $Background;
+    overflow: initial;
+    overflow-y: auto;
+    @include custom-scroll;
+
+    .page-title {
+      color: $Indigo7;
+      margin: 16px 0;
+    }
+
+    .wrapper {
+      padding: 0 20px 40px;
+      display: grid;
+      grid: 1fr / 1fr 1fr 1fr 1fr;
+      grid-gap: 16px 16px;
+      align-items: baseline;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .content {
+      padding: 12px;
+      height: calc(100vh - 80px);
+      display: grid;
+      grid: 1fr / 1fr;
+    }
   }
 }
