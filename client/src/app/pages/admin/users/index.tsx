@@ -19,10 +19,13 @@ export default function AdminUsers(props: AdminUsersProps) {
 
   const fetchUsers = async () => {
     try {
+      set_loading(true)
       const res = await adminService.getUsers()
       set_users(res)
+      set_loading(false)
     } catch (e) {
       log(e)
+      set_loading(false)
     }
   }
 
@@ -32,12 +35,12 @@ export default function AdminUsers(props: AdminUsersProps) {
 
   return (
     <article className="AdminUsers-page">
-      <PageContent title="Admin Users">
+      <PageContent loading={loading} title="Admin Users">
         <div className="wrapper">
           {notEmptyArray(users) && users.map(u => <AdminUserBox key={u.id} user={u} onEdit={() => set_edit_user(u)} />)}
         </div>
       </PageContent>
-      <EditUser user={edit_user} onClose={() => set_edit_user(null)}/>
+      <EditUser onSave={fetchUsers} user={edit_user} onClose={() => set_edit_user(null)}/>
     </article>
   )
 }

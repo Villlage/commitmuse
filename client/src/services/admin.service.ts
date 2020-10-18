@@ -19,4 +19,8 @@ export default class AdminService {
   async editUser(userId: number, partial: any) {
     return await baseService.patchJSON(`admin/users/${userId}`, partial)
   }
+
+  async editCompany(companyId: number, partial: any) {
+    return await baseService.patchJSON(`admin/companies/${companyId}`, partial)
+  }
 }

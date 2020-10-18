@@ -7,6 +7,7 @@ import { formatLongDate } from '../../../../../helpers/formattings'
 import { notEmptyArray } from '../../../../../helpers/base'
 
 interface CompanyBoxProps {
+  onEdit(): void
   company: Company
 }
 
@@ -18,7 +19,7 @@ export default function CompanyBox(props: CompanyBoxProps) {
           Name: <span>{props.company.name}</span>
         </h2>
         <div className="actions">
-          <Button>EDIT</Button>
+          <Button onClick={props.onEdit}>EDIT</Button>
         </div>
       </header>
       <div className="body">

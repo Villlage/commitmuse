@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import List, Dict, Any
 from datetime import datetime
 from app import db
 from enum import Enum
@@ -44,13 +44,14 @@ class Company(db.Model):  # type: ignore
             session.commit()
             return company
 
-    def update_company(self, **kwargs: Any) -> "Company":
+    def update_company(self, attributes: Dict[str, Any]) -> "Company":
         with db_session() as session:
-            for key, value in kwargs.items():
+            for key, value in attributes.items():
                 setattr(self, key, value)
-                session.commit()
 
-        return self.get_company_by_id(company_id=self.id)
+            session.add(self)
+            session.commit()
+            return self
 
     def delete(self) -> None:
         with db_session() as session:

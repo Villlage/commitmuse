@@ -27,6 +27,10 @@ def _get_company_by_id(company_id: int) -> Company:
     return company
 
 
+def update_company(company: Company, schema: Dict[Any, Any]) -> Company:
+    return company.update_company(attributes=schema)
+
+
 def create_company(schema: Dict[Any, Any], user: User) -> Company:
     """
     creating a company and assigning the user that created it as an admin user for that company
