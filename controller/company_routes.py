@@ -34,7 +34,7 @@ def company(company_id: int) -> Tuple[Response, int]:
 
     if request.method == "PATCH":
         schema = update_company_schema.load(request.json)
-        company = company.update_company(**schema)
+        company = company.update_company(schema)
     elif request.method == "DELETE":
         company.delete()
         return jsonify(), 204
