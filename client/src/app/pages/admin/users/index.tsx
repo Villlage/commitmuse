@@ -7,6 +7,7 @@ import { notEmptyArray } from '../../../../helpers/base'
 import AdminUserBox from '../../../modules/admin/users/UserBox'
 import PageContent from '../../../modules/common/PageContent'
 import EditUser from './edit-user'
+import _ from 'lodash'
 
 const adminService = new AdminService()
 
@@ -21,7 +22,7 @@ export default function AdminUsers(props: AdminUsersProps) {
     try {
       set_loading(true)
       const res = await adminService.getUsers()
-      set_users(res)
+      set_users(_.sortBy(res, 'user_type'))
       set_loading(false)
     } catch (e) {
       log(e)
