@@ -33,5 +33,5 @@ class TestCompany:
         update_args = dict(name=name)
         company = company.update_company(update_args)
 
-        company = company.get_company_by_id(company.id)
+        company = Company.get_company_by_id(company.id)
         assert company.name == name
