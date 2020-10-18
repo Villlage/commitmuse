@@ -51,52 +51,23 @@ export interface Coach {
   user_type: string
 }
 
-export type SystemColors =
-  | 'MainPrimary'
-  | 'MainSecondary'
-  | 'BodyLight'
-  | 'BodyDarker'
-  | 'Title'
-  | 'Border'
-  | 'BorderDark'
-  | 'Background'
-  | 'HoverPrimary'
-  | 'HoverSecondary'
-  | 'ActivePrimary'
-  | 'ActiveSecondary'
-  | 'MainSuccess'
-  | 'ActiveSuccess'
-  | 'MainError'
-  | 'MainWarning'
-  | 'MainInfo'
-  | 'MainLight'
-  | 'HoverSuccess'
-  | 'HoverError'
-  | 'ActiveError'
-  | 'HoverWarning'
-  | 'ActiveWarning'
-  | 'HoverInfo'
-  | 'ActiveInfo'
-  | 'HoverLight'
-  | 'ActiveLight'
-  | 'HoverBorder'
-  | 'ActiveBorder'
-
 export interface ISA {
   id: number
   current_income: number
   percentage: number
   cap: number
   time_to_be_paid: number
+  program_duration_weeks: number
+  expiration_period_months: null | number
   status: string
   description: string
   coach_id: number
   client: any
-  coach: number
-  student: number
+  coach: User
+  student: User
   cancellation_period_weeks: number
   created_at: string
-  expiration_period_months: null | string
+  industry_field: null | string
   updated_at: null | string
 }
 

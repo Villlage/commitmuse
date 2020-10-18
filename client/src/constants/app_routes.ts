@@ -39,7 +39,7 @@ const APP_ROUTES: any = {
     { component: Subscription, path: '/company/subscription/:id' },
     { component: CompanyIsaOverview, path: '/company/isas/:id' },
     { component: BillingAndSubs, path: '/company/billing' },
-    { component: MyAccount, path: '/company/settings/my-account' }
+    { component: MyAccount, path: '/company/settings/my-account' },
   ],
   coach: [
     { component: CompanyOnBoarding, path: '/company/register' },

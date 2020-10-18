@@ -146,7 +146,7 @@ export const intOrFloat = (value: string) =>
 
 export const roundK = (val: number) => Math.round((val + Number.EPSILON) * 100) / 100
 
-export const dateNth = (d: number) => {
+export const countNth = (d: number) => {
   if (d > 3 && d < 21) return 'th'
   switch (d % 10) {
     case 1:
