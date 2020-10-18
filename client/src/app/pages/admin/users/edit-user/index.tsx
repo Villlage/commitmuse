@@ -2,7 +2,7 @@ import React from 'react'
 import './style.scss'
 import SlideSidebar from '../../../../modules/common/SlideSidebar'
 import { User } from '../../../../../interfaces/baseIntefaces'
-import InputRow from '../../../../modules/admin/Users/InputRow'
+import InputRow from '../../../../modules/admin/users/InputRow'
 import { makeName } from '../../../../../helpers/base'
 
 interface EditUserProps {

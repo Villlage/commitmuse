@@ -5,9 +5,9 @@ import CompanyIsas from '../app/pages/public/company/dashboard/my-isas'
 import CreateIsa from '../app/pages/public/company/dashboard/my-isas/create-isa'
 import CompanyIsaOverview from '../app/pages/public/company/dashboard/my-isas/isa-overview'
 import BillingAndSubs from '../app/pages/public/company/dashboard/billing-and-subs'
-import AdminUsers from '../app/pages/admin/Users'
-import AdminIsas from '../app/pages/admin/Isas'
-import AdminPlaid from '../app/pages/admin/Plaid'
+import AdminUsers from '../app/pages/admin/users'
+import AdminIsas from '../app/pages/admin/isas'
+import AdminPlaid from '../app/pages/admin/plaid'
 import IsaOverview from '../app/pages/public/company/my-isa/isa-overview'
 import Settings from '../app/pages/public/client/settings'
 import OnBoarding from '../app/pages/public/coach/on-boarding'
@@ -18,12 +18,14 @@ import SignContract from 'app/pages/public/company/dashboard/my-isas/create-isa/
 import MyAccount from '../app/pages/public/company/my-account'
 import CompanySingleCoach from 'app/pages/public/company/coach'
 import CoachClient from 'app/pages/public/coach/coach-clients/coach-single-client'
+import AdminCompanies from '../app/pages/admin/companies'
 
 const APP_ROUTES: any = {
   admin: [
     { component: AdminUsers, path: '/admin/users' },
     { component: AdminIsas, path: '/admin/isas' },
     { component: AdminPlaid, path: '/admin/plaid' },
+    { component: AdminCompanies, path: '/admin/companies' },
   ],
   company_admin: [
     { component: CompanyOnBoarding, path: '/company/register' },

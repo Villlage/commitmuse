@@ -4,7 +4,7 @@ import AdminService from '../../../../services/admin.service'
 import { ISA, ScreenProps } from '../../../../interfaces/baseIntefaces'
 import { log } from '../../../../services/logging.service'
 import { notEmptyArray } from '../../../../helpers/base'
-import IsaBox from '../../../modules/admin/IsaBox'
+import IsaBox from '../../../modules/admin/isas/IsaBox'
 import PageContent from '../../../modules/common/PageContent'
 
 const adminService = new AdminService()

@@ -4,9 +4,9 @@ import { ScreenProps, User } from '../../../../interfaces/baseIntefaces'
 import AdminService from '../../../../services/admin.service'
 import { log } from '../../../../services/logging.service'
 import { notEmptyArray } from '../../../../helpers/base'
-import AdminUserBox from '../../../modules/admin/UserBox'
+import AdminUserBox from '../../../modules/admin/users/UserBox'
 import PageContent from '../../../modules/common/PageContent'
-import EditUser from './EditUser'
+import EditUser from './edit-user'
 
 const adminService = new AdminService()
 

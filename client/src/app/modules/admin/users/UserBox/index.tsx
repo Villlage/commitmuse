@@ -1,10 +1,10 @@
 import React from 'react'
 import './style.scss'
-import { User } from '../../../../interfaces/baseIntefaces'
-import Button from '../../../components/Button'
-import Icon from '../../../components/Icon'
-import Field from '../../../components/Field'
-import { fixClass } from '../../../../helpers/base'
+import { User } from '../../../../../interfaces/baseIntefaces'
+import Button from '../../../../components/Button'
+import Icon from '../../../../components/Icon'
+import Field from '../../../../components/Field'
+import { fixClass } from '../../../../../helpers/base'
 
 interface AdminUserBoxProps {
   user: User

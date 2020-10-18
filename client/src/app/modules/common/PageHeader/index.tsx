@@ -52,6 +52,9 @@ export default function PageHeader(props: PageHeaderProps) {
               <NavLink activeClassName="is-active" className="admin-link" to={'/admin/isas'}>
                 ISAs
               </NavLink>
+              <NavLink activeClassName="is-active" className="admin-link" to={'/admin/companies'}>
+                Companies
+              </NavLink>
               {/*<NavLink activeClassName="is-active" className="admin-link" to={'/admin/plaid'}>*/}
               {/*  Plaid*/}
               {/*</NavLink>*/}

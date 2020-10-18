@@ -1,11 +1,9 @@
 import React from 'react'
 import './style.scss'
-import { ISA } from '../../../../interfaces/baseIntefaces'
-import Button from '../../../components/Button'
-import Field from '../../../components/Field'
-import moment from 'moment'
-
-const formatDate = (d: string | Date) => d ? moment(d).format('DD MMM YYYY') : '-'
+import { ISA } from '../../../../../interfaces/baseIntefaces'
+import Button from '../../../../components/Button'
+import Field from '../../../../components/Field'
+import { formatLongDate } from '../../../../../helpers/formattings'
 
 interface IsaBoxProps {
   isa: ISA
@@ -22,7 +20,7 @@ export default function IsaBox(props: IsaBoxProps) {
       </header>
       <div className="body">
         <div>
-          <Field title="Created at">{formatDate(props.isa.created_at)}</Field>
+          <Field title="Created at">{formatLongDate(props.isa.created_at)}</Field>
           <Field title="Coach ID">{props.isa.coach}</Field>
           <Field title="Student ID">{props.isa.student}</Field>
           <Field title="Status">{props.isa.status || '-'}</Field>
