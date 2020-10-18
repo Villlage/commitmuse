@@ -28,6 +28,13 @@
       border-color: transparent transparent transparent transparent;
     }
 
+    &:not(:last-child) {
+      &:after {
+        position: relative;
+        right: -1px;
+      }
+    }
+
     &:before {
       content: '';
       width: 0;
