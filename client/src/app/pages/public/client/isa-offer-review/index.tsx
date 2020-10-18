@@ -12,13 +12,14 @@ import { usePlaidLink } from 'react-plaid-link'
 import ClientIsaSignUp from '../isa-offer-steps/sign-up'
 import PlaidService from '../../../../../services/plaid.service'
 import ClientService from '../../../../../services/client.service'
-import { fixClass, makeName, roundK } from '../../../../../helpers/base'
+import { countNth, fixClass, makeName, roundK } from '../../../../../helpers/base'
+import moment from 'moment'
 
 const plaidService = new PlaidService()
 const clientService = new ClientService()
 const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
 
-const PLANS = [
+const PLANS: any = [
   {
     name: 'Single',
     price: 5000,
@@ -26,7 +27,7 @@ const PLANS = [
     payments: [
       {
         count: 1,
-        title: 'Upfront payment of $5,000',
+        price: 5000,
       },
     ],
   },
@@ -37,11 +38,12 @@ const PLANS = [
     payments: [
       {
         count: 1,
+        price: 3500,
         title: 'Upfront payment of $3,500',
       },
       {
         count: 7,
-        title: 'Split payments of $500',
+        price: 500,
       },
     ],
   },
@@ -52,11 +54,14 @@ const PLANS = [
     payments: [
       {
         count: 16,
-        title: 'Split payments of $500',
+        price: 500,
       },
     ],
   },
 ]
+
+const formatMonth = (d: string | Date) => d ? moment(d).format('MMMM, ') : ''
+const formatYear = (d: string | Date) => d ? moment(d).format('YYYY') : ''
 
 interface IsaOfferReviewProps extends ScreenProps {
   match: any
@@ -176,17 +181,18 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
             <div className="select-plan">
               <h2>Select your payment Plan</h2>
               <div className="plans">
-                {PLANS.map((plan, i) => (
+                {PLANS.map((plan: any, i: number) => (
                   <div className={`plan${fixClass(plan.name === selected_plan && 'selected')}`} key={i}>
                     <div>
                       <h2>{plan.name}</h2>
                       <p className="plan_price">
                         ${plan.price.toLocaleString()} <span>usd</span>
                       </p>
-                      {plan.payments.map((payment, i) => (
+                      {plan.payments.map((payment: any, i: number) => (
                         <p className="upfront_payment" key={i}>
                           <i>{payment.count}</i>
-                          {payment.title}
+                          {payment.count > 1 ? 'Split payments of $' : 'Upfront payment of $'}
+                          {payment.price}
                         </p>
                       ))}
 
@@ -199,62 +205,40 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
               </div>
 
               <div className="plan-desc">
-                <h2>Combined Plan</h2>
+                <h2>{selected_plan} Plan</h2>
                 <div className="plan-carousel">
                   <div className="wrapper">
-                    <div>
-                      <h2>Upfront Payment</h2>
-                      <p className="date">
-                        January, <span>2020</span>
-                      </p>
-                      <p>
-                        $3,500 <span>USD</span>
-                      </p>
-                    </div>
-                    <div>
-                      <h2>
-                        1<i>st</i> <span>split Payment</span>
-                      </h2>
-                      <p className="date">
-                        February, <span>2020</span>
-                      </p>
-                      <p>
-                        $500 <span>USD</span>
-                      </p>
-                    </div>
-                    <div>
-                      <h2>
-                        2<i>nd</i> <span>split Payment</span>
-                      </h2>
-                      <p className="date">
-                        March, <span>2020</span>
-                      </p>
-                      <p>
-                        $500 <span>USD</span>
-                      </p>
-                    </div>
-                    <div>
-                      <h2>
-                        3<i>rd</i> <span>split Payment</span>
-                      </h2>
-                      <p className="date">
-                        May, <span>2020</span>
-                      </p>
-                      <p>
-                        $500 <span>USD</span>
-                      </p>
-                    </div>
-                    <div>
-                      <h2>
-                        4<i>th</i> <span>split Payment</span>
-                      </h2>
-                      <p className="date">
-                        June, <span>2020</span>
-                      </p>
-                      <p>
-                        $500 <span>USD</span>
-                      </p>
-                    </div>
+                    {PLANS.find((p: any) => p.name === selected_plan).payments.map((payment: any, index: number) =>
+                      payment.count > 1 ? (
+                        Array(payment.count)
+                          .fill(payment)
+                          .map((p, i) => (
+                            <div key={i}>
+                              <h2>
+                                {i + 1}
+                                <i>{countNth(i + 1)}</i> <span>split Payment</span>
+                              </h2>
+                              <p className="date">
+                                {formatMonth(new Date(new Date().setMonth(new Date().getMonth() + i + 1)))}
+                                <span>{formatYear(new Date(new Date().setMonth(new Date().getMonth() + i + 1)))}</span>
+                              </p>
+                              <p>
+                                ${payment.price.toLocaleString()} <span>USD</span>
+                              </p>
+                            </div>
+                          ))
+                      ) : (
+                        <div key={index}>
+                          <h2>Upfront Payment</h2>
+                          <p className="date">
+                            {formatMonth(new Date())}<span>{formatYear(new Date())}</span>
+                          </p>
+                          <p>
+                            ${payment.price.toLocaleString()} <span>USD</span>
+                          </p>
+                        </div>
+                      ),
+                    )}
                   </div>
                 </div>
 
@@ -270,7 +254,12 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
           </section>
           <footer>
             <FAQ />
-            <ISACalculator current_income={isa.current_income} percentage={isa.percentage} months={isa.time_to_be_paid} max={100000} />
+            <ISACalculator
+              current_income={isa.current_income}
+              percentage={isa.percentage}
+              months={isa.time_to_be_paid}
+              max={100000}
+            />
           </footer>
         </PageContent>
       </article>
