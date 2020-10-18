@@ -9,7 +9,7 @@ interface SelectProps {
   value: string
   options: string[] | null | undefined
   onChange(option: string): void
-  placeholder: string
+  placeholder?: string
   label?: string
   error?: string
   tooltip?: string

@@ -4,7 +4,7 @@ import { Company } from '../interfaces/baseIntefaces'
 const baseService = new BaseService()
 
 export default class CompanyService {
-  public async create(company: Company) {
+  public async create(company: Partial<Company>) {
     return await baseService.postJSON('companies', company)
   }
 

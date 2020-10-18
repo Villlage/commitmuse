@@ -30,9 +30,8 @@ class TestCompany:
     def test_update(self) -> None:
         company = CompanyFactory.create()
         name = "other company inc"
-        old_address = company.address
         update_args = dict(name=name)
-        company = company.update_company(**update_args)
-        assert company
+        company = company.update_company(update_args)
+
+        company = Company.get_company_by_id(company.id)
         assert company.name == name
-        assert company.address == old_address

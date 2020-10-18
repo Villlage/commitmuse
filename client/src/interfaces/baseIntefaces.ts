@@ -92,9 +92,17 @@ export interface PlaidMetadata {
 }
 
 export interface Company {
+  id: number
   number_of_employees_estimate: string
   name: string
   address: string
+  created_at: string
+  is_active: boolean
+  plaid_items: number[]
+  status: string
+  subscriptions: number[]
+  updated_at: null | string
+  users: number[]
 }
 
 export interface IsaClient {

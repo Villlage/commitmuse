@@ -1,0 +1,64 @@
+@import 'src/styles/mixins';
+@import 'src/styles/colors';
+
+.CompanyBox-module {
+  box-shadow: 0 0 2px 1px #0000002b;
+  border-radius: 4px;
+  overflow: hidden;
+  background: white;
+
+  header {
+    display: grid;
+    grid: 1fr / 1fr 1fr;
+    padding: 10px;
+    background: $Indigo4;
+    align-items: center;
+
+    h2 {
+      color: white;
+      font-weight: normal;
+      font-size: 14px;
+
+      span {
+        font-size: 16px;
+        font-weight: 800;
+        text-shadow: 1px 1px 1px black;
+      }
+    }
+
+    div {
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        height: 32px;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .body {
+    display: grid;
+    grid: 1fr auto / 1fr 1fr;
+
+    .Field-component {
+      background: white;
+    }
+
+    .full {
+      grid-column: 1 / span 2;
+      height: 100%;
+    }
+
+    .green {
+      color: $Green4;
+    }
+
+    .red {
+      color: $Red4;
+    }
+  }
+
+  footer {
+  }
+}

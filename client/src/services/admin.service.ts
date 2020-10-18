@@ -12,7 +12,15 @@ export default class AdminService {
     return await baseService.getJSON(`admin/isas`)
   }
 
+  public async getCompanies() {
+    return await baseService.getJSON(`admin/companies`)
+  }
+
   async editUser(userId: number, partial: any) {
     return await baseService.patchJSON(`admin/users/${userId}`, partial)
+  }
+
+  async editCompany(companyId: number, partial: any) {
+    return await baseService.patchJSON(`admin/companies/${companyId}`, partial)
   }
 }
