@@ -13,7 +13,9 @@ export default function IsaBox(props: IsaBoxProps) {
   return (
     <section className="IsaBox-module">
       <header>
-        <h2>ID: <span>{props.isa.id}</span></h2>
+        <h2>
+          ID: <span>{props.isa.id}</span>
+        </h2>
         <div className="actions">
           <Button>EDIT</Button>
         </div>
@@ -32,7 +34,9 @@ export default function IsaBox(props: IsaBoxProps) {
           <Field title="Current income">{props.isa.current_income}</Field>
           <Field title="Percentage">{props.isa.percentage}</Field>
           <Field title="Time to be paid">{props.isa.time_to_be_paid}</Field>
-          <Field title="Expiration period">{props.isa.expiration_period_months ? props.isa.expiration_period_months + ' months' : '-'}</Field>
+          <Field title="Expiration period">
+            {props.isa.expiration_period_months ? props.isa.expiration_period_months + ' months' : '-'}
+          </Field>
         </div>
         <Field title="description">{props.isa.description}</Field>
       </div>

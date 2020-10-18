@@ -25,7 +25,7 @@ export default function CompanyBox(props: CompanyBoxProps) {
         <div>
           <Field title="ID">{props.company.id}</Field>
           <Field title="Created at">{formatLongDate(props.company.created_at)}</Field>
-          <Field title="number_of_employees_estimate">{props.company.number_of_employees_estimate || '-'}</Field>
+          <Field title="Number of employees">{props.company.number_of_employees_estimate || '-'}</Field>
           <Field title="Status">{props.company.status}</Field>
         </div>
         <div>
@@ -43,7 +43,9 @@ export default function CompanyBox(props: CompanyBoxProps) {
             )}
           </Field>
         </div>
-        <Field title="Address" className="full">{props.company.address}</Field>
+        <Field title="Address" className="full">
+          {props.company.address}
+        </Field>
       </div>
       <footer></footer>
     </section>
