@@ -13,10 +13,13 @@ import Message from '../../../../components/Message'
 import { Link } from 'react-router-dom'
 import ButtonSelect from '../../../../components/ButtonSelect'
 import { USER_TYPES } from '../../../../../constants/system'
+import CheckBox from '../../../../components/CheckBox'
 
 const authService = new AuthService()
 
 export default function SignUp(props: ScreenProps) {
+  const [terms_and_conditions, set_terms_and_conditions] = useState(false)
+
   const [user, set_user] = useState({
     first_name: '',
     last_name: '',
@@ -150,13 +153,19 @@ export default function SignUp(props: ScreenProps) {
               <label>I am a:</label>
               <ButtonSelect options={USER_TYPES} selected={user.type} onSelect={e => set_user({ ...user, type: e })} />
             </div>
+            <div className="terms_and_conditions full">
+              <CheckBox label="I agree to the Commit Muse's" value={terms_and_conditions} onChange={e => set_terms_and_conditions(e)} />
+              <a target="_blank" href="https://www.commitmuse.com/tos">
+                Terms & Conditions
+              </a>
+            </div>
           </div>
           <footer className="full">
             <p>
               Already have an account? <Link to="/login">Sign In</Link>
             </p>
 
-            <Button disabled={notValid()} onClick={onSubmit} loading={loading}>
+            <Button disabled={!terms_and_conditions || notValid()} onClick={onSubmit} loading={loading}>
               NEXT <Icon icon="arrow-right" />{' '}
             </Button>
           </footer>
