@@ -40,7 +40,6 @@ const PLANS: any = [
       {
         count: 1,
         price: 3500,
-        title: 'Upfront payment of $3,500',
       },
       {
         count: 7,
