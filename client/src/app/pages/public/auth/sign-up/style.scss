@@ -56,6 +56,21 @@
         }
       }
 
+      .terms_and_conditions {
+        display: flex;
+        align-items: center;
+
+        a {
+          margin-left: 4px;
+          font-size: 14px;
+          margin-top: 2px;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
       footer {
         display: flex;
         padding: 18px 24px;

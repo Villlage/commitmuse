@@ -12,7 +12,7 @@ import { usePlaidLink } from 'react-plaid-link'
 import ClientIsaSignUp from '../isa-offer-steps/sign-up'
 import PlaidService from '../../../../../services/plaid.service'
 import ClientService from '../../../../../services/client.service'
-import { countNth, fixClass, makeName, roundK } from '../../../../../helpers/base'
+import { countNth, fixClass, kFormatter, makeName, roundK } from '../../../../../helpers/base'
 import moment from 'moment'
 import Stepper from '../../../../modules/common/Stepper'
 
@@ -40,7 +40,6 @@ const PLANS: any = [
       {
         count: 1,
         price: 3500,
-        title: 'Upfront payment of $3,500',
       },
       {
         count: 7,
@@ -71,6 +70,7 @@ interface IsaOfferReviewProps extends ScreenProps {
 export default function IsaOfferReview(props: IsaOfferReviewProps) {
   const [isa, set_isa] = useState<ISA | null>(null)
   const [offer_step, set_offer_step] = useState(0)
+  const [loading, set_loading] = useState(false)
   const [request_error, set_request_error] = useState('')
   const [selected_plan, set_selected_plan] = useState('Combined')
 
@@ -78,8 +78,10 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
   const token = props.location.search.split('?token=')[1]
 
   const getIsa = async () => {
+    set_loading(true)
     try {
       const res = await clientService.getOffer(isa_id)
+      set_loading(false)
 
       if (res) {
         if (res.error) {
@@ -91,6 +93,7 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
         }
       }
     } catch (e) {
+      set_loading(false)
       set_request_error(e.error || e.toString())
       setTimeout(() => set_request_error(''), 3000)
     }
@@ -154,8 +157,8 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
               <Field>{''}</Field>
               <Field title="Job Field">{isa.industry_field || '-'}</Field>
               <Field title="Program  Duration">{isa.time_to_be_paid} Months</Field>
-              <Field title="Current income">${roundK(isa.current_income)}K / YEAR</Field>
-              <Field title="Future income">{roundK(isa.cap)}K / YEAR</Field>
+              <Field title="Current income">${kFormatter(isa.current_income)} / YEAR</Field>
+              <Field title="Future income">${kFormatter(isa.cap)} / YEAR</Field>
               <Field title="ISA PRICING">From new raise</Field>
               <Field title="Percentage to be paid">{isa.percentage}%</Field>
               <Field title="Description" className="full">
@@ -265,7 +268,7 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
   return (
     isa && (
       <article className={`IsaOfferReview-page${fixClass(offer_step !== 0 && 'active')}`}>
-        <PageContent title="Review Your ISA Offer">
+        <PageContent loading={loading} title="Review Your ISA Offer">
           <section className={`offer-steps${fixClass(offer_step !== 0 && 'active')}`}>
             {offer_step !== 0 && <Stepper steps={offerStatuses} activeIndex={offer_step} />}
             {isa && offer_strategy[offerStatuses[offer_step]]}

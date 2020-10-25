@@ -141,10 +141,24 @@ export const createEl = <P extends DOMAttributes<T>, T extends Element>(
 export const makeName = (u: Coach | User) => (u ? u.first_name + ' ' + u.last_name : '')
 
 // helper to check if value is number
-export const intOrFloat = (value: string) =>
+export const intOrFloat = (value: any) =>
   /^(?=.)([+-]?([0-9]*)(\.([0-9]+))?)$/.test(value) || value === '' || value[value.length - 1] === '.'
 
-export const roundK = (val: number) => Math.round((val + Number.EPSILON) * 100) / 100
+export const roundK = (val: number) => Math.round((Number(val) + Number.EPSILON) * 100) / 100
+
+export const kFormatter = (num: number) => {
+  if (intOrFloat(num)) {
+    if (num > 999 && num < 1000000) {
+      return (num / 1000).toFixed(0) + 'K'
+    }
+    if (num > 1000000) {
+      return (num / 1000000).toFixed(0) + 'M'
+    }
+    return num
+  } else {
+    return 'NaN'
+  }
+}
 
 export const countNth = (d: number) => {
   if (d > 3 && d < 21) return 'th'
