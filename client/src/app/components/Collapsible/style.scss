@@ -1,0 +1,53 @@
+@import '../../../styles/colors';
+@import '../../../styles/mixins';
+
+.Collapsible-component {
+  overflow: hidden;
+  transition: 300ms all;
+  max-height: 600px;
+  color: $MainInfo;
+
+  .collapsible-wrapper {
+    overflow-y: auto;
+    max-height: 600px;
+    @include custom-scroll();
+  }
+
+  .collapsible-title {
+    max-height: 20px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    transition: 300ms all;
+
+    &:hover {
+      color: $MainInfo;
+
+      .arrow {
+        filter: invert(51%) sepia(86%) saturate(3576%) hue-rotate(157deg) brightness(98%) contrast(82%) !important;
+      }
+    }
+
+    .arrow {
+      margin-right: 8px;
+      transform: rotate(-90deg);
+      width: 12px;
+      height: 12px;
+      filter: invert(51%) sepia(86%) saturate(3576%) hue-rotate(157deg) brightness(98%) contrast(82%);
+    }
+  }
+
+  &.collapsed {
+    overflow: hidden;
+    max-height: 20px;
+    color: $Title;
+
+    .collapsible-title {
+      .arrow {
+        transform: rotate(90deg);
+        filter: none;
+      }
+    }
+  }
+}

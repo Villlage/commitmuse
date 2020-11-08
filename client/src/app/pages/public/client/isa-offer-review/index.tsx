@@ -12,7 +12,7 @@ import { usePlaidLink } from 'react-plaid-link'
 import ClientIsaSignUp from '../isa-offer-steps/sign-up'
 import PlaidService from '../../../../../services/plaid.service'
 import ClientService from '../../../../../services/client.service'
-import { countNth, fixClass, kFormatter, makeName, roundK } from '../../../../../helpers/base'
+import { countNth, fixClass, kFormatter, makeName } from '../../../../../helpers/base'
 import moment from 'moment'
 import Stepper from '../../../../modules/common/Stepper'
 
@@ -22,9 +22,9 @@ const offerStatuses = ['review offer', 'sign up', 'link bank', 'sign contract']
 
 const PLANS: any = [
   {
-    name: 'Single',
+    name: 'Upfront',
     price: 5000,
-    description: 'Make a single upfront payment and get a huge discount on your ISA.',
+    description: 'Make a single upfront payment.',
     payments: [
       {
         count: 1,
@@ -34,27 +34,29 @@ const PLANS: any = [
   },
   {
     name: 'Combined',
-    price: 7000,
-    description: 'Make a single upfront payment and 7 split payments on your ISA.',
+    price: '2,500 + 4%',
+    description: '* Income sharing will occur ONLY if you get placed ',
     payments: [
       {
         count: 1,
-        price: 3500,
+        price: 2500,
       },
       {
         count: 7,
         price: 500,
+        description: '4% of your income for 8 months'
       },
     ],
   },
   {
-    name: 'Split',
-    price: 8000,
-    description: 'Make a 16 split payments on your ISA.',
+    name: 'Income Share',
+    price: '0 + 9%',
+    description: '* Income share will occur ONLY if you get placed',
     payments: [
       {
         count: 16,
         price: 500,
+        description: '9% of your income for 8 months'
       },
     ],
   },
@@ -181,8 +183,8 @@ export default function IsaOfferReview(props: IsaOfferReviewProps) {
                     {plan.payments.map((payment: any, i: number) => (
                       <p className="upfront_payment" key={i}>
                         <i>{payment.count}</i>
-                        {payment.count > 1 ? 'Split payments of $' : 'Upfront payment of $'}
-                        {payment.price}
+                        {payment.description ? payment.description : payment.count > 1 ? 'Split payments of $' : 'Upfront payment of $'}
+                        {payment.description ? '' : payment.price}
                       </p>
                     ))}
 

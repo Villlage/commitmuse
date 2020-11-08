@@ -13,6 +13,7 @@ import ClientIsaOfferSigning from './app/pages/public/client/isa-offer-steps'
 import CoachSignUp from './app/pages/public/auth/coach-sign-up'
 import IsaOfferReview from './app/pages/public/client/isa-offer-review'
 import TermsAndConditions from './app/pages/public/terms-and-conditions'
+import MentorsGallery from './app/pages/public/mentors/gallery'
 
 export default function Routes(routerProps: Partial<ScreenProps>) {
   const privateRoute = (Component: any, route: string, index: number, exact?: boolean) => {
@@ -60,6 +61,11 @@ export default function Routes(routerProps: Partial<ScreenProps>) {
         <Route
           path="/client/isa-offer-review/:id"
           render={(props: any) => <IsaOfferReview {...props} {...routerProps} />}
+        />
+
+        <Route
+          path="/mentors/gallery"
+          render={(props: any) => <MentorsGallery {...props} {...routerProps} />}
         />
 
         {/* Private Routes */}

@@ -173,3 +173,17 @@ export const countNth = (d: number) => {
       return 'th'
   }
 }
+
+
+export const isString = (str: any) => typeof str === 'string'
+export const isObject = (str: any) => typeof str === 'object'
+
+// the fastest way to clone array or object
+export const createClone = (obj: object) => JSON.parse(JSON.stringify(obj))
+
+export const removeUnderscore = (str: string) => (isString(str) ? str.replace(/_/g, ' ') : '')
+
+// helper to check if user agent is WebView
+export const isWebview = !!navigator.userAgent.match(
+  new RegExp('(WebView|(iPhone|iPod|iPad)(?!.*Safari)|Android.*(wv|.0.0.0)|Linux; U; Android)', 'ig'),
+)
